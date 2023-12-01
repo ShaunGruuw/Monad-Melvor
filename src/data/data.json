@@ -17,7 +17,7 @@
         "lootChance": 100,
         "lootTable": [
           {
-            "itemID": "melvorD:Adamant_2H_Sword",
+            "itemID": "monad:Cucumber",
             "maxQuantity": 1,
             "minQuantity": 1,
             "weight": 100

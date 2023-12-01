@@ -24,14 +24,14 @@ export async function setup(ctx: Modding.ModContext) {
   // the templates aren't available until after the setup() function runs
   ctx.onModsLoaded(async (ctx) => {
     try {
+      const TothEntitlement = cloudManager.hasTotHEntitlement
+      const kcm = mod.manager.getLoadedModList().includes('Custom Modifiers in Melvor')
+      // const tes = mod.manager.getLoadedModList().includes("The Elder Scrolls")
       const mythLoaded = mod.manager.getLoadedModList().includes("[Myth] Music")
       // const dboxLoaded = mod.manager.getLoadedModList().includes('dbox')
-      const TothEntitlement = cloudManager.hasTotHEntitlement
       // const Abyssal = mod.manager.getLoadedModList().includes('Abyssal Rift')
       // const Pokeworld = mod.manager.getLoadedModList().includes('Pokeworld (Generation 1)')
       // const Runescape = mod.manager.getLoadedModList().includes('Runescape Encounters in Melvor')
-      const kcm = mod.manager.getLoadedModList().includes('Custom Modifiers in Melvor')
-      // const tes = mod.manager.getLoadedModList().includes("The Elder Scrolls")
 
       if (kcm) {
         const cmim = mod.api.customModifiersInMelvor;
@@ -173,13 +173,5 @@ export async function setup(ctx: Modding.ModContext) {
     } catch (error) {
       console.log('error, Monad onModsLoaded', error)
     }
-  });
-}
-
-function open(ctx: Modding.ModContext, html: HTMLElement) {
-  SwalLocale.fire({
-    iconHtml: `<img class="mbts__logo-img" src="${ctx.getResourceUrl(LargeIcon)}" />`,
-    title: ctx.name,
-    html,
   });
 }

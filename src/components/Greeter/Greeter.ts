@@ -8,7 +8,7 @@ interface Greeter {
 
 export default function Greeter(props: GreeterProps): Component<Greeter> {
   return {
-    $template: '#mbts__greeter',
+    $template: '#monad__greeter',
     props,
   };
 }
