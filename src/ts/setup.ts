@@ -17,7 +17,8 @@ import '../img/icon.png';
 import LargeIcon from '../img/icon_large.png';
 
 export async function setup(ctx: Modding.ModContext) {
-  // Register our GameData
+  try {
+      // Register our GameData
   await ctx.gameData.addPackage(ModData);
 
   // Because we're loading our templates.min.html file via the manifest.json,
@@ -174,4 +175,7 @@ export async function setup(ctx: Modding.ModContext) {
       console.log('error, Monad onModsLoaded', error)
     }
   });
+  } catch (error) {
+    console.log('Error, Monad setup', error)
+  }
 }
