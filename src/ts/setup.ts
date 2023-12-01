@@ -5,6 +5,7 @@ import Greeter from '../components/Greeter/Greeter';
 // Data
 // Game data for registration
 import ModData from '../data/data.json';
+import { ItemList as monadItems } from '../data/monad-data';
 
 // Styles
 // Will automatically load your styles upon loading the mod
@@ -20,7 +21,7 @@ export async function setup(ctx: any) {
   try {
     // Register our GameData
     await ctx.gameData.addPackage(ModData);
-
+    console.log('Starting Monad')
     // Because we're loading our templates.min.html file via the manifest.json,
     // the templates aren't available until after the setup() function runs
     ctx.onModsLoaded(async () => {
@@ -165,6 +166,42 @@ export async function setup(ctx: any) {
           cmim.forceBaseModTypeActive("MythicalCreature");
           cmim.forceBaseModTypeActive("SeaCreature");
         }
+
+
+        const monadItemsArray = Object.keys(monadItems)
+        
+        const initialPackage = ctx.gameData.buildPackage((itemPackage: any) => {
+              try {
+                for (let index = 0; index < monadItemsArray.length; index++) {
+                  const id = monadItemsArray[index]
+                  const newItem:any =                     {
+                    "id": id,
+                    "name": monadItems[id].name,
+                    "category": monadItems[id].type,
+                    "type": monadItems[id].type,
+                    "itemType": monadItems[id].type,
+                    "media": monadItems[id].image || "",
+                    "ignoreCompletion": false,
+                    "obtainFromItemLog": false,
+                    "golbinRaidExclusive": false,
+                    "sellsFor": monadItems[id].sellsFor,
+                    "customDescription": monadItems[id].description,
+                  }
+                  if(monadItems[id].type === "Equipment") {
+                    newItem.equipmentStats = {
+                      key: "attackSpeed",
+                      value: 3000
+                  }
+                  }
+                  itemPackage.items.add(newItem)
+                }
+              } catch (error) {
+                  console.log("Monad onModsLoaded itempackage", error)
+              }
+      });
+      initialPackage.add();
+    
+      game.monad = initialPackage
       } catch (error) {
         console.log('error, Monad onModsLoaded', error)
       }
