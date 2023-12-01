@@ -16,14 +16,14 @@ import '../img/icon.png';
 // Reference images using `ctx.getResourceUrl`
 import LargeIcon from '../img/icon_large.png';
 
-export async function setup(ctx: Modding.ModContext) {
+export async function setup(ctx: any) {
   try {
     // Register our GameData
     await ctx.gameData.addPackage(ModData);
 
     // Because we're loading our templates.min.html file via the manifest.json,
     // the templates aren't available until after the setup() function runs
-    ctx.onModsLoaded(async (ctx) => {
+    ctx.onModsLoaded(async () => {
       try {
         const TothEntitlement = cloudManager.hasTotHEntitlement
         const kcm = mod.manager.getLoadedModList().includes('Custom Modifiers in Melvor')
@@ -58,11 +58,7 @@ export async function setup(ctx: Modding.ModContext) {
           ]
           const elfList: any[] = [
           ]
-          const KhajiitList: any[] = [
-          ]
           const RobotsList: any[] = [
-          ]
-          const ArgonianList: any[] = [
           ]
           const OrcList: any[] = [
           ]
@@ -156,9 +152,7 @@ export async function setup(ctx: Modding.ModContext) {
 
           cmim.registerOrUpdateType("Elf", "Elves", "https://cdn.melvor.net/core/v018/assets/media/pets/elf_rock.png", elfList, true);
           cmim.registerOrUpdateType("Goblin", "Goblins", "https://cdn.melvor.net/core/v018/assets/media/monsters/goblin.png", GoblinList, true);
-          cmim.registerOrUpdateType("Khajiit", "Khajiit", "https://cdn.melvor.net/core/v018/assets/media/pets/octavius_lepidus_viii.png", KhajiitList, true);
           cmim.registerOrUpdateType("Robot", "Robots", "https://cdn.melvor.net/core/v018/assets/media/pets/smithing.png", RobotsList, true);
-          cmim.registerOrUpdateType("Argonian", "Argonians", "https://cdn.melvor.net/core/v018/assets/media/monsters/dragon_red.png", ArgonianList, true);
           cmim.registerOrUpdateType("Orc", "Orcs", "https://cdn.melvor.net/core/v018/assets/media/monsters/goblin.png", OrcList, true);
           cmim.registerOrUpdateType("Plant", "Plants", "https://cdn.melvor.net/core/v018/assets/media/monsters/plant.png", PlantList, true);
 
