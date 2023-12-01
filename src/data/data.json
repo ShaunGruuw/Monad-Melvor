@@ -1,6 +1,85 @@
 {
   "$schema": "https://melvoridle.com/assets/schema/gameData.json",
+  "namespace": "monad",
   "data": {
-    
+    "monsters": [
+      {
+        "id": "Kappa",
+        "name": "Kappa",
+        "attackType": "melee",
+        "bones": {
+          "itemID": "melvorD:Bones",
+          "quantity": 1
+        },
+        "media": "https://ottotsuma.github.io/images/monsters/Kappa.png",
+        "passives": [],
+        "specialAttacks": [],
+        "lootChance": 100,
+        "lootTable": [
+          {
+            "itemID": "melvorD:Adamant_2H_Sword",
+            "maxQuantity": 1,
+            "minQuantity": 1,
+            "weight": 100
+          }
+        ],
+        "gpDrops": {
+          "min": 1,
+          "max": 3
+        },
+        "equipmentStats": [
+          {
+            "key": "attackSpeed",
+            "value": 3000
+          },
+          {
+            "key": "damageReduction",
+            "value": 1
+          }
+        ],
+        "levels": {
+          "Attack": 2,
+          "Defence": 2,
+          "Hitpoints": 3,
+          "Magic": 1,
+          "Ranged": 1,
+          "Strength": 3
+        },
+        "ignoreCompletion": false,
+        "isBoss": false,
+        "canSlayer": true,
+        "selectedSpell": "melvorD:WindBolt"
+      }
+    ],
+    "items": [ 
+      {
+        "id": "Cucumber",
+        "name": "Cucumber",
+        "category": "Cooking",
+        "type": "Food",
+        "itemType": "Food",
+        "media": "https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fpngimg.com%2Fuploads%2Fcucumber%2Fcucumber_PNG84294.png",
+        "ignoreCompletion": false,
+        "obtainFromItemLog": false,
+        "golbinRaidExclusive": false,
+        "sellsFor": 1,
+        "healsFor": 3
+      }
+    ]
+  },
+  "modifications": {
+    "combatAreas": [
+      {
+        "id": "melvorD:Goblin_Village",
+        "monsters": {
+          "add": [
+            {
+              "monsterID": "monad:Kappa",
+              "insertAt": 1
+            }
+          ]
+        }
+      }
+    ]
   }
 }
