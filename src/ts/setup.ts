@@ -177,6 +177,11 @@ export async function setup(ctx: Modding.ModContext) {
                   const type = monadItems[id].type
                   if(type === "Set") {
                     // Add to set effects
+                    itemIDs: (string | SynergyGroup)[];
+                    playerModifiers?: PlayerModifierData;
+                    enemyModifiers?: CombatModifierData;
+                    conditionalModifiers?: ConditionalModifierData[];
+                    equipmentStats?: EquipStatPair[];
                   } else {
                     // Is added to items
                     const newItem:any = {
@@ -192,11 +197,75 @@ export async function setup(ctx: Modding.ModContext) {
                       "sellsFor": monadItems[id].sellsFor,
                       "customDescription": monadItems[id].description,
                     }
-                    if(type === "Equipment") {
-                      newItem.equipmentStats = {
-                        key: "attackSpeed",
-                        value: 3000
+                    if(Weapon) {
+                      attackType: AttackType;
+                      ammoTypeRequired?: AmmoType;
+
+                      stats: monadStats;
+                      validSlots: SlotTypes[];
+                      occupiesSlots: SlotTypes[];
+                      equipRequirements: AnyRequirementData[];
+                      equipmentStats: EquipStatPair[];
+                      modifiers?: PlayerModifierData;
+                      enemyModifiers?: CombatModifierData;
+                      conditionalModifiers?: ConditionalModifierData[];
+                      specialAttacks?: string[];
+                      overrideSpecialChances?: number[];
+                      fightEffects?: string[];
+                      providedRunes?: IDQuantity[];
+                      ammoType?: AmmoType;
+                      consumesChargesOn?: GameEventMatcherData[];
+                      consumesOn?: GameEventMatcherData[];
+                      consumesItemOn?: {
+                        itemID: string;
+                        chance: number;
+                        matchers: GameEventMatcherData[];
+                      };
                     }
+                    if(Food) {
+                      healsFor: number;
+                    }
+                    if(Bone) {
+                      prayerPoints: number;
+                    }
+                    if(Potion) {
+                      modifiers: PlayerModifierData;
+                      charges: number;
+                      action: string;
+                      consumesOn: GameEventMatcherData[];
+                    }
+                    if(Readable){
+                      modalID?: string;
+                      swalData?: ReadableItemSwalData;
+                    }
+                    if(Openable) {
+                      dropTable: DropTableData[];
+                      keyItem?: IDQuantity;
+                    }
+                    if(Misc) {
+                      keyItem?: IDQuantity;
+                    }
+                    if(type === "Equipment") {
+                      stats: monadStats;
+                      validSlots: SlotTypes[];
+                      occupiesSlots: SlotTypes[];
+                      equipRequirements: AnyRequirementData[];
+                      equipmentStats: EquipStatPair[];
+                      modifiers?: PlayerModifierData;
+                      enemyModifiers?: CombatModifierData;
+                      conditionalModifiers?: ConditionalModifierData[];
+                      specialAttacks?: string[];
+                      overrideSpecialChances?: number[];
+                      fightEffects?: string[];
+                      providedRunes?: IDQuantity[];
+                      ammoType?: AmmoType;
+                      consumesChargesOn?: GameEventMatcherData[];
+                      consumesOn?: GameEventMatcherData[];
+                      consumesItemOn?: {
+                        itemID: string;
+                        chance: number;
+                        matchers: GameEventMatcherData[];
+                      };
                     }
                     itemPackage.items.add(newItem)
                   }

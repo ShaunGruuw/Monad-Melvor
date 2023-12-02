@@ -185,8 +185,13 @@ interface monadMiscItemData extends monadItem {
   keyItem?: IDQuantity;
 }
 
-interface monadSetItemData extends monadBaseEquipmentItemData {
+interface monadSetItemData {
   type: 'Set';
+  itemIDs: (string | SynergyGroup)[];
+  playerModifiers?: PlayerModifierData;
+  enemyModifiers?: CombatModifierData;
+  conditionalModifiers?: ConditionalModifierData[];
+  equipmentStats?: EquipStatPair[];
 }
 
 export const ItemList: monadItemList = {
