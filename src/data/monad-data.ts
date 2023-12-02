@@ -49,7 +49,7 @@ const ranks = [
   "quest",
 ]
 
-declare type ratings = 
+declare type ratings =
   "junk" |
   "common" |
   "normal" |
@@ -66,7 +66,7 @@ interface monadItemList {
   [key: string]: monadItem | monadEquipmentItemData | monadWeaponItemData | monadFoodItemData | monadBoneItemData | monadPotionItemData | monadReadableItemData | monadOpenableItemData | monadMiscItemData | monadSetItemData;
 }
 interface monadItem {
-  // [key: string]: any // for production to make it shut up about adding stuff dynamicly
+  [key: string]: any // for production to make it shut up about adding stuff dynamicly
   name: string;
   description: string;
   image: string;
@@ -74,16 +74,16 @@ interface monadItem {
   sellsFor: number; // buys for would be in shops data.
   long?: string; // Appears a the bottom of cards. Is the same as (description overwrites effect), but longer and overwrites description. Let's remove effect. Shows the price if shown in a shop. Should really make shop data then.
   note: string;
-  0?: Partial<monadItem> | monadEquipmentItemData | monadWeaponItemData | monadFoodItemData | monadBoneItemData | monadPotionItemData | monadReadableItemData | monadOpenableItemData | monadMiscItemData | monadSetItemData;
-  1?: Partial<monadItem> | monadEquipmentItemData | monadWeaponItemData | monadFoodItemData | monadBoneItemData | monadPotionItemData | monadReadableItemData | monadOpenableItemData | monadMiscItemData | monadSetItemData;
-  2?: Partial<monadItem> | monadEquipmentItemData | monadWeaponItemData | monadFoodItemData | monadBoneItemData | monadPotionItemData | monadReadableItemData | monadOpenableItemData | monadMiscItemData | monadSetItemData;
+  0?: Partial<monadItem> | Partial<monadEquipmentItemData>  | Partial<monadWeaponItemData> | Partial<monadFoodItemData> | Partial<monadBoneItemData> | Partial<monadPotionItemData> | Partial<monadReadableItemData> | Partial<monadOpenableItemData> | Partial<monadMiscItemData> | Partial<monadSetItemData>;
+  1?: Partial<monadItem> | Partial<monadEquipmentItemData>  | monadWeaponItemData | monadFoodItemData | monadBoneItemData | monadPotionItemData | monadReadableItemData | monadOpenableItemData | monadMiscItemData | monadSetItemData;
+  2?: Partial<monadItem> | Partial<monadEquipmentItemData>  | monadWeaponItemData | monadFoodItemData | monadBoneItemData | monadPotionItemData | monadReadableItemData | monadOpenableItemData | monadMiscItemData | monadSetItemData;
   3?: Partial<monadItem> | monadEquipmentItemData | monadWeaponItemData | monadFoodItemData | monadBoneItemData | monadPotionItemData | monadReadableItemData | monadOpenableItemData | monadMiscItemData | monadSetItemData;
-  4?: Partial<monadItem> | monadEquipmentItemData | monadWeaponItemData | monadFoodItemData | monadBoneItemData | monadPotionItemData | monadReadableItemData | monadOpenableItemData | monadMiscItemData | monadSetItemData;
-  5?: Partial<monadItem> | monadEquipmentItemData | monadWeaponItemData | monadFoodItemData | monadBoneItemData | monadPotionItemData | monadReadableItemData | monadOpenableItemData | monadMiscItemData | monadSetItemData;
-  6?: Partial<monadItem> | monadEquipmentItemData | monadWeaponItemData | monadFoodItemData | monadBoneItemData | monadPotionItemData | monadReadableItemData | monadOpenableItemData | monadMiscItemData | monadSetItemData;
-  7?: Partial<monadItem> | monadEquipmentItemData | monadWeaponItemData | monadFoodItemData | monadBoneItemData | monadPotionItemData | monadReadableItemData | monadOpenableItemData | monadMiscItemData | monadSetItemData;
-  8?: Partial<monadItem> | monadEquipmentItemData | monadWeaponItemData | monadFoodItemData | monadBoneItemData | monadPotionItemData | monadReadableItemData | monadOpenableItemData | monadMiscItemData | monadSetItemData;
-  9?: Partial<monadItem> | monadEquipmentItemData | monadWeaponItemData | monadFoodItemData | monadBoneItemData | monadPotionItemData | monadReadableItemData | monadOpenableItemData | monadMiscItemData | monadSetItemData;
+  4?: Partial<monadItem> | Partial<monadEquipmentItemData>  | monadWeaponItemData | monadFoodItemData | monadBoneItemData | monadPotionItemData | monadReadableItemData | monadOpenableItemData | monadMiscItemData | monadSetItemData;
+  5?: Partial<monadItem> | Partial<monadEquipmentItemData>  | monadWeaponItemData | monadFoodItemData | monadBoneItemData | monadPotionItemData | monadReadableItemData | monadOpenableItemData | monadMiscItemData | monadSetItemData;
+  6?: Partial<monadItem> | Partial<monadEquipmentItemData>  | monadWeaponItemData | monadFoodItemData | monadBoneItemData | monadPotionItemData | monadReadableItemData | monadOpenableItemData | monadMiscItemData | monadSetItemData;
+  7?: Partial<monadItem> | Partial<monadEquipmentItemData>  | monadWeaponItemData | monadFoodItemData | monadBoneItemData | monadPotionItemData | monadReadableItemData | monadOpenableItemData | monadMiscItemData | monadSetItemData;
+  8?: Partial<monadItem> | Partial<monadEquipmentItemData>  | monadWeaponItemData | monadFoodItemData | monadBoneItemData | monadPotionItemData | monadReadableItemData | monadOpenableItemData | monadMiscItemData | monadSetItemData;
+  9?: Partial<monadItem> | Partial<monadEquipmentItemData> | monadWeaponItemData | monadFoodItemData | monadBoneItemData | monadPotionItemData | monadReadableItemData | monadOpenableItemData | monadMiscItemData | monadSetItemData;
 }
 
 interface monadEquipmentItemData extends monadBaseEquipmentItemData {
@@ -105,7 +105,7 @@ interface monadStats {
 
   HPPerc?: Number
   MPPerc?: Number
-  
+
   vitalityPerc?: Number
   endurancePerc?: Number
   willpowerPerc?: Number
@@ -256,7 +256,7 @@ export const ItemList: monadItemList = {
     sellsFor: 0,
     type: "Equipment",
     image: "",
-    validSlots:[],
+    validSlots: [],
     occupiesSlots: []
   },
   "Paladin Engeler's Gauntlets (silver rank)": {
@@ -376,7 +376,7 @@ export const ItemList: monadItemList = {
     sellsFor: 0,
     type: "Set",
     image: "",
-    validSlots:[],
+    validSlots: [],
     occupiesSlots: []
   },
   "Paladin Engeler's Set (4/7)": {
@@ -386,9 +386,9 @@ export const ItemList: monadItemList = {
     stats: {},
     note: "",
     sellsFor: 0,
-    type: "Set",    
+    type: "Set",
     image: "",
-    validSlots:[],
+    validSlots: [],
     occupiesSlots: []
   },
   "Paladin Engeler's Set (7/7)": {
@@ -401,7 +401,7 @@ export const ItemList: monadItemList = {
     sellsFor: 0,
     type: "Set",
     image: "",
-    validSlots:[],
+    validSlots: [],
     occupiesSlots: []
   },
   "Toads Skin Jacket": {
@@ -414,7 +414,7 @@ export const ItemList: monadItemList = {
     long: "", // Price since it was shown In a shop.
     note: "https://ffxiv.gamerescape.com/wiki/Category:Rogue_Body/iLevel_30-39",
     type: "Equipment",
-    validSlots:[], occupiesSlots:[], equipRequirements:[], equipmentStats:[], sellsFor:0
+    validSlots: [], occupiesSlots: [], equipRequirements: [], equipmentStats: [], sellsFor: 0
   },
   "Crown of the Dammed": {
     name: "Crown of the Dammed",
@@ -425,7 +425,7 @@ export const ItemList: monadItemList = {
     long: "", // Price since it was shown In a shop.
     note: "Ch5, kings crown",
     type: "Equipment",
-    validSlots:[], occupiesSlots:[], equipRequirements:[], equipmentStats:[], sellsFor:0
+    validSlots: [], occupiesSlots: [], equipRequirements: [], equipmentStats: [], sellsFor: 0
   },
   "Ring of initial undead control": {
     name: "Ring of initial undead control",
@@ -436,7 +436,7 @@ export const ItemList: monadItemList = {
     long: "", // Price since it was shown In a shop.
     note: "Ch5, kings ring",
     type: "Equipment",
-    validSlots:[], occupiesSlots:[], equipRequirements:[], equipmentStats:[], sellsFor:0
+    validSlots: [], occupiesSlots: [], equipRequirements: [], equipmentStats: [], sellsFor: 0
   },
   "Ring of Little Strength": {
     name: "Ring of Little Strength",
@@ -447,7 +447,7 @@ export const ItemList: monadItemList = {
     long: "", // Price since it was shown In a shop.
     note: "Ch11, queens ring",
     type: "Equipment",
-    validSlots:[], occupiesSlots:[], equipRequirements:[], equipmentStats:[], sellsFor:0
+    validSlots: [], occupiesSlots: [], equipRequirements: [], equipmentStats: [], sellsFor: 0
   },
   "Pendent of Medium Magic": {
     name: "Pendent of Medium Magic",
@@ -458,7 +458,7 @@ export const ItemList: monadItemList = {
     long: "", // Price since it was shown In a shop.
     note: "Ch11",
     type: "Equipment",
-    validSlots:[], occupiesSlots:[], equipRequirements:[], equipmentStats:[], sellsFor:0
+    validSlots: [], occupiesSlots: [], equipRequirements: [], equipmentStats: [], sellsFor: 0
   },
   "Witches Hat": {
     name: "Witches Hat",
@@ -469,7 +469,7 @@ export const ItemList: monadItemList = {
     long: "", // Price since it was shown In a shop.
     note: "Ch11",
     type: "Equipment",
-    validSlots:[], occupiesSlots:[], equipRequirements:[], equipmentStats:[], sellsFor:0
+    validSlots: [], occupiesSlots: [], equipRequirements: [], equipmentStats: [], sellsFor: 0
   },
   "Queen's Pawn": {
     name: "Queen's Pawn",
@@ -480,7 +480,7 @@ export const ItemList: monadItemList = {
     long: "", // Price since it was shown In a shop.
     note: "Ch11, Tiara",
     type: "Equipment",
-    validSlots:[], occupiesSlots:[], equipRequirements:[], equipmentStats:[], sellsFor:0
+    validSlots: [], occupiesSlots: [], equipRequirements: [], equipmentStats: [], sellsFor: 0
   },
   "Skull of victim": {
     name: "Skull of victim",
@@ -490,14 +490,14 @@ export const ItemList: monadItemList = {
     long: "", // Price since it was shown In a shop.
     note: "Ch11, Skull",
     type: "Misc",
-    sellsFor:0
+    sellsFor: 0
   },
   "Enchanting Quill": {
     name: "Enchanting Quill",
     description: "Enchanting chance of success + 5%.",
     image: "",
     rating: "normal",
-    sellsFor:0,
+    sellsFor: 0,
     long: "", // Price since it was shown In a shop.
     note: "Ch11, Quill",
     type: "Misc",
@@ -507,7 +507,7 @@ export const ItemList: monadItemList = {
     description: "(???).",
     image: "",
     rating: "junk",
-    sellsFor:0,
+    sellsFor: 0,
     long: "", // Price since it was shown In a shop.
     note: "Ch11, Coin",
     type: "Misc",
@@ -625,7 +625,7 @@ export const ItemList: monadItemList = {
     sellsFor: 0,
     type: "Set",
     image: "",
-    validSlots:[],
+    validSlots: [],
     occupiesSlots: []
   },
   "Cotton Scarf": {
@@ -662,6 +662,9 @@ export const ItemList: monadItemList = {
     long: "", // Price since it was shown In a shop.
     note: "https://ffxiv.gamerescape.com/wiki/Category:Ring/iLevel_30-39",
     type: "Equipment",
+    validSlots: [],
+    occupiesSlots: [],
+    sellsFor: 0,
     3: {
       name: "Rogue's Ring +3",
       description: "Critical hit rate: +3, Dexterity: +3.",
@@ -772,13 +775,24 @@ export const ItemList: monadItemList = {
     image:
       "https://image.vector-park.jp/images/item/original2/019/2017/08/24/019-201708240761_1.jpg?t=1572379770",
     rating: "epic",
-    stats: {
-      9: { dexterity: 9 },
+    stats: {},
+    9: {
+      name: "Tidus Earring",
+      description: "Dexterity +9, Swimming speed +5, Can breath underwater for 5 minutes.",
+      image: "",
+      rating: "normal",
+      stats: { dexterity: 9 },
+      long: "", // Price since it was shown In a shop.
+      note: "",
+      sellsFor: 0,
+      type: "Equipment",
     },
     long: "", // Price since it was shown In a shop.
     note: "",
     sellsFor: 0,
     type: "Equipment",
+    "validSlots": [],
+    "occupiesSlots": []
   },
   "Featureless Deathwood Mask": {
     name: "Featureless Deathwood Mask",
@@ -829,7 +843,7 @@ export const ItemList: monadItemList = {
     description: "",
     image: "",
     rating: "normal",
-    stats: { "Small magic increase": "+?" },
+    stats: { "Small magic increase": 1 },
     long: "", // Price since it was shown In a shop.
     note: "",
     sellsFor: 0,
@@ -839,7 +853,7 @@ export const ItemList: monadItemList = {
       description: "",
       image: "",
       rating: "normal",
-      stats: { "Small magic increase": "+?" },
+      stats: { "Small magic increase": 10 },
       long: "", // Price since it was shown In a shop.
       note: "",
       sellsFor: 0,
@@ -897,7 +911,7 @@ export const ItemList: monadItemList = {
     name: "Hui Lu's Battle Armour",
     description: "",
     image: "",
-    rating: "",
+    rating: "rare",
     stats: {},
     long: "", // Price since it was shown In a shop.
     note: "",
@@ -919,7 +933,7 @@ export const ItemList: monadItemList = {
     name: "Hui Lu's Enchanting Gloves",
     description: "",
     image: "",
-    rating: "",
+    rating: "rare",
     stats: {},
     long: "", // Price since it was shown In a shop.
     note: "",
@@ -941,7 +955,7 @@ export const ItemList: monadItemList = {
     name: "Hui Lu's Burning Boots",
     description: "",
     image: "",
-    rating: "",
+    rating: "rare",
     stats: {},
     long: "", // Price since it was shown In a shop.
     note: "",

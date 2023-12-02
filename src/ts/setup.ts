@@ -175,7 +175,6 @@ export async function setup(ctx: Modding.ModContext) {
                 for (let index = 0; index < monadItemsArray.length; index++) {
                   const id = monadItemsArray[index]
                   const type = monadItems[id].type
-
                   if(type === "Set") {
                     // Add to set effects
                   } else {
