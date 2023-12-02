@@ -178,16 +178,18 @@ export async function setup(ctx: Modding.ModContext) {
               if (type === "Set") {
                 // Add to set effects
                 const newSynergy: ItemSynergyData = {
-                  "itemIDs": monadItemsArray[index].itemIDs,
-                  "conditionalModifiers": [],
-                  "enemyModifiers": {},
-                  "equipmentStats": [],
-                  "playerModifiers": {}
+                  "itemIDs": monadItemsArray[index].itemIDs
+                }
+                const Requirements = ['conditionalModifiers', "enemyModifiers", "equipmentStats", "playerModifiers"]
+                for (let j = 0; j < Requirements.length; j++) {
+                  if (monadItems[id][Requirements[j]]) {
+                    newSynergy[Requirements[j]] = monadItems[id][Requirements[j]]
+                  }
                 }
                 itemPackage.itemSynergies.add(newSynergy)
               } else {
                 // Is added to items
-                const newItem: any = {
+                const newItem: AnyItemData = {
                   "id": id,
                   "name": monadItems[id].name,
                   "category": type,
