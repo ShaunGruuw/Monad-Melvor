@@ -6,6 +6,7 @@ import Greeter from '../components/Greeter/Greeter';
 // Game data for registration
 import ModData from '../data/data.json';
 import { ItemList as monadItems } from '../data/monad-data';
+import { nonSupport } from '../data/poe.data';
 
 // Styles
 // Will automatically load your styles upon loading the mod
