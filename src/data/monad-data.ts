@@ -1,4 +1,3 @@
-
 const monadColors = {
   junk: "rgb(186, 186, 186)", // grey
   common: "rgb(168, 168, 168)", // light grey
@@ -66,7 +65,6 @@ declare type ratings =
 interface monadItemList {
   [key: string]: monadItem | monadEquipmentItemData | monadWeaponItemData | monadFoodItemData | monadBoneItemData | monadPotionItemData | monadReadableItemData | monadOpenableItemData | monadMiscItemData | monadSetItemData;
 }
-
 interface monadItem {
   // [key: string]: any // for production to make it shut up about adding stuff dynamicly
   name: string;
@@ -76,46 +74,55 @@ interface monadItem {
   sellsFor: number; // buys for would be in shops data.
   long?: string; // Appears a the bottom of cards. Is the same as (description overwrites effect), but longer and overwrites description. Let's remove effect. Shows the price if shown in a shop. Should really make shop data then.
   note: string;
-  1?: monadItem | monadEquipmentItemData | monadWeaponItemData | monadFoodItemData | monadBoneItemData | monadPotionItemData | monadReadableItemData | monadOpenableItemData | monadMiscItemData | monadSetItemData;
-  2?: monadItem | monadEquipmentItemData | monadWeaponItemData | monadFoodItemData | monadBoneItemData | monadPotionItemData | monadReadableItemData | monadOpenableItemData | monadMiscItemData | monadSetItemData;
-  3?: monadItem | monadEquipmentItemData | monadWeaponItemData | monadFoodItemData | monadBoneItemData | monadPotionItemData | monadReadableItemData | monadOpenableItemData | monadMiscItemData | monadSetItemData;
-  4?: monadItem | monadEquipmentItemData | monadWeaponItemData | monadFoodItemData | monadBoneItemData | monadPotionItemData | monadReadableItemData | monadOpenableItemData | monadMiscItemData | monadSetItemData;
-  5?: monadItem | monadEquipmentItemData | monadWeaponItemData | monadFoodItemData | monadBoneItemData | monadPotionItemData | monadReadableItemData | monadOpenableItemData | monadMiscItemData | monadSetItemData;
-  6?: monadItem | monadEquipmentItemData | monadWeaponItemData | monadFoodItemData | monadBoneItemData | monadPotionItemData | monadReadableItemData | monadOpenableItemData | monadMiscItemData | monadSetItemData;
-  7?: monadItem | monadEquipmentItemData | monadWeaponItemData | monadFoodItemData | monadBoneItemData | monadPotionItemData | monadReadableItemData | monadOpenableItemData | monadMiscItemData | monadSetItemData;
-  8?: monadItem | monadEquipmentItemData | monadWeaponItemData | monadFoodItemData | monadBoneItemData | monadPotionItemData | monadReadableItemData | monadOpenableItemData | monadMiscItemData | monadSetItemData;
-  9?: monadItem | monadEquipmentItemData | monadWeaponItemData | monadFoodItemData | monadBoneItemData | monadPotionItemData | monadReadableItemData | monadOpenableItemData | monadMiscItemData | monadSetItemData;
+  0?: Partial<monadItem> | monadEquipmentItemData | monadWeaponItemData | monadFoodItemData | monadBoneItemData | monadPotionItemData | monadReadableItemData | monadOpenableItemData | monadMiscItemData | monadSetItemData;
+  1?: Partial<monadItem> | monadEquipmentItemData | monadWeaponItemData | monadFoodItemData | monadBoneItemData | monadPotionItemData | monadReadableItemData | monadOpenableItemData | monadMiscItemData | monadSetItemData;
+  2?: Partial<monadItem> | monadEquipmentItemData | monadWeaponItemData | monadFoodItemData | monadBoneItemData | monadPotionItemData | monadReadableItemData | monadOpenableItemData | monadMiscItemData | monadSetItemData;
+  3?: Partial<monadItem> | monadEquipmentItemData | monadWeaponItemData | monadFoodItemData | monadBoneItemData | monadPotionItemData | monadReadableItemData | monadOpenableItemData | monadMiscItemData | monadSetItemData;
+  4?: Partial<monadItem> | monadEquipmentItemData | monadWeaponItemData | monadFoodItemData | monadBoneItemData | monadPotionItemData | monadReadableItemData | monadOpenableItemData | monadMiscItemData | monadSetItemData;
+  5?: Partial<monadItem> | monadEquipmentItemData | monadWeaponItemData | monadFoodItemData | monadBoneItemData | monadPotionItemData | monadReadableItemData | monadOpenableItemData | monadMiscItemData | monadSetItemData;
+  6?: Partial<monadItem> | monadEquipmentItemData | monadWeaponItemData | monadFoodItemData | monadBoneItemData | monadPotionItemData | monadReadableItemData | monadOpenableItemData | monadMiscItemData | monadSetItemData;
+  7?: Partial<monadItem> | monadEquipmentItemData | monadWeaponItemData | monadFoodItemData | monadBoneItemData | monadPotionItemData | monadReadableItemData | monadOpenableItemData | monadMiscItemData | monadSetItemData;
+  8?: Partial<monadItem> | monadEquipmentItemData | monadWeaponItemData | monadFoodItemData | monadBoneItemData | monadPotionItemData | monadReadableItemData | monadOpenableItemData | monadMiscItemData | monadSetItemData;
+  9?: Partial<monadItem> | monadEquipmentItemData | monadWeaponItemData | monadFoodItemData | monadBoneItemData | monadPotionItemData | monadReadableItemData | monadOpenableItemData | monadMiscItemData | monadSetItemData;
 }
 
 interface monadEquipmentItemData extends monadBaseEquipmentItemData {
   type: 'Equipment';
 }
+interface monadStats {
+  [key: string]: Number // to take in all other keys added to stats but keeping number as the value. This would include damage to a spcific type of monster
+
+  vitality?: Number
+  endurance?: Number
+  willpower?: Number
+  magic?: Number
+  strength?: Number
+  dexterity?: Number
+  sense?: Number
+  charisma?: Number
+  HP?: Number
+  MP?: Number
+
+  HPPerc?: Number
+  MPPerc?: Number
+  
+  vitalityPerc?: Number
+  endurancePerc?: Number
+  willpowerPerc?: Number
+  magicPerc?: Number
+  strengthPerc?: Number
+  dexterityPerc?: Number
+  sensePerc?: Number
+  charismaPerc?: Number
+
+  PhysicalDamageReduction?: Number
+  MagicDamageReduction?: Number
+  PhysicalDamageReductionPerc?: Number
+  MagicDamageReductionPerc?: Number
+}
 
 interface monadBaseEquipmentItemData extends monadItem {
-  stats: {
-    vitality?: Number
-    endurance?: Number
-    willpower?: Number
-    magic?: Number
-    strength?: Number
-    dexterity?: Number
-    sense?: Number
-    charisma?: Number
-    HP?: Number
-    MP?: Number
-
-    HPMultiplier?: Number
-    MPMultiplier?: Number
-    
-    vitalityMultiplier?: Number
-    enduranceMultiplier?: Number
-    willpowerMultiplier?: Number
-    magicMultiplier?: Number
-    strengthMultiplier?: Number
-    dexterityMultiplier?: Number
-    senseMultiplier?: Number
-    charismaMultiplier?: Number
-  };
+  stats: monadStats;
   validSlots: SlotTypes[];
   occupiesSlots: SlotTypes[];
   equipRequirements: AnyRequirementData[];
@@ -234,7 +241,7 @@ export const ItemList: monadItemList = {
     description:
       "Reduces physical damage taken by 10%, except spears. Endurance +1, Endurance +10%.",
     rating: "epic",
-    stats: { endurance: 1, enduranceMultiplier: 1.1 },
+    stats: { endurance: 1, endurancePerc: 1.1 },
     note: "",
     sellsFor: 0,
     type: "Equipment",
@@ -368,6 +375,9 @@ export const ItemList: monadItemList = {
     note: "",
     sellsFor: 0,
     type: "Set",
+    image: "",
+    validSlots:[],
+    occupiesSlots: []
   },
   "Paladin Engeler's Set (4/7)": {
     name: "Paladin Engeler's Set",
@@ -376,7 +386,10 @@ export const ItemList: monadItemList = {
     stats: {},
     note: "",
     sellsFor: 0,
-    type: "Set",
+    type: "Set",    
+    image: "",
+    validSlots:[],
+    occupiesSlots: []
   },
   "Paladin Engeler's Set (7/7)": {
     name: "Paladin Engeler's Set",
@@ -387,6 +400,9 @@ export const ItemList: monadItemList = {
     note: "",
     sellsFor: 0,
     type: "Set",
+    image: "",
+    validSlots:[],
+    occupiesSlots: []
   },
   "Toads Skin Jacket": {
     name: "Toads Skin Jacket",
@@ -608,6 +624,9 @@ export const ItemList: monadItemList = {
     note: "",
     sellsFor: 0,
     type: "Set",
+    image: "",
+    validSlots:[],
+    occupiesSlots: []
   },
   "Cotton Scarf": {
     name: "Cotton Scarf",
