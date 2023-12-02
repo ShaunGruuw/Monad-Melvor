@@ -73,29 +73,17 @@ interface monadItem {
   image: string;
   rating: ratings;
   sellsFor: number; // buys for would be in shops data.
-  
   long?: string; // Appears a the bottom of cards. Is the same as (description overwrites effect), but longer and overwrites description. Let's remove effect. Shows the price if shown in a shop. Should really make shop data then.
   note: string;
-  1?: levelMonadItem;
-  2?: levelMonadItem;
-  3?: levelMonadItem;
-  4?: levelMonadItem;
-  5?: levelMonadItem;
-  6?: levelMonadItem;
-  7?: levelMonadItem;
-  8?: levelMonadItem;
-  9?: levelMonadItem;
-}
-
-interface levelMonadItem {
-  name?: string;
-  description?: string;
-  image?: string;
-  rating?: ratings;
-  category?: string; // for sorting them out easily.
-  sellsFor?: number; // buys for would be in shops data.
-  long?: string;
-  note?: string;
+  1?: monadItem;
+  2?: monadItem;
+  3?: monadItem;
+  4?: monadItem;
+  5?: monadItem;
+  6?: monadItem;
+  7?: monadItem;
+  8?: monadItem;
+  9?: monadItem;
 }
 
 interface monadEquipmentItemData extends monadBaseEquipmentItemData {
@@ -103,7 +91,30 @@ interface monadEquipmentItemData extends monadBaseEquipmentItemData {
 }
 
 interface monadBaseEquipmentItemData extends monadItem {
-  stats: {};
+  stats: {
+    vitality?: Number
+    endurance?: Number
+    willpower?: Number
+    magic?: Number
+    strength?: Number
+    dexterity?: Number
+    sense?: Number
+    charisma?: Number
+    HP?: Number
+    MP?: Number
+
+    HPMultiplier?: Number
+    MPMultiplier?: Number
+    
+    vitalityMultiplier?: Number
+    enduranceMultiplier?: Number
+    willpowerMultiplier?: Number
+    magicMultiplier?: Number
+    strengthMultiplier?: Number
+    dexterityMultiplier?: Number
+    senseMultiplier?: Number
+    charismaMultiplier?: Number
+  };
   validSlots: SlotTypes[];
   occupiesSlots: SlotTypes[];
   equipRequirements: AnyRequirementData[];
@@ -175,9 +186,9 @@ export const ItemList: monadItemList = {
     image: "img/items/BloodPotion.png",
     long: "¤1", // Price since it was shown In a shop.
     note: "",
+    sellsFor: 0,
     type: "Potion",
-    rating: "junk",
-    sellsFor: 0
+    rating: "junk"
   },
   "Soul bound wand": {
     name: "Soul bound wand",
@@ -187,7 +198,8 @@ export const ItemList: monadItemList = {
     rating: "normal",
     stats: { sense: 1 },
     note: "",
-    type: "Weapon",
+    sellsFor: 0,
+    type: "Weapon"
   },
   "Bone Lance": {
     name: "Bone Lance",
@@ -195,19 +207,21 @@ export const ItemList: monadItemList = {
     image:
       "https://ottotsuma.github.io/images/people/2d7002b02e419fb5cca7be2ec8e9f755.jpg",
     long: "", // Price since it was shown In a shop.
-    rating: "",
+    rating: "normal",
     stats: {},
     note: "",
-    type: "Weapon",
+    sellsFor: 0,
+    type: "Weapon"
   },
   "Trainee Bone Spear": {
     name: "Trainee Bone Spear",
     description: "Tiny increase in spear proficiency when equipped.",
     image: "",
     long: "", // Price since it was shown In a shop.
-    rating: "",
+    rating: "junk",
     stats: {},
     note: "",
+    sellsFor: 0,
     type: "Weapon",
   },
   "Paladin Engeler's Body Armour (silver rank)": {
@@ -217,6 +231,7 @@ export const ItemList: monadItemList = {
     rating: "epic",
     stats: { endurance: 1, enduranceMultiplier: 1.1 },
     note: "",
+    sellsFor: 0,
     type: "Equipment",
     image: ""
   },
@@ -226,7 +241,11 @@ export const ItemList: monadItemList = {
     rating: "epic",
     stats: { endurance: 1.8 },
     note: "",
+    sellsFor: 0,
     type: "Equipment",
+    image: "",
+    validSlots:[],
+    occupiesSlots: []
   },
   "Paladin Engeler's Gauntlets (silver rank)": {
     name: "Paladin Engeler's Gauntlets (silver rank)",
@@ -234,7 +253,9 @@ export const ItemList: monadItemList = {
     rating: "epic",
     stats: { endurance: 1 },
     note: "",
+    sellsFor: 0,
     type: "Equipment",
+    image: "",
   },
   "Paladin Engeler's Sabaton (silver rank)": {
     name: "Paladin Engeler's Sabaton (silver rank)",
@@ -242,7 +263,9 @@ export const ItemList: monadItemList = {
     rating: "epic",
     stats: { endurance: 1.2 },
     note: "",
+    sellsFor: 0,
     type: "Equipment",
+    image: "",
   },
   "Paladin Engeler's Mace (silver rank)": {
     name: "Paladin Engeler's Mace (silver rank)",
@@ -250,7 +273,9 @@ export const ItemList: monadItemList = {
     rating: "epic",
     stats: { strength: 3 },
     note: "",
+    sellsFor: 0,
     type: "Equipment",
+    image: "",
   },
   "Paladin Engeler's Shield (silver rank)": {
     name: "Paladin Engeler's Shield (silver rank)",
@@ -259,7 +284,9 @@ export const ItemList: monadItemList = {
     rating: "epic",
     stats: { endurance: 0 },
     note: "",
+    sellsFor: 0,
     type: "Equipment",
+    image: "",
   },
   "Paladin Engeler's Cape (silver rank)": {
     name: "Paladin Engeler's Cape (silver rank)",
@@ -267,7 +294,9 @@ export const ItemList: monadItemList = {
     rating: "epic",
     stats: { HP: 315, MP: 225 },
     note: "",
+    sellsFor: 0,
     type: "Equipment",
+    image: "",
     1: {
       description: "Increase HP by 32, Increase MP by 23.",
       stats: { HP: 32, MP: 23 },
@@ -279,10 +308,12 @@ export const ItemList: monadItemList = {
       "Reduces physical damage taken by 15, Reduces magical damage taken by 17, Reduce received damage from Demons by 3%",
     rating: "epic",
     stats: {
-      "Physical Damage Reduction": 15,
+      PhysicalDamageReduction: 15,
     },
     note: "",
+    sellsFor: 0,
     type: "Equipment",
+    image: "",
   },
   "Demon Hunter Bracelet": {
     name: "Demon Hunter Bracelet",
@@ -295,7 +326,9 @@ export const ItemList: monadItemList = {
       "Damage from Demons Reduction %": 3, // "1.03 This change will require "stats" code changes"
     },
     note: "",
+    sellsFor: 0,
     type: "Equipment",
+    image: "",
   },
   "Demon Hunter Earring": {
     name: "Demon Hunter Earring",
@@ -303,7 +336,9 @@ export const ItemList: monadItemList = {
       "Reduces physical damage taken by 15, Reduces magical damage taken by 17, Reduce received damage from Demons by 3%",
     rating: "epic",
     note: "",
+    sellsFor: 0,
     type: "Equipment",
+    image: "",
   },
   "Demon Hunter Ring": {
     name: "Demon Hunter Ring",
@@ -311,7 +346,9 @@ export const ItemList: monadItemList = {
       "Reduces physical damage taken by 15, Reduces magical damage taken by 17, Reduce received damage from Demons by 3%",
     rating: "epic",
     note: "",
+    sellsFor: 0,
     type: "Equipment",
+    image: "",
   },
   "Paladin Engeler's Set (3/7)": {
     name: "Paladin Engeler's Set",
@@ -323,6 +360,7 @@ export const ItemList: monadItemList = {
       stats: { endurance: 0.9, HP: 22 }
     },
     note: "",
+    sellsFor: 0,
     type: "set effect",
   },
   "Paladin Engeler's Set (4/7)": {
@@ -331,6 +369,7 @@ export const ItemList: monadItemList = {
     rating: "epic",
     // stats: {}
     note: "",
+    sellsFor: 0,
     type: "set effect",
   },
   "Paladin Engeler's Set (7/7)": {
@@ -340,6 +379,7 @@ export const ItemList: monadItemList = {
     rating: "epic",
     stats: { endurance: 0 },
     note: "",
+    sellsFor: 0,
     type: "set effect",
   },
   "Toads Skin Jacket": {
@@ -352,6 +392,7 @@ export const ItemList: monadItemList = {
     long: "", // Price since it was shown In a shop.
     note: "https://ffxiv.gamerescape.com/wiki/Category:Rogue_Body/iLevel_30-39",
     type: "Equipment",
+    validSlots:[], occupiesSlots:[], equipRequirements:[], equipmentStats:[], sellsFor:0
   },
   "Crown of the Dammed": {
     name: "Crown of the Dammed",
@@ -362,6 +403,7 @@ export const ItemList: monadItemList = {
     long: "", // Price since it was shown In a shop.
     note: "Ch5, kings crown",
     type: "Equipment",
+    validSlots:[], occupiesSlots:[], equipRequirements:[], equipmentStats:[], sellsFor:0
   },
   "Ring of initial undead control": {
     name: "Ring of initial undead control",
@@ -372,6 +414,7 @@ export const ItemList: monadItemList = {
     long: "", // Price since it was shown In a shop.
     note: "Ch5, kings ring",
     type: "Equipment",
+    validSlots:[], occupiesSlots:[], equipRequirements:[], equipmentStats:[], sellsFor:0
   },
   "Ring of Little Strength": {
     name: "Ring of Little Strength",
@@ -382,6 +425,7 @@ export const ItemList: monadItemList = {
     long: "", // Price since it was shown In a shop.
     note: "Ch11, queens ring",
     type: "Equipment",
+    validSlots:[], occupiesSlots:[], equipRequirements:[], equipmentStats:[], sellsFor:0
   },
   "Pendent of Medium Magic": {
     name: "Pendent of Medium Magic",
@@ -392,6 +436,7 @@ export const ItemList: monadItemList = {
     long: "", // Price since it was shown In a shop.
     note: "Ch11",
     type: "Equipment",
+    validSlots:[], occupiesSlots:[], equipRequirements:[], equipmentStats:[], sellsFor:0
   },
   "Witches Hat": {
     name: "Witches Hat",
@@ -402,6 +447,7 @@ export const ItemList: monadItemList = {
     long: "", // Price since it was shown In a shop.
     note: "Ch11",
     type: "Equipment",
+    validSlots:[], occupiesSlots:[], equipRequirements:[], equipmentStats:[], sellsFor:0
   },
   "Queen's Pawn": {
     name: "Queen's Pawn",
@@ -412,23 +458,24 @@ export const ItemList: monadItemList = {
     long: "", // Price since it was shown In a shop.
     note: "Ch11, Tiara",
     type: "Equipment",
+    validSlots:[], occupiesSlots:[], equipRequirements:[], equipmentStats:[], sellsFor:0
   },
   "Skull of victim": {
     name: "Skull of victim",
     description: "Control undead +2.",
     image: "",
     rating: "normal",
-    stats: {},
     long: "", // Price since it was shown In a shop.
     note: "Ch11, Skull",
     type: "Misc",
+    sellsFor:0
   },
   "Enchanting Quill": {
     name: "Enchanting Quill",
     description: "Enchanting chance of success + 5%.",
     image: "",
     rating: "normal",
-    stats: {},
+    sellsFor:0,
     long: "", // Price since it was shown In a shop.
     note: "Ch11, Quill",
     type: "Misc",
@@ -438,7 +485,7 @@ export const ItemList: monadItemList = {
     description: "(???).",
     image: "",
     rating: "junk",
-    stats: {},
+    sellsFor:0,
     long: "", // Price since it was shown In a shop.
     note: "Ch11, Coin",
     type: "Misc",
@@ -452,6 +499,7 @@ export const ItemList: monadItemList = {
     long: "", // Price since it was shown In a shop.
     note: "Ch17",
     type: "Equipment",
+    sellsFor: 0
   },
   "Black scarf": {
     name: "Black scarf",
@@ -461,6 +509,7 @@ export const ItemList: monadItemList = {
     stats: {},
     long: "", // Price since it was shown In a shop.
     note: "",
+    sellsFor: 0,
     type: "Equipment",
   },
   "Whale Skin": {
@@ -468,9 +517,9 @@ export const ItemList: monadItemList = {
     description: "Coating boats to go faster.",
     image: "",
     rating: "normal",
-    stats: {},
     long: "", // Price since it was shown In a shop.
     note: "",
+    sellsFor: 0,
     type: "Misc",
   },
   "Linen Halfgloves": {
@@ -482,6 +531,7 @@ export const ItemList: monadItemList = {
     stats: { dexterity: 1 },
     long: "", // Price since it was shown In a shop.
     note: "",
+    sellsFor: 0,
     type: "Equipment",
   },
   "Battlemage's Gloves": {
@@ -493,6 +543,7 @@ export const ItemList: monadItemList = {
     stats: { magic: 1, willpower: 1 },
     long: "", // Price since it was shown In a shop.
     note: "",
+    sellsFor: 0,
     type: "Equipment",
   },
   "Battlemage's Hat": {
@@ -504,6 +555,7 @@ export const ItemList: monadItemList = {
     stats: { magic: 1, willpower: 1 },
     long: "", // Price since it was shown In a shop.
     note: "",
+    sellsFor: 0,
     type: "Equipment",
   },
   "Battlemage's Robe": {
@@ -515,6 +567,7 @@ export const ItemList: monadItemList = {
     stats: { magic: 1, willpower: 1 },
     long: "", // Price since it was shown In a shop.
     note: "",
+    sellsFor: 0,
     type: "Equipment",
   },
   "Battlemage's Crakows": {
@@ -526,6 +579,7 @@ export const ItemList: monadItemList = {
     stats: { magic: 1, willpower: 1 },
     long: "", // Price since it was shown In a shop.
     note: "",
+    sellsFor: 0,
     type: "Equipment",
   },
   "Battlemage's Breeches": {
@@ -537,7 +591,8 @@ export const ItemList: monadItemList = {
     stats: { magic: 1, willpower: 1 },
     long: "", // Price since it was shown In a shop.
     note: "",
-    type: "trousers",
+    sellsFor: 0,
+    type: "Equipment",
   },
   "Battlemage's Set (4/4)": {
     name: "Battlemage's Set (4/4)",
@@ -545,6 +600,7 @@ export const ItemList: monadItemList = {
     rating: "normal",
     stats: { magic: 1, willpower: 1 },
     note: "",
+    sellsFor: 0,
     type: "set effect",
   },
   "Cotton Scarf": {
@@ -556,7 +612,8 @@ export const ItemList: monadItemList = {
     stats: {},
     long: "", // Price since it was shown In a shop.
     note: "",
-    type: "scarf",
+    sellsFor: 0,
+    type: "Equipment",
   },
   "Rayndr Jackboots": {
     name: "Rayndr Jackboots",
@@ -567,6 +624,7 @@ export const ItemList: monadItemList = {
     stats: { endurance: 1 },
     long: "", // Price since it was shown In a shop.
     note: "",
+    sellsFor: 0,
     type: "Equipment",
   },
   "Rogue's Ring": {
@@ -578,7 +636,7 @@ export const ItemList: monadItemList = {
     stats: { dexterity: 1 },
     long: "", // Price since it was shown In a shop.
     note: "https://ffxiv.gamerescape.com/wiki/Category:Ring/iLevel_30-39",
-    type: "ring",
+    type: "Equipment",
     3: {
       name: "Rogue's Ring +3",
       description: "Critical hit rate: +3, Dexterity: +3.",
@@ -588,7 +646,7 @@ export const ItemList: monadItemList = {
       stats: { dexterity: 3 },
       long: "", // Price since it was shown In a shop.
       note: "https://ffxiv.gamerescape.com/wiki/Category:Ring/iLevel_30-39",
-      type: "ring",
+      type: "Equipment",
     },
     9: {
       name: "Rogue's Ring +9",
@@ -599,7 +657,7 @@ export const ItemList: monadItemList = {
       stats: { dexterity: 9 },
       long: "", // Price since it was shown In a shop.
       note: "https://ffxiv.gamerescape.com/wiki/Category:Ring/iLevel_30-39",
-      type: "ring",
+      type: "Equipment",
     },
   },
   "Dark Elf's Scimitar": {
@@ -611,6 +669,7 @@ export const ItemList: monadItemList = {
     stats: { strength: 1 },
     long: "", // Price since it was shown In a shop.
     note: "",
+    sellsFor: 0,
     type: "Equipment",
   },
   "Meroyri Xiphos": {
@@ -622,6 +681,7 @@ export const ItemList: monadItemList = {
     stats: { strength: 1 },
     long: "", // Price since it was shown In a shop.
     note: "",
+    sellsFor: 0,
     type: "Equipment",
   },
   "Rayndr Face Mask": {
@@ -632,6 +692,7 @@ export const ItemList: monadItemList = {
     stats: { strength: 0 },
     long: "", // Price since it was shown In a shop.
     note: "",
+    sellsFor: 0,
     type: "Equipment",
   },
   "Shadow Pirate's Coat": {
@@ -643,6 +704,7 @@ export const ItemList: monadItemList = {
     stats: { strength: 0 },
     long: "", // Price since it was shown In a shop.
     note: "",
+    sellsFor: 0,
     type: "Equipment",
   },
   "Leather Pirate Boots": {
@@ -653,6 +715,7 @@ export const ItemList: monadItemList = {
     stats: { endurance: 1 },
     long: "", // Price since it was shown In a shop.
     note: "",
+    sellsFor: 0,
     type: "Equipment",
   },
   "Black Band": {
@@ -663,7 +726,8 @@ export const ItemList: monadItemList = {
     stats: { dexterity: 1 },
     long: "", // Price since it was shown In a shop.
     note: "",
-    type: "ring",
+    sellsFor: 0,
+    type: "Equipment",
     9: {
       name: "Black Band +9",
       description: "Dexterity: +9.",
@@ -672,7 +736,8 @@ export const ItemList: monadItemList = {
       stats: { dexterity: 9 },
       long: "", // Price since it was shown In a shop.
       note: "",
-      type: "ring",
+      sellsFor: 0,
+      type: "Equipment",
     },
   },
   "Tidus Earring": {
@@ -687,6 +752,7 @@ export const ItemList: monadItemList = {
     },
     long: "", // Price since it was shown In a shop.
     note: "",
+    sellsFor: 0,
     type: "Equipment",
   },
   "Featureless Deathwood Mask": {
@@ -697,6 +763,7 @@ export const ItemList: monadItemList = {
     stats: {},
     long: "", // Price since it was shown In a shop.
     note: "",
+    sellsFor: 0,
     type: "Equipment",
   },
   "Black Braid Bracelet": {
@@ -707,7 +774,8 @@ export const ItemList: monadItemList = {
     stats: {},
     long: "", // Price since it was shown In a shop.
     note: "",
-    type: "bracelet",
+    sellsFor: 0,
+    type: "Equipment",
   },
   "Frost Gloves": {
     name: "Frost Gloves",
@@ -717,6 +785,7 @@ export const ItemList: monadItemList = {
     stats: {},
     long: "", // Price since it was shown In a shop.
     note: "",
+    sellsFor: 0,
     type: "Equipment",
   },
   "Flame Gloves": {
@@ -727,6 +796,7 @@ export const ItemList: monadItemList = {
     stats: {},
     long: "", // Price since it was shown In a shop.
     note: "",
+    sellsFor: 0,
     type: "Equipment",
   },
   "Ceremonial White Stag Mask": {
@@ -735,9 +805,9 @@ export const ItemList: monadItemList = {
     image: "",
     rating: "normal",
     stats: { "Small magic increase": "+?" },
-    long: "",
     long: "", // Price since it was shown In a shop.
     note: "",
+    sellsFor: 0,
     type: "Equipment",
     0: {
       name: "Ceremonial White Stag Mask",
@@ -745,9 +815,9 @@ export const ItemList: monadItemList = {
       image: "",
       rating: "normal",
       stats: { "Small magic increase": "+?" },
-      long: "",
       long: "", // Price since it was shown In a shop.
       note: "",
+      sellsFor: 0,
       type: "Equipment",
     },
   },
@@ -758,9 +828,9 @@ export const ItemList: monadItemList = {
     image: "",
     rating: "unique",
     stats: { magic: 2 },
-    long: "",
     long: "Blessing of 建御雷 [Takemikazuchi]: Resist lightning +20%, Lightning cost - 15%, Lightning power +20%.", // Price since it was shown In a shop.
     note: "",
+    sellsFor: 0,
     type: "Equipment",
     0: {
       name: "Heavenly White Stag Mask",
@@ -769,9 +839,9 @@ export const ItemList: monadItemList = {
       image: "",
       rating: "unique",
       stats: { magic: 1, },
-      long: "",
       long: "Blessing of 建御雷 [Takemikazuchi]: Resist lightning +10%, Lightning cost - 10%, Lightning power +10%.", // Price since it was shown In a shop.
       note: "",
+      sellsFor: 0,
       type: "Equipment",
     },
     1: {
@@ -781,9 +851,9 @@ export const ItemList: monadItemList = {
       image: "",
       rating: "unique",
       stats: { magic: 2 },
-      long: "",
       long: "Blessing of 建御雷 [Takemikazuchi]: Resist lightning +20%, Lightning cost - 15%, Lightning power +20%.", // Price since it was shown In a shop.
       note: "",
+      sellsFor: 0,
       type: "Equipment",
     }
   },
@@ -795,6 +865,7 @@ export const ItemList: monadItemList = {
     stats: { magic: 2, HP: 10 },
     long: "", // Price since it was shown In a shop.
     note: "",
+    sellsFor: 0,
     type: "Equipment",
   },
   "Hui Lu's Battle Armour": {
@@ -805,6 +876,7 @@ export const ItemList: monadItemList = {
     stats: {},
     long: "", // Price since it was shown In a shop.
     note: "",
+    sellsFor: 0,
     type: "Equipment",
     0: {
       name: "Hui Lu's Battle Armour",
@@ -814,6 +886,7 @@ export const ItemList: monadItemList = {
       stats: {},
       long: "", // Price since it was shown In a shop.
       note: "",
+      sellsFor: 0,
       type: "Equipment",
     },
   },
@@ -825,6 +898,7 @@ export const ItemList: monadItemList = {
     stats: {},
     long: "", // Price since it was shown In a shop.
     note: "",
+    sellsFor: 0,
     type: "Equipment",
     0: {
       name: "Hui Lu's Enchanting Gloves",
@@ -834,6 +908,7 @@ export const ItemList: monadItemList = {
       stats: {},
       long: "", // Price since it was shown In a shop.
       note: "",
+      sellsFor: 0,
       type: "Equipment",
     },
   },
@@ -845,6 +920,7 @@ export const ItemList: monadItemList = {
     stats: {},
     long: "", // Price since it was shown In a shop.
     note: "",
+    sellsFor: 0,
     type: "Equipment",
     0: {
       name: "Hui Lu's Burning Boots",
@@ -854,6 +930,7 @@ export const ItemList: monadItemList = {
       stats: {},
       long: "", // Price since it was shown In a shop.
       note: "",
+      sellsFor: 0,
       type: "Equipment",
     },
   },
@@ -867,6 +944,7 @@ export const ItemList: monadItemList = {
     },
     long: "", // Price since it was shown In a shop.
     note: "",
+    sellsFor: 0,
     type: "Equipment",
   },
   "Glide Moroha": {
@@ -897,6 +975,7 @@ export const ItemList: monadItemList = {
     rating: "rare",
     stats: {},
     note: "",
+    sellsFor: 0,
     type: "set effect",
   },
   "Niyosho Gakuran": {
@@ -905,6 +984,7 @@ export const ItemList: monadItemList = {
     rating: "junk",
     stats: {},
     note: "gakuran (学ラン)",
+    image: "",
     type: "Equipment",
   },
   "Niyosho Hakama": {
@@ -913,6 +993,7 @@ export const ItemList: monadItemList = {
     rating: "junk",
     stats: {},
     note: "Originally students just wore standard everyday clothes to school; kimono for female students, with hakama for male students. During the Meiji period, students began to wear uniforms modelled after Western dress.",
+    image: "",
     type: "Equipment",
   },
   "Otto's Leaky Wand": {
@@ -921,6 +1002,8 @@ export const ItemList: monadItemList = {
     rating: "normal",
     stats: {},
     note: "",
+    sellsFor: 0,
+    image: "",
     type: "Equipment",
   },
   "Jokoto Wakizashi": {
@@ -930,12 +1013,14 @@ export const ItemList: monadItemList = {
     stats: {},
     note: "Jokotō (ancient swords, until around A.D. 900), https://en.wikipedia.org/wiki/Wakizashi",
     type: "Equipment",
+    image: "",
   },
   "Seifuku": {
     name: "Seifuku",
     description: "High school sailor outfit worn by female students of Niyosho.",
     rating: "junk",
     stats: {},
+    image: "",
     note: "seifuku (制服). The sailor fuku (セーラー服, sērā fuku) (lit. 'sailor outfit') is a common style of uniform worn by female middle school students, traditionally by high school students.",
     type: "Equipment",
   },
@@ -945,6 +1030,8 @@ export const ItemList: monadItemList = {
     rating: "junk",
     stats: {},
     note: "",
+    image: "",
+    sellsFor: 0,
     type: "Equipment",
   },
   "Autumn Cloak": {
@@ -954,6 +1041,7 @@ export const ItemList: monadItemList = {
     image: "https://ottotsuma.github.io/images/items/AutumnCloak.jpg",
     stats: {},
     note: "",
+    sellsFor: 0,
     type: "Equipment",
   },
   //   The following are types of Japanese swords:
