@@ -50,7 +50,8 @@ const ranks = [
   "quest",
 ]
 
-declare type ratings = "junk" |
+declare type ratings = 
+  "junk" |
   "common" |
   "normal" |
   "intermediate" |
@@ -63,7 +64,7 @@ declare type ratings = "junk" |
   "quest"
 
 interface monadItemList {
-  [key: string]: monadItem | monadEquipmentItemData | monadWeaponItemData | monadFoodItemData | monadBoneItemData | monadPotionItemData | monadReadableItemData | monadOpenableItemData | monadMiscItemData;
+  [key: string]: monadItem | monadEquipmentItemData | monadWeaponItemData | monadFoodItemData | monadBoneItemData | monadPotionItemData | monadReadableItemData | monadOpenableItemData | monadMiscItemData | monadSetItemData;
 }
 
 interface monadItem {
@@ -75,15 +76,15 @@ interface monadItem {
   sellsFor: number; // buys for would be in shops data.
   long?: string; // Appears a the bottom of cards. Is the same as (description overwrites effect), but longer and overwrites description. Let's remove effect. Shows the price if shown in a shop. Should really make shop data then.
   note: string;
-  1?: monadItem;
-  2?: monadItem;
-  3?: monadItem;
-  4?: monadItem;
-  5?: monadItem;
-  6?: monadItem;
-  7?: monadItem;
-  8?: monadItem;
-  9?: monadItem;
+  1?: monadItem | monadEquipmentItemData | monadWeaponItemData | monadFoodItemData | monadBoneItemData | monadPotionItemData | monadReadableItemData | monadOpenableItemData | monadMiscItemData | monadSetItemData;
+  2?: monadItem | monadEquipmentItemData | monadWeaponItemData | monadFoodItemData | monadBoneItemData | monadPotionItemData | monadReadableItemData | monadOpenableItemData | monadMiscItemData | monadSetItemData;
+  3?: monadItem | monadEquipmentItemData | monadWeaponItemData | monadFoodItemData | monadBoneItemData | monadPotionItemData | monadReadableItemData | monadOpenableItemData | monadMiscItemData | monadSetItemData;
+  4?: monadItem | monadEquipmentItemData | monadWeaponItemData | monadFoodItemData | monadBoneItemData | monadPotionItemData | monadReadableItemData | monadOpenableItemData | monadMiscItemData | monadSetItemData;
+  5?: monadItem | monadEquipmentItemData | monadWeaponItemData | monadFoodItemData | monadBoneItemData | monadPotionItemData | monadReadableItemData | monadOpenableItemData | monadMiscItemData | monadSetItemData;
+  6?: monadItem | monadEquipmentItemData | monadWeaponItemData | monadFoodItemData | monadBoneItemData | monadPotionItemData | monadReadableItemData | monadOpenableItemData | monadMiscItemData | monadSetItemData;
+  7?: monadItem | monadEquipmentItemData | monadWeaponItemData | monadFoodItemData | monadBoneItemData | monadPotionItemData | monadReadableItemData | monadOpenableItemData | monadMiscItemData | monadSetItemData;
+  8?: monadItem | monadEquipmentItemData | monadWeaponItemData | monadFoodItemData | monadBoneItemData | monadPotionItemData | monadReadableItemData | monadOpenableItemData | monadMiscItemData | monadSetItemData;
+  9?: monadItem | monadEquipmentItemData | monadWeaponItemData | monadFoodItemData | monadBoneItemData | monadPotionItemData | monadReadableItemData | monadOpenableItemData | monadMiscItemData | monadSetItemData;
 }
 
 interface monadEquipmentItemData extends monadBaseEquipmentItemData {
@@ -175,6 +176,10 @@ interface monadOpenableItemData extends monadItem {
 interface monadMiscItemData extends monadItem {
   type: 'Misc';
   keyItem?: IDQuantity;
+}
+
+interface monadSetItemData extends monadBaseEquipmentItemData {
+  type: 'Set';
 }
 
 export const ItemList: monadItemList = {
@@ -300,6 +305,7 @@ export const ItemList: monadItemList = {
     1: {
       description: "Increase HP by 32, Increase MP by 23.",
       stats: { HP: 32, MP: 23 },
+      type: "Equipment",
     }
   },
   "Demon Hunter Necklace": {
@@ -361,16 +367,16 @@ export const ItemList: monadItemList = {
     },
     note: "",
     sellsFor: 0,
-    type: "set effect",
+    type: "Set",
   },
   "Paladin Engeler's Set (4/7)": {
     name: "Paladin Engeler's Set",
     description: "Crit Rate: +1, Critical Damage: +2.5%.",
     rating: "epic",
-    // stats: {}
+    stats: {},
     note: "",
     sellsFor: 0,
-    type: "set effect",
+    type: "Set",
   },
   "Paladin Engeler's Set (7/7)": {
     name: "Paladin Engeler's Set",
@@ -380,7 +386,7 @@ export const ItemList: monadItemList = {
     stats: { endurance: 0 },
     note: "",
     sellsFor: 0,
-    type: "set effect",
+    type: "Set",
   },
   "Toads Skin Jacket": {
     name: "Toads Skin Jacket",
@@ -601,7 +607,7 @@ export const ItemList: monadItemList = {
     stats: { magic: 1, willpower: 1 },
     note: "",
     sellsFor: 0,
-    type: "set effect",
+    type: "Set",
   },
   "Cotton Scarf": {
     name: "Cotton Scarf",
@@ -957,6 +963,7 @@ export const ItemList: monadItemList = {
     long: "", // Price since it was shown In a shop.
     note: "Moroha is the type of blade. Ice.",
     type: "Equipment",
+    sellsFor: 0
   },
   "Gale Moroha": {
     name: "Gale Moroha",
@@ -968,6 +975,7 @@ export const ItemList: monadItemList = {
     long: "", // Price since it was shown In a shop.
     note: "Moroha is the type of blade. Wind.",
     type: "Equipment",
+    sellsFor: 0
   },
   "Glide & Gale (2/2)": {
     name: "Set Effect:",
@@ -975,8 +983,9 @@ export const ItemList: monadItemList = {
     rating: "rare",
     stats: {},
     note: "",
+    image: "",
     sellsFor: 0,
-    type: "set effect",
+    type: "Set",
   },
   "Niyosho Gakuran": {
     name: "Niyosho Gakuran",
@@ -986,6 +995,7 @@ export const ItemList: monadItemList = {
     note: "gakuran (学ラン)",
     image: "",
     type: "Equipment",
+    sellsFor: 0
   },
   "Niyosho Hakama": {
     name: "Niyosho Hakama",
@@ -995,6 +1005,7 @@ export const ItemList: monadItemList = {
     note: "Originally students just wore standard everyday clothes to school; kimono for female students, with hakama for male students. During the Meiji period, students began to wear uniforms modelled after Western dress.",
     image: "",
     type: "Equipment",
+    sellsFor: 0
   },
   "Otto's Leaky Wand": {
     name: "Otto's Leaky Wand",
@@ -1014,6 +1025,7 @@ export const ItemList: monadItemList = {
     note: "Jokotō (ancient swords, until around A.D. 900), https://en.wikipedia.org/wiki/Wakizashi",
     type: "Equipment",
     image: "",
+    sellsFor: 0
   },
   "Seifuku": {
     name: "Seifuku",
@@ -1023,6 +1035,7 @@ export const ItemList: monadItemList = {
     image: "",
     note: "seifuku (制服). The sailor fuku (セーラー服, sērā fuku) (lit. 'sailor outfit') is a common style of uniform worn by female middle school students, traditionally by high school students.",
     type: "Equipment",
+    sellsFor: 0
   },
   "Niyosho Kimono": {
     name: "Niyosho Kimono",

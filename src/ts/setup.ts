@@ -18,11 +18,10 @@ import '../img/icon.png';
 // Reference images using `ctx.getResourceUrl`
 import LargeIcon from '../img/icon_large.png';
 
-export async function setup(ctx: any) {
+export async function setup(ctx: Modding.ModContext) {
   try {
     // Register our GameData
-    await ctx.gameData.addPackage(ModData);
-    console.log('Starting Monad')
+    await ctx.gameData.addPackage('data.json');
     // Because we're loading our templates.min.html file via the manifest.json,
     // the templates aren't available until after the setup() function runs
     ctx.onModsLoaded(async () => {
@@ -175,26 +174,33 @@ export async function setup(ctx: any) {
               try {
                 for (let index = 0; index < monadItemsArray.length; index++) {
                   const id = monadItemsArray[index]
-                  const newItem:any =                     {
-                    "id": id,
-                    "name": monadItems[id].name,
-                    "category": monadItems[id].type,
-                    "type": monadItems[id].type,
-                    "itemType": monadItems[id].type,
-                    "media": monadItems[id].image || "",
-                    "ignoreCompletion": false,
-                    "obtainFromItemLog": false,
-                    "golbinRaidExclusive": false,
-                    "sellsFor": monadItems[id].sellsFor,
-                    "customDescription": monadItems[id].description,
+                  const type = monadItems[id].type
+
+                  if(type === "Set") {
+                    // Add to set effects
+                  } else {
+                    // Is added to items
+                    const newItem:any = {
+                      "id": id,
+                      "name": monadItems[id].name,
+                      "category": type,
+                      "type": type,
+                      "itemType": type,
+                      "media": monadItems[id].image || "",
+                      "ignoreCompletion": false,
+                      "obtainFromItemLog": false,
+                      "golbinRaidExclusive": false,
+                      "sellsFor": monadItems[id].sellsFor,
+                      "customDescription": monadItems[id].description,
+                    }
+                    if(type === "Equipment") {
+                      newItem.equipmentStats = {
+                        key: "attackSpeed",
+                        value: 3000
+                    }
+                    }
+                    itemPackage.items.add(newItem)
                   }
-                  if(monadItems[id].type === "Equipment") {
-                    newItem.equipmentStats = {
-                      key: "attackSpeed",
-                      value: 3000
-                  }
-                  }
-                  itemPackage.items.add(newItem)
                 }
               } catch (error) {
                   console.log("Monad onModsLoaded itempackage", error)
