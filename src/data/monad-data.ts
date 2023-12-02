@@ -61,12 +61,8 @@ declare type ratings =
   "unique" |
   "growth" |
   "quest"
-
-interface monadItemList {
-  [key: string]: monadItem | monadEquipmentItemData | monadWeaponItemData | monadFoodItemData | monadBoneItemData | monadPotionItemData | monadReadableItemData | monadOpenableItemData | monadMiscItemData | monadSetItemData;
-}
 interface monadItem {
-  [key: string]: any // for production to make it shut up about adding stuff dynamicly
+  // [key: string]: any // for production to make it shut up about adding stuff dynamicly
   name: string;
   description: string;
   image: string;
@@ -194,7 +190,10 @@ interface monadSetItemData {
   equipmentStats?: EquipStatPair[];
 }
 
-export const ItemList: monadItemList = {
+interface monadItemList {
+  [key: string]: monadItem | monadEquipmentItemData | monadWeaponItemData | monadFoodItemData | monadBoneItemData | monadPotionItemData | monadReadableItemData | monadOpenableItemData | monadMiscItemData | monadSetItemData;
+}
+export const ItemList: any = {
   // Each item can be enchanted by level / 10. That is how you increase the stats, not an automatic increase.
   // Should stats really be : {1:{magic: 1}, 2:{magic: 2}}
   "Training Health Potion": {

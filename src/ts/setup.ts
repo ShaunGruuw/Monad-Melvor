@@ -169,114 +169,110 @@ export async function setup(ctx: Modding.ModContext) {
 
 
         const monadItemsArray = Object.keys(monadItems)
-        
-        const initialPackage = ctx.gameData.buildPackage((itemPackage: any) => {
-              try {
-                for (let index = 0; index < monadItemsArray.length; index++) {
-                  const id = monadItemsArray[index]
-                  const type = monadItems[id].type
-                  if(type === "Set") {
-                    // Add to set effects
-                    itemIDs: (string | SynergyGroup)[];
-                    playerModifiers?: PlayerModifierData;
-                    enemyModifiers?: CombatModifierData;
-                    conditionalModifiers?: ConditionalModifierData[];
-                    equipmentStats?: EquipStatPair[];
-                  } else {
-                    // Is added to items
-                    const newItem:any = {
-                      "id": id,
-                      "name": monadItems[id].name,
-                      "category": type,
-                      "type": type,
-                      "itemType": type,
-                      "media": monadItems[id].image || "",
-                      "ignoreCompletion": false,
-                      "obtainFromItemLog": false,
-                      "golbinRaidExclusive": false,
-                      "sellsFor": monadItems[id].sellsFor,
-                      "customDescription": monadItems[id].description,
-                    }
-                    if(Weapon) {
-                      attackType: AttackType;
-                      ammoTypeRequired?: AmmoType;
 
-                      stats: monadStats;
-                      validSlots: SlotTypes[];
-                      occupiesSlots: SlotTypes[];
-                      equipRequirements: AnyRequirementData[];
-                      equipmentStats: EquipStatPair[];
-                      modifiers?: PlayerModifierData;
-                      enemyModifiers?: CombatModifierData;
-                      conditionalModifiers?: ConditionalModifierData[];
-                      specialAttacks?: string[];
-                      overrideSpecialChances?: number[];
-                      fightEffects?: string[];
-                      providedRunes?: IDQuantity[];
-                      ammoType?: AmmoType;
-                      consumesChargesOn?: GameEventMatcherData[];
-                      consumesOn?: GameEventMatcherData[];
-                      consumesItemOn?: {
-                        itemID: string;
-                        chance: number;
-                        matchers: GameEventMatcherData[];
-                      };
+        const initialPackage = ctx.gameData.buildPackage((itemPackage: any) => {
+          try {
+            for (let index = 0; index < monadItemsArray.length; index++) {
+              const id = monadItemsArray[index]
+              const type = monadItems[id].type
+              if (type === "Set") {
+                // Add to set effects
+                const newSynergy: ItemSynergyData = {
+                  "itemIDs": monadItemsArray[index].itemIDs,
+                  "conditionalModifiers": [],
+                  "enemyModifiers": {},
+                  "equipmentStats": [],
+                  "playerModifiers": {}
+                }
+                itemPackage.itemSynergies.add(newSynergy)
+              } else {
+                // Is added to items
+                const newItem: any = {
+                  "id": id,
+                  "name": monadItems[id].name,
+                  "category": type,
+                  "type": type,
+                  "itemType": type,
+                  "media": monadItems[id].image || "",
+                  "ignoreCompletion": false,
+                  "obtainFromItemLog": false,
+                  "golbinRaidExclusive": false,
+                  "sellsFor": monadItems[id].sellsFor,
+                  "customDescription": monadItems[id].description,
+                }
+                if (type === "Weapon") {
+                  const Requirements = ['attackType', 'ammoTypeRequired', 'stats', 'validSlots', 'occupiesSlots', 'equipRequirements', 'equipmentStats', 'modifiers', 'enemyModifiers', 'conditionalModifiers', 'specialAttacks', 'overrideSpecialChances', 'fightEffects', 'providedRunes', 'ammoType ', 'consumesChargesOn', 'consumesOn', 'consumesItemOn']
+                  for (let j = 0; j < Requirements.length; j++) {
+                    if (monadItems[id][Requirements[j]]) {
+                      newItem[Requirements[j]] = monadItems[id][Requirements[j]]
                     }
-                    if(Food) {
-                      healsFor: number;
-                    }
-                    if(Bone) {
-                      prayerPoints: number;
-                    }
-                    if(Potion) {
-                      modifiers: PlayerModifierData;
-                      charges: number;
-                      action: string;
-                      consumesOn: GameEventMatcherData[];
-                    }
-                    if(Readable){
-                      modalID?: string;
-                      swalData?: ReadableItemSwalData;
-                    }
-                    if(Openable) {
-                      dropTable: DropTableData[];
-                      keyItem?: IDQuantity;
-                    }
-                    if(Misc) {
-                      keyItem?: IDQuantity;
-                    }
-                    if(type === "Equipment") {
-                      stats: monadStats;
-                      validSlots: SlotTypes[];
-                      occupiesSlots: SlotTypes[];
-                      equipRequirements: AnyRequirementData[];
-                      equipmentStats: EquipStatPair[];
-                      modifiers?: PlayerModifierData;
-                      enemyModifiers?: CombatModifierData;
-                      conditionalModifiers?: ConditionalModifierData[];
-                      specialAttacks?: string[];
-                      overrideSpecialChances?: number[];
-                      fightEffects?: string[];
-                      providedRunes?: IDQuantity[];
-                      ammoType?: AmmoType;
-                      consumesChargesOn?: GameEventMatcherData[];
-                      consumesOn?: GameEventMatcherData[];
-                      consumesItemOn?: {
-                        itemID: string;
-                        chance: number;
-                        matchers: GameEventMatcherData[];
-                      };
-                    }
-                    itemPackage.items.add(newItem)
                   }
                 }
-              } catch (error) {
-                  console.log("Monad onModsLoaded itempackage", error)
+                if(type === "Food") {
+                  const Requirements = ['healsFor']
+                  for (let j = 0; j < Requirements.length; j++) {
+                    if (monadItems[id][Requirements[j]]) {
+                      newItem[Requirements[j]] = monadItems[id][Requirements[j]]
+                    }
+                  }
+                }
+                if(type === "Bone") {
+                  const Requirements = ['prayerPoints']
+                  for (let j = 0; j < Requirements.length; j++) {
+                    if (monadItems[id][Requirements[j]]) {
+                      newItem[Requirements[j]] = monadItems[id][Requirements[j]]
+                    }
+                  }
+                }
+                // if(type === "Potion") {
+                //   modifiers: PlayerModifierData;
+                //   charges: number;
+                //   action: string;
+                //   consumesOn: GameEventMatcherData[];
+                // }
+                // if(type === "Readable"){
+                //   modalID?: string;
+                //   swalData?: ReadableItemSwalData;
+                // }
+                // if(type === "Openable") {
+                //   dropTable: DropTableData[];
+                //   keyItem?: IDQuantity;
+                // }
+                // if(type === "Misc") {
+                //   keyItem?: IDQuantity;
+                // }
+                // if(type === "Equipment") {
+                //   stats: monadStats;
+                //   validSlots: SlotTypes[];
+                //   occupiesSlots: SlotTypes[];
+                //   equipRequirements: AnyRequirementData[];
+                //   equipmentStats: EquipStatPair[];
+                //   modifiers?: PlayerModifierData;
+                //   enemyModifiers?: CombatModifierData;
+                //   conditionalModifiers?: ConditionalModifierData[];
+                //   specialAttacks?: string[];
+                //   overrideSpecialChances?: number[];
+                //   fightEffects?: string[];
+                //   providedRunes?: IDQuantity[];
+                //   ammoType?: AmmoType;
+                //   consumesChargesOn?: GameEventMatcherData[];
+                //   consumesOn?: GameEventMatcherData[];
+                //   consumesItemOn?: {
+                //     itemID: string;
+                //     chance: number;
+                //     matchers: GameEventMatcherData[];
+                //   };
+                // }
+                if(newItem.itemType) { itemPackage.items.add(newItem) }
+                else {console.log('Monad, onModsLoaded, itempackage, What is this?', newItem)}
               }
-      });
-      initialPackage.add();
-    
-      game.monad = initialPackage
+            }
+          } catch (error) {
+            console.log("Monad onModsLoaded itempackage", error)
+          }
+        });
+        initialPackage.add();
+        game.monad = initialPackage
       } catch (error) {
         console.log('error, Monad onModsLoaded', error)
       }
