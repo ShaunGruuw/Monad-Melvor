@@ -70,15 +70,15 @@ interface monadItem {
   sellsFor: number; // buys for would be in shops data.
   long?: string; // Appears a the bottom of cards. Is the same as (description overwrites effect), but longer and overwrites description. Let's remove effect. Shows the price if shown in a shop. Should really make shop data then.
   note: string;
-  0?: Partial<monadItem> | Partial<monadEquipmentItemData>  | Partial<monadWeaponItemData> | Partial<monadFoodItemData> | Partial<monadBoneItemData> | Partial<monadPotionItemData> | Partial<monadReadableItemData> | Partial<monadOpenableItemData> | Partial<monadMiscItemData> | Partial<monadSetItemData>;
-  1?: Partial<monadItem> | Partial<monadEquipmentItemData>  | monadWeaponItemData | monadFoodItemData | monadBoneItemData | monadPotionItemData | monadReadableItemData | monadOpenableItemData | monadMiscItemData | monadSetItemData;
-  2?: Partial<monadItem> | Partial<monadEquipmentItemData>  | monadWeaponItemData | monadFoodItemData | monadBoneItemData | monadPotionItemData | monadReadableItemData | monadOpenableItemData | monadMiscItemData | monadSetItemData;
+  0?: Partial<monadItem> | Partial<monadEquipmentItemData> | Partial<monadWeaponItemData> | Partial<monadFoodItemData> | Partial<monadBoneItemData> | Partial<monadPotionItemData> | Partial<monadReadableItemData> | Partial<monadOpenableItemData> | Partial<monadMiscItemData> | Partial<monadSetItemData>;
+  1?: Partial<monadItem> | Partial<monadEquipmentItemData> | monadWeaponItemData | monadFoodItemData | monadBoneItemData | monadPotionItemData | monadReadableItemData | monadOpenableItemData | monadMiscItemData | monadSetItemData;
+  2?: Partial<monadItem> | Partial<monadEquipmentItemData> | monadWeaponItemData | monadFoodItemData | monadBoneItemData | monadPotionItemData | monadReadableItemData | monadOpenableItemData | monadMiscItemData | monadSetItemData;
   3?: Partial<monadItem> | monadEquipmentItemData | monadWeaponItemData | monadFoodItemData | monadBoneItemData | monadPotionItemData | monadReadableItemData | monadOpenableItemData | monadMiscItemData | monadSetItemData;
-  4?: Partial<monadItem> | Partial<monadEquipmentItemData>  | monadWeaponItemData | monadFoodItemData | monadBoneItemData | monadPotionItemData | monadReadableItemData | monadOpenableItemData | monadMiscItemData | monadSetItemData;
-  5?: Partial<monadItem> | Partial<monadEquipmentItemData>  | monadWeaponItemData | monadFoodItemData | monadBoneItemData | monadPotionItemData | monadReadableItemData | monadOpenableItemData | monadMiscItemData | monadSetItemData;
-  6?: Partial<monadItem> | Partial<monadEquipmentItemData>  | monadWeaponItemData | monadFoodItemData | monadBoneItemData | monadPotionItemData | monadReadableItemData | monadOpenableItemData | monadMiscItemData | monadSetItemData;
-  7?: Partial<monadItem> | Partial<monadEquipmentItemData>  | monadWeaponItemData | monadFoodItemData | monadBoneItemData | monadPotionItemData | monadReadableItemData | monadOpenableItemData | monadMiscItemData | monadSetItemData;
-  8?: Partial<monadItem> | Partial<monadEquipmentItemData>  | monadWeaponItemData | monadFoodItemData | monadBoneItemData | monadPotionItemData | monadReadableItemData | monadOpenableItemData | monadMiscItemData | monadSetItemData;
+  4?: Partial<monadItem> | Partial<monadEquipmentItemData> | monadWeaponItemData | monadFoodItemData | monadBoneItemData | monadPotionItemData | monadReadableItemData | monadOpenableItemData | monadMiscItemData | monadSetItemData;
+  5?: Partial<monadItem> | Partial<monadEquipmentItemData> | monadWeaponItemData | monadFoodItemData | monadBoneItemData | monadPotionItemData | monadReadableItemData | monadOpenableItemData | monadMiscItemData | monadSetItemData;
+  6?: Partial<monadItem> | Partial<monadEquipmentItemData> | monadWeaponItemData | monadFoodItemData | monadBoneItemData | monadPotionItemData | monadReadableItemData | monadOpenableItemData | monadMiscItemData | monadSetItemData;
+  7?: Partial<monadItem> | Partial<monadEquipmentItemData> | monadWeaponItemData | monadFoodItemData | monadBoneItemData | monadPotionItemData | monadReadableItemData | monadOpenableItemData | monadMiscItemData | monadSetItemData;
+  8?: Partial<monadItem> | Partial<monadEquipmentItemData> | monadWeaponItemData | monadFoodItemData | monadBoneItemData | monadPotionItemData | monadReadableItemData | monadOpenableItemData | monadMiscItemData | monadSetItemData;
   9?: Partial<monadItem> | Partial<monadEquipmentItemData> | monadWeaponItemData | monadFoodItemData | monadBoneItemData | monadPotionItemData | monadReadableItemData | monadOpenableItemData | monadMiscItemData | monadSetItemData;
 }
 
@@ -87,7 +87,6 @@ interface monadEquipmentItemData extends monadBaseEquipmentItemData {
 }
 interface monadStats {
   [key: string]: Number // to take in all other keys added to stats but keeping number as the value. This would include damage to a spcific type of monster
-
   vitality?: Number
   endurance?: Number
   willpower?: Number
@@ -117,8 +116,14 @@ interface monadStats {
   MagicDamageReductionPerc?: Number
 }
 
+declare type monadStatKey = 'attackSpeed' | 'stabAttackBonus' | 'slashAttackBonus' | 'blockAttackBonus' | 'rangedAttackBonus' | 'magicAttackBonus' | 'meleeStrengthBonus' | 'rangedStrengthBonus' | 'magicDamageBonus' | 'meleeDefenceBonus' | 'rangedDefenceBonus' | 'magicDefenceBonus' | 'damageReduction' | 'summoningMaxhit' | 'vitality' | 'endurance' | 'willpower' | 'magic' | 'strength' | 'dexterity' | 'sense' | 'charisma' | 'HP' | 'MP' | 'HPPerc' | 'MPPerc' | 'vitalityPerc' | 'endurancePerc' | 'willpowerPerc' | 'magicPerc' | 'strengthPerc' | 'dexterityPerc' | 'sensePerc' | 'charismaPerc' | 'PhysicalDamageReduction' | 'MagicDamageReduction' | 'PhysicalDamageReductionPerc' | 'MagicDamageReductionPerc';
+declare type monadStatPair = {
+  key: monadStatKey;
+  value: number;
+};
 interface monadBaseEquipmentItemData extends monadItem {
   stats: monadStats;
+  // stats: monadStatPair[];
   validSlots: SlotTypes[];
   occupiesSlots: SlotTypes[];
   equipRequirements: AnyRequirementData[];
@@ -181,7 +186,7 @@ interface monadMiscItemData extends monadItem {
   keyItem?: IDQuantity;
 }
 
-interface monadSetItemData {
+interface monadSetItemData extends Partial<monadBaseEquipmentItemData> {
   type: 'Set';
   itemIDs: (string | SynergyGroup)[];
   playerModifiers?: PlayerModifierData;

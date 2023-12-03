@@ -177,8 +177,14 @@ export async function setup(ctx: Modding.ModContext) {
               const type = monadItems[id].type
               if (type === "Set") {
                 // Add to set effects / ItemSynergyData
+                const newIDs: any[] = []
+                if (monadItemsArray[index].itemIDs && monadItemsArray[index].itemIDs.length > 0) {
+                  for (let j = 0; j < monadItemsArray[index].itemIDs.length; j++) {
+                    newIDs.push(monadItemsArray[index].itemIDs[j].replace("'", '').replace(/\s/g, ""))
+                  }
+                }
                 const newSynergy: any = {
-                  "itemIDs": monadItemsArray[index].itemIDs
+                  "itemIDs": newIDs
                 }
                 const Requirements = ['conditionalModifiers', "enemyModifiers", "equipmentStats", "playerModifiers"]
                 for (let j = 0; j < Requirements.length; j++) {
@@ -190,7 +196,7 @@ export async function setup(ctx: Modding.ModContext) {
               } else {
                 // Is added to items / AnyItemData
                 const newItem: any = {
-                  "id": id,
+                  "id": id.replace("'", '').replace(/\s/g, ""),
                   "name": monadItems[id].name,
                   "category": type,
                   "type": type,
@@ -202,6 +208,12 @@ export async function setup(ctx: Modding.ModContext) {
                   "sellsFor": monadItems[id].sellsFor,
                   "customDescription": monadItems[id].description,
                 }
+                const newequipmentStats = {
+                  'attackSpeed': 0, 'stabAttackBonus': 0, 'slashAttackBonus': 0, 'blockAttackBonus': 0, 'rangedAttackBonus': 0, 'magicAttackBonus': 0, 'meleeStrengthBonus': 0, 'rangedStrengthBonus': 0, 'magicDamageBonus': 0, 'meleeDefenceBonus': 0, 'rangedDefenceBonus': 0, 'magicDefenceBonus': 0, 'damageReduction': 0, 'summoningMaxhit': 0
+                }
+                if (monadItems[id].stats) {
+                  monadItems[id].equipmentStats = newequipmentStats
+                }
                 if (type === "Weapon") {
                   const Requirements = ['attackType', 'ammoTypeRequired', 'stats', 'validSlots', 'occupiesSlots', 'equipRequirements', 'equipmentStats', 'modifiers', 'enemyModifiers', 'conditionalModifiers', 'specialAttacks', 'overrideSpecialChances', 'fightEffects', 'providedRunes', 'ammoType ', 'consumesChargesOn', 'consumesOn', 'consumesItemOn']
                   for (let j = 0; j < Requirements.length; j++) {
@@ -210,7 +222,7 @@ export async function setup(ctx: Modding.ModContext) {
                     }
                   }
                 }
-                if(type === "Food") {
+                if (type === "Food") {
                   const Requirements = ['healsFor']
                   for (let j = 0; j < Requirements.length; j++) {
                     if (monadItems[id][Requirements[j]]) {
@@ -218,7 +230,7 @@ export async function setup(ctx: Modding.ModContext) {
                     }
                   }
                 }
-                if(type === "Bone") {
+                if (type === "Bone") {
                   const Requirements = ['prayerPoints']
                   for (let j = 0; j < Requirements.length; j++) {
                     if (monadItems[id][Requirements[j]]) {
@@ -226,7 +238,7 @@ export async function setup(ctx: Modding.ModContext) {
                     }
                   }
                 }
-                if(type === "Potion") {
+                if (type === "Potion") {
                   const Requirements = ['modifiers', 'charges', 'action', 'consumesOn']
                   for (let j = 0; j < Requirements.length; j++) {
                     if (monadItems[id][Requirements[j]]) {
@@ -234,7 +246,7 @@ export async function setup(ctx: Modding.ModContext) {
                     }
                   }
                 }
-                if(type === "Readable"){
+                if (type === "Readable") {
                   const Requirements = ['modalID', 'swalData']
                   for (let j = 0; j < Requirements.length; j++) {
                     if (monadItems[id][Requirements[j]]) {
@@ -242,7 +254,7 @@ export async function setup(ctx: Modding.ModContext) {
                     }
                   }
                 }
-                if(type === "Openable") {
+                if (type === "Openable") {
                   const Requirements = ['dropTable', 'keyItem']
                   for (let j = 0; j < Requirements.length; j++) {
                     if (monadItems[id][Requirements[j]]) {
@@ -250,7 +262,7 @@ export async function setup(ctx: Modding.ModContext) {
                     }
                   }
                 }
-                if(type === "Misc") {
+                if (type === "Misc") {
                   const Requirements = ['keyItem']
                   for (let j = 0; j < Requirements.length; j++) {
                     if (monadItems[id][Requirements[j]]) {
@@ -258,7 +270,7 @@ export async function setup(ctx: Modding.ModContext) {
                     }
                   }
                 }
-                if(type === "Equipment") {
+                if (type === "Equipment") {
                   const Requirements = ['stats', 'validSlots', 'occupiesSlots', 'equipRequirements', 'equipmentStats', 'modifiers', 'enemyModifiers', 'conditionalModifiers', 'specialAttacks', 'overrideSpecialChances', 'fightEffects', 'providedRunes', 'ammoType', 'consumesChargesOn', 'consumesOn', 'consumesItemOn']
                   for (let j = 0; j < Requirements.length; j++) {
                     if (monadItems[id][Requirements[j]]) {
@@ -266,8 +278,8 @@ export async function setup(ctx: Modding.ModContext) {
                     }
                   }
                 }
-                if(newItem.itemType) { itemPackage.items.add(newItem) }
-                else {console.log('Monad, onModsLoaded, itempackage, What is this?', newItem)}
+                if (newItem.itemType) { itemPackage.items.add(newItem) }
+                else { console.log('Monad, onModsLoaded, itempackage, What is this?', newItem) }
               }
             }
           } catch (error) {
