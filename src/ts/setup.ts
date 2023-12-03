@@ -168,7 +168,7 @@ export async function setup(ctx: Modding.ModContext) {
         }
 
 
-        const monadItemsArray = Object.keys(monadItems)
+        const monadItemsArray: any[] = Object.keys(monadItems)
 
         const initialPackage = ctx.gameData.buildPackage((itemPackage: any) => {
           try {
@@ -176,8 +176,8 @@ export async function setup(ctx: Modding.ModContext) {
               const id = monadItemsArray[index]
               const type = monadItems[id].type
               if (type === "Set") {
-                // Add to set effects
-                const newSynergy: ItemSynergyData = {
+                // Add to set effects / ItemSynergyData
+                const newSynergy: any = {
                   "itemIDs": monadItemsArray[index].itemIDs
                 }
                 const Requirements = ['conditionalModifiers', "enemyModifiers", "equipmentStats", "playerModifiers"]
@@ -188,8 +188,8 @@ export async function setup(ctx: Modding.ModContext) {
                 }
                 itemPackage.itemSynergies.add(newSynergy)
               } else {
-                // Is added to items
-                const newItem: AnyItemData = {
+                // Is added to items / AnyItemData
+                const newItem: any = {
                   "id": id,
                   "name": monadItems[id].name,
                   "category": type,
@@ -226,45 +226,46 @@ export async function setup(ctx: Modding.ModContext) {
                     }
                   }
                 }
-                // if(type === "Potion") {
-                //   modifiers: PlayerModifierData;
-                //   charges: number;
-                //   action: string;
-                //   consumesOn: GameEventMatcherData[];
-                // }
-                // if(type === "Readable"){
-                //   modalID?: string;
-                //   swalData?: ReadableItemSwalData;
-                // }
-                // if(type === "Openable") {
-                //   dropTable: DropTableData[];
-                //   keyItem?: IDQuantity;
-                // }
-                // if(type === "Misc") {
-                //   keyItem?: IDQuantity;
-                // }
-                // if(type === "Equipment") {
-                //   stats: monadStats;
-                //   validSlots: SlotTypes[];
-                //   occupiesSlots: SlotTypes[];
-                //   equipRequirements: AnyRequirementData[];
-                //   equipmentStats: EquipStatPair[];
-                //   modifiers?: PlayerModifierData;
-                //   enemyModifiers?: CombatModifierData;
-                //   conditionalModifiers?: ConditionalModifierData[];
-                //   specialAttacks?: string[];
-                //   overrideSpecialChances?: number[];
-                //   fightEffects?: string[];
-                //   providedRunes?: IDQuantity[];
-                //   ammoType?: AmmoType;
-                //   consumesChargesOn?: GameEventMatcherData[];
-                //   consumesOn?: GameEventMatcherData[];
-                //   consumesItemOn?: {
-                //     itemID: string;
-                //     chance: number;
-                //     matchers: GameEventMatcherData[];
-                //   };
-                // }
+                if(type === "Potion") {
+                  const Requirements = ['modifiers', 'charges', 'action', 'consumesOn']
+                  for (let j = 0; j < Requirements.length; j++) {
+                    if (monadItems[id][Requirements[j]]) {
+                      newItem[Requirements[j]] = monadItems[id][Requirements[j]]
+                    }
+                  }
+                }
+                if(type === "Readable"){
+                  const Requirements = ['modalID', 'swalData']
+                  for (let j = 0; j < Requirements.length; j++) {
+                    if (monadItems[id][Requirements[j]]) {
+                      newItem[Requirements[j]] = monadItems[id][Requirements[j]]
+                    }
+                  }
+                }
+                if(type === "Openable") {
+                  const Requirements = ['dropTable', 'keyItem']
+                  for (let j = 0; j < Requirements.length; j++) {
+                    if (monadItems[id][Requirements[j]]) {
+                      newItem[Requirements[j]] = monadItems[id][Requirements[j]]
+                    }
+                  }
+                }
+                if(type === "Misc") {
+                  const Requirements = ['keyItem']
+                  for (let j = 0; j < Requirements.length; j++) {
+                    if (monadItems[id][Requirements[j]]) {
+                      newItem[Requirements[j]] = monadItems[id][Requirements[j]]
+                    }
+                  }
+                }
+                if(type === "Equipment") {
+                  const Requirements = ['stats', 'validSlots', 'occupiesSlots', 'equipRequirements', 'equipmentStats', 'modifiers', 'enemyModifiers', 'conditionalModifiers', 'specialAttacks', 'overrideSpecialChances', 'fightEffects', 'providedRunes', 'ammoType', 'consumesChargesOn', 'consumesOn', 'consumesItemOn']
+                  for (let j = 0; j < Requirements.length; j++) {
+                    if (monadItems[id][Requirements[j]]) {
+                      newItem[Requirements[j]] = monadItems[id][Requirements[j]]
+                    }
+                  }
+                }
                 if(newItem.itemType) { itemPackage.items.add(newItem) }
                 else {console.log('Monad, onModsLoaded, itempackage, What is this?', newItem)}
               }
