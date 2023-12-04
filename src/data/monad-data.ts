@@ -48,7 +48,6 @@ const ranks = [
   "growth",
   "quest",
 ]
-
 declare type ratings =
   "junk" |
   "common" |
@@ -63,6 +62,7 @@ declare type ratings =
   "quest"
 interface monadItem {
   // [key: string]: any // for production to make it shut up about adding stuff dynamicly
+  category: string; // for sorting. So you have type: Weapon, category Dagger.
   name: string;
   description: string;
   image: string;
@@ -81,7 +81,6 @@ interface monadItem {
   8?: Partial<monadItem> | Partial<monadEquipmentItemData> | monadWeaponItemData | monadFoodItemData | monadBoneItemData | monadPotionItemData | monadReadableItemData | monadOpenableItemData | monadMiscItemData | monadSetItemData;
   9?: Partial<monadItem> | Partial<monadEquipmentItemData> | monadWeaponItemData | monadFoodItemData | monadBoneItemData | monadPotionItemData | monadReadableItemData | monadOpenableItemData | monadMiscItemData | monadSetItemData;
 }
-
 interface monadEquipmentItemData extends monadBaseEquipmentItemData {
   type: 'Equipment';
 }
@@ -110,20 +109,39 @@ interface monadStats {
   sensePerc?: Number
   charismaPerc?: Number
 
-  PhysicalDamageReduction?: Number
-  MagicDamageReduction?: Number
-  PhysicalDamageReductionPerc?: Number
-  MagicDamageReductionPerc?: Number
+  physicalDamageReduction?: Number
+  magicDamageReduction?: Number
+  physicalDamageReductionPerc?: Number
+  magicDamageReductionPerc?: Number
+}
+type EventConfig<Events extends { kind: string }> = {
+  [E in Events as E["kind"]]?: Number;
 }
 
-declare type monadStatKey = 'attackSpeed' | 'stabAttackBonus' | 'slashAttackBonus' | 'blockAttackBonus' | 'rangedAttackBonus' | 'magicAttackBonus' | 'meleeStrengthBonus' | 'rangedStrengthBonus' | 'magicDamageBonus' | 'meleeDefenceBonus' | 'rangedDefenceBonus' | 'magicDefenceBonus' | 'damageReduction' | 'summoningMaxhit' | 'vitality' | 'endurance' | 'willpower' | 'magic' | 'strength' | 'dexterity' | 'sense' | 'charisma' | 'HP' | 'MP' | 'HPPerc' | 'MPPerc' | 'vitalityPerc' | 'endurancePerc' | 'willpowerPerc' | 'magicPerc' | 'strengthPerc' | 'dexterityPerc' | 'sensePerc' | 'charismaPerc' | 'PhysicalDamageReduction' | 'MagicDamageReduction' | 'PhysicalDamageReductionPerc' | 'MagicDamageReductionPerc';
-declare type monadStatPair = {
-  key: monadStatKey;
-  value: number;
-};
+declare type monadStatKey = 'attackSpeed' | 'stabAttackBonus' | 'slashAttackBonus' | 'blockAttackBonus' | 'rangedAttackBonus' | 'magicAttackBonus' | 'meleeStrengthBonus' | 'rangedStrengthBonus' | 'magicDamageBonus' | 'meleeDefenceBonus' | 'rangedDefenceBonus' | 'magicDefenceBonus' | 'damageReduction' | 'summoningMaxhit' | 'vitality' | 'endurance' | 'willpower' | 'magic' | 'strength' | 'dexterity' | 'sense' | 'charisma' | 'HP' | 'MP' | 'HPPerc' | 'MPPerc' | 'vitalityPerc' | 'endurancePerc' | 'willpowerPerc' | 'magicPerc' | 'strengthPerc' | 'dexterityPerc' | 'sensePerc' | 'charismaPerc' | 'physicalDamageReduction' | 'magicDamageReduction' | 'physicalDamageReductionPerc' | 'magicDamageReductionPerc' | 'manaRegenPerc';
+
+const monadModifiers = ['ResistancePerc', 'DamageReductionPerc', 'CostPerc', 'SkillCooldownPerc']
+type monadModifiersTypes = typeof monadModifiers[number];
+
+const monadSpecies = ['demon', 'undead', 'animal'] as const;
+type monadSpeciesTypes = typeof monadSpecies[number];
+declare type monadSpeciesKey = `${monadSpeciesTypes}${monadModifiersTypes}`;
+type monadSpeciesEvent = { kind: monadSpeciesKey };
+
+const monadElements = ['lightning', 'wind', 'water', 'fire', 'ice', 'all'] as const;
+type monadElementsTypes = typeof monadElements[number];
+declare type monadElementsKey = `${monadElementsTypes}${monadModifiersTypes}`;
+type monadElementsEvent = { kind: monadElementsKey };
+
+type monadSpcificKeys = 'blockPerc' | 'controlUndead' | 'Enchanting' | 'SpellSpeed' | 'CriticalHitChance' | 'diseaseResistance' | 'diseaseResistancePerc' | 'underwaterBreathing' | 'swimSpeed' | 'stealthInShadowsPerc' | 'controlPlants' | 'command';
+
+type monadSpcificEvent = { kind: monadSpcificKeys };
+
+type monadStatEvent = { kind: monadStatKey };
+declare type monadStatPair = EventConfig<monadStatEvent | monadElementsEvent | monadSpeciesEvent | monadSpcificEvent>
 interface monadBaseEquipmentItemData extends monadItem {
-  stats: monadStats;
-  // stats: monadStatPair[];
+  // stats: monadStats;
+  stats: monadStatPair;
   validSlots: SlotTypes[];
   occupiesSlots: SlotTypes[];
   equipRequirements: AnyRequirementData[];
@@ -167,6 +185,7 @@ interface monadPotionItemData extends monadItem {
   charges: number;
   action: string;
   consumesOn: GameEventMatcherData[];
+  tier?: Number
 }
 
 interface monadReadableItemData extends monadItem {
@@ -200,16 +219,28 @@ interface monadItemList {
 }
 export const ItemList: any = {
   // Each item can be enchanted by level / 10. That is how you increase the stats, not an automatic increase.
-  // Should stats really be : {1:{magic: 1}, 2:{magic: 2}}
   "Training Health Potion": {
+    type: "Potion",
     name: "Training Health Potion",
     description: "Recovers 1HP every 5 seconds for the next 120 seconds.", // 24 HP
     image: "img/items/BloodPotion.png",
     long: "¤1", // Price since it was shown In a shop.
     note: "",
     sellsFor: 0,
-    type: "Potion",
-    rating: "junk"
+    rating: "junk",
+    category: "Potion",
+    // Melvor
+    "modifiers": {
+      // "increasedHealEvery200Int": 1
+    },
+    "charges": 5,
+    "tier": 0,
+    "action": "melvorD:Combat",
+    "consumesOn": [
+      {
+        "type": "PlayerAttack"
+      }
+    ]
   },
   "Soul bound wand": {
     name: "Soul bound wand",
@@ -217,10 +248,21 @@ export const ItemList: any = {
     image: "https://ottotsuma.github.io/images/items/wand1.png",
     long: "¤3,200,000", // Price since it was shown In a shop.
     rating: "normal",
-    stats: { sense: 1 },
+    stats: { sense: 1, attackSpeed: 2600 },
     note: "",
     sellsFor: 0,
-    type: "Weapon"
+    type: "Weapon",
+    "category": "wand",
+    attackType: "magic",
+    // melvor
+    // equipmentStats will be converted from stats
+    validSlots: ["Weapon"],
+    occupiesSlots: [],
+    equipRequirements: [],
+    modifiers: {},
+    enemyModifiers: {},
+    specialAttacks: [],
+    overrideSpecialChances: []
   },
   "Bone Lance": {
     name: "Bone Lance",
@@ -232,7 +274,18 @@ export const ItemList: any = {
     stats: {},
     note: "",
     sellsFor: 0,
-    type: "Weapon"
+    "category": "",
+    type: "Weapon",
+    "attackType": "melee",
+    // melvor
+    // equipmentStats will be converted from stats
+    validSlots: ["Weapon"],
+    occupiesSlots: [],
+    equipRequirements: [],
+    modifiers: {},
+    enemyModifiers: {},
+    specialAttacks: [],
+    overrideSpecialChances: []
   },
   "Trainee Bone Spear": {
     name: "Trainee Bone Spear",
@@ -243,18 +296,39 @@ export const ItemList: any = {
     stats: {},
     note: "",
     sellsFor: 0,
+    "category": "",
     type: "Weapon",
+    "attackType": "melee",
+    // melvor
+    // equipmentStats will be converted from stats
+    validSlots: ["Weapon"],
+    occupiesSlots: [], // "Shield" if two handed
+    equipRequirements: [],
+    modifiers: {},
+    enemyModifiers: {},
+    specialAttacks: [],
+    overrideSpecialChances: []
   },
   "Paladin Engeler's Body Armour (silver rank)": {
     name: "Paladin Engeler's Body Armour (silver rank)",
     description:
       "Reduces physical damage taken by 10%, except spears. Endurance +1, Endurance +10%.",
     rating: "epic",
-    stats: { endurance: 1, endurancePerc: 1.1 },
+    stats: { endurance: 1, endurancePerc: 1.1, physicalDamageReduction: 10 },
     note: "",
     sellsFor: 0,
+    "category": "",
     type: "Equipment",
-    image: ""
+    image: "",
+    // melvor
+    // equipmentStats will be converted from stats
+    validSlots: ["Platebody"],
+    occupiesSlots: [],
+    equipRequirements: [],
+    modifiers: {},
+    enemyModifiers: {},
+    specialAttacks: [],
+    overrideSpecialChances: []
   },
   "Paladin Engeler's Sallet (silver rank)": {
     name: "Paladin Engeler's Sallet (silver rank)",
@@ -263,10 +337,18 @@ export const ItemList: any = {
     stats: { endurance: 1.8 },
     note: "",
     sellsFor: 0,
+    "category": "",
     type: "Equipment",
     image: "",
-    validSlots: [],
-    occupiesSlots: []
+    // melvor
+    // equipmentStats will be converted from stats
+    validSlots: ["Helmet"],
+    occupiesSlots: [],
+    equipRequirements: [],
+    modifiers: {},
+    enemyModifiers: {},
+    specialAttacks: [],
+    overrideSpecialChances: []
   },
   "Paladin Engeler's Gauntlets (silver rank)": {
     name: "Paladin Engeler's Gauntlets (silver rank)",
@@ -275,8 +357,18 @@ export const ItemList: any = {
     stats: { endurance: 1 },
     note: "",
     sellsFor: 0,
+    "category": "",
     type: "Equipment",
     image: "",
+    // melvor
+    // equipmentStats will be converted from stats
+    validSlots: ["Gloves"],
+    occupiesSlots: [],
+    equipRequirements: [],
+    modifiers: {},
+    enemyModifiers: {},
+    specialAttacks: [],
+    overrideSpecialChances: []
   },
   "Paladin Engeler's Sabaton (silver rank)": {
     name: "Paladin Engeler's Sabaton (silver rank)",
@@ -285,8 +377,18 @@ export const ItemList: any = {
     stats: { endurance: 1.2 },
     note: "",
     sellsFor: 0,
+    "category": "",
     type: "Equipment",
     image: "",
+    // melvor
+    // equipmentStats will be converted from stats
+    validSlots: ["Boots"],
+    occupiesSlots: [],
+    equipRequirements: [],
+    modifiers: {},
+    enemyModifiers: {},
+    specialAttacks: [],
+    overrideSpecialChances: []
   },
   "Paladin Engeler's Mace (silver rank)": {
     name: "Paladin Engeler's Mace (silver rank)",
@@ -295,19 +397,40 @@ export const ItemList: any = {
     stats: { strength: 3 },
     note: "",
     sellsFor: 0,
-    type: "Equipment",
+    "category": "",
+    type: "Weapon",
     image: "",
+    "attackType": "melee",
+    // melvor
+    // equipmentStats will be converted from stats
+    validSlots: ["Weapon"],
+    occupiesSlots: [], // "Shield" if two handed
+    equipRequirements: [],
+    modifiers: {},
+    enemyModifiers: {},
+    specialAttacks: [],
+    overrideSpecialChances: []
   },
   "Paladin Engeler's Shield (silver rank)": {
     name: "Paladin Engeler's Shield (silver rank)",
     description:
       "Threat increased 20%, Reduce received damage from Demons by 7%, Reduce received damage from Undead by 7%, chance to block 20%.",
     rating: "epic",
-    stats: { endurance: 0 },
+    stats: { endurance: 0, "demonDamageReductionPerc": 7, undeadDamageReductionPerc: 7, blockPerc: 20 },
     note: "",
     sellsFor: 0,
+    "category": "",
     type: "Equipment",
     image: "",
+    // melvor
+    // equipmentStats will be converted from stats
+    validSlots: ["Shield"],
+    occupiesSlots: [],
+    equipRequirements: [],
+    modifiers: {},
+    enemyModifiers: {},
+    specialAttacks: [],
+    overrideSpecialChances: []
   },
   "Paladin Engeler's Cape (silver rank)": {
     name: "Paladin Engeler's Cape (silver rank)",
@@ -316,8 +439,18 @@ export const ItemList: any = {
     stats: { HP: 315, MP: 225 },
     note: "",
     sellsFor: 0,
+    "category": "",
     type: "Equipment",
     image: "",
+    // melvor
+    // equipmentStats will be converted from stats
+    validSlots: ["Cape"],
+    occupiesSlots: [],
+    equipRequirements: [],
+    modifiers: {},
+    enemyModifiers: {},
+    specialAttacks: [],
+    overrideSpecialChances: [],
     1: {
       description: "Increase HP by 32, Increase MP by 23.",
       stats: { HP: 32, MP: 23 },
@@ -330,12 +463,24 @@ export const ItemList: any = {
       "Reduces physical damage taken by 15, Reduces magical damage taken by 17, Reduce received damage from Demons by 3%",
     rating: "epic",
     stats: {
-      PhysicalDamageReduction: 15,
+      physicalDamageReduction: 15,
+      magicDamageReduction: 17,
+      demonDamageReductionPerc: 3
     },
     note: "",
     sellsFor: 0,
+    "category": "",
     type: "Equipment",
     image: "",
+    // melvor
+    // equipmentStats will be converted from stats
+    validSlots: ["Amulet"],
+    occupiesSlots: [],
+    equipRequirements: [],
+    modifiers: {},
+    enemyModifiers: {},
+    specialAttacks: [],
+    overrideSpecialChances: []
   },
   "Demon Hunter Bracelet": {
     name: "Demon Hunter Bracelet",
@@ -343,34 +488,74 @@ export const ItemList: any = {
       "Reduces physical damage taken by 15, Reduces magical damage taken by 17, Reduce received damage from Demons by 3%",
     rating: "epic",
     stats: {
-      "Physical Damage Reduction": 15,
-      "Magical Damage Reduction": 17,
-      "Damage from Demons Reduction %": 3, // "1.03 This change will require "stats" code changes"
+      "physicalDamageReduction": 15,
+      "magicDamageReductionPerc": 17,
+      "demonDamageReductionPerc": 3, // "1.03 This change will require "stats" code changes"
     },
     note: "",
     sellsFor: 0,
+    "category": "",
     type: "Equipment",
     image: "",
+    // melvor
+    // equipmentStats will be converted from stats
+    validSlots: ["Ring", "Passive"],
+    occupiesSlots: [],
+    equipRequirements: [],
+    modifiers: {},
+    enemyModifiers: {},
+    specialAttacks: [],
+    overrideSpecialChances: []
   },
   "Demon Hunter Earring": {
     name: "Demon Hunter Earring",
     description:
       "Reduces physical damage taken by 15, Reduces magical damage taken by 17, Reduce received damage from Demons by 3%",
+    stats: {
+      "physicalDamageReduction": 15,
+      "magicDamageReductionPerc": 17,
+      "demonDamageReductionPerc": 3, // "1.03 This change will require "stats" code changes"
+    },
     rating: "epic",
     note: "",
     sellsFor: 0,
+    "category": "",
     type: "Equipment",
     image: "",
+    // melvor
+    // equipmentStats will be converted from stats
+    validSlots: ["Ring", "Passive"],
+    occupiesSlots: [],
+    equipRequirements: [],
+    modifiers: {},
+    enemyModifiers: {},
+    specialAttacks: [],
+    overrideSpecialChances: []
   },
   "Demon Hunter Ring": {
     name: "Demon Hunter Ring",
     description:
       "Reduces physical damage taken by 15, Reduces magical damage taken by 17, Reduce received damage from Demons by 3%",
+    stats: {
+      "physicalDamageReduction": 15,
+      "magicDamageReductionPerc": 17,
+      "demonDamageReductionPerc": 3, // "1.03 This change will require "stats" code changes"
+    },
     rating: "epic",
     note: "",
     sellsFor: 0,
+    "category": "",
     type: "Equipment",
     image: "",
+    // melvor
+    // equipmentStats will be converted from stats
+    validSlots: ["Ring", "Passive"],
+    occupiesSlots: [],
+    equipRequirements: [],
+    modifiers: {},
+    enemyModifiers: {},
+    specialAttacks: [],
+    overrideSpecialChances: []
   },
   "Paladin Engeler's Set (3/7)": {
     name: "Paladin Engeler's Set",
@@ -383,6 +568,7 @@ export const ItemList: any = {
     },
     note: "",
     sellsFor: 0,
+    "category": "",
     type: "Set",
     image: "",
     validSlots: [],
@@ -395,6 +581,7 @@ export const ItemList: any = {
     stats: {},
     note: "",
     sellsFor: 0,
+    "category": "",
     type: "Set",
     image: "",
     validSlots: [],
@@ -408,6 +595,7 @@ export const ItemList: any = {
     stats: { endurance: 0 },
     note: "",
     sellsFor: 0,
+    "category": "",
     type: "Set",
     image: "",
     validSlots: [],
@@ -423,40 +611,77 @@ export const ItemList: any = {
     long: "", // Price since it was shown In a shop.
     note: "https://ffxiv.gamerescape.com/wiki/Category:Rogue_Body/iLevel_30-39",
     type: "Equipment",
-    validSlots: [], occupiesSlots: [], equipRequirements: [], equipmentStats: [], sellsFor: 0
+    sellsFor: 0,
+    "category": "",
+    // melvor
+    // equipmentStats will be converted from stats
+    validSlots: ["Platebody"],
+    occupiesSlots: [],
+    equipRequirements: [],
+    modifiers: {},
+    enemyModifiers: {},
+    specialAttacks: [],
+    overrideSpecialChances: []
   },
   "Crown of the Dammed": {
     name: "Crown of the Dammed",
     description: "Magic + 25, -5 Charisma, control undead +1.",
     image: "",
     rating: "rare",
-    stats: { magic: 25, charisma: -5 },
+    stats: { magic: 25, charisma: -5, controlUndead: 1 },
     long: "", // Price since it was shown In a shop.
     note: "Ch5, kings crown",
     type: "Equipment",
-    validSlots: [], occupiesSlots: [], equipRequirements: [], equipmentStats: [], sellsFor: 0
+    // melvor
+    // equipmentStats will be converted from stats
+    validSlots: ["Platebody"],
+    occupiesSlots: [],
+    equipRequirements: [],
+    modifiers: {},
+    enemyModifiers: {},
+    specialAttacks: [],
+    overrideSpecialChances: [], sellsFor: 0,
+    "category": "",
   },
   "Ring of initial undead control": {
     name: "Ring of initial undead control",
     description: "mag + 10, Control undead +1.",
     image: "",
     rating: "normal",
-    stats: { magic: 10 },
+    stats: { magic: 10, controlUndead: 1 },
     long: "", // Price since it was shown In a shop.
     note: "Ch5, kings ring",
     type: "Equipment",
-    validSlots: [], occupiesSlots: [], equipRequirements: [], equipmentStats: [], sellsFor: 0
+    // melvor
+    // equipmentStats will be converted from stats
+    validSlots: ["Ring"],
+    occupiesSlots: [],
+    equipRequirements: [],
+    modifiers: {},
+    enemyModifiers: {},
+    specialAttacks: [],
+    overrideSpecialChances: [], sellsFor: 0,
+    "category": "",
   },
   "Ring of Little Strength": {
     name: "Ring of Little Strength",
     description: "Strength +1.",
     image: "",
     rating: "junk",
-    stats: { strength: 10 },
+    stats: { strength: 1 },
     long: "", // Price since it was shown In a shop.
     note: "Ch11, queens ring",
     type: "Equipment",
-    validSlots: [], occupiesSlots: [], equipRequirements: [], equipmentStats: [], sellsFor: 0
+    // melvor
+    // equipmentStats will be converted from stats
+    validSlots: ["Ring"],
+    occupiesSlots: [],
+    equipRequirements: [],
+    modifiers: {},
+    enemyModifiers: {},
+    specialAttacks: [],
+    overrideSpecialChances: [], sellsFor: 0,
+    "category": "",
   },
   "Pendent of Medium Magic": {
     name: "Pendent of Medium Magic",
@@ -467,7 +692,16 @@ export const ItemList: any = {
     long: "", // Price since it was shown In a shop.
     note: "Ch11",
     type: "Equipment",
-    validSlots: [], occupiesSlots: [], equipRequirements: [], equipmentStats: [], sellsFor: 0
+    // melvor
+    // equipmentStats will be converted from stats
+    validSlots: ["Amulet"],
+    occupiesSlots: [],
+    equipRequirements: [],
+    modifiers: {},
+    enemyModifiers: {},
+    specialAttacks: [],
+    overrideSpecialChances: [], sellsFor: 0,
+    "category": "",
   },
   "Witches Hat": {
     name: "Witches Hat",
@@ -478,7 +712,16 @@ export const ItemList: any = {
     long: "", // Price since it was shown In a shop.
     note: "Ch11",
     type: "Equipment",
-    validSlots: [], occupiesSlots: [], equipRequirements: [], equipmentStats: [], sellsFor: 0
+    // melvor
+    // equipmentStats will be converted from stats
+    validSlots: ["Helmet"],
+    occupiesSlots: [],
+    equipRequirements: [],
+    modifiers: {},
+    enemyModifiers: {},
+    specialAttacks: [],
+    overrideSpecialChances: [], sellsFor: 0,
+    "category": "",
   },
   "Queen's Pawn": {
     name: "Queen's Pawn",
@@ -489,27 +732,58 @@ export const ItemList: any = {
     long: "", // Price since it was shown In a shop.
     note: "Ch11, Tiara",
     type: "Equipment",
-    validSlots: [], occupiesSlots: [], equipRequirements: [], equipmentStats: [], sellsFor: 0
+    // melvor
+    // equipmentStats will be converted from stats
+    validSlots: ["Passive"],
+    occupiesSlots: [],
+    equipRequirements: [],
+    modifiers: {},
+    enemyModifiers: {},
+    specialAttacks: ['monad:AnimateStone'],
+    overrideSpecialChances: [15], sellsFor: 0,
+    "category": "",
   },
   "Skull of victim": {
     name: "Skull of victim",
     description: "Control undead +2.",
+    stats: { controlUndead: 2 },
     image: "",
     rating: "normal",
     long: "", // Price since it was shown In a shop.
     note: "Ch11, Skull",
-    type: "Misc",
-    sellsFor: 0
+    type: "Equipment",
+    sellsFor: 0,
+    "category": "",
+    // melvor
+    // equipmentStats will be converted from stats
+    validSlots: ["Passive"],
+    occupiesSlots: [],
+    equipRequirements: [],
+    modifiers: {},
+    enemyModifiers: {},
+    specialAttacks: [''],
+    overrideSpecialChances: [],
   },
   "Enchanting Quill": {
     name: "Enchanting Quill",
     description: "Enchanting chance of success + 5%.",
     image: "",
+    stats: { Enchanting: 5 },
     rating: "normal",
     sellsFor: 0,
+    "category": "",
     long: "", // Price since it was shown In a shop.
     note: "Ch11, Quill",
-    type: "Misc",
+    type: "Equipment",
+    // melvor
+    // equipmentStats will be converted from stats
+    validSlots: ["Weapon"],
+    occupiesSlots: [],
+    equipRequirements: [],
+    modifiers: {},
+    enemyModifiers: {},
+    specialAttacks: [''],
+    overrideSpecialChances: []
   },
   "Princesses Coin": {
     name: "Princesses Coin",
@@ -517,6 +791,7 @@ export const ItemList: any = {
     image: "",
     rating: "junk",
     sellsFor: 0,
+    "category": "",
     long: "", // Price since it was shown In a shop.
     note: "Ch11, Coin",
     type: "Misc",
@@ -530,7 +805,17 @@ export const ItemList: any = {
     long: "", // Price since it was shown In a shop.
     note: "Ch17",
     type: "Equipment",
-    sellsFor: 0
+    sellsFor: 0,
+    "category": "",
+    // melvor
+    // equipmentStats will be converted from stats
+    validSlots: ["Amulet"],
+    occupiesSlots: [],
+    equipRequirements: [],
+    modifiers: {},
+    enemyModifiers: {},
+    specialAttacks: [],
+    overrideSpecialChances: [],
   },
   "Black scarf": {
     name: "Black scarf",
@@ -541,7 +826,17 @@ export const ItemList: any = {
     long: "", // Price since it was shown In a shop.
     note: "",
     sellsFor: 0,
+    "category": "",
     type: "Equipment",
+    // melvor
+    // equipmentStats will be converted from stats
+    validSlots: ["Amulet"],
+    occupiesSlots: [],
+    equipRequirements: [],
+    modifiers: {},
+    enemyModifiers: {},
+    specialAttacks: [],
+    overrideSpecialChances: [],
   },
   "Whale Skin": {
     name: "Whale Skin",
@@ -551,6 +846,7 @@ export const ItemList: any = {
     long: "", // Price since it was shown In a shop.
     note: "",
     sellsFor: 0,
+    "category": "",
     type: "Misc",
   },
   "Linen Halfgloves": {
@@ -563,7 +859,17 @@ export const ItemList: any = {
     long: "", // Price since it was shown In a shop.
     note: "",
     sellsFor: 0,
+    "category": "",
     type: "Equipment",
+    // melvor
+    // equipmentStats will be converted from stats
+    validSlots: ["Gloves"],
+    occupiesSlots: [],
+    equipRequirements: [],
+    modifiers: {},
+    enemyModifiers: {},
+    specialAttacks: [],
+    overrideSpecialChances: [],
   },
   "Battlemage's Gloves": {
     name: "Battlemage's Gloves",
@@ -571,11 +877,21 @@ export const ItemList: any = {
     image:
       "https://ffxiv.gamerescape.com/w/images/9/9a/Model-Linen_Halfgloves-Male-Hyur.png",
     rating: "normal",
-    stats: { magic: 1, willpower: 1 },
+    stats: { magic: 1, willpower: 1, SpellSpeed: 1 },
     long: "", // Price since it was shown In a shop.
     note: "",
     sellsFor: 0,
+    "category": "",
     type: "Equipment",
+    // melvor
+    // equipmentStats will be converted from stats
+    validSlots: ["Gloves"],
+    occupiesSlots: [],
+    equipRequirements: [],
+    modifiers: {},
+    enemyModifiers: {},
+    specialAttacks: [],
+    overrideSpecialChances: [],
   },
   "Battlemage's Hat": {
     name: "Battlemage's Hat",
@@ -583,11 +899,21 @@ export const ItemList: any = {
     image:
       "https://ffxiv.gamerescape.com/w/images/3/34/Model-Battlemage%27s_Hat-Male-Hyur.png",
     rating: "normal",
-    stats: { magic: 1, willpower: 1 },
+    stats: { magic: 1, willpower: 1, SpellSpeed: 1 },
     long: "", // Price since it was shown In a shop.
     note: "",
     sellsFor: 0,
+    "category": "",
     type: "Equipment",
+    // melvor
+    // equipmentStats will be converted from stats
+    validSlots: ["Helmet"],
+    occupiesSlots: [],
+    equipRequirements: [],
+    modifiers: {},
+    enemyModifiers: {},
+    specialAttacks: [],
+    overrideSpecialChances: [],
   },
   "Battlemage's Robe": {
     name: "Battlemage's Robe",
@@ -595,11 +921,21 @@ export const ItemList: any = {
     image:
       "https://ffxiv.gamerescape.com/w/images/6/63/Model-Battlemage%27s_Robe-Male-Hyur.png",
     rating: "normal",
-    stats: { magic: 1, willpower: 1 },
+    stats: { magic: 1, willpower: 1, SpellSpeed: 1 },
     long: "", // Price since it was shown In a shop.
     note: "",
     sellsFor: 0,
+    "category": "",
     type: "Equipment",
+    // melvor
+    // equipmentStats will be converted from stats
+    validSlots: ["Platebody"],
+    occupiesSlots: [],
+    equipRequirements: [],
+    modifiers: {},
+    enemyModifiers: {},
+    specialAttacks: [],
+    overrideSpecialChances: [],
   },
   "Battlemage's Crakows": {
     name: "Battlemage's Crakows",
@@ -607,11 +943,21 @@ export const ItemList: any = {
     image:
       "https://ffxiv.gamerescape.com/w/images/0/0c/Model-Battlemage%27s_Crakows-Male-Hyur.png",
     rating: "normal",
-    stats: { magic: 1, willpower: 1 },
+    stats: { magic: 1, willpower: 1, SpellSpeed: 1 },
     long: "", // Price since it was shown In a shop.
     note: "",
     sellsFor: 0,
+    "category": "",
     type: "Equipment",
+    // melvor
+    // equipmentStats will be converted from stats
+    validSlots: ["Boots"],
+    occupiesSlots: [],
+    equipRequirements: [],
+    modifiers: {},
+    enemyModifiers: {},
+    specialAttacks: [],
+    overrideSpecialChances: [],
   },
   "Battlemage's Breeches": {
     name: "Battlemage's Breeches",
@@ -619,11 +965,21 @@ export const ItemList: any = {
     image:
       "https://ffxiv.gamerescape.com/w/images/2/2e/Model-Battlemage%27s_Breeches-Male-Hyur.png",
     rating: "normal",
-    stats: { magic: 1, willpower: 1 },
+    stats: { magic: 1, willpower: 1, SpellSpeed: 1 },
     long: "", // Price since it was shown In a shop.
     note: "",
     sellsFor: 0,
+    "category": "",
     type: "Equipment",
+    // melvor
+    // equipmentStats will be converted from stats
+    validSlots: ["Platelegs"],
+    occupiesSlots: [],
+    equipRequirements: [],
+    modifiers: {},
+    enemyModifiers: {},
+    specialAttacks: [],
+    overrideSpecialChances: [],
   },
   "Battlemage's Set (4/4)": {
     name: "Battlemage's Set (4/4)",
@@ -632,10 +988,9 @@ export const ItemList: any = {
     stats: { magic: 1, willpower: 1 },
     note: "",
     sellsFor: 0,
+    "category": "",
     type: "Set",
-    image: "",
-    validSlots: [],
-    occupiesSlots: []
+    image: ""
   },
   "Cotton Scarf": {
     name: "Cotton Scarf",
@@ -647,7 +1002,17 @@ export const ItemList: any = {
     long: "", // Price since it was shown In a shop.
     note: "",
     sellsFor: 0,
+    "category": "",
     type: "Equipment",
+    // melvor
+    // equipmentStats will be converted from stats
+    validSlots: ["Amulet"],
+    occupiesSlots: [],
+    equipRequirements: [],
+    modifiers: {},
+    enemyModifiers: {},
+    specialAttacks: [],
+    overrideSpecialChances: [],
   },
   "Rayndr Jackboots": {
     name: "Rayndr Jackboots",
@@ -655,11 +1020,21 @@ export const ItemList: any = {
     image:
       "https://ffxiv.gamerescape.com/w/images/2/23/Model-Qarn_Jackboots-Male-Hyur.png",
     rating: "normal",
-    stats: { endurance: 1 },
+    stats: { endurance: 1, CriticalHitChance: +1 },
     long: "", // Price since it was shown In a shop.
     note: "",
     sellsFor: 0,
+    "category": "",
     type: "Equipment",
+    // melvor
+    // equipmentStats will be converted from stats
+    validSlots: ["Boots"],
+    occupiesSlots: [],
+    equipRequirements: [],
+    modifiers: {},
+    enemyModifiers: {},
+    specialAttacks: [],
+    overrideSpecialChances: [],
   },
   "Rogue's Ring": {
     name: "Rogue's Ring",
@@ -667,13 +1042,21 @@ export const ItemList: any = {
     image:
       "https://ffxiv.gamerescape.com/w/images/thumb/0/05/Model-Rogue%27s_Ring.png/450px-Model-Rogue%27s_Ring.png",
     rating: "normal",
-    stats: { dexterity: 1 },
+    stats: { dexterity: 1, CriticalHitChance: 1 },
     long: "", // Price since it was shown In a shop.
     note: "https://ffxiv.gamerescape.com/wiki/Category:Ring/iLevel_30-39",
     type: "Equipment",
-    validSlots: [],
-    occupiesSlots: [],
     sellsFor: 0,
+    "category": "",
+    // melvor
+    // equipmentStats will be converted from stats
+    validSlots: ["Ring"],
+    occupiesSlots: [],
+    equipRequirements: [],
+    modifiers: {},
+    enemyModifiers: {},
+    specialAttacks: [],
+    overrideSpecialChances: [],
     3: {
       name: "Rogue's Ring +3",
       description: "Critical hit rate: +3, Dexterity: +3.",
@@ -695,6 +1078,15 @@ export const ItemList: any = {
       long: "", // Price since it was shown In a shop.
       note: "https://ffxiv.gamerescape.com/wiki/Category:Ring/iLevel_30-39",
       type: "Equipment",
+      // melvor
+      // equipmentStats will be converted from stats
+      validSlots: ["Platebody"],
+      occupiesSlots: [],
+      equipRequirements: [],
+      modifiers: {},
+      enemyModifiers: {},
+      specialAttacks: [],
+      overrideSpecialChances: [],
     },
   },
   "Dark Elf's Scimitar": {
@@ -703,11 +1095,22 @@ export const ItemList: any = {
     image:
       "https://i.pinimg.com/564x/e4/b7/5d/e4b75d01d093430bb055a82dc5967c38.jpg",
     rating: "normal",
-    stats: { strength: 1 },
+    stats: { strength: 1, slashAttackBonus: 3 },
     long: "", // Price since it was shown In a shop.
     note: "",
     sellsFor: 0,
-    type: "Equipment",
+    "category": "",
+    type: "Weapon",
+    "attackType": "melee",
+    // melvor
+    // equipmentStats will be converted from stats
+    validSlots: ["Weapon"],
+    occupiesSlots: [],
+    equipRequirements: [],
+    modifiers: {},
+    enemyModifiers: {},
+    specialAttacks: [],
+    overrideSpecialChances: [],
   },
   "Meroyri Xiphos": {
     name: "Meroyri Xiphos",
@@ -719,18 +1122,39 @@ export const ItemList: any = {
     long: "", // Price since it was shown In a shop.
     note: "",
     sellsFor: 0,
-    type: "Equipment",
+    "category": "",
+    type: "Weapon",
+    "attackType": "melee",
+    // melvor
+    // equipmentStats will be converted from stats
+    validSlots: ["Weapon"],
+    occupiesSlots: [],
+    equipRequirements: [],
+    modifiers: {},
+    enemyModifiers: {},
+    specialAttacks: [],
+    overrideSpecialChances: [],
   },
   "Rayndr Face Mask": {
     name: "Rayndr Face Mask",
     description: "Disease resistance +3%.",
     image: "",
     rating: "junk",
-    stats: { strength: 0 },
+    stats: { diseaseResistancePerc: 3 },
     long: "", // Price since it was shown In a shop.
     note: "",
     sellsFor: 0,
+    "category": "",
     type: "Equipment",
+    // melvor
+    // equipmentStats will be converted from stats
+    validSlots: ["Helmet"],
+    occupiesSlots: [],
+    equipRequirements: [],
+    modifiers: {},
+    enemyModifiers: {},
+    specialAttacks: [],
+    overrideSpecialChances: [],
   },
   "Shadow Pirate's Coat": {
     name: "Shadow Pirate's Coat",
@@ -738,11 +1162,23 @@ export const ItemList: any = {
       "Hiding in shadows is 40% more effective. +150 water resistance. 2% water resistance.",
     image: "",
     rating: "rare",
-    stats: { strength: 0 },
+    stats: { stealthInShadowsPerc: 40, waterResistancePerc: 2, waterResistance: 150 },
     long: "", // Price since it was shown In a shop.
     note: "",
     sellsFor: 0,
+    "category": "",
     type: "Equipment",
+    // melvor
+    // equipmentStats will be converted from stats
+    validSlots: ["Cape"],
+    occupiesSlots: [],
+    equipRequirements: [],
+    modifiers: {
+      increasedThievingStealth: 40,
+    },
+    enemyModifiers: {},
+    specialAttacks: [],
+    overrideSpecialChances: [],
   },
   "Leather Pirate Boots": {
     name: "Leather Pirate Boots",
@@ -753,7 +1189,17 @@ export const ItemList: any = {
     long: "", // Price since it was shown In a shop.
     note: "",
     sellsFor: 0,
+    "category": "",
     type: "Equipment",
+    // melvor
+    // equipmentStats will be converted from stats
+    validSlots: ["Boots"],
+    occupiesSlots: [],
+    equipRequirements: [],
+    modifiers: {},
+    enemyModifiers: {},
+    specialAttacks: [],
+    overrideSpecialChances: [],
   },
   "Black Band": {
     name: "Black Band",
@@ -764,7 +1210,17 @@ export const ItemList: any = {
     long: "", // Price since it was shown In a shop.
     note: "",
     sellsFor: 0,
+    "category": "",
     type: "Equipment",
+    // melvor
+    // equipmentStats will be converted from stats
+    validSlots: ["Ring"],
+    occupiesSlots: [],
+    equipRequirements: [],
+    modifiers: {},
+    enemyModifiers: {},
+    specialAttacks: [],
+    overrideSpecialChances: [],
     9: {
       name: "Black Band +9",
       description: "Dexterity: +9.",
@@ -774,6 +1230,7 @@ export const ItemList: any = {
       long: "", // Price since it was shown In a shop.
       note: "",
       sellsFor: 0,
+      "category": "",
       type: "Equipment",
     },
   },
@@ -784,7 +1241,7 @@ export const ItemList: any = {
     image:
       "https://image.vector-park.jp/images/item/original2/019/2017/08/24/019-201708240761_1.jpg?t=1572379770",
     rating: "epic",
-    stats: {},
+    stats: { dexterity: 9, swimSpeed: 5, underwaterBreathing: 300000 },
     9: {
       name: "Tidus Earring",
       description: "Dexterity +9, Swimming speed +5, Can breath underwater for 5 minutes.",
@@ -794,14 +1251,23 @@ export const ItemList: any = {
       long: "", // Price since it was shown In a shop.
       note: "",
       sellsFor: 0,
+      "category": "",
       type: "Equipment",
     },
     long: "", // Price since it was shown In a shop.
     note: "",
     sellsFor: 0,
+    "category": "",
     type: "Equipment",
-    "validSlots": [],
-    "occupiesSlots": []
+    // melvor
+    // equipmentStats will be converted from stats
+    validSlots: ["Ring"],
+    occupiesSlots: [],
+    equipRequirements: [],
+    modifiers: {},
+    enemyModifiers: {},
+    specialAttacks: [],
+    overrideSpecialChances: []
   },
   "Featureless Deathwood Mask": {
     name: "Featureless Deathwood Mask",
@@ -812,7 +1278,17 @@ export const ItemList: any = {
     long: "", // Price since it was shown In a shop.
     note: "",
     sellsFor: 0,
+    "category": "",
     type: "Equipment",
+    // melvor
+    // equipmentStats will be converted from stats
+    validSlots: ["Helmet"],
+    occupiesSlots: [],
+    equipRequirements: [],
+    modifiers: {},
+    enemyModifiers: {},
+    specialAttacks: [],
+    overrideSpecialChances: []
   },
   "Black Braid Bracelet": {
     name: "Black Braid Bracelet",
@@ -823,7 +1299,17 @@ export const ItemList: any = {
     long: "", // Price since it was shown In a shop.
     note: "",
     sellsFor: 0,
+    "category": "",
     type: "Equipment",
+    // melvor
+    // equipmentStats will be converted from stats
+    validSlots: ["Ring"],
+    occupiesSlots: [],
+    equipRequirements: [],
+    modifiers: {},
+    enemyModifiers: {},
+    specialAttacks: [],
+    overrideSpecialChances: []
   },
   "Frost Gloves": {
     name: "Frost Gloves",
@@ -834,7 +1320,17 @@ export const ItemList: any = {
     long: "", // Price since it was shown In a shop.
     note: "",
     sellsFor: 0,
+    "category": "",
     type: "Equipment",
+    // melvor
+    // equipmentStats will be converted from stats
+    validSlots: ["Gloves"],
+    occupiesSlots: [],
+    equipRequirements: [],
+    modifiers: {},
+    enemyModifiers: {},
+    specialAttacks: [],
+    overrideSpecialChances: []
   },
   "Flame Gloves": {
     name: "Flame Gloves",
@@ -845,27 +1341,48 @@ export const ItemList: any = {
     long: "", // Price since it was shown In a shop.
     note: "",
     sellsFor: 0,
+    "category": "",
     type: "Equipment",
+    // melvor
+    // equipmentStats will be converted from stats
+    validSlots: ["Gloves"],
+    occupiesSlots: [],
+    equipRequirements: [],
+    modifiers: {},
+    enemyModifiers: {},
+    specialAttacks: [],
+    overrideSpecialChances: []
   },
   "Ceremonial White Stag Mask": {
     name: "Ceremonial White Stag Mask",
     description: "",
     image: "",
     rating: "normal",
-    stats: { "Small magic increase": 1 },
+    stats: { "magic": 1 },
     long: "", // Price since it was shown In a shop.
     note: "",
     sellsFor: 0,
+    "category": "",
     type: "Equipment",
+    // melvor
+    // equipmentStats will be converted from stats
+    validSlots: ["Helmet"],
+    occupiesSlots: [],
+    equipRequirements: [],
+    modifiers: {},
+    enemyModifiers: {},
+    specialAttacks: [],
+    overrideSpecialChances: [],
     0: {
       name: "Ceremonial White Stag Mask",
       description: "",
       image: "",
       rating: "normal",
-      stats: { "Small magic increase": 10 },
+      stats: { "magic": 10 },
       long: "", // Price since it was shown In a shop.
       note: "",
       sellsFor: 0,
+      "category": "",
       type: "Equipment",
     },
   },
@@ -875,11 +1392,21 @@ export const ItemList: any = {
       "Magic: +2, Disease resistance + 20%, Mana regeneration + 20%, blessing of 建御雷 [Takemikazuchi].",
     image: "",
     rating: "unique",
-    stats: { magic: 2 },
+    stats: { magic: 2, diseaseResistancePerc: 20, manaRegenPerc: 20, lightningResistancePerc: 20, lightningCostPercg: 15 },
     long: "Blessing of 建御雷 [Takemikazuchi]: Resist lightning +20%, Lightning cost - 15%, Lightning power +20%.", // Price since it was shown In a shop.
     note: "",
     sellsFor: 0,
+    "category": "",
     type: "Equipment",
+    // melvor
+    // equipmentStats will be converted from stats
+    validSlots: ["Helmet"],
+    occupiesSlots: [],
+    equipRequirements: [],
+    modifiers: {},
+    enemyModifiers: {},
+    specialAttacks: [],
+    overrideSpecialChances: [],
     0: {
       name: "Heavenly White Stag Mask",
       description:
@@ -890,7 +1417,17 @@ export const ItemList: any = {
       long: "Blessing of 建御雷 [Takemikazuchi]: Resist lightning +10%, Lightning cost - 10%, Lightning power +10%.", // Price since it was shown In a shop.
       note: "",
       sellsFor: 0,
+      "category": "",
       type: "Equipment",
+      // melvor
+      // equipmentStats will be converted from stats
+      validSlots: ["Platebody"],
+      occupiesSlots: [],
+      equipRequirements: [],
+      modifiers: {},
+      enemyModifiers: {},
+      specialAttacks: [],
+      overrideSpecialChances: []
     },
     1: {
       name: "Heavenly White Stag Mask",
@@ -902,7 +1439,17 @@ export const ItemList: any = {
       long: "Blessing of 建御雷 [Takemikazuchi]: Resist lightning +20%, Lightning cost - 15%, Lightning power +20%.", // Price since it was shown In a shop.
       note: "",
       sellsFor: 0,
+      "category": "",
       type: "Equipment",
+      // melvor
+      // equipmentStats will be converted from stats
+      validSlots: ["Platebody"],
+      occupiesSlots: [],
+      equipRequirements: [],
+      modifiers: {},
+      enemyModifiers: {},
+      specialAttacks: [],
+      overrideSpecialChances: []
     }
   },
   "Academy Robe (Black/Yellow)": {
@@ -910,11 +1457,21 @@ export const ItemList: any = {
     description: "Magic: +2, Lightning +2%, HP +10.",
     image: "",
     rating: "junk",
-    stats: { magic: 2, HP: 10 },
+    stats: { magic: 2, HP: 10, lightningIncreasedDamage: 2 },
     long: "", // Price since it was shown In a shop.
     note: "",
     sellsFor: 0,
+    "category": "",
     type: "Equipment",
+    // melvor
+    // equipmentStats will be converted from stats
+    validSlots: ["Platebody"],
+    occupiesSlots: [],
+    equipRequirements: [],
+    modifiers: {},
+    enemyModifiers: {},
+    specialAttacks: [],
+    overrideSpecialChances: []
   },
   "Hui Lu's Battle Armour": {
     name: "Hui Lu's Battle Armour",
@@ -925,7 +1482,17 @@ export const ItemList: any = {
     long: "", // Price since it was shown In a shop.
     note: "",
     sellsFor: 0,
+    "category": "",
     type: "Equipment",
+    // melvor
+    // equipmentStats will be converted from stats
+    validSlots: ["Platebody"],
+    occupiesSlots: [],
+    equipRequirements: [],
+    modifiers: {},
+    enemyModifiers: {},
+    specialAttacks: [],
+    overrideSpecialChances: [],
     0: {
       name: "Hui Lu's Battle Armour",
       description: "???",
@@ -935,6 +1502,7 @@ export const ItemList: any = {
       long: "", // Price since it was shown In a shop.
       note: "",
       sellsFor: 0,
+      "category": "",
       type: "Equipment",
     },
   },
@@ -947,7 +1515,17 @@ export const ItemList: any = {
     long: "", // Price since it was shown In a shop.
     note: "",
     sellsFor: 0,
+    "category": "",
     type: "Equipment",
+    // melvor
+    // equipmentStats will be converted from stats
+    validSlots: ["Gloves"],
+    occupiesSlots: [],
+    equipRequirements: [],
+    modifiers: {},
+    enemyModifiers: {},
+    specialAttacks: [],
+    overrideSpecialChances: [],
     0: {
       name: "Hui Lu's Enchanting Gloves",
       description: "???",
@@ -957,6 +1535,7 @@ export const ItemList: any = {
       long: "", // Price since it was shown In a shop.
       note: "",
       sellsFor: 0,
+      "category": "",
       type: "Equipment",
     },
   },
@@ -969,7 +1548,17 @@ export const ItemList: any = {
     long: "", // Price since it was shown In a shop.
     note: "",
     sellsFor: 0,
+    "category": "",
     type: "Equipment",
+    // melvor
+    // equipmentStats will be converted from stats
+    validSlots: ["Boots"],
+    occupiesSlots: [],
+    equipRequirements: [],
+    modifiers: {},
+    enemyModifiers: {},
+    specialAttacks: [],
+    overrideSpecialChances: [],
     0: {
       name: "Hui Lu's Burning Boots",
       description: "???",
@@ -979,6 +1568,7 @@ export const ItemList: any = {
       long: "", // Price since it was shown In a shop.
       note: "",
       sellsFor: 0,
+      "category": "",
       type: "Equipment",
     },
   },
@@ -993,7 +1583,17 @@ export const ItemList: any = {
     long: "", // Price since it was shown In a shop.
     note: "",
     sellsFor: 0,
+    "category": "",
     type: "Equipment",
+    // melvor
+    // equipmentStats will be converted from stats
+    validSlots: ["Gloves"],
+    occupiesSlots: [],
+    equipRequirements: [],
+    modifiers: {},
+    enemyModifiers: {},
+    specialAttacks: [],
+    overrideSpecialChances: []
   },
   "Glide Moroha": {
     name: "Glide Moroha",
@@ -1001,11 +1601,22 @@ export const ItemList: any = {
       "Deals +5 ice damage. Ice skills cost 5% less mana, other skills cost 2% less mana.",
     image: "",
     rating: "rare",
-    stats: {},
+    stats: { iceIncreasedDamage: 5, iceCostPerc: 5, allCostPerc: 2 },
     long: "", // Price since it was shown In a shop.
     note: "Moroha is the type of blade. Ice.",
-    type: "Equipment",
-    sellsFor: 0
+    type: "Weapon",
+    sellsFor: 0,
+    "category": "",
+    "attackType": "melee",
+    // melvor
+    // equipmentStats will be converted from stats
+    validSlots: ["Weapon"],
+    occupiesSlots: [],
+    equipRequirements: [],
+    modifiers: {},
+    enemyModifiers: {},
+    specialAttacks: [],
+    overrideSpecialChances: []
   },
   "Gale Moroha": {
     name: "Gale Moroha",
@@ -1013,11 +1624,22 @@ export const ItemList: any = {
       "Deals +1 wind damage. Attack speed starts at 10% of user maximum speed. Skill cool downs are reduced 3%.",
     image: "",
     rating: "rare",
-    stats: {},
+    stats: { windIncreasedDamage: 1, attackSpeed: 2400, allSkillCooldownPerc: 3 },
     long: "", // Price since it was shown In a shop.
     note: "Moroha is the type of blade. Wind.",
-    type: "Equipment",
-    sellsFor: 0
+    type: "Weapon",
+    sellsFor: 0,
+    attackType: "melee",
+    "category": "",
+    // melvor
+    // equipmentStats will be converted from stats
+    validSlots: ["Weapon"],
+    occupiesSlots: [],
+    equipRequirements: [],
+    modifiers: {},
+    enemyModifiers: {},
+    specialAttacks: [],
+    overrideSpecialChances: []
   },
   "Glide & Gale (2/2)": {
     name: "Set Effect:",
@@ -1027,6 +1649,7 @@ export const ItemList: any = {
     note: "",
     image: "",
     sellsFor: 0,
+    "category": "",
     type: "Set",
   },
   "Niyosho Gakuran": {
@@ -1037,7 +1660,17 @@ export const ItemList: any = {
     note: "gakuran (学ラン)",
     image: "",
     type: "Equipment",
-    sellsFor: 0
+    sellsFor: 0,
+    "category": "",
+    // melvor
+    // equipmentStats will be converted from stats
+    validSlots: ["Platebody"],
+    occupiesSlots: [],
+    equipRequirements: [],
+    modifiers: {},
+    enemyModifiers: {},
+    specialAttacks: [],
+    overrideSpecialChances: []
   },
   "Niyosho Hakama": {
     name: "Niyosho Hakama",
@@ -1047,17 +1680,41 @@ export const ItemList: any = {
     note: "Originally students just wore standard everyday clothes to school; kimono for female students, with hakama for male students. During the Meiji period, students began to wear uniforms modelled after Western dress.",
     image: "",
     type: "Equipment",
-    sellsFor: 0
+    sellsFor: 0,
+    "category": "",
+    // melvor
+    // equipmentStats will be converted from stats
+    validSlots: ["Platebody"],
+    occupiesSlots: [],
+    equipRequirements: [],
+    modifiers: {},
+    enemyModifiers: {},
+    specialAttacks: [],
+    overrideSpecialChances: []
   },
   "Otto's Leaky Wand": {
     name: "Otto's Leaky Wand",
     description: "Can only be used by Otto. Command +1, Command over plant's +4.",
     rating: "normal",
-    stats: {},
+    stats: {
+      controlPlants: 4,
+      command: 1
+    },
     note: "",
     sellsFor: 0,
+    "category": "",
     image: "",
-    type: "Equipment",
+    type: "Weapon",
+    attackType: "magic",
+    // melvor
+    // equipmentStats will be converted from stats
+    validSlots: ["Weapon"],
+    occupiesSlots: [],
+    equipRequirements: [],
+    modifiers: {},
+    enemyModifiers: {},
+    specialAttacks: [],
+    overrideSpecialChances: []
   },
   "Jokoto Wakizashi": {
     name: "Jokoto Wakizashi",
@@ -1065,9 +1722,20 @@ export const ItemList: any = {
     rating: "junk",
     stats: {},
     note: "Jokotō (ancient swords, until around A.D. 900), https://en.wikipedia.org/wiki/Wakizashi",
-    type: "Equipment",
+    type: "Weapon",
     image: "",
-    sellsFor: 0
+    attackType: "melee",
+    // melvor
+    // equipmentStats will be converted from stats
+    validSlots: ["Weapon"],
+    occupiesSlots: [],
+    equipRequirements: [],
+    modifiers: {},
+    enemyModifiers: {},
+    specialAttacks: [],
+    overrideSpecialChances: [],
+    sellsFor: 0,
+    "category": "",
   },
   "Seifuku": {
     name: "Seifuku",
@@ -1077,7 +1745,17 @@ export const ItemList: any = {
     image: "",
     note: "seifuku (制服). The sailor fuku (セーラー服, sērā fuku) (lit. 'sailor outfit') is a common style of uniform worn by female middle school students, traditionally by high school students.",
     type: "Equipment",
-    sellsFor: 0
+    sellsFor: 0,
+    "category": "",
+    // melvor
+    // equipmentStats will be converted from stats
+    validSlots: ["Platebody"],
+    occupiesSlots: [],
+    equipRequirements: [],
+    modifiers: {},
+    enemyModifiers: {},
+    specialAttacks: [],
+    overrideSpecialChances: []
   },
   "Niyosho Kimono": {
     name: "Niyosho Kimono",
@@ -1087,7 +1765,17 @@ export const ItemList: any = {
     note: "",
     image: "",
     sellsFor: 0,
+    "category": "",
     type: "Equipment",
+    // melvor
+    // equipmentStats will be converted from stats
+    validSlots: ["Platebody"],
+    occupiesSlots: [],
+    equipRequirements: [],
+    modifiers: {},
+    enemyModifiers: {},
+    specialAttacks: [],
+    overrideSpecialChances: []
   },
   "Autumn Cloak": {
     name: "Autumn Cloak",
@@ -1097,7 +1785,19 @@ export const ItemList: any = {
     stats: {},
     note: "",
     sellsFor: 0,
+    "category": "",
     type: "Equipment",
+    // melvor
+    // equipmentStats will be converted from stats
+    validSlots: ["Cape"],
+    occupiesSlots: [],
+    equipRequirements: [],
+    modifiers: {
+      increasedThievingStealth: 250
+    },
+    enemyModifiers: {},
+    specialAttacks: [],
+    overrideSpecialChances: []
   },
   //   The following are types of Japanese swords:
   // Tsurugi/Ken (剣, "sword"): A straight two edged sword that was mainly produced prior to the 10th century. Before the 10th century, they completely disappeared as weapons and came to be made only as offerings to Shinto shrines and Buddhist temples.

@@ -2,6 +2,26 @@
   "$schema": "https://melvoridle.com/assets/schema/gameData.json",
   "namespace": "monad",
   "data": {
+    "attacks": [
+      {
+        "id": "AnimateStone",
+        "attackCount": 1,
+        "attackInterval": 500,
+        "cantMiss": true,
+        "damage": [
+          {
+            "amplitude": 200,
+            "damageType": "Normal"
+          }
+        ],
+        "defaultChance": 35,
+        "description": "",
+        "lifesteal": 0,
+        "prehitEffects": [],
+        "onhitEffects": [],
+        "name": "Animate Stone"
+      }
+    ],
     "monsters": [
       {
         "id": "Kappa",

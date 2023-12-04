@@ -169,34 +169,36 @@ export async function setup(ctx: Modding.ModContext) {
 
 
         const monadItemsArray: any[] = Object.keys(monadItems)
-
+// Error: [test] Error constructing NamespacedObject. Local ID "Training Health Potion" is invalid.
         const initialPackage = ctx.gameData.buildPackage((itemPackage: any) => {
           try {
             for (let index = 0; index < monadItemsArray.length; index++) {
               const id = monadItemsArray[index]
               const type = monadItems[id].type
+              const itemID = id.replace("/", '').replace("(", '').replace(")", '').replace("'", '').replace(/\s/g, "")
+              // const price = parseInt(monadItems[id].long.replace(/\D/g,'')) // for shop data
               if (type === "Set") {
                 // Add to set effects / ItemSynergyData
-                const newIDs: any[] = []
-                if (monadItemsArray[index].itemIDs && monadItemsArray[index].itemIDs.length > 0) {
-                  for (let j = 0; j < monadItemsArray[index].itemIDs.length; j++) {
-                    newIDs.push(monadItemsArray[index].itemIDs[j].replace("'", '').replace(/\s/g, ""))
-                  }
-                }
-                const newSynergy: any = {
-                  "itemIDs": newIDs
-                }
-                const Requirements = ['conditionalModifiers', "enemyModifiers", "equipmentStats", "playerModifiers"]
-                for (let j = 0; j < Requirements.length; j++) {
-                  if (monadItems[id][Requirements[j]]) {
-                    newSynergy[Requirements[j]] = monadItems[id][Requirements[j]]
-                  }
-                }
-                itemPackage.itemSynergies.add(newSynergy)
+                // const newIDs: any[] = []
+                // if (monadItemsArray[index].itemIDs && monadItemsArray[index].itemIDs.length > 0) {
+                //   for (let j = 0; j < monadItemsArray[index].itemIDs.length; j++) {
+                //     newIDs.push(monadItemsArray[index].itemIDs[j].replace("/", '').replace("(", '').replace(")", '').replace("'", '').replace(/\s/g, ""))
+                //   }
+                // }
+                // const newSynergy: any = {
+                //   "itemIDs": newIDs
+                // }
+                // const Requirements = ['conditionalModifiers', "enemyModifiers", "equipmentStats", "playerModifiers"]
+                // for (let j = 0; j < Requirements.length; j++) {
+                //   if (monadItems[index][Requirements[j]]) {
+                //     newSynergy[Requirements[j]] = monadItems[index][Requirements[j]]
+                //   }
+                // }
+                // itemPackage.itemSynergies.add(newSynergy)
               } else {
                 // Is added to items / AnyItemData
                 const newItem: any = {
-                  "id": id.replace("'", '').replace(/\s/g, ""),
+                  "id": itemID,
                   "name": monadItems[id].name,
                   "category": type,
                   "type": type,
@@ -208,10 +210,56 @@ export async function setup(ctx: Modding.ModContext) {
                   "sellsFor": monadItems[id].sellsFor,
                   "customDescription": monadItems[id].description,
                 }
-                const newequipmentStats = {
-                  'attackSpeed': 0, 'stabAttackBonus': 0, 'slashAttackBonus': 0, 'blockAttackBonus': 0, 'rangedAttackBonus': 0, 'magicAttackBonus': 0, 'meleeStrengthBonus': 0, 'rangedStrengthBonus': 0, 'magicDamageBonus': 0, 'meleeDefenceBonus': 0, 'rangedDefenceBonus': 0, 'magicDefenceBonus': 0, 'damageReduction': 0, 'summoningMaxhit': 0
+                const newequipmentStats: any = {
+                  'attackSpeed': 3000, 'stabAttackBonus': 0, 'slashAttackBonus': 0, 'blockAttackBonus': 0, 'rangedAttackBonus': 0, 'magicAttackBonus': 0, 'meleeStrengthBonus': 0, 'rangedStrengthBonus': 0, 'magicDamageBonus': 0, 'meleeDefenceBonus': 0, 'rangedDefenceBonus': 0, 'magicDefenceBonus': 0, 'damageReduction': 0, 'summoningMaxhit': 0
+                }
+                const newModifiers: any = {
+
                 }
                 if (monadItems[id].stats) {
+                  const tempStats:any[] = monadItems[id].stats
+                  const statKeys:any[] = Object.keys(tempStats)
+                  // stats: { sense: 1, attackSpeed: 2600 },
+                  if(statKeys.length > 0 ) {
+                    for (let m = 0; m < statKeys.length; m++) {
+                      if(statKeys[m] === 'HP') {
+                        newModifiers['increasedFlatMaxHitpoints'] = tempStats[statKeys[m]]
+                      }
+                      else if(statKeys[m] === 'attackSpeed') {
+                        newModifiers['attackSpeed'] = tempStats[statKeys[m]]
+                      }
+                      // else if(statKeys[m] === 'MP') {
+                      //   newModifiers['increasedRunePreservation'] = tempStats[statKeys[m]]
+                      // }
+                      else if(statKeys[m] === 'HPPerc') {
+                        newModifiers['increasedMaxHitpoints'] = tempStats[statKeys[m]]
+                      }
+                      else if(statKeys[m] === 'strength') {
+                        newequipmentStats['meleeStrengthBonus'] = tempStats[statKeys[m]]
+                      }
+                      else if(statKeys[m] === 'vitality') {
+                        newequipmentStats['increasedFlatMaxHitpoints'] = newequipmentStats['increasedFlatMaxHitpoints'] + tempStats[statKeys[m]]
+                      }
+                      else if(statKeys[m] === 'endurance') {
+                        newequipmentStats['meleeDefenceBonus'] = tempStats[statKeys[m]]
+                      }
+                      else if(statKeys[m] === 'willpower') {
+                        newequipmentStats['magicDefenceBonus'] = tempStats[statKeys[m]]
+                      }
+                      else if(statKeys[m] === 'magic') {
+                        newequipmentStats['magicAttackBonus'] = tempStats[statKeys[m]]
+                      }
+                      else if(statKeys[m] === 'dexterity') {
+                        newequipmentStats['rangedAttackBonus'] = tempStats[statKeys[m]]
+                      }
+                      else if(statKeys[m] === 'sense') {
+                        newequipmentStats['damageReduction'] = tempStats[statKeys[m]]
+                      }
+                      else if(statKeys[m] === 'charisma') {
+                        newequipmentStats['summoningMaxhit'] = tempStats[statKeys[m]]
+                      }
+                    }
+                  }
                   monadItems[id].equipmentStats = newequipmentStats
                 }
                 if (type === "Weapon") {
@@ -222,7 +270,7 @@ export async function setup(ctx: Modding.ModContext) {
                     }
                   }
                 }
-                if (type === "Food") {
+                else if (type === "Food") {
                   const Requirements = ['healsFor']
                   for (let j = 0; j < Requirements.length; j++) {
                     if (monadItems[id][Requirements[j]]) {
@@ -230,7 +278,7 @@ export async function setup(ctx: Modding.ModContext) {
                     }
                   }
                 }
-                if (type === "Bone") {
+                else if (type === "Bone") {
                   const Requirements = ['prayerPoints']
                   for (let j = 0; j < Requirements.length; j++) {
                     if (monadItems[id][Requirements[j]]) {
@@ -238,7 +286,7 @@ export async function setup(ctx: Modding.ModContext) {
                     }
                   }
                 }
-                if (type === "Potion") {
+                else if (type === "Potion") {
                   const Requirements = ['modifiers', 'charges', 'action', 'consumesOn']
                   for (let j = 0; j < Requirements.length; j++) {
                     if (monadItems[id][Requirements[j]]) {
@@ -246,7 +294,7 @@ export async function setup(ctx: Modding.ModContext) {
                     }
                   }
                 }
-                if (type === "Readable") {
+                else if (type === "Readable") {
                   const Requirements = ['modalID', 'swalData']
                   for (let j = 0; j < Requirements.length; j++) {
                     if (monadItems[id][Requirements[j]]) {
@@ -254,7 +302,7 @@ export async function setup(ctx: Modding.ModContext) {
                     }
                   }
                 }
-                if (type === "Openable") {
+                else if (type === "Openable") {
                   const Requirements = ['dropTable', 'keyItem']
                   for (let j = 0; j < Requirements.length; j++) {
                     if (monadItems[id][Requirements[j]]) {
@@ -262,7 +310,7 @@ export async function setup(ctx: Modding.ModContext) {
                     }
                   }
                 }
-                if (type === "Misc") {
+                else if (type === "Misc") {
                   const Requirements = ['keyItem']
                   for (let j = 0; j < Requirements.length; j++) {
                     if (monadItems[id][Requirements[j]]) {
@@ -270,11 +318,11 @@ export async function setup(ctx: Modding.ModContext) {
                     }
                   }
                 }
-                if (type === "Equipment") {
+                else if (type === "Equipment") {
                   const Requirements = ['stats', 'validSlots', 'occupiesSlots', 'equipRequirements', 'equipmentStats', 'modifiers', 'enemyModifiers', 'conditionalModifiers', 'specialAttacks', 'overrideSpecialChances', 'fightEffects', 'providedRunes', 'ammoType', 'consumesChargesOn', 'consumesOn', 'consumesItemOn']
                   for (let j = 0; j < Requirements.length; j++) {
-                    if (monadItems[id][Requirements[j]]) {
-                      newItem[Requirements[j]] = monadItems[id][Requirements[j]]
+                    if (monadItems[index][Requirements[j]]) {
+                      newItem[Requirements[j]] = monadItems[index][Requirements[j]]
                     }
                   }
                 }
