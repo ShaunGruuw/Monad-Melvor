@@ -1,5 +1,8 @@
 declare class Game implements Serializable, EncodableObject {
     monad: any;
+    idLog: any[];
+    monadErrorLog: any[];
+    
     loopInterval: number;
     loopStarted: boolean;
     disableClearOffline: boolean;

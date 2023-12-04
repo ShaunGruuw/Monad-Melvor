@@ -19,6 +19,7 @@ import '../img/icon.png';
 import LargeIcon from '../img/icon_large.png';
 
 export async function setup(ctx: Modding.ModContext) {
+  const errorLog: any[] = []
   try {
     // Register our GameData
     await ctx.gameData.addPackage('data.json');
@@ -169,38 +170,43 @@ export async function setup(ctx: Modding.ModContext) {
 
 
         const monadItemsArray: any[] = Object.keys(monadItems)
-// Error: [test] Error constructing NamespacedObject. Local ID "Training Health Potion" is invalid.
+        const idLog: any[] = []
+        // Error: [test] Error constructing NamespacedObject. Local ID "Training Health Potion" is invalid.
         const initialPackage = ctx.gameData.buildPackage((itemPackage: any) => {
           try {
             for (let index = 0; index < monadItemsArray.length; index++) {
               const id = monadItemsArray[index]
               const type = monadItems[id].type
-              const itemID = id.replace("/", '').replace("(", '').replace(")", '').replace("'", '').replace(/\s/g, "")
+              const itemID = id.replace(/[^a-zA-Z ]/g, "").replace(/\s/g, "")
+              idLog.push(itemID)
               // const price = parseInt(monadItems[id].long.replace(/\D/g,'')) // for shop data
               if (type === "Set") {
                 // Add to set effects / ItemSynergyData
-                // const newIDs: any[] = []
-                // if (monadItemsArray[index].itemIDs && monadItemsArray[index].itemIDs.length > 0) {
-                //   for (let j = 0; j < monadItemsArray[index].itemIDs.length; j++) {
-                //     newIDs.push(monadItemsArray[index].itemIDs[j].replace("/", '').replace("(", '').replace(")", '').replace("'", '').replace(/\s/g, ""))
-                //   }
-                // }
-                // const newSynergy: any = {
-                //   "itemIDs": newIDs
-                // }
-                // const Requirements = ['conditionalModifiers', "enemyModifiers", "equipmentStats", "playerModifiers"]
-                // for (let j = 0; j < Requirements.length; j++) {
-                //   if (monadItems[index][Requirements[j]]) {
-                //     newSynergy[Requirements[j]] = monadItems[index][Requirements[j]]
-                //   }
-                // }
-                // itemPackage.itemSynergies.add(newSynergy)
-              } else {
+                const newIDs: any[] = []
+                if (monadItems[id].itemIDs && monadItems[id].itemIDs.length > 0) {
+                  for (let j = 0; j < monadItems[id].itemIDs.length; j++) {
+                    newIDs.push('monad:' + monadItems[id].itemIDs[j].replace(/[^a-zA-Z ]/g, "").replace(/\s/g, ""))
+                  }
+                }
+                const newSynergy: any = {
+                  "itemIDs": newIDs
+                }
+                if (newSynergy.itemIDs.length > 0) {
+                  const Requirements = ['conditionalModifiers', "enemyModifiers", "equipmentStats", "playerModifiers"]
+                  for (let j = 0; j < Requirements.length; j++) {
+                    if (monadItems[id][Requirements[j]]) {
+                      newSynergy[Requirements[j]] = monadItems[id][Requirements[j]]
+                    }
+                  }
+                   itemPackage.itemSynergies.add(newSynergy)
+                }
+              }
+              else {
                 // Is added to items / AnyItemData
                 const newItem: any = {
                   "id": itemID,
                   "name": monadItems[id].name,
-                  "category": type,
+                  "category": monadItems[id].category,
                   "type": type,
                   "itemType": type,
                   "media": monadItems[id].image || "",
@@ -211,7 +217,7 @@ export async function setup(ctx: Modding.ModContext) {
                   "customDescription": monadItems[id].description,
                 }
                 const newequipmentStats: any = {
-                  'attackSpeed': 3000, 'stabAttackBonus': 0, 'slashAttackBonus': 0, 'blockAttackBonus': 0, 'rangedAttackBonus': 0, 'magicAttackBonus': 0, 'meleeStrengthBonus': 0, 'rangedStrengthBonus': 0, 'magicDamageBonus': 0, 'meleeDefenceBonus': 0, 'rangedDefenceBonus': 0, 'magicDefenceBonus': 0, 'damageReduction': 0, 'summoningMaxhit': 0
+                   'stabAttackBonus': 0, 'slashAttackBonus': 0, 'blockAttackBonus': 0, 'rangedAttackBonus': 0, 'magicAttackBonus': 0, 'meleeStrengthBonus': 0, 'rangedStrengthBonus': 0, 'magicDamageBonus': 0, 'meleeDefenceBonus': 0, 'rangedDefenceBonus': 0, 'magicDefenceBonus': 0, 'damageReduction': 0, 'summoningMaxhit': 0
                 }
                 const newModifiers: any = {
 
@@ -225,20 +231,17 @@ export async function setup(ctx: Modding.ModContext) {
                       if(statKeys[m] === 'HP') {
                         newModifiers['increasedFlatMaxHitpoints'] = tempStats[statKeys[m]]
                       }
-                      else if(statKeys[m] === 'attackSpeed') {
-                        newModifiers['attackSpeed'] = tempStats[statKeys[m]]
-                      }
-                      // else if(statKeys[m] === 'MP') {
-                      //   newModifiers['increasedRunePreservation'] = tempStats[statKeys[m]]
-                      // }
                       else if(statKeys[m] === 'HPPerc') {
                         newModifiers['increasedMaxHitpoints'] = tempStats[statKeys[m]]
                       }
+                      else if(statKeys[m] === 'vitality') {
+                        newModifiers['increasedFlatMaxHitpoints'] = newModifiers['increasedFlatMaxHitpoints'] + tempStats[statKeys[m]]
+                      }
+                      else if(statKeys[m] === 'attackSpeed') {
+                        newequipmentStats['attackSpeed'] = tempStats[statKeys[m]]
+                      }
                       else if(statKeys[m] === 'strength') {
                         newequipmentStats['meleeStrengthBonus'] = tempStats[statKeys[m]]
-                      }
-                      else if(statKeys[m] === 'vitality') {
-                        newequipmentStats['increasedFlatMaxHitpoints'] = newequipmentStats['increasedFlatMaxHitpoints'] + tempStats[statKeys[m]]
                       }
                       else if(statKeys[m] === 'endurance') {
                         newequipmentStats['meleeDefenceBonus'] = tempStats[statKeys[m]]
@@ -263,6 +266,7 @@ export async function setup(ctx: Modding.ModContext) {
                   monadItems[id].equipmentStats = newequipmentStats
                 }
                 if (type === "Weapon") {
+                  newequipmentStats['attackSpeed'] = 3000;
                   const Requirements = ['attackType', 'ammoTypeRequired', 'stats', 'validSlots', 'occupiesSlots', 'equipRequirements', 'equipmentStats', 'modifiers', 'enemyModifiers', 'conditionalModifiers', 'specialAttacks', 'overrideSpecialChances', 'fightEffects', 'providedRunes', 'ammoType ', 'consumesChargesOn', 'consumesOn', 'consumesItemOn']
                   for (let j = 0; j < Requirements.length; j++) {
                     if (monadItems[id][Requirements[j]]) {
@@ -321,8 +325,8 @@ export async function setup(ctx: Modding.ModContext) {
                 else if (type === "Equipment") {
                   const Requirements = ['stats', 'validSlots', 'occupiesSlots', 'equipRequirements', 'equipmentStats', 'modifiers', 'enemyModifiers', 'conditionalModifiers', 'specialAttacks', 'overrideSpecialChances', 'fightEffects', 'providedRunes', 'ammoType', 'consumesChargesOn', 'consumesOn', 'consumesItemOn']
                   for (let j = 0; j < Requirements.length; j++) {
-                    if (monadItems[index][Requirements[j]]) {
-                      newItem[Requirements[j]] = monadItems[index][Requirements[j]]
+                    if (monadItems[id][Requirements[j]]) {
+                      newItem[Requirements[j]] = monadItems[id][Requirements[j]]
                     }
                   }
                 }
@@ -331,16 +335,21 @@ export async function setup(ctx: Modding.ModContext) {
               }
             }
           } catch (error) {
+            errorLog.push("Error @ Monad onModsLoaded itempackage", error)
             console.log("Monad onModsLoaded itempackage", error)
           }
         });
         initialPackage.add();
         game.monad = initialPackage
+        game.idLog = idLog
       } catch (error) {
-        console.log('error, Monad onModsLoaded', error)
+        errorLog.push("Error, Monad onModsLoaded", error)
+        console.log('Error, Monad onModsLoaded', error)
       }
     });
   } catch (error) {
+    errorLog.push("Error, Monad setup", error)
     console.log('Error, Monad setup', error)
   }
+  game.monadErrorLog = errorLog
 }

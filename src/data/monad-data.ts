@@ -133,7 +133,7 @@ type monadElementsTypes = typeof monadElements[number];
 declare type monadElementsKey = `${monadElementsTypes}${monadModifiersTypes}`;
 type monadElementsEvent = { kind: monadElementsKey };
 
-type monadSpcificKeys = 'blockPerc' | 'controlUndead' | 'Enchanting' | 'SpellSpeed' | 'CriticalHitChance' | 'diseaseResistance' | 'diseaseResistancePerc' | 'underwaterBreathing' | 'swimSpeed' | 'stealthInShadowsPerc' | 'controlPlants' | 'command';
+type monadSpcificKeys = 'blockPerc' | 'controlUndead' | 'Enchanting' | 'SpellSpeed' | 'CriticalHitChance' | 'CriticalHitDamage' | 'diseaseResistance' | 'diseaseResistancePerc' | 'underwaterBreathing' | 'swimSpeed' | 'stealthInShadowsPerc' | 'controlPlants' | 'command';
 
 type monadSpcificEvent = { kind: monadSpcificKeys };
 
@@ -274,7 +274,7 @@ export const ItemList: any = {
     stats: {},
     note: "",
     sellsFor: 0,
-    "category": "",
+    "category": "Combat",
     type: "Weapon",
     "attackType": "melee",
     // melvor
@@ -296,7 +296,7 @@ export const ItemList: any = {
     stats: {},
     note: "",
     sellsFor: 0,
-    "category": "",
+    "category": "Combat",
     type: "Weapon",
     "attackType": "melee",
     // melvor
@@ -314,10 +314,10 @@ export const ItemList: any = {
     description:
       "Reduces physical damage taken by 10%, except spears. Endurance +1, Endurance +10%.",
     rating: "epic",
-    stats: { endurance: 1, endurancePerc: 1.1, physicalDamageReduction: 10 },
+    stats: { endurance: 1, endurancePerc: 10, physicalDamageReduction: 10 },
     note: "",
     sellsFor: 0,
-    "category": "",
+    "category": "Combat",
     type: "Equipment",
     image: "",
     // melvor
@@ -337,7 +337,7 @@ export const ItemList: any = {
     stats: { endurance: 1.8 },
     note: "",
     sellsFor: 0,
-    "category": "",
+    "category": "Combat",
     type: "Equipment",
     image: "",
     // melvor
@@ -357,7 +357,7 @@ export const ItemList: any = {
     stats: { endurance: 1 },
     note: "",
     sellsFor: 0,
-    "category": "",
+    "category": "Combat",
     type: "Equipment",
     image: "",
     // melvor
@@ -377,7 +377,7 @@ export const ItemList: any = {
     stats: { endurance: 1.2 },
     note: "",
     sellsFor: 0,
-    "category": "",
+    "category": "Combat",
     type: "Equipment",
     image: "",
     // melvor
@@ -397,7 +397,7 @@ export const ItemList: any = {
     stats: { strength: 3 },
     note: "",
     sellsFor: 0,
-    "category": "",
+    "category": "Combat",
     type: "Weapon",
     image: "",
     "attackType": "melee",
@@ -419,7 +419,7 @@ export const ItemList: any = {
     stats: { endurance: 0, "demonDamageReductionPerc": 7, undeadDamageReductionPerc: 7, blockPerc: 20 },
     note: "",
     sellsFor: 0,
-    "category": "",
+    "category": "Combat",
     type: "Equipment",
     image: "",
     // melvor
@@ -439,7 +439,7 @@ export const ItemList: any = {
     stats: { HP: 315, MP: 225 },
     note: "",
     sellsFor: 0,
-    "category": "",
+    "category": "Combat",
     type: "Equipment",
     image: "",
     // melvor
@@ -469,7 +469,7 @@ export const ItemList: any = {
     },
     note: "",
     sellsFor: 0,
-    "category": "",
+    "category": "Combat",
     type: "Equipment",
     image: "",
     // melvor
@@ -494,7 +494,7 @@ export const ItemList: any = {
     },
     note: "",
     sellsFor: 0,
-    "category": "",
+    "category": "Combat",
     type: "Equipment",
     image: "",
     // melvor
@@ -519,7 +519,7 @@ export const ItemList: any = {
     rating: "epic",
     note: "",
     sellsFor: 0,
-    "category": "",
+    "category": "Combat",
     type: "Equipment",
     image: "",
     // melvor
@@ -544,7 +544,7 @@ export const ItemList: any = {
     rating: "epic",
     note: "",
     sellsFor: 0,
-    "category": "",
+    "category": "Combat",
     type: "Equipment",
     image: "",
     // melvor
@@ -559,30 +559,32 @@ export const ItemList: any = {
   },
   "Paladin Engeler's Set (3/7)": {
     name: "Paladin Engeler's Set",
-    description: "HP + 217.0, endurance + 0.9",
+    description: "HP + 217.0, endurance + 1",
     rating: "epic",
-    stats: { endurance: 0.9, HP: 217 },
+    stats: { endurance: 1, HP: 217 },
     1: {
-      description: "HP + 22, endurance + 0.9",
-      stats: { endurance: 0.9, HP: 22 }
+      description: "HP + 22, endurance + 1",
+      stats: { endurance: 1, HP: 22 }
     },
     note: "",
     sellsFor: 0,
-    "category": "",
+    "category": "Combat",
     type: "Set",
+    itemIDs: ["Paladin Engeler's Body Armour (silver rank)", "Paladin Engeler's Sabaton (silver rank)", "Paladin Engeler's Sallet (silver rank)"],
     image: "",
     validSlots: [],
     occupiesSlots: []
   },
   "Paladin Engeler's Set (4/7)": {
     name: "Paladin Engeler's Set",
-    description: "Crit Rate: +1, Critical Damage: +2.5%.",
+    description: "Crit Rate: +1, Critical Damage: +3%.",
     rating: "epic",
-    stats: {},
+    stats: { CriticalHitChance: 1, CriticalHitDamage: 3},
     note: "",
     sellsFor: 0,
-    "category": "",
+    "category": "Combat",
     type: "Set",
+    itemIDs: ["Paladin Engeler's Body Armour (silver rank)", "Paladin Engeler's Sabaton (silver rank)", "Paladin Engeler's Sallet (silver rank)", "Paladin Engeler's Gauntlets (silver rank)"],
     image: "",
     validSlots: [],
     occupiesSlots: []
@@ -592,11 +594,12 @@ export const ItemList: any = {
     description:
       "Skill: One of the Twelve; Increases all stats by 12% for 7 seconds.",
     rating: "epic",
-    stats: { endurance: 0 },
+    stats: { },
     note: "",
     sellsFor: 0,
-    "category": "",
+    "category": "Combat",
     type: "Set",
+    itemIDs: ["Paladin Engeler's Body Armour (silver rank)", "Paladin Engeler's Sabaton (silver rank)", "Paladin Engeler's Sallet (silver rank)", "Paladin Engeler's Gauntlets (silver rank)", "Paladin Engeler's Cape (silver rank)", "Paladin Engeler's Shield (silver rank)", "Paladin Engeler's Mace (silver rank)"],
     image: "",
     validSlots: [],
     occupiesSlots: []
@@ -612,7 +615,7 @@ export const ItemList: any = {
     note: "https://ffxiv.gamerescape.com/wiki/Category:Rogue_Body/iLevel_30-39",
     type: "Equipment",
     sellsFor: 0,
-    "category": "",
+    "category": "Combat",
     // melvor
     // equipmentStats will be converted from stats
     validSlots: ["Platebody"],
@@ -641,7 +644,7 @@ export const ItemList: any = {
     enemyModifiers: {},
     specialAttacks: [],
     overrideSpecialChances: [], sellsFor: 0,
-    "category": "",
+    "category": "Combat",
   },
   "Ring of initial undead control": {
     name: "Ring of initial undead control",
@@ -661,7 +664,7 @@ export const ItemList: any = {
     enemyModifiers: {},
     specialAttacks: [],
     overrideSpecialChances: [], sellsFor: 0,
-    "category": "",
+    "category": "Combat",
   },
   "Ring of Little Strength": {
     name: "Ring of Little Strength",
@@ -681,7 +684,7 @@ export const ItemList: any = {
     enemyModifiers: {},
     specialAttacks: [],
     overrideSpecialChances: [], sellsFor: 0,
-    "category": "",
+    "category": "Combat",
   },
   "Pendent of Medium Magic": {
     name: "Pendent of Medium Magic",
@@ -701,7 +704,7 @@ export const ItemList: any = {
     enemyModifiers: {},
     specialAttacks: [],
     overrideSpecialChances: [], sellsFor: 0,
-    "category": "",
+    "category": "Combat",
   },
   "Witches Hat": {
     name: "Witches Hat",
@@ -721,7 +724,7 @@ export const ItemList: any = {
     enemyModifiers: {},
     specialAttacks: [],
     overrideSpecialChances: [], sellsFor: 0,
-    "category": "",
+    "category": "Combat",
   },
   "Queen's Pawn": {
     name: "Queen's Pawn",
@@ -741,7 +744,7 @@ export const ItemList: any = {
     enemyModifiers: {},
     specialAttacks: ['monad:AnimateStone'],
     overrideSpecialChances: [15], sellsFor: 0,
-    "category": "",
+    "category": "Combat",
   },
   "Skull of victim": {
     name: "Skull of victim",
@@ -753,7 +756,7 @@ export const ItemList: any = {
     note: "Ch11, Skull",
     type: "Equipment",
     sellsFor: 0,
-    "category": "",
+    "category": "Combat",
     // melvor
     // equipmentStats will be converted from stats
     validSlots: ["Passive"],
@@ -771,7 +774,7 @@ export const ItemList: any = {
     stats: { Enchanting: 5 },
     rating: "normal",
     sellsFor: 0,
-    "category": "",
+    "category": "Combat",
     long: "", // Price since it was shown In a shop.
     note: "Ch11, Quill",
     type: "Equipment",
@@ -791,7 +794,7 @@ export const ItemList: any = {
     image: "",
     rating: "junk",
     sellsFor: 0,
-    "category": "",
+    "category": "Combat",
     long: "", // Price since it was shown In a shop.
     note: "Ch11, Coin",
     type: "Misc",
@@ -806,7 +809,7 @@ export const ItemList: any = {
     note: "Ch17",
     type: "Equipment",
     sellsFor: 0,
-    "category": "",
+    "category": "Combat",
     // melvor
     // equipmentStats will be converted from stats
     validSlots: ["Amulet"],
@@ -826,7 +829,7 @@ export const ItemList: any = {
     long: "", // Price since it was shown In a shop.
     note: "",
     sellsFor: 0,
-    "category": "",
+    "category": "Combat",
     type: "Equipment",
     // melvor
     // equipmentStats will be converted from stats
@@ -846,7 +849,7 @@ export const ItemList: any = {
     long: "", // Price since it was shown In a shop.
     note: "",
     sellsFor: 0,
-    "category": "",
+    "category": "Combat",
     type: "Misc",
   },
   "Linen Halfgloves": {
@@ -859,7 +862,7 @@ export const ItemList: any = {
     long: "", // Price since it was shown In a shop.
     note: "",
     sellsFor: 0,
-    "category": "",
+    "category": "Combat",
     type: "Equipment",
     // melvor
     // equipmentStats will be converted from stats
@@ -881,7 +884,7 @@ export const ItemList: any = {
     long: "", // Price since it was shown In a shop.
     note: "",
     sellsFor: 0,
-    "category": "",
+    "category": "Combat",
     type: "Equipment",
     // melvor
     // equipmentStats will be converted from stats
@@ -903,7 +906,7 @@ export const ItemList: any = {
     long: "", // Price since it was shown In a shop.
     note: "",
     sellsFor: 0,
-    "category": "",
+    "category": "Combat",
     type: "Equipment",
     // melvor
     // equipmentStats will be converted from stats
@@ -925,7 +928,7 @@ export const ItemList: any = {
     long: "", // Price since it was shown In a shop.
     note: "",
     sellsFor: 0,
-    "category": "",
+    "category": "Combat",
     type: "Equipment",
     // melvor
     // equipmentStats will be converted from stats
@@ -947,7 +950,7 @@ export const ItemList: any = {
     long: "", // Price since it was shown In a shop.
     note: "",
     sellsFor: 0,
-    "category": "",
+    "category": "Combat",
     type: "Equipment",
     // melvor
     // equipmentStats will be converted from stats
@@ -969,7 +972,7 @@ export const ItemList: any = {
     long: "", // Price since it was shown In a shop.
     note: "",
     sellsFor: 0,
-    "category": "",
+    "category": "Combat",
     type: "Equipment",
     // melvor
     // equipmentStats will be converted from stats
@@ -981,15 +984,16 @@ export const ItemList: any = {
     specialAttacks: [],
     overrideSpecialChances: [],
   },
-  "Battlemage's Set (4/4)": {
-    name: "Battlemage's Set (4/4)",
+  "Battlemage's Set (5/5)": {
+    name: "Battlemage's Set (5/5)",
     description: "Magic +1, Willpower: +1, Spell Speed: +1%.",
     rating: "normal",
-    stats: { magic: 1, willpower: 1 },
+    stats: { magic: 1, willpower: 1, SpellSpeed: 1 },
     note: "",
     sellsFor: 0,
-    "category": "",
+    "category": "Combat",
     type: "Set",
+    itemIDs: ["Battlemage's Gloves", "Battlemage's Hat", "Battlemage's Robe", "Battlemage's Crakows", "Battlemage's Breeches"],
     image: ""
   },
   "Cotton Scarf": {
@@ -1002,7 +1006,7 @@ export const ItemList: any = {
     long: "", // Price since it was shown In a shop.
     note: "",
     sellsFor: 0,
-    "category": "",
+    "category": "Combat",
     type: "Equipment",
     // melvor
     // equipmentStats will be converted from stats
@@ -1024,7 +1028,7 @@ export const ItemList: any = {
     long: "", // Price since it was shown In a shop.
     note: "",
     sellsFor: 0,
-    "category": "",
+    "category": "Combat",
     type: "Equipment",
     // melvor
     // equipmentStats will be converted from stats
@@ -1047,7 +1051,7 @@ export const ItemList: any = {
     note: "https://ffxiv.gamerescape.com/wiki/Category:Ring/iLevel_30-39",
     type: "Equipment",
     sellsFor: 0,
-    "category": "",
+    "category": "Combat",
     // melvor
     // equipmentStats will be converted from stats
     validSlots: ["Ring"],
@@ -1099,7 +1103,7 @@ export const ItemList: any = {
     long: "", // Price since it was shown In a shop.
     note: "",
     sellsFor: 0,
-    "category": "",
+    "category": "Combat",
     type: "Weapon",
     "attackType": "melee",
     // melvor
@@ -1122,7 +1126,7 @@ export const ItemList: any = {
     long: "", // Price since it was shown In a shop.
     note: "",
     sellsFor: 0,
-    "category": "",
+    "category": "Combat",
     type: "Weapon",
     "attackType": "melee",
     // melvor
@@ -1144,7 +1148,7 @@ export const ItemList: any = {
     long: "", // Price since it was shown In a shop.
     note: "",
     sellsFor: 0,
-    "category": "",
+    "category": "Combat",
     type: "Equipment",
     // melvor
     // equipmentStats will be converted from stats
@@ -1166,7 +1170,7 @@ export const ItemList: any = {
     long: "", // Price since it was shown In a shop.
     note: "",
     sellsFor: 0,
-    "category": "",
+    "category": "Combat",
     type: "Equipment",
     // melvor
     // equipmentStats will be converted from stats
@@ -1189,7 +1193,7 @@ export const ItemList: any = {
     long: "", // Price since it was shown In a shop.
     note: "",
     sellsFor: 0,
-    "category": "",
+    "category": "Combat",
     type: "Equipment",
     // melvor
     // equipmentStats will be converted from stats
@@ -1210,7 +1214,7 @@ export const ItemList: any = {
     long: "", // Price since it was shown In a shop.
     note: "",
     sellsFor: 0,
-    "category": "",
+    "category": "Combat",
     type: "Equipment",
     // melvor
     // equipmentStats will be converted from stats
@@ -1230,7 +1234,7 @@ export const ItemList: any = {
       long: "", // Price since it was shown In a shop.
       note: "",
       sellsFor: 0,
-      "category": "",
+      "category": "Combat",
       type: "Equipment",
     },
   },
@@ -1251,13 +1255,13 @@ export const ItemList: any = {
       long: "", // Price since it was shown In a shop.
       note: "",
       sellsFor: 0,
-      "category": "",
+      "category": "Combat",
       type: "Equipment",
     },
     long: "", // Price since it was shown In a shop.
     note: "",
     sellsFor: 0,
-    "category": "",
+    "category": "Combat",
     type: "Equipment",
     // melvor
     // equipmentStats will be converted from stats
@@ -1278,7 +1282,7 @@ export const ItemList: any = {
     long: "", // Price since it was shown In a shop.
     note: "",
     sellsFor: 0,
-    "category": "",
+    "category": "Combat",
     type: "Equipment",
     // melvor
     // equipmentStats will be converted from stats
@@ -1299,7 +1303,7 @@ export const ItemList: any = {
     long: "", // Price since it was shown In a shop.
     note: "",
     sellsFor: 0,
-    "category": "",
+    "category": "Combat",
     type: "Equipment",
     // melvor
     // equipmentStats will be converted from stats
@@ -1320,7 +1324,7 @@ export const ItemList: any = {
     long: "", // Price since it was shown In a shop.
     note: "",
     sellsFor: 0,
-    "category": "",
+    "category": "Combat",
     type: "Equipment",
     // melvor
     // equipmentStats will be converted from stats
@@ -1341,7 +1345,7 @@ export const ItemList: any = {
     long: "", // Price since it was shown In a shop.
     note: "",
     sellsFor: 0,
-    "category": "",
+    "category": "Combat",
     type: "Equipment",
     // melvor
     // equipmentStats will be converted from stats
@@ -1362,7 +1366,7 @@ export const ItemList: any = {
     long: "", // Price since it was shown In a shop.
     note: "",
     sellsFor: 0,
-    "category": "",
+    "category": "Combat",
     type: "Equipment",
     // melvor
     // equipmentStats will be converted from stats
@@ -1382,7 +1386,7 @@ export const ItemList: any = {
       long: "", // Price since it was shown In a shop.
       note: "",
       sellsFor: 0,
-      "category": "",
+      "category": "Combat",
       type: "Equipment",
     },
   },
@@ -1396,7 +1400,7 @@ export const ItemList: any = {
     long: "Blessing of 建御雷 [Takemikazuchi]: Resist lightning +20%, Lightning cost - 15%, Lightning power +20%.", // Price since it was shown In a shop.
     note: "",
     sellsFor: 0,
-    "category": "",
+    "category": "Combat",
     type: "Equipment",
     // melvor
     // equipmentStats will be converted from stats
@@ -1417,7 +1421,7 @@ export const ItemList: any = {
       long: "Blessing of 建御雷 [Takemikazuchi]: Resist lightning +10%, Lightning cost - 10%, Lightning power +10%.", // Price since it was shown In a shop.
       note: "",
       sellsFor: 0,
-      "category": "",
+      "category": "Combat",
       type: "Equipment",
       // melvor
       // equipmentStats will be converted from stats
@@ -1439,7 +1443,7 @@ export const ItemList: any = {
       long: "Blessing of 建御雷 [Takemikazuchi]: Resist lightning +20%, Lightning cost - 15%, Lightning power +20%.", // Price since it was shown In a shop.
       note: "",
       sellsFor: 0,
-      "category": "",
+      "category": "Combat",
       type: "Equipment",
       // melvor
       // equipmentStats will be converted from stats
@@ -1461,7 +1465,7 @@ export const ItemList: any = {
     long: "", // Price since it was shown In a shop.
     note: "",
     sellsFor: 0,
-    "category": "",
+    "category": "Combat",
     type: "Equipment",
     // melvor
     // equipmentStats will be converted from stats
@@ -1482,7 +1486,7 @@ export const ItemList: any = {
     long: "", // Price since it was shown In a shop.
     note: "",
     sellsFor: 0,
-    "category": "",
+    "category": "Combat",
     type: "Equipment",
     // melvor
     // equipmentStats will be converted from stats
@@ -1502,7 +1506,7 @@ export const ItemList: any = {
       long: "", // Price since it was shown In a shop.
       note: "",
       sellsFor: 0,
-      "category": "",
+      "category": "Combat",
       type: "Equipment",
     },
   },
@@ -1515,7 +1519,7 @@ export const ItemList: any = {
     long: "", // Price since it was shown In a shop.
     note: "",
     sellsFor: 0,
-    "category": "",
+    "category": "Combat",
     type: "Equipment",
     // melvor
     // equipmentStats will be converted from stats
@@ -1535,7 +1539,7 @@ export const ItemList: any = {
       long: "", // Price since it was shown In a shop.
       note: "",
       sellsFor: 0,
-      "category": "",
+      "category": "Combat",
       type: "Equipment",
     },
   },
@@ -1548,7 +1552,7 @@ export const ItemList: any = {
     long: "", // Price since it was shown In a shop.
     note: "",
     sellsFor: 0,
-    "category": "",
+    "category": "Combat",
     type: "Equipment",
     // melvor
     // equipmentStats will be converted from stats
@@ -1568,7 +1572,7 @@ export const ItemList: any = {
       long: "", // Price since it was shown In a shop.
       note: "",
       sellsFor: 0,
-      "category": "",
+      "category": "Combat",
       type: "Equipment",
     },
   },
@@ -1583,7 +1587,7 @@ export const ItemList: any = {
     long: "", // Price since it was shown In a shop.
     note: "",
     sellsFor: 0,
-    "category": "",
+    "category": "Combat",
     type: "Equipment",
     // melvor
     // equipmentStats will be converted from stats
@@ -1606,11 +1610,11 @@ export const ItemList: any = {
     note: "Moroha is the type of blade. Ice.",
     type: "Weapon",
     sellsFor: 0,
-    "category": "",
+    "category": "Combat",
     "attackType": "melee",
     // melvor
     // equipmentStats will be converted from stats
-    validSlots: ["Weapon"],
+    validSlots: ["Shield"],
     occupiesSlots: [],
     equipRequirements: [],
     modifiers: {},
@@ -1630,7 +1634,7 @@ export const ItemList: any = {
     type: "Weapon",
     sellsFor: 0,
     attackType: "melee",
-    "category": "",
+    "category": "Combat",
     // melvor
     // equipmentStats will be converted from stats
     validSlots: ["Weapon"],
@@ -1649,8 +1653,9 @@ export const ItemList: any = {
     note: "",
     image: "",
     sellsFor: 0,
-    "category": "",
+    "category": "Combat",
     type: "Set",
+    itemIDs: ["Gale Moroha", "Glide Moroha"],
   },
   "Niyosho Gakuran": {
     name: "Niyosho Gakuran",
@@ -1661,7 +1666,7 @@ export const ItemList: any = {
     image: "",
     type: "Equipment",
     sellsFor: 0,
-    "category": "",
+    "category": "Combat",
     // melvor
     // equipmentStats will be converted from stats
     validSlots: ["Platebody"],
@@ -1681,7 +1686,7 @@ export const ItemList: any = {
     image: "",
     type: "Equipment",
     sellsFor: 0,
-    "category": "",
+    "category": "Combat",
     // melvor
     // equipmentStats will be converted from stats
     validSlots: ["Platebody"],
@@ -1702,7 +1707,7 @@ export const ItemList: any = {
     },
     note: "",
     sellsFor: 0,
-    "category": "",
+    "category": "Combat",
     image: "",
     type: "Weapon",
     attackType: "magic",
@@ -1735,7 +1740,7 @@ export const ItemList: any = {
     specialAttacks: [],
     overrideSpecialChances: [],
     sellsFor: 0,
-    "category": "",
+    "category": "Combat",
   },
   "Seifuku": {
     name: "Seifuku",
@@ -1746,7 +1751,7 @@ export const ItemList: any = {
     note: "seifuku (制服). The sailor fuku (セーラー服, sērā fuku) (lit. 'sailor outfit') is a common style of uniform worn by female middle school students, traditionally by high school students.",
     type: "Equipment",
     sellsFor: 0,
-    "category": "",
+    "category": "Combat",
     // melvor
     // equipmentStats will be converted from stats
     validSlots: ["Platebody"],
@@ -1765,7 +1770,7 @@ export const ItemList: any = {
     note: "",
     image: "",
     sellsFor: 0,
-    "category": "",
+    "category": "Combat",
     type: "Equipment",
     // melvor
     // equipmentStats will be converted from stats
@@ -1785,7 +1790,7 @@ export const ItemList: any = {
     stats: {},
     note: "",
     sellsFor: 0,
-    "category": "",
+    "category": "Combat",
     type: "Equipment",
     // melvor
     // equipmentStats will be converted from stats
