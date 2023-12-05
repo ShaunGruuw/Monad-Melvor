@@ -17,6 +17,8 @@ import '../img/items/BloodPotion.png';
 import '../img/items/Black_Band.png';
 import '../img/items/Miolite_Gloves.png';
 import '../img/people/owl.jpg';
+import '../img/items/lootbox.png';
+
 // Reference images using `ctx.getResourceUrl`
 
 export async function setup(ctx: Modding.ModContext) {
@@ -363,6 +365,20 @@ export async function setup(ctx: Modding.ModContext) {
                 if (newItem.itemType) { itemPackage.items.add(newItem) }
                 else { errorLog.push("Unknown item", newItem) }
               }
+
+              itemPackage.items.modify({
+                id: "monad:lootbox",
+                dropTable: {
+                    add: [
+                        {
+                            itemID: `monad:${itemID}`,
+                            minQuantity: 1,
+                            maxQuantity: 1,
+                            weight: 1
+                        }
+                    ]
+                },
+            })
             }
           } catch (error) {
             errorLog.push("Error @ Monad onModsLoaded itempackage", error)
@@ -380,3 +396,5 @@ export async function setup(ctx: Modding.ModContext) {
   }
   game.monadErrorLog = errorLog
 }
+
+// ["monad:TrainingHealthPotion","monad:Soulboundwand","monad:BoneLance","monad:TraineeBoneSpear","monad:PaladinEngelersBodyArmoursilverrank","monad:PaladinEngelersSalletsilverrank","monad:PaladinEngelersGauntletssilverrank","monad:PaladinEngelersSabatonsilverrank","monad:PaladinEngelersMacesilverrank","monad:PaladinEngelersShieldsilverrank","monad:PaladinEngelersCapesilverrank","monad:DemonHunterNecklace","monad:DemonHunterBracelet","monad:DemonHunterEaring","monad:DemonHunterRing","monad:ToadsSkinJacket","monad:CrownoftheDammed","monad:Ringofinitialundeadcontrol","monad:RingofLittleStrength","monad:PendentofMediumMagic","monad:WitchesHat","monad:QueensPawn","monad:Skullofvictim","monad:EnchantingQuill","monad:PrincessesCoin","monad:necklacemadeofteeth","monad:Blackscarf","monad:WhaleSkin","monad:LinenHalfgloves","monad:BattlemagesGloves","monad:BattlemagesHat","monad:BattlemagesRobe","monad:BattlemagesCrakows","monad:BattlemagesBreeches","monad:CottonScarf","monad:RayndrJackboots","monad:RoguesRing","monad:DarkElfsScimitar","monad:MeroyriXiphos","monad:RayndrFaceMask","monad:ShadowPiratesCoat","monad:LeatherPirateBoots","monad:BlackBand","monad:TidusEaring","monad:FeaturelessDeathwoodMask","monad:BlackBraidBracelet","monad:FrostGloves","monad:FlameGloves","monad:CeremonialWhiteStagMask","monad:HeavenlyWhiteStagMask","monad:AcademyRobeBlackYellow","monad:HuiLusBattleArmour","monad:HuiLusEnchantingGloves","monad:HuiLusBurningBoots","monad:OtariKote","monad:GlideMoroha","monad:GaleMoroha","monad:NiyoshoGakuran","monad:NiyoshoHakama","monad:OttosLeakyWand","monad:JokotoWakizashi","monad:Seifuku","monad:NiyoshoKimono","monad:AutumnCloak"]
