@@ -223,7 +223,7 @@ export const ItemList: any = {
     type: "Potion",
     name: "Training Health Potion",
     description: "Recovers 1HP every 5 seconds for the next 120 seconds.", // 24 HP
-    image: "img/items/BloodPotion.png",
+    image: "img/BloodPotion.png",
     long: "¤1", // Price since it was shown In a shop.
     note: "",
     sellsFor: 0,
@@ -260,9 +260,7 @@ export const ItemList: any = {
     occupiesSlots: [],
     equipRequirements: [],
     modifiers: {},
-    enemyModifiers: {},
-    specialAttacks: [],
-    overrideSpecialChances: []
+    enemyModifiers: {}
   },
   "Bone Lance": {
     name: "Bone Lance",
@@ -283,14 +281,12 @@ export const ItemList: any = {
     occupiesSlots: [],
     equipRequirements: [],
     modifiers: {},
-    enemyModifiers: {},
-    specialAttacks: [],
-    overrideSpecialChances: []
+    enemyModifiers: {}
   },
   "Trainee Bone Spear": {
     name: "Trainee Bone Spear",
     description: "Tiny increase in spear proficiency when equipped.",
-    image: "",
+    image: "https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fimg4.wikia.nocookie.net%2F__cb20100812144340%2Frunescape%2Fimages%2F4%2F43%2FBone_spear_detail.png",
     long: "", // Price since it was shown In a shop.
     rating: "junk",
     stats: {},
@@ -305,9 +301,7 @@ export const ItemList: any = {
     occupiesSlots: [], // "Shield" if two handed
     equipRequirements: [],
     modifiers: {},
-    enemyModifiers: {},
-    specialAttacks: [],
-    overrideSpecialChances: []
+    enemyModifiers: {}
   },
   "Paladin Engeler's Body Armour (silver rank)": {
     name: "Paladin Engeler's Body Armour (silver rank)",
@@ -319,16 +313,14 @@ export const ItemList: any = {
     sellsFor: 0,
     "category": "Combat",
     type: "Equipment",
-    image: "",
+    image: "https://ottotsuma.github.io/images/people/w1.jpg",
     // melvor
     // equipmentStats will be converted from stats
     validSlots: ["Platebody"],
     occupiesSlots: [],
     equipRequirements: [],
     modifiers: {},
-    enemyModifiers: {},
-    specialAttacks: [],
-    overrideSpecialChances: []
+    enemyModifiers: {}
   },
   "Paladin Engeler's Sallet (silver rank)": {
     name: "Paladin Engeler's Sallet (silver rank)",
@@ -339,16 +331,14 @@ export const ItemList: any = {
     sellsFor: 0,
     "category": "Combat",
     type: "Equipment",
-    image: "",
+    image: "https://ottotsuma.github.io/images/people/w1.jpg",
     // melvor
     // equipmentStats will be converted from stats
     validSlots: ["Helmet"],
     occupiesSlots: [],
     equipRequirements: [],
     modifiers: {},
-    enemyModifiers: {},
-    specialAttacks: [],
-    overrideSpecialChances: []
+    enemyModifiers: {}
   },
   "Paladin Engeler's Gauntlets (silver rank)": {
     name: "Paladin Engeler's Gauntlets (silver rank)",
@@ -359,16 +349,14 @@ export const ItemList: any = {
     sellsFor: 0,
     "category": "Combat",
     type: "Equipment",
-    image: "",
+    image: "https://ottotsuma.github.io/images/people/w1.jpg",
     // melvor
     // equipmentStats will be converted from stats
     validSlots: ["Gloves"],
     occupiesSlots: [],
     equipRequirements: [],
     modifiers: {},
-    enemyModifiers: {},
-    specialAttacks: [],
-    overrideSpecialChances: []
+    enemyModifiers: {}
   },
   "Paladin Engeler's Sabaton (silver rank)": {
     name: "Paladin Engeler's Sabaton (silver rank)",
@@ -379,16 +367,14 @@ export const ItemList: any = {
     sellsFor: 0,
     "category": "Combat",
     type: "Equipment",
-    image: "",
+    image: "https://ottotsuma.github.io/images/people/w1.jpg",
     // melvor
     // equipmentStats will be converted from stats
     validSlots: ["Boots"],
     occupiesSlots: [],
     equipRequirements: [],
     modifiers: {},
-    enemyModifiers: {},
-    specialAttacks: [],
-    overrideSpecialChances: []
+    enemyModifiers: {}
   },
   "Paladin Engeler's Mace (silver rank)": {
     name: "Paladin Engeler's Mace (silver rank)",
@@ -399,7 +385,7 @@ export const ItemList: any = {
     sellsFor: 0,
     "category": "Combat",
     type: "Weapon",
-    image: "",
+    image: "https://ottotsuma.github.io/images/people/w1.jpg",
     "attackType": "melee",
     // melvor
     // equipmentStats will be converted from stats
@@ -407,9 +393,7 @@ export const ItemList: any = {
     occupiesSlots: [], // "Shield" if two handed
     equipRequirements: [],
     modifiers: {},
-    enemyModifiers: {},
-    specialAttacks: [],
-    overrideSpecialChances: []
+    enemyModifiers: {}
   },
   "Paladin Engeler's Shield (silver rank)": {
     name: "Paladin Engeler's Shield (silver rank)",
@@ -421,16 +405,14 @@ export const ItemList: any = {
     sellsFor: 0,
     "category": "Combat",
     type: "Equipment",
-    image: "",
+    image: "https://ottotsuma.github.io/images/people/w1.jpg",
     // melvor
     // equipmentStats will be converted from stats
     validSlots: ["Shield"],
     occupiesSlots: [],
     equipRequirements: [],
     modifiers: {},
-    enemyModifiers: {},
-    specialAttacks: [],
-    overrideSpecialChances: []
+    enemyModifiers: {}
   },
   "Paladin Engeler's Cape (silver rank)": {
     name: "Paladin Engeler's Cape (silver rank)",
@@ -441,7 +423,7 @@ export const ItemList: any = {
     sellsFor: 0,
     "category": "Combat",
     type: "Equipment",
-    image: "",
+    image: "https://ottotsuma.github.io/images/people/w1.jpg",
     // melvor
     // equipmentStats will be converted from stats
     validSlots: ["Cape"],
@@ -449,8 +431,6 @@ export const ItemList: any = {
     equipRequirements: [],
     modifiers: {},
     enemyModifiers: {},
-    specialAttacks: [],
-    overrideSpecialChances: [],
     1: {
       description: "Increase HP by 32, Increase MP by 23.",
       stats: { HP: 32, MP: 23 },
@@ -471,16 +451,14 @@ export const ItemList: any = {
     sellsFor: 0,
     "category": "Combat",
     type: "Equipment",
-    image: "",
+    image: "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fi.pinimg.com%2Foriginals%2Faa%2Fce%2F84%2Faace8423095c3544a43b45708415ed82.png",
     // melvor
     // equipmentStats will be converted from stats
     validSlots: ["Amulet"],
     occupiesSlots: [],
     equipRequirements: [],
     modifiers: {},
-    enemyModifiers: {},
-    specialAttacks: [],
-    overrideSpecialChances: []
+    enemyModifiers: {}
   },
   "Demon Hunter Bracelet": {
     name: "Demon Hunter Bracelet",
@@ -496,19 +474,17 @@ export const ItemList: any = {
     sellsFor: 0,
     "category": "Combat",
     type: "Equipment",
-    image: "",
+    image: "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fi.pinimg.com%2Foriginals%2Faa%2F43%2Fb9%2Faa43b99db20d309cdb7389b15cab69cc.png",
     // melvor
     // equipmentStats will be converted from stats
     validSlots: ["Ring", "Passive"],
     occupiesSlots: [],
     equipRequirements: [],
     modifiers: {},
-    enemyModifiers: {},
-    specialAttacks: [],
-    overrideSpecialChances: []
+    enemyModifiers: {}
   },
-  "Demon Hunter Earring": {
-    name: "Demon Hunter Earring",
+  "Demon Hunter Earing": {
+    name: "Demon Hunter Earing",
     description:
       "Reduces physical damage taken by 15, Reduces magical damage taken by 17, Reduce received damage from Demons by 3%",
     stats: {
@@ -521,16 +497,14 @@ export const ItemList: any = {
     sellsFor: 0,
     "category": "Combat",
     type: "Equipment",
-    image: "",
+    image: "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fcdn1.iconfinder.com%2Fdata%2Ficons%2Fdress-up%2F200%2Fdress_ear_earrings_jewel_rings-512.png",
     // melvor
     // equipmentStats will be converted from stats
     validSlots: ["Ring", "Passive"],
     occupiesSlots: [],
     equipRequirements: [],
     modifiers: {},
-    enemyModifiers: {},
-    specialAttacks: [],
-    overrideSpecialChances: []
+    enemyModifiers: {}
   },
   "Demon Hunter Ring": {
     name: "Demon Hunter Ring",
@@ -546,16 +520,14 @@ export const ItemList: any = {
     sellsFor: 0,
     "category": "Combat",
     type: "Equipment",
-    image: "",
+    image: "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fcdn.shopify.com%2Fs%2Ffiles%2F1%2F0201%2F1744%2Fproducts%2FStrata.Wide.Realtree.GreenOrange.Angle.png",
     // melvor
     // equipmentStats will be converted from stats
     validSlots: ["Ring", "Passive"],
     occupiesSlots: [],
     equipRequirements: [],
     modifiers: {},
-    enemyModifiers: {},
-    specialAttacks: [],
-    overrideSpecialChances: []
+    enemyModifiers: {}
   },
   "Paladin Engeler's Set (3/7)": {
     name: "Paladin Engeler's Set",
@@ -622,14 +594,12 @@ export const ItemList: any = {
     occupiesSlots: [],
     equipRequirements: [],
     modifiers: {},
-    enemyModifiers: {},
-    specialAttacks: [],
-    overrideSpecialChances: []
+    enemyModifiers: {}
   },
   "Crown of the Dammed": {
     name: "Crown of the Dammed",
     description: "Magic + 25, -5 Charisma, control undead +1.",
-    image: "",
+    image: "https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fimg4.wikia.nocookie.net%2F__cb20120612154312%2Felderscrolls%2Fimages%2F4%2F42%2FBonecrowngo.png",
     rating: "rare",
     stats: { magic: 25, charisma: -5, controlUndead: 1 },
     long: "", // Price since it was shown In a shop.
@@ -641,15 +611,13 @@ export const ItemList: any = {
     occupiesSlots: [],
     equipRequirements: [],
     modifiers: {},
-    enemyModifiers: {},
-    specialAttacks: [],
-    overrideSpecialChances: [], sellsFor: 0,
+    enemyModifiers: {}, sellsFor: 0,
     "category": "Combat",
   },
   "Ring of initial undead control": {
     name: "Ring of initial undead control",
     description: "mag + 10, Control undead +1.",
-    image: "",
+    image: "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fstatic.wikia.nocookie.net%2Fthe-bloodied-goats%2Fimages%2F2%2F2b%2FNecromanticRing_01.png",
     rating: "normal",
     stats: { magic: 10, controlUndead: 1 },
     long: "", // Price since it was shown In a shop.
@@ -661,15 +629,13 @@ export const ItemList: any = {
     occupiesSlots: [],
     equipRequirements: [],
     modifiers: {},
-    enemyModifiers: {},
-    specialAttacks: [],
-    overrideSpecialChances: [], sellsFor: 0,
+    enemyModifiers: {}, sellsFor: 0,
     "category": "Combat",
   },
   "Ring of Little Strength": {
     name: "Ring of Little Strength",
     description: "Strength +1.",
-    image: "",
+    image: "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fdemonssouls.wiki.fextralife.com%2Ffile%2FDemons-Souls%2Fring_of_great_strength_ring_demon%27s_souls_wiki_guide234px.png",
     rating: "junk",
     stats: { strength: 1 },
     long: "", // Price since it was shown In a shop.
@@ -681,15 +647,13 @@ export const ItemList: any = {
     occupiesSlots: [],
     equipRequirements: [],
     modifiers: {},
-    enemyModifiers: {},
-    specialAttacks: [],
-    overrideSpecialChances: [], sellsFor: 0,
+    enemyModifiers: {}, sellsFor: 0,
     "category": "Combat",
   },
   "Pendent of Medium Magic": {
     name: "Pendent of Medium Magic",
     description: "magic +2, strength -1.",
-    image: "",
+    image: "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fi.pinimg.com%2Foriginals%2F6d%2F67%2F34%2F6d6734a47795c57393d8722de88a02d3.png",
     rating: "normal",
     stats: { strength: -1, magic: 2 },
     long: "", // Price since it was shown In a shop.
@@ -701,15 +665,13 @@ export const ItemList: any = {
     occupiesSlots: [],
     equipRequirements: [],
     modifiers: {},
-    enemyModifiers: {},
-    specialAttacks: [],
-    overrideSpecialChances: [], sellsFor: 0,
+    enemyModifiers: {}, sellsFor: 0,
     "category": "Combat",
   },
   "Witches Hat": {
     name: "Witches Hat",
     description: "magic +30.",
-    image: "",
+    image: "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fcdn4.iconfinder.com%2Fdata%2Ficons%2Fhalloween-4%2F60%2Fhalloween_hat_witch-1024.png",
     rating: "normal",
     stats: { magic: 30 },
     long: "", // Price since it was shown In a shop.
@@ -721,15 +683,13 @@ export const ItemList: any = {
     occupiesSlots: [],
     equipRequirements: [],
     modifiers: {},
-    enemyModifiers: {},
-    specialAttacks: [],
-    overrideSpecialChances: [], sellsFor: 0,
+    enemyModifiers: {}, sellsFor: 0,
     "category": "Combat",
   },
   "Queen's Pawn": {
     name: "Queen's Pawn",
     description: "Skill: Animate stone.",
-    image: "",
+    image: "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fclipground.com%2Fimages%2Fqueen-chess-piece-png-5.png",
     rating: "rare",
     stats: {},
     long: "", // Price since it was shown In a shop.
@@ -750,7 +710,7 @@ export const ItemList: any = {
     name: "Skull of victim",
     description: "Control undead +2.",
     stats: { controlUndead: 2 },
-    image: "",
+    image: "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwallpapercave.com%2Fwp%2FoHigspi.jpg",
     rating: "normal",
     long: "", // Price since it was shown In a shop.
     note: "Ch11, Skull",
@@ -763,14 +723,12 @@ export const ItemList: any = {
     occupiesSlots: [],
     equipRequirements: [],
     modifiers: {},
-    enemyModifiers: {},
-    specialAttacks: [''],
-    overrideSpecialChances: [],
+    enemyModifiers: {}
   },
   "Enchanting Quill": {
     name: "Enchanting Quill",
     description: "Enchanting chance of success + 5%.",
-    image: "",
+    image: "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fi.pinimg.com%2Foriginals%2F4d%2Fea%2Fa3%2F4deaa39ea2c9b61448246b35d9208b62.jpg",
     stats: { Enchanting: 5 },
     rating: "normal",
     sellsFor: 0,
@@ -784,14 +742,12 @@ export const ItemList: any = {
     occupiesSlots: [],
     equipRequirements: [],
     modifiers: {},
-    enemyModifiers: {},
-    specialAttacks: [''],
-    overrideSpecialChances: []
+    enemyModifiers: {}
   },
   "Princesses Coin": {
     name: "Princesses Coin",
     description: "(???).",
-    image: "",
+    image: "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.thirdwayindustries.com%2Fwp-content%2Fuploads%2F2021%2F03%2Ftales_coin_princess.png",
     rating: "junk",
     sellsFor: 0,
     "category": "Combat",
@@ -802,7 +758,7 @@ export const ItemList: any = {
   "necklace made of teeth": {
     name: "necklace made of teeth",
     description: "(???).",
-    image: "",
+    image: "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fvignette.wikia.nocookie.net%2Fclubpenguin%2Fimages%2F7%2F70%2FToothy_Necklace.png",
     rating: "junk",
     stats: {},
     long: "", // Price since it was shown In a shop.
@@ -817,13 +773,11 @@ export const ItemList: any = {
     equipRequirements: [],
     modifiers: {},
     enemyModifiers: {},
-    specialAttacks: [],
-    overrideSpecialChances: [],
   },
   "Black scarf": {
     name: "Black scarf",
     description: "Hides users identity.",
-    image: "",
+    image: "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fpurepng.com%2Fpublic%2Fuploads%2Flarge%2Fpurepng.com-heather-black-scarfscarfscarvesfabricwarmthfashionclipartheatherblack-1421526411611eyqmx.png",
     rating: "junk",
     stats: {},
     long: "", // Price since it was shown In a shop.
@@ -838,13 +792,11 @@ export const ItemList: any = {
     equipRequirements: [],
     modifiers: {},
     enemyModifiers: {},
-    specialAttacks: [],
-    overrideSpecialChances: [],
   },
   "Whale Skin": {
     name: "Whale Skin",
     description: "Coating boats to go faster.",
-    image: "",
+    image: "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fpreview.redd.it%2Fomnyzp2yoqt21.png",
     rating: "normal",
     long: "", // Price since it was shown In a shop.
     note: "",
@@ -871,8 +823,6 @@ export const ItemList: any = {
     equipRequirements: [],
     modifiers: {},
     enemyModifiers: {},
-    specialAttacks: [],
-    overrideSpecialChances: [],
   },
   "Battlemage's Gloves": {
     name: "Battlemage's Gloves",
@@ -893,8 +843,6 @@ export const ItemList: any = {
     equipRequirements: [],
     modifiers: {},
     enemyModifiers: {},
-    specialAttacks: [],
-    overrideSpecialChances: [],
   },
   "Battlemage's Hat": {
     name: "Battlemage's Hat",
@@ -915,8 +863,6 @@ export const ItemList: any = {
     equipRequirements: [],
     modifiers: {},
     enemyModifiers: {},
-    specialAttacks: [],
-    overrideSpecialChances: [],
   },
   "Battlemage's Robe": {
     name: "Battlemage's Robe",
@@ -937,8 +883,6 @@ export const ItemList: any = {
     equipRequirements: [],
     modifiers: {},
     enemyModifiers: {},
-    specialAttacks: [],
-    overrideSpecialChances: [],
   },
   "Battlemage's Crakows": {
     name: "Battlemage's Crakows",
@@ -959,8 +903,6 @@ export const ItemList: any = {
     equipRequirements: [],
     modifiers: {},
     enemyModifiers: {},
-    specialAttacks: [],
-    overrideSpecialChances: [],
   },
   "Battlemage's Breeches": {
     name: "Battlemage's Breeches",
@@ -981,8 +923,6 @@ export const ItemList: any = {
     equipRequirements: [],
     modifiers: {},
     enemyModifiers: {},
-    specialAttacks: [],
-    overrideSpecialChances: [],
   },
   "Battlemage's Set (5/5)": {
     name: "Battlemage's Set (5/5)",
@@ -1015,8 +955,6 @@ export const ItemList: any = {
     equipRequirements: [],
     modifiers: {},
     enemyModifiers: {},
-    specialAttacks: [],
-    overrideSpecialChances: [],
   },
   "Rayndr Jackboots": {
     name: "Rayndr Jackboots",
@@ -1037,8 +975,6 @@ export const ItemList: any = {
     equipRequirements: [],
     modifiers: {},
     enemyModifiers: {},
-    specialAttacks: [],
-    overrideSpecialChances: [],
   },
   "Rogue's Ring": {
     name: "Rogue's Ring",
@@ -1059,8 +995,6 @@ export const ItemList: any = {
     equipRequirements: [],
     modifiers: {},
     enemyModifiers: {},
-    specialAttacks: [],
-    overrideSpecialChances: [],
     3: {
       name: "Rogue's Ring +3",
       description: "Critical hit rate: +3, Dexterity: +3.",
@@ -1088,9 +1022,7 @@ export const ItemList: any = {
       occupiesSlots: [],
       equipRequirements: [],
       modifiers: {},
-      enemyModifiers: {},
-      specialAttacks: [],
-      overrideSpecialChances: [],
+      enemyModifiers: {}
     },
   },
   "Dark Elf's Scimitar": {
@@ -1113,8 +1045,6 @@ export const ItemList: any = {
     equipRequirements: [],
     modifiers: {},
     enemyModifiers: {},
-    specialAttacks: [],
-    overrideSpecialChances: [],
   },
   "Meroyri Xiphos": {
     name: "Meroyri Xiphos",
@@ -1136,13 +1066,11 @@ export const ItemList: any = {
     equipRequirements: [],
     modifiers: {},
     enemyModifiers: {},
-    specialAttacks: [],
-    overrideSpecialChances: [],
   },
   "Rayndr Face Mask": {
     name: "Rayndr Face Mask",
     description: "Disease resistance +3%.",
-    image: "",
+    image: "https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fauronlu.istad.org%2Fffx-script%2Fwp-content%2Fuploads%2F2015%2F09%2F96nedus.jpg",
     rating: "junk",
     stats: { diseaseResistancePerc: 3 },
     long: "", // Price since it was shown In a shop.
@@ -1157,14 +1085,12 @@ export const ItemList: any = {
     equipRequirements: [],
     modifiers: {},
     enemyModifiers: {},
-    specialAttacks: [],
-    overrideSpecialChances: [],
   },
   "Shadow Pirate's Coat": {
     name: "Shadow Pirate's Coat",
     description:
       "Hiding in shadows is 40% more effective. +150 water resistance. 2% water resistance.",
-    image: "",
+    image: "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fi.pinimg.com%2F474x%2F7d%2F0b%2Fd6%2F7d0bd6d33ea4f540d26ce3d59b642258.jpg",
     rating: "rare",
     stats: { stealthInShadowsPerc: 40, waterResistancePerc: 2, waterResistance: 150 },
     long: "", // Price since it was shown In a shop.
@@ -1181,13 +1107,11 @@ export const ItemList: any = {
       increasedThievingStealth: 40,
     },
     enemyModifiers: {},
-    specialAttacks: [],
-    overrideSpecialChances: [],
   },
   "Leather Pirate Boots": {
     name: "Leather Pirate Boots",
     description: "+1 Endurance.",
-    image: "",
+    image: "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Frudokstavern.com%2Fwp-content%2Fuploads%2F2021%2F08%2FBoots-of-the-Shadow-Walker_1-768x768.jpg",
     rating: "junk",
     stats: { endurance: 1 },
     long: "", // Price since it was shown In a shop.
@@ -1202,13 +1126,11 @@ export const ItemList: any = {
     equipRequirements: [],
     modifiers: {},
     enemyModifiers: {},
-    specialAttacks: [],
-    overrideSpecialChances: [],
   },
   "Black Band": {
     name: "Black Band",
     description: "Dexterity: +1.",
-    image: "",
+    image: "img/Black_Band.png",
     rating: "normal",
     stats: { dexterity: 1 },
     long: "", // Price since it was shown In a shop.
@@ -1223,8 +1145,6 @@ export const ItemList: any = {
     equipRequirements: [],
     modifiers: {},
     enemyModifiers: {},
-    specialAttacks: [],
-    overrideSpecialChances: [],
     9: {
       name: "Black Band +9",
       description: "Dexterity: +9.",
@@ -1238,8 +1158,8 @@ export const ItemList: any = {
       type: "Equipment",
     },
   },
-  "Tidus Earring": {
-    name: "Tidus Earring",
+  "Tidus Earing": {
+    name: "Tidus Earing",
     description:
       "Dexterity +9, Swimming speed +5, Can breath underwater for 5 minutes.",
     image:
@@ -1247,7 +1167,7 @@ export const ItemList: any = {
     rating: "epic",
     stats: { dexterity: 9, swimSpeed: 5, underwaterBreathing: 300000 },
     9: {
-      name: "Tidus Earring",
+      name: "Tidus Earing",
       description: "Dexterity +9, Swimming speed +5, Can breath underwater for 5 minutes.",
       image: "",
       rating: "normal",
@@ -1269,14 +1189,12 @@ export const ItemList: any = {
     occupiesSlots: [],
     equipRequirements: [],
     modifiers: {},
-    enemyModifiers: {},
-    specialAttacks: [],
-    overrideSpecialChances: []
+    enemyModifiers: {}
   },
   "Featureless Deathwood Mask": {
     name: "Featureless Deathwood Mask",
     description: "Hides the users stats, name and other details.",
-    image: "",
+    image: "https://static.wikia.nocookie.net/elderscrolls/images/f/f5/Nahkriin_Mask.png",
     rating: "rare",
     stats: {},
     long: "", // Price since it was shown In a shop.
@@ -1290,14 +1208,12 @@ export const ItemList: any = {
     occupiesSlots: [],
     equipRequirements: [],
     modifiers: {},
-    enemyModifiers: {},
-    specialAttacks: [],
-    overrideSpecialChances: []
+    enemyModifiers: {}
   },
   "Black Braid Bracelet": {
     name: "Black Braid Bracelet",
     description: "",
-    image: "",
+    image: "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fi.pinimg.com%2Foriginals%2Fcd%2F5b%2Fa1%2Fcd5ba160093ba063c0f5c5e2a60402e7.png",
     rating: "junk",
     stats: {},
     long: "", // Price since it was shown In a shop.
@@ -1311,14 +1227,12 @@ export const ItemList: any = {
     occupiesSlots: [],
     equipRequirements: [],
     modifiers: {},
-    enemyModifiers: {},
-    specialAttacks: [],
-    overrideSpecialChances: []
+    enemyModifiers: {}
   },
   "Frost Gloves": {
     name: "Frost Gloves",
     description: "",
-    image: "",
+    image: "img/Miolite_Gloves.png",
     rating: "normal",
     stats: {},
     long: "", // Price since it was shown In a shop.
@@ -1332,14 +1246,12 @@ export const ItemList: any = {
     occupiesSlots: [],
     equipRequirements: [],
     modifiers: {},
-    enemyModifiers: {},
-    specialAttacks: [],
-    overrideSpecialChances: []
+    enemyModifiers: {}
   },
   "Flame Gloves": {
     name: "Flame Gloves",
     description: "",
-    image: "",
+    image: "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fgamepedia.cursecdn.com%2Fpathofexile_gamepedia%2F2%2F29%2FFire_Gloves_inventory_icon.png",
     rating: "normal",
     stats: {},
     long: "", // Price since it was shown In a shop.
@@ -1353,14 +1265,12 @@ export const ItemList: any = {
     occupiesSlots: [],
     equipRequirements: [],
     modifiers: {},
-    enemyModifiers: {},
-    specialAttacks: [],
-    overrideSpecialChances: []
+    enemyModifiers: {}
   },
   "Ceremonial White Stag Mask": {
     name: "Ceremonial White Stag Mask",
     description: "",
-    image: "",
+    image: "img/owl.jpg",
     rating: "normal",
     stats: { "magic": 1 },
     long: "", // Price since it was shown In a shop.
@@ -1375,8 +1285,6 @@ export const ItemList: any = {
     equipRequirements: [],
     modifiers: {},
     enemyModifiers: {},
-    specialAttacks: [],
-    overrideSpecialChances: [],
     0: {
       name: "Ceremonial White Stag Mask",
       description: "",
@@ -1394,7 +1302,7 @@ export const ItemList: any = {
     name: "Heavenly White Stag Mask",
     description:
       "Magic: +2, Disease resistance + 20%, Mana regeneration + 20%, blessing of 建御雷 [Takemikazuchi].",
-    image: "",
+    image: "img/owl.jpg",
     rating: "unique",
     stats: { magic: 2, diseaseResistancePerc: 20, manaRegenPerc: 20, lightningResistancePerc: 20, lightningCostPercg: 15 },
     long: "Blessing of 建御雷 [Takemikazuchi]: Resist lightning +20%, Lightning cost - 15%, Lightning power +20%.", // Price since it was shown In a shop.
@@ -1409,8 +1317,6 @@ export const ItemList: any = {
     equipRequirements: [],
     modifiers: {},
     enemyModifiers: {},
-    specialAttacks: [],
-    overrideSpecialChances: [],
     0: {
       name: "Heavenly White Stag Mask",
       description:
@@ -1429,9 +1335,7 @@ export const ItemList: any = {
       occupiesSlots: [],
       equipRequirements: [],
       modifiers: {},
-      enemyModifiers: {},
-      specialAttacks: [],
-      overrideSpecialChances: []
+      enemyModifiers: {}
     },
     1: {
       name: "Heavenly White Stag Mask",
@@ -1451,15 +1355,13 @@ export const ItemList: any = {
       occupiesSlots: [],
       equipRequirements: [],
       modifiers: {},
-      enemyModifiers: {},
-      specialAttacks: [],
-      overrideSpecialChances: []
+      enemyModifiers: {}
     }
   },
   "Academy Robe (Black/Yellow)": {
     name: "Academy Robe (Black/Yellow)",
     description: "Magic: +2, Lightning +2%, HP +10.",
-    image: "",
+    image: "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fcdn.sphere.co.uk%2Fpubtool-images%2Fnau89xt86itn68e7cswvg24yvcit&f=1&nofb=1&ipt=0731a0d425e37930a55835401236d4e146cc9c29305cbda2efa5f7882eb88741&ipo=images",
     rating: "junk",
     stats: { magic: 2, HP: 10, lightningIncreasedDamage: 2 },
     long: "", // Price since it was shown In a shop.
@@ -1473,14 +1375,12 @@ export const ItemList: any = {
     occupiesSlots: [],
     equipRequirements: [],
     modifiers: {},
-    enemyModifiers: {},
-    specialAttacks: [],
-    overrideSpecialChances: []
+    enemyModifiers: {}
   },
   "Hui Lu's Battle Armour": {
     name: "Hui Lu's Battle Armour",
     description: "",
-    image: "",
+    image: "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fget.wallhere.com%2Fphoto%2FHua-Lu-drawing-digital-art-samurai-men-creature-armor-tie-1557857.jpg",
     rating: "rare",
     stats: {},
     long: "", // Price since it was shown In a shop.
@@ -1495,8 +1395,6 @@ export const ItemList: any = {
     equipRequirements: [],
     modifiers: {},
     enemyModifiers: {},
-    specialAttacks: [],
-    overrideSpecialChances: [],
     0: {
       name: "Hui Lu's Battle Armour",
       description: "???",
@@ -1513,7 +1411,7 @@ export const ItemList: any = {
   "Hui Lu's Enchanting Gloves": {
     name: "Hui Lu's Enchanting Gloves",
     description: "",
-    image: "",
+    image: "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fget.wallhere.com%2Fphoto%2FHua-Lu-drawing-digital-art-samurai-men-creature-armor-tie-1557857.jpg",
     rating: "rare",
     stats: {},
     long: "", // Price since it was shown In a shop.
@@ -1528,8 +1426,6 @@ export const ItemList: any = {
     equipRequirements: [],
     modifiers: {},
     enemyModifiers: {},
-    specialAttacks: [],
-    overrideSpecialChances: [],
     0: {
       name: "Hui Lu's Enchanting Gloves",
       description: "???",
@@ -1546,7 +1442,7 @@ export const ItemList: any = {
   "Hui Lu's Burning Boots": {
     name: "Hui Lu's Burning Boots",
     description: "",
-    image: "",
+    image: "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fget.wallhere.com%2Fphoto%2FHua-Lu-drawing-digital-art-samurai-men-creature-armor-tie-1557857.jpg",
     rating: "rare",
     stats: {},
     long: "", // Price since it was shown In a shop.
@@ -1561,8 +1457,6 @@ export const ItemList: any = {
     equipRequirements: [],
     modifiers: {},
     enemyModifiers: {},
-    specialAttacks: [],
-    overrideSpecialChances: [],
     0: {
       name: "Hui Lu's Burning Boots",
       description: "???",
@@ -1579,7 +1473,7 @@ export const ItemList: any = {
   "Otari Kote": {
     name: "Otari Kote",
     description: "Endurance +1, Skill: Powdered Snow Defense (Passive).",
-    image: "",
+    image: "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fi.pinimg.com%2Foriginals%2F24%2F9f%2F00%2F249f00a8b019357ac998c60d3df129f9.jpg",
     rating: "normal",
     stats: {
       endurance: 1,
@@ -1595,15 +1489,13 @@ export const ItemList: any = {
     occupiesSlots: [],
     equipRequirements: [],
     modifiers: {},
-    enemyModifiers: {},
-    specialAttacks: [],
-    overrideSpecialChances: []
+    enemyModifiers: {}
   },
   "Glide Moroha": {
     name: "Glide Moroha",
     description:
       "Deals +5 ice damage. Ice skills cost 5% less mana, other skills cost 2% less mana.",
-    image: "",
+    image: "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.darkknightarmoury.com%2Fwp-content%2Fuploads%2F2021%2F02%2FSH2413.jpg",
     rating: "rare",
     stats: { iceIncreasedDamage: 5, iceCostPerc: 5, allCostPerc: 2 },
     long: "", // Price since it was shown In a shop.
@@ -1618,15 +1510,13 @@ export const ItemList: any = {
     occupiesSlots: [],
     equipRequirements: [],
     modifiers: {},
-    enemyModifiers: {},
-    specialAttacks: [],
-    overrideSpecialChances: []
+    enemyModifiers: {}
   },
   "Gale Moroha": {
     name: "Gale Moroha",
     description:
       "Deals +1 wind damage. Attack speed starts at 10% of user maximum speed. Skill cool downs are reduced 3%.",
-    image: "",
+    image: "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.darkknightarmoury.com%2Fwp-content%2Fuploads%2F2021%2F02%2FSH2413.jpg",
     rating: "rare",
     stats: { windIncreasedDamage: 1, attackSpeed: 2400, allSkillCooldownPerc: 3 },
     long: "", // Price since it was shown In a shop.
@@ -1641,9 +1531,7 @@ export const ItemList: any = {
     occupiesSlots: [],
     equipRequirements: [],
     modifiers: {},
-    enemyModifiers: {},
-    specialAttacks: [],
-    overrideSpecialChances: []
+    enemyModifiers: {}
   },
   "Glide & Gale (2/2)": {
     name: "Set Effect:",
@@ -1663,7 +1551,7 @@ export const ItemList: any = {
     rating: "junk",
     stats: {},
     note: "gakuran (学ラン)",
-    image: "",
+    image: "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2F3.bp.blogspot.com%2F-F5Tt2VoG3U0%2FU-8FvYC1ERI%2FAAAAAAAAkxY%2FYiSzIsYU6-Y%2Fs800%2Fseifuku_gakuran.png",
     type: "Equipment",
     sellsFor: 0,
     "category": "Combat",
@@ -1673,9 +1561,7 @@ export const ItemList: any = {
     occupiesSlots: [],
     equipRequirements: [],
     modifiers: {},
-    enemyModifiers: {},
-    specialAttacks: [],
-    overrideSpecialChances: []
+    enemyModifiers: {}
   },
   "Niyosho Hakama": {
     name: "Niyosho Hakama",
@@ -1683,7 +1569,7 @@ export const ItemList: any = {
     rating: "junk",
     stats: {},
     note: "Originally students just wore standard everyday clothes to school; kimono for female students, with hakama for male students. During the Meiji period, students began to wear uniforms modelled after Western dress.",
-    image: "",
+    image: "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fi.pinimg.com%2Foriginals%2Ffd%2Fe6%2F75%2Ffde675e4fe3d7eeef19e5b4e2fab8366.png",
     type: "Equipment",
     sellsFor: 0,
     "category": "Combat",
@@ -1693,9 +1579,7 @@ export const ItemList: any = {
     occupiesSlots: [],
     equipRequirements: [],
     modifiers: {},
-    enemyModifiers: {},
-    specialAttacks: [],
-    overrideSpecialChances: []
+    enemyModifiers: {}
   },
   "Otto's Leaky Wand": {
     name: "Otto's Leaky Wand",
@@ -1708,7 +1592,7 @@ export const ItemList: any = {
     note: "",
     sellsFor: 0,
     "category": "Combat",
-    image: "",
+    image: "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fi.pinimg.com%2Foriginals%2Fd6%2F20%2F7a%2Fd6207a896f16deb3df75e9ca32f3de82.jpg",
     type: "Weapon",
     attackType: "magic",
     // melvor
@@ -1717,9 +1601,7 @@ export const ItemList: any = {
     occupiesSlots: [],
     equipRequirements: [],
     modifiers: {},
-    enemyModifiers: {},
-    specialAttacks: [],
-    overrideSpecialChances: []
+    enemyModifiers: {}
   },
   "Jokoto Wakizashi": {
     name: "Jokoto Wakizashi",
@@ -1728,7 +1610,7 @@ export const ItemList: any = {
     stats: {},
     note: "Jokotō (ancient swords, until around A.D. 900), https://en.wikipedia.org/wiki/Wakizashi",
     type: "Weapon",
-    image: "",
+    image: "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.medievalcollectibles.com%2Fwp-content%2Fuploads%2F2019%2F04%2FMC-TR-005.png",
     attackType: "melee",
     // melvor
     // equipmentStats will be converted from stats
@@ -1737,8 +1619,6 @@ export const ItemList: any = {
     equipRequirements: [],
     modifiers: {},
     enemyModifiers: {},
-    specialAttacks: [],
-    overrideSpecialChances: [],
     sellsFor: 0,
     "category": "Combat",
   },
@@ -1747,7 +1627,7 @@ export const ItemList: any = {
     description: "High school sailor outfit worn by female students of Niyosho.",
     rating: "junk",
     stats: {},
-    image: "",
+    image: "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fnanj-challenge.up.seesaa.net%2Fimage%2Fseifuku_sailor.png",
     note: "seifuku (制服). The sailor fuku (セーラー服, sērā fuku) (lit. 'sailor outfit') is a common style of uniform worn by female middle school students, traditionally by high school students.",
     type: "Equipment",
     sellsFor: 0,
@@ -1758,9 +1638,7 @@ export const ItemList: any = {
     occupiesSlots: [],
     equipRequirements: [],
     modifiers: {},
-    enemyModifiers: {},
-    specialAttacks: [],
-    overrideSpecialChances: []
+    enemyModifiers: {}
   },
   "Niyosho Kimono": {
     name: "Niyosho Kimono",
@@ -1768,7 +1646,7 @@ export const ItemList: any = {
     rating: "junk",
     stats: {},
     note: "",
-    image: "",
+    image: "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.pngmart.com%2Ffiles%2F22%2FKimono-PNG-Isolated-Transparent.png",
     sellsFor: 0,
     "category": "Combat",
     type: "Equipment",
@@ -1778,15 +1656,13 @@ export const ItemList: any = {
     occupiesSlots: [],
     equipRequirements: [],
     modifiers: {},
-    enemyModifiers: {},
-    specialAttacks: [],
-    overrideSpecialChances: []
+    enemyModifiers: {}
   },
   "Autumn Cloak": {
     name: "Autumn Cloak",
     description: "Once a day you can cause the leaves on this cloak to swirl around you, obscuring you from sight for one minute.",
     rating: "rare",
-    image: "https://ottotsuma.github.io/images/items/AutumnCloak.jpg",
+    image: "https://ottotsuma.github.io/images/items/bc253ed84af1a472a0b23f1f07600190.jpg",
     stats: {},
     note: "",
     sellsFor: 0,
@@ -1800,9 +1676,7 @@ export const ItemList: any = {
     modifiers: {
       increasedThievingStealth: 250
     },
-    enemyModifiers: {},
-    specialAttacks: [],
-    overrideSpecialChances: []
+    enemyModifiers: {}
   },
   //   The following are types of Japanese swords:
   // Tsurugi/Ken (剣, "sword"): A straight two edged sword that was mainly produced prior to the 10th century. Before the 10th century, they completely disappeared as weapons and came to be made only as offerings to Shinto shrines and Buddhist temples.

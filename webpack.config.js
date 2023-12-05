@@ -22,7 +22,11 @@ module.exports = {
     new CopyPlugin({
       patterns: [
         { from: 'manifest.json', to: 'manifest.json' },
-        { from: 'src/data/data.json', to: 'data.json' }
+        { from: 'src/data/data.json', to: 'data.json' },
+        { from: 'src/data/monad-data.json', to: 'monad-data.json' }
+
+
+        
       ]
     })
   ],
