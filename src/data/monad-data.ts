@@ -380,7 +380,7 @@ export const ItemList: any = {
     name: "Paladin Engeler's Mace (silver rank)",
     description: "Strength +3.",
     rating: "epic",
-    stats: { strength: 3, strengthPerc: 100 },
+    stats: { strength: 3, strengthPerc: 1 },
     note: "",
     sellsFor: 0,
     "category": "Combat",
@@ -400,7 +400,7 @@ export const ItemList: any = {
     description:
       "Threat increased 20%, Reduce received damage from Demons by 7%, Reduce received damage from Undead by 7%, chance to block 20%.",
     rating: "epic",
-    stats: { endurance: 0, "demonDamageReductionPerc": 7, undeadDamageReductionPerc: 7, blockPerc: 20 },
+    stats: { "demonDamageReductionPerc": 7, undeadDamageReductionPerc: 7, blockPerc: 20, meleeDefenceBonus: 100, rangedDefenceBonus: 100 },
     note: "",
     sellsFor: 0,
     "category": "Combat",

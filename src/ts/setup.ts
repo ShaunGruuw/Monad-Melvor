@@ -249,6 +249,17 @@ export async function setup(ctx: Modding.ModContext) {
                   const statKeys: any[] = Object.keys(tempStats)
                   if (statKeys.length > 0) {
                     for (let m = 0; m < statKeys.length; m++) {
+                      if(kcm) {
+                        if (statKeys[m] === 'demonDamageReductionPerc') {
+                          newModifiers['decreasedDamageTakenFromDemons'] = Math.floor(tempStats[statKeys[m]])
+                        }  
+                        if (statKeys[m] === 'undeadDamageReductionPerc') {
+                          newModifiers['decreasedDamageTakenFromUndead'] = Math.floor(tempStats[statKeys[m]])
+                        }  
+                      }
+                      if (statKeys[m] === 'controlUndead') {
+                        newModifiers['increasedSummoningMaxHit'] = Math.floor(tempStats[statKeys[m]])
+                      }
                       if (statKeys[m] === 'strengthPerc') {
                         newModifiers['increasedMeleeStrengthBonus'] = Math.floor(tempStats[statKeys[m]])
                         newModifiers['increasedRangedStrengthBonus'] = Math.floor(tempStats[statKeys[m]])
@@ -271,6 +282,24 @@ export async function setup(ctx: Modding.ModContext) {
                       if (statKeys[m] === 'attackSpeed') {
                         for (let q = 0; q < newequipmentStats.length; q++) {
                           if (newequipmentStats[q].key === 'attackSpeed') {
+                            if(Math.floor(tempStats[statKeys[m]]) > 0) {
+                              newequipmentStats[q].value = Math.floor(tempStats[statKeys[m]])
+                            } else {
+                              newequipmentStats[q].value = 3000
+                            }
+                          }
+                        }
+                      }
+                      if (statKeys[m] === 'meleeDefenceBonus') {
+                        for (let q = 0; q < newequipmentStats.length; q++) {
+                          if (newequipmentStats[q].key === 'meleeDefenceBonus') {
+                            newequipmentStats[q].value = newequipmentStats[q].value + Math.floor(tempStats[statKeys[m]])
+                          }
+                        }
+                      }
+                      if (statKeys[m] === 'rangedDefenceBonus') {
+                        for (let q = 0; q < newequipmentStats.length; q++) {
+                          if (newequipmentStats[q].key === 'rangedDefenceBonus') {
                             newequipmentStats[q].value = newequipmentStats[q].value + Math.floor(tempStats[statKeys[m]])
                           }
                         }
@@ -285,14 +314,14 @@ export async function setup(ctx: Modding.ModContext) {
                       else if (statKeys[m] === 'endurance') {
                         for (let q = 0; q < newequipmentStats.length; q++) {
                           if (newequipmentStats[q].key === 'meleeDefenceBonus' || newequipmentStats[q].key === 'rangedDefenceBonus') {
-                            newequipmentStats[q].value = Math.floor(tempStats[statKeys[m]] * 2)
+                            newequipmentStats[q].value = newequipmentStats[q].value + Math.floor(tempStats[statKeys[m]] * 2)
                           }
                         }
                       }
                       else if (statKeys[m] === 'physicalDamageReduction') {
                         for (let q = 0; q < newequipmentStats.length; q++) {
                           if (newequipmentStats[q].key === 'meleeDefenceBonus' || newequipmentStats[q].key === 'rangedDefenceBonus') {
-                            newequipmentStats[q].value = Math.floor(tempStats[statKeys[m]] * 2)
+                            newequipmentStats[q].value = newequipmentStats[q].value + Math.floor(tempStats[statKeys[m]] * 2)
                           }
                         }
                       }
@@ -336,20 +365,17 @@ export async function setup(ctx: Modding.ModContext) {
                       }
                     }
                   }
-                  const newequipmentStatsList: any[] = Object.keys(newequipmentStats)
-                  for (let w = 0; w < newequipmentStatsList.length; w++) {
-                    if(newequipmentStatsList[w].value > 0) {
-                      newequipmentStatsFinal.push(newequipmentStatsList[w])
+
+                  for (let w = 0; w < newequipmentStats.length; w++) {
+                    if(newequipmentStats[w].value > 0) {
+                      newequipmentStatsFinal.push(newequipmentStats[w])
                     }
                   }
+                  idLog.push(id, newequipmentStatsFinal)
                 }
                 if (type === "Weapon") {
-                  newequipmentStats.push({
-                    "key": "attackSpeed",
-                    "value": 3000
-                  },)
                   newItem.equipmentStats = newequipmentStatsFinal
-                  newItem.modifiers = newModifiers
+                  newItem.modifiers = {...newItem.modifiers, ...newModifiers};
                   newItem.tier = "none"
                   const Requirements = ['attackType', 'ammoTypeRequired', 'validSlots', 'occupiesSlots', 'equipRequirements', '', 'enemyModifiers', 'conditionalModifiers', 'specialAttacks', 'overrideSpecialChances', 'fightEffects', 'providedRunes', 'ammoType ', 'consumesChargesOn', 'consumesOn', 'consumesItemOn']
                   for (let j = 0; j < Requirements.length; j++) {
