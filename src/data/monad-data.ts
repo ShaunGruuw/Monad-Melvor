@@ -380,7 +380,7 @@ export const ItemList: any = {
     name: "Paladin Engeler's Mace (silver rank)",
     description: "Strength +3.",
     rating: "epic",
-    stats: { strength: 3 },
+    stats: { strength: 3, strengthPerc: 100 },
     note: "",
     sellsFor: 0,
     "category": "Combat",

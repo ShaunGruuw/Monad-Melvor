@@ -209,7 +209,7 @@ export async function setup(ctx: Modding.ModContext) {
                 }
               }
               else {
-                idLog.push("monad:" + itemID)
+                // idLog.push("monad:" + itemID)
                 // Is added to items / AnyItemData
                 const newItem: any = {
                   "id": itemID,
@@ -247,38 +247,54 @@ export async function setup(ctx: Modding.ModContext) {
                   const statKeys: any[] = Object.keys(tempStats)
                   if (statKeys.length > 0) {
                     for (let m = 0; m < statKeys.length; m++) {
-                      if (statKeys[m] === 'HP') {
-                        newModifiers['increasedFlatMaxHitpoints'] = Math.floor(tempStats[statKeys[m]] / 10)
+                      if (statKeys[m] === 'strengthPerc') {
+                        newModifiers['increasedMeleeStrengthBonus'] = Math.floor(tempStats[statKeys[m]])
+                        newModifiers['increasedRangedStrengthBonus'] = Math.floor(tempStats[statKeys[m]])
                       }
-                      else if (statKeys[m] === 'HPPerc') {
-                        newModifiers['increasedMaxHitpoints'] = Math.floor(tempStats[statKeys[m]])
+                      if (statKeys[m] === 'magicPerc') {
+                        newModifiers['increasedMagicDamageBonus'] = Math.floor(tempStats[statKeys[m]])
                       }
-                      else if (statKeys[m] === 'vitality') {
-                        newModifiers['increasedFlatMaxHitpoints'] = newModifiers['increasedFlatMaxHitpoints'] + Math.floor(tempStats[statKeys[m]])
+                      // 'CriticalHitDamage'
+                      if (statKeys[m] === 'CriticalHitChance') {
+                        newModifiers['increasedMagicCritChance'] = Math.floor(tempStats[statKeys[m]])
+                        newModifiers['increasedMeleeCritChance'] = Math.floor(tempStats[statKeys[m]])
+                        newModifiers['increasedRangedCritChance'] = Math.floor(tempStats[statKeys[m]])
                       }
-
+                      if (statKeys[m] === 'HP' || statKeys[m] === 'vitality') {
+                        newModifiers['increasedFlatMaxHitpoints'] = newModifiers['increasedFlatMaxHitpoints'] + Math.floor(tempStats[statKeys[m]] / 10)
+                      }
+                      else if (statKeys[m] === 'HPPerc' || statKeys[m] === 'vitalityPerc') {
+                        newModifiers['increasedMaxHitpoints'] = newModifiers['increasedMaxHitpoints'] + Math.floor(tempStats[statKeys[m]])
+                      }
                       if (statKeys[m] === 'attackSpeed') {
                         for (let q = 0; q < newequipmentStats.length; q++) {
                           if (newequipmentStats[q].key === 'attackSpeed') {
-                            newequipmentStats[q].value = Math.floor(tempStats[statKeys[m]])
+                            newequipmentStats[q].value = newequipmentStats[q].value + Math.floor(tempStats[statKeys[m]])
                           }
                         }
                       }
                       else if (statKeys[m] === 'strength') {
                         for (let q = 0; q < newequipmentStats.length; q++) {
-                          if (newequipmentStats[q].key === 'meleeStrengthBonus' || 'rangedStrengthBonus') {
-                            newequipmentStats[q].value = Math.floor(tempStats[statKeys[m]] * 10)
+                          if (newequipmentStats[q].key === 'meleeStrengthBonus' || newequipmentStats[q].key === 'rangedStrengthBonus') {
+                            newequipmentStats[q].value = newequipmentStats[q].value + Math.floor(tempStats[statKeys[m]] * 10)
                           }
                         }
                       }
                       else if (statKeys[m] === 'endurance') {
                         for (let q = 0; q < newequipmentStats.length; q++) {
-                          if (newequipmentStats[q].key === 'meleeDefenceBonus' || 'rangedDefenceBonus') {
+                          if (newequipmentStats[q].key === 'meleeDefenceBonus' || newequipmentStats[q].key === 'rangedDefenceBonus') {
                             newequipmentStats[q].value = Math.floor(tempStats[statKeys[m]] * 2)
                           }
                         }
                       }
-                      else if (statKeys[m] === 'willpower') {
+                      else if (statKeys[m] === 'physicalDamageReduction') {
+                        for (let q = 0; q < newequipmentStats.length; q++) {
+                          if (newequipmentStats[q].key === 'meleeDefenceBonus' || newequipmentStats[q].key === 'rangedDefenceBonus') {
+                            newequipmentStats[q].value = Math.floor(tempStats[statKeys[m]])
+                          }
+                        }
+                      }
+                      else if (statKeys[m] === 'willpower' || statKeys[m] === 'magicDamageReductionPerc') {
                         for (let q = 0; q < newequipmentStats.length; q++) {
                           if (newequipmentStats[q].key === 'magicDefenceBonus') {
                             newequipmentStats[q].value = Math.floor(tempStats[statKeys[m]])
@@ -294,10 +310,10 @@ export async function setup(ctx: Modding.ModContext) {
                             newequipmentStats[q].value = Math.floor(tempStats[statKeys[m]])
                           }
                         }
-                      }
+                      }                      
                       else if (statKeys[m] === 'dexterity') {
                         for (let q = 0; q < newequipmentStats.length; q++) {
-                          if (newequipmentStats[q].key === 'rangedAttackBonus' || 'rangedDefenceBonus') {
+                          if (newequipmentStats[q].key === 'rangedAttackBonus' || newequipmentStats[q].key === 'rangedDefenceBonus') {
                             newequipmentStats[q].value = Math.floor(tempStats[statKeys[m]])
                           }
                         }
