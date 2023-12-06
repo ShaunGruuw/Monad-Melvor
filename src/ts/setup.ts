@@ -34,7 +34,7 @@ export async function setup(ctx: Modding.ModContext) {
       try {
         const TothEntitlement = cloudManager.hasTotHEntitlement
         const kcm = mod.manager.getLoadedModList().includes('Custom Modifiers in Melvor')
-        // const tes = mod.manager.getLoadedModList().includes("The Elder Scrolls")
+        const tes = mod.manager.getLoadedModList().includes("The Elder Scrolls")
         const mythLoaded = mod.manager.getLoadedModList().includes("[Myth] Music")
         // const dboxLoaded = mod.manager.getLoadedModList().includes('dbox')
         // const Abyssal = mod.manager.getLoadedModList().includes('Abyssal Rift')
@@ -222,7 +222,7 @@ export async function setup(ctx: Modding.ModContext) {
                   "obtainFromItemLog": false,
                   "golbinRaidExclusive": false,
                   "sellsFor": monadItems[id].sellsFor,
-                  "customDescription": monadItems[id].description,
+                  // "customDescription": monadItems[id].description,
                 }
                 const newequipmentStats: any[] = [
                   { "key": 'stabAttackBonus', "value": 0 },
@@ -248,41 +248,72 @@ export async function setup(ctx: Modding.ModContext) {
                   if (statKeys.length > 0) {
                     for (let m = 0; m < statKeys.length; m++) {
                       if (statKeys[m] === 'HP') {
-                        newModifiers['increasedFlatMaxHitpoints'] = tempStats[statKeys[m]]
+                        newModifiers['increasedFlatMaxHitpoints'] = Math.floor(tempStats[statKeys[m]] / 10)
                       }
                       else if (statKeys[m] === 'HPPerc') {
-                        newModifiers['increasedMaxHitpoints'] = tempStats[statKeys[m]]
+                        newModifiers['increasedMaxHitpoints'] = Math.floor(tempStats[statKeys[m]])
                       }
                       else if (statKeys[m] === 'vitality') {
-                        newModifiers['increasedFlatMaxHitpoints'] = newModifiers['increasedFlatMaxHitpoints'] + tempStats[statKeys[m]]
+                        newModifiers['increasedFlatMaxHitpoints'] = newModifiers['increasedFlatMaxHitpoints'] + Math.floor(tempStats[statKeys[m]])
                       }
-                      for (let q = 0; q < newequipmentStats.length; q++) {
-                        if (statKeys[m] && newequipmentStats[q].key === 'attackSpeed') {
-                          newequipmentStats[q].value = Math.floor(tempStats[statKeys[m]])
+
+                      if (statKeys[m] === 'attackSpeed') {
+                        for (let q = 0; q < newequipmentStats.length; q++) {
+                          if (newequipmentStats[q].key === 'attackSpeed') {
+                            newequipmentStats[q].value = Math.floor(tempStats[statKeys[m]])
+                          }
                         }
-                        else if (statKeys[m] === 'strength' && newequipmentStats[q].key === 'meleeStrengthBonus' || 'rangedStrengthBonus') {
-                          newequipmentStats[q].value = Math.floor(tempStats[statKeys[m]] * 10)
+                      }
+                      else if (statKeys[m] === 'strength') {
+                        for (let q = 0; q < newequipmentStats.length; q++) {
+                          if (newequipmentStats[q].key === 'meleeStrengthBonus' || 'rangedStrengthBonus') {
+                            newequipmentStats[q].value = Math.floor(tempStats[statKeys[m]] * 10)
+                          }
                         }
-                        else if (statKeys[m] === 'endurance' && newequipmentStats[q].key === 'meleeDefenceBonus' || 'rangedDefenceBonus') {
-                          newequipmentStats[q].value = Math.floor(tempStats[statKeys[m]] * 2)
+                      }
+                      else if (statKeys[m] === 'endurance') {
+                        for (let q = 0; q < newequipmentStats.length; q++) {
+                          if (newequipmentStats[q].key === 'meleeDefenceBonus' || 'rangedDefenceBonus') {
+                            newequipmentStats[q].value = Math.floor(tempStats[statKeys[m]] * 2)
+                          }
                         }
-                        else if (statKeys[m] === 'willpower' && newequipmentStats[q].key === 'magicDefenceBonus') {
-                          newequipmentStats[q].value = tempStats[statKeys[m]]
+                      }
+                      else if (statKeys[m] === 'willpower') {
+                        for (let q = 0; q < newequipmentStats.length; q++) {
+                          if (newequipmentStats[q].key === 'magicDefenceBonus') {
+                            newequipmentStats[q].value = Math.floor(tempStats[statKeys[m]])
+                          }
                         }
-                        else if (statKeys[m] === 'magic' && newequipmentStats[q].key === 'magicAttackBonus') {
-                          newequipmentStats[q].value = Math.floor(tempStats[statKeys[m]] * 3)
+                      }
+                      else if (statKeys[m] === 'magic') {
+                        for (let q = 0; q < newequipmentStats.length; q++) {
+                          if (newequipmentStats[q].key === 'magicAttackBonus') {
+                            newequipmentStats[q].value = Math.floor(tempStats[statKeys[m]] * 3)
+                          }
+                          if (newequipmentStats[q].key === 'magicDamageBonus') {
+                            newequipmentStats[q].value = Math.floor(tempStats[statKeys[m]])
+                          }
                         }
-                        else if (statKeys[m] === 'magic' && newequipmentStats[q].key === 'magicDamageBonus') {
-                          newequipmentStats[q].value = Math.floor(tempStats[statKeys[m]])
+                      }
+                      else if (statKeys[m] === 'dexterity') {
+                        for (let q = 0; q < newequipmentStats.length; q++) {
+                          if (newequipmentStats[q].key === 'rangedAttackBonus' || 'rangedDefenceBonus') {
+                            newequipmentStats[q].value = Math.floor(tempStats[statKeys[m]])
+                          }
                         }
-                        else if (statKeys[m] === 'dexterity' && newequipmentStats[q].key === 'rangedAttackBonus' || 'rangedDefenceBonus') {
-                          newequipmentStats[q].value = Math.floor(tempStats[statKeys[m]] * 2)
+                      }
+                      else if (statKeys[m] === 'sense') {
+                        for (let q = 0; q < newequipmentStats.length; q++) {
+                          if (newequipmentStats[q].key === 'damageReduction') {
+                            newequipmentStats[q].value = Math.floor(tempStats[statKeys[m]])
+                          }
                         }
-                        else if (statKeys[m] === 'sense' && newequipmentStats[q].key === 'damageReduction') {
-                          newequipmentStats[q].value = tempStats[statKeys[m]]
-                        }
-                        else if (statKeys[m] === 'charisma' && newequipmentStats[q].key === 'summoningMaxhit') {
-                          newequipmentStats[q].value = tempStats[statKeys[m]]
+                      }
+                      else if (statKeys[m] === 'charisma') {
+                        for (let q = 0; q < newequipmentStats.length; q++) {
+                          if (newequipmentStats[q].key === 'summoningMaxhit') {
+                            newequipmentStats[q].value = Math.floor(tempStats[statKeys[m]])
+                          }
                         }
                       }
                     }
@@ -365,20 +396,35 @@ export async function setup(ctx: Modding.ModContext) {
                 if (newItem.itemType) { itemPackage.items.add(newItem) }
                 else { errorLog.push("Unknown item", newItem) }
               }
+              if (tes) {
+                itemPackage.items.modify({
+                  id: "tes:lootbox",
+                  dropTable: {
+                    add: [
+                      {
+                        itemID: `monad:${itemID}`,
+                        minQuantity: 1,
+                        maxQuantity: 1,
+                        weight: 1
+                      }
+                    ]
+                  },
+                })
+              }
 
               itemPackage.items.modify({
                 id: "monad:lootbox",
                 dropTable: {
-                    add: [
-                        {
-                            itemID: `monad:${itemID}`,
-                            minQuantity: 1,
-                            maxQuantity: 1,
-                            weight: 1
-                        }
-                    ]
+                  add: [
+                    {
+                      itemID: `monad:${itemID}`,
+                      minQuantity: 1,
+                      maxQuantity: 1,
+                      weight: 1
+                    }
+                  ]
                 },
-            })
+              })
             }
           } catch (error) {
             errorLog.push("Error @ Monad onModsLoaded itempackage", error)
