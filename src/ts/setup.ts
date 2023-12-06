@@ -242,6 +242,8 @@ export async function setup(ctx: Modding.ModContext) {
                 const newModifiers: any = {
 
                 }
+                const newequipmentStatsFinal:any[] = []
+
                 if (monadItems[id].stats) {
                   const tempStats: any[] = monadItems[id].stats
                   const statKeys: any[] = Object.keys(tempStats)
@@ -261,10 +263,10 @@ export async function setup(ctx: Modding.ModContext) {
                         newModifiers['increasedRangedCritChance'] = Math.floor(tempStats[statKeys[m]])
                       }
                       if (statKeys[m] === 'HP' || statKeys[m] === 'vitality') {
-                        newModifiers['increasedFlatMaxHitpoints'] = newModifiers['increasedFlatMaxHitpoints'] + Math.floor(tempStats[statKeys[m]] / 10)
+                        newModifiers['increasedFlatMaxHitpoints'] = (newModifiers['increasedFlatMaxHitpoints'] || 0) + Math.floor(tempStats[statKeys[m]] / 10)
                       }
                       else if (statKeys[m] === 'HPPerc' || statKeys[m] === 'vitalityPerc') {
-                        newModifiers['increasedMaxHitpoints'] = newModifiers['increasedMaxHitpoints'] + Math.floor(tempStats[statKeys[m]])
+                        newModifiers['increasedMaxHitpoints'] = (newModifiers['increasedMaxHitpoints'] || 0) + Math.floor(tempStats[statKeys[m]])
                       }
                       if (statKeys[m] === 'attackSpeed') {
                         for (let q = 0; q < newequipmentStats.length; q++) {
@@ -290,7 +292,7 @@ export async function setup(ctx: Modding.ModContext) {
                       else if (statKeys[m] === 'physicalDamageReduction') {
                         for (let q = 0; q < newequipmentStats.length; q++) {
                           if (newequipmentStats[q].key === 'meleeDefenceBonus' || newequipmentStats[q].key === 'rangedDefenceBonus') {
-                            newequipmentStats[q].value = Math.floor(tempStats[statKeys[m]])
+                            newequipmentStats[q].value = Math.floor(tempStats[statKeys[m]] * 2)
                           }
                         }
                       }
@@ -334,13 +336,19 @@ export async function setup(ctx: Modding.ModContext) {
                       }
                     }
                   }
+                  const newequipmentStatsList: any[] = Object.keys(newequipmentStats)
+                  for (let w = 0; w < newequipmentStatsList.length; w++) {
+                    if(newequipmentStatsList[w].value > 0) {
+                      newequipmentStatsFinal.push(newequipmentStatsList[w])
+                    }
+                  }
                 }
                 if (type === "Weapon") {
                   newequipmentStats.push({
                     "key": "attackSpeed",
                     "value": 3000
                   },)
-                  newItem.equipmentStats = newequipmentStats
+                  newItem.equipmentStats = newequipmentStatsFinal
                   newItem.modifiers = newModifiers
                   newItem.tier = "none"
                   const Requirements = ['attackType', 'ammoTypeRequired', 'validSlots', 'occupiesSlots', 'equipRequirements', '', 'enemyModifiers', 'conditionalModifiers', 'specialAttacks', 'overrideSpecialChances', 'fightEffects', 'providedRunes', 'ammoType ', 'consumesChargesOn', 'consumesOn', 'consumesItemOn']
@@ -399,7 +407,7 @@ export async function setup(ctx: Modding.ModContext) {
                   }
                 }
                 else if (type === "Equipment") {
-                  newItem.equipmentStats = newequipmentStats
+                  newItem.equipmentStats = newequipmentStatsFinal
                   newItem.modifiers = newModifiers
                   newItem.tier = "none"
                   const Requirements = ['validSlots', 'occupiesSlots', 'equipRequirements', 'enemyModifiers', 'conditionalModifiers', 'specialAttacks', 'overrideSpecialChances', 'fightEffects', 'providedRunes', 'ammoType', 'consumesChargesOn', 'consumesOn', 'consumesItemOn']
@@ -408,6 +416,9 @@ export async function setup(ctx: Modding.ModContext) {
                       newItem[Requirements[j]] = monadItems[id][Requirements[j]]
                     }
                   }
+                }
+                if(Object.keys(newModifiers).length < 1) {
+                  newItem.customDescription = monadItems[id].description
                 }
                 if (newItem.itemType) { itemPackage.items.add(newItem) }
                 else { errorLog.push("Unknown item", newItem) }
