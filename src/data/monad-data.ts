@@ -118,12 +118,13 @@ type EventConfig<Events extends { kind: string }> = {
   [E in Events as E["kind"]]?: Number;
 }
 
-declare type monadStatKey = 'attackSpeed' | 'stabAttackBonus' | 'slashAttackBonus' | 'blockAttackBonus' | 'rangedAttackBonus' | 'magicAttackBonus' | 'meleeStrengthBonus' | 'rangedStrengthBonus' | 'magicDamageBonus' | 'meleeDefenceBonus' | 'rangedDefenceBonus' | 'magicDefenceBonus' | 'damageReduction' | 'summoningMaxhit' | 'vitality' | 'endurance' | 'willpower' | 'magic' | 'strength' | 'dexterity' | 'sense' | 'charisma' | 'HP' | 'MP' | 'HPPerc' | 'MPPerc' | 'vitalityPerc' | 'endurancePerc' | 'willpowerPerc' | 'magicPerc' | 'strengthPerc' | 'dexterityPerc' | 'sensePerc' | 'charismaPerc' | 'physicalDamageReduction' | 'magicDamageReduction' | 'physicalDamageReductionPerc' | 'magicDamageReductionPerc' | 'manaRegenPerc';
+declare type monadStatKey = 'vitality' | 'endurance' | 'willpower' | 'magic' | 'strength' | 'dexterity' | 'sense' | 'charisma' | 'HP' | 'MP' | 'HPPerc' | 'MPPerc' | 'vitalityPerc' | 'endurancePerc' | 'willpowerPerc' | 'magicPerc' | 'strengthPerc' | 'dexterityPerc' | 'sensePerc' | 'charismaPerc' | 'physicalDamageReduction' | 'magicDamageReduction' | 'physicalDamageReductionPerc' | 'magicDamageReductionPerc' | 'manaRegenPerc';
+
+declare type monadStatEquipmentKey = 'attackSpeed' | 'stabAttackBonus' | 'slashAttackBonus' | 'blockAttackBonus' | 'rangedAttackBonus' | 'magicAttackBonus' | 'meleeStrengthBonus' | 'rangedStrengthBonus' | 'magicDamageBonus' | 'meleeDefenceBonus' | 'rangedDefenceBonus' | 'magicDefenceBonus' | 'damageReduction' | 'summoningMaxhit';
 
 const monadModifiers = ['ResistancePerc', 'DamageReductionPerc', 'CostPerc', 'SkillCooldownPerc']
 type monadModifiersTypes = typeof monadModifiers[number];
-
-const monadSpecies = ['demon', 'undead', 'animal'] as const;
+const monadSpecies = ['demon', 'undead', 'animal', "SeaCreature", "MythicalCreature", "Elemental", "Human", "Dragon", "Orc", "Robot", "Goblin", "Elf"] as const;
 type monadSpeciesTypes = typeof monadSpecies[number];
 declare type monadSpeciesKey = `${monadSpeciesTypes}${monadModifiersTypes}`;
 type monadSpeciesEvent = { kind: monadSpeciesKey };
@@ -138,7 +139,10 @@ type monadSpcificKeys = 'blockPerc' | 'controlUndead' | 'Enchanting' | 'SpellSpe
 type monadSpcificEvent = { kind: monadSpcificKeys };
 
 type monadStatEvent = { kind: monadStatKey };
-declare type monadStatPair = EventConfig<monadStatEvent | monadElementsEvent | monadSpeciesEvent | monadSpcificEvent>
+type monadStatEquipmentEvent = { kind: monadStatEquipmentKey };
+
+
+declare type monadStatPair = EventConfig<monadStatEvent | monadStatEquipmentEvent | monadElementsEvent | monadSpeciesEvent | monadSpcificEvent>
 interface monadBaseEquipmentItemData extends monadItem {
   // stats: monadStats;
   stats: monadStatPair;

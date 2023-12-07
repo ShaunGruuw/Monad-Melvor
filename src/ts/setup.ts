@@ -250,6 +250,40 @@ export async function setup(ctx: Modding.ModContext) {
                   if (statKeys.length > 0) {
                     for (let m = 0; m < statKeys.length; m++) {
                       if(kcm) {
+                        // traitApplied: `${typeSingularNameLower}TraitApplied`,
+                        // increasedDamage: `increasedDamageAgainst${typePluralName}`,
+                        // decreasedDamage: `decreasedDamageAgainst${typePluralName}`,
+                        // increasedDamageTaken: `increasedDamageTakenFrom${typePluralName}`,
+                        // decreasedDamageTaken: `decreasedDamageTakenFrom${typePluralName}`,
+                        // increasedMaxHitPercent: `increasedMaxHitPercentAgainst${typePluralName}`,
+                        // decreasedMaxHitPercent: `decreasedMaxHitPercentAgainst${typePluralName}`,
+                        // increasedMaxHitFlat: `increasedMaxHitFlatAgainst${typePluralName}`,
+                        // decreasedMaxHitFlat: `decreasedMaxHitFlatAgainst${typePluralName}`,
+                        // increasedMinHitBasedOnMaxHit: `increasedMinHitBasedOnMaxHitAgainst${typePluralName}`,
+                        // decreasedMinHitBasedOnMaxHit: `decreasedMinHitBasedOnMaxHitAgainst${typePluralName}`,
+                        // increasedFlatMinHit: `increasedFlatMinHitAgainst${typePluralName}`,
+                        // decreasedFlatMinHit: `decreasedFlatMinHitAgainst${typePluralName}`,
+                        // increasedGlobalAccuracy: `increasedGlobalAccuracyAgainst${typePluralName}`,
+                        // decreasedGlobalAccuracy: `decreasedGlobalAccuracyAgainst${typePluralName}`,
+                        // increasedDamageReduction: `increasedDamageReductionAgainst${typePluralName}`,
+                        // decreasedDamageReduction: `decreasedDamageReductionAgainst${typePluralName}`,
+                        // increasedChanceToApplyTraitInfiniteOnSpawn: `increasedChanceToApply${typeSingularName}TraitInfiniteOnSpawn`,
+                        // decreasedChanceToApplyTraitInfiniteOnSpawn: `decreasedChanceToApply${typeSingularName}TraitInfiniteOnSpawn`,
+                        // applyTraitTurnsOnSpawn: `apply${typeSingularName}TraitTurnsOnSpawn`,
+                        // increasedChanceToApplyTrait: `increasedChanceToApply${typeSingularName}Trait`,
+                        // decreasedChanceToApplyTrait: `decreasedChanceToApply${typeSingularName}Trait`,
+                        // applyTraitTurns: `apply${typeSingularName}TraitTurns`
+
+                        // increasedDamageTakenFromAirSpells: Standard,
+                        // decreasedDamageTakenFromAirSpells: Standard,
+                        // increasedDamageTakenFromWaterSpells: Standard,
+                        // decreasedDamageTakenFromWaterSpells: Standard,
+                        // increasedDamageTakenFromEarthSpells: Standard,
+                        // decreasedDamageTakenFromEarthSpells: Standard,
+                        // increasedDamageTakenFromFireSpells: Standard,
+                        // decreasedDamageTakenFromFireSpells: Standard,
+
+                        // const monadSpecies = ['demon', 'undead', 'animal', "SeaCreature", "MythicalCreature", "Elemental", "Human", "Dragon", "Orc", "Robot", "Goblin", "Elf"] as const;
                         if (statKeys[m] === 'demonDamageReductionPerc') {
                           newModifiers['decreasedDamageTakenFromDemons'] = Math.floor(tempStats[statKeys[m]])
                         }  
@@ -257,6 +291,9 @@ export async function setup(ctx: Modding.ModContext) {
                           newModifiers['decreasedDamageTakenFromUndead'] = Math.floor(tempStats[statKeys[m]])
                         }  
                       }
+                      // 'stabAttackBonus' | 'slashAttackBonus' | 'blockAttackBonus' | 'rangedAttackBonus' | 'magicAttackBonus' | 'meleeStrengthBonus' | 'rangedStrengthBonus' | 'magicDamageBonus' | 'meleeDefenceBonus' | 'rangedDefenceBonus' | 'magicDefenceBonus' | 'damageReduction' | 'summoningMaxhit' 
+                      
+                      // 'MP'  'MPPerc'  'endurancePerc' | 'willpowerPerc' | 'dexterityPerc' | 'sensePerc' | 'charismaPerc'  'magicDamageReductionPerc' | 'physicalDamageReductionPerc'  'manaRegenPerc';
                       if (statKeys[m] === 'controlUndead') {
                         newModifiers['increasedSummoningMaxHit'] = Math.floor(tempStats[statKeys[m]])
                       }
@@ -325,7 +362,7 @@ export async function setup(ctx: Modding.ModContext) {
                           }
                         }
                       }
-                      else if (statKeys[m] === 'willpower' || statKeys[m] === 'magicDamageReductionPerc') {
+                      else if (statKeys[m] === 'willpower' || statKeys[m] === 'magicDamageReduction') {
                         for (let q = 0; q < newequipmentStats.length; q++) {
                           if (newequipmentStats[q].key === 'magicDefenceBonus') {
                             newequipmentStats[q].value = Math.floor(tempStats[statKeys[m]])
