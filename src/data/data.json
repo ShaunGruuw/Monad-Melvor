@@ -79,6 +79,27 @@
     ],
     "items": [
       {
+        "id": "Test_Gem",
+        "name": "Test_Gem",
+        "category": "Combat",
+        "type": "Gem",
+        "media": "https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fpngimg.com%2Fuploads%2Fcucumber%2Fcucumber_PNG84294.png",
+        "ignoreCompletion": true,
+        "obtainFromItemLog": false,
+        "golbinRaidExclusive": false,
+        "sellsFor": 1,
+        "validSlots": [
+          "Gem"
+        ],
+        "occupiesSlots": [],
+        "tier": "none",
+        "equipRequirements": [],
+        "equipmentStats": [],
+        "itemType": "Equipment",
+        "modifiers": {
+        }
+      },
+      {
         "id": "lootbox",
         "name": "Lost Box",
         "category": "Dungeons",

@@ -173,12 +173,80 @@ export async function setup(ctx: Modding.ModContext) {
           cmim.forceBaseModTypeActive("SeaCreature");
         }
 
-        const nonSupportKeys: any[] = Object.keys(nonSupport)
         const monadItemsKeys: any[] = Object.keys(monadItems)
         const idLog: any[] = []
         // Error: [test] Error constructing NamespacedObject. Local ID "Training Health Potion" is invalid.
         const initialPackage = ctx.gameData.buildPackage((itemPackage: any) => {
           try {
+            for (let index = 0; index < nonSupport.length; index++) {
+              const newPoeGem: any = {
+                "id": nonSupport[index].id,
+                "name": nonSupport[index].name,
+                "category": "Combat",
+                "type": "Gem",
+                "media": nonSupport[index].icon,
+                "ignoreCompletion": true,
+                "obtainFromItemLog": false,
+                "golbinRaidExclusive": false,
+                "sellsFor": 1,
+                "validSlots": [
+                  "Gem"
+                ],
+                "occupiesSlots": [],
+                "tier": "none",
+                "equipRequirements": [],
+                "equipmentStats": [],
+                "itemType": "Equipment",
+                "modifiers": {
+                }
+              }
+              for (let j = 0; j < nonSupport[index].explicitMods.length; j++) {
+                if(nonSupport[index].explicitMods[j].includes("Armour")) {
+                  newPoeGem.modifiers["increasedFlatMeleeDefenceBonus"] = parseInt(nonSupport[index].explicitMods[0].replace(/^\D+/g, ''));
+                } 
+                if(nonSupport[index].explicitMods[j].includes("Damage")) {
+                  newPoeGem.modifiers["increasedDamageToAllMonsters"] = parseInt(nonSupport[index].explicitMods[0].replace(/^\D+/g, ''));
+                } 
+                if(nonSupport[index].explicitMods[j].includes("Minions")) {
+                  newPoeGem.modifiers["increasedSummoningMaxHit"] = parseInt(nonSupport[index].explicitMods[0].replace(/^\D+/g, ''));
+                } 
+                if(nonSupport[index].explicitMods[j].includes("Critical")) {
+                  newPoeGem.modifiers["increasedMeleeCritChance"] = parseInt(nonSupport[index].explicitMods[0].replace(/^\D+/g, ''));
+                  newPoeGem.modifiers["increasedRangedCritChance"] = parseInt(nonSupport[index].explicitMods[0].replace(/^\D+/g, ''));
+                  newPoeGem.modifiers["increasedMagicCritChance"] = parseInt(nonSupport[index].explicitMods[0].replace(/^\D+/g, ''));
+                } 
+                if(nonSupport[index].explicitMods[j].includes("Melee")) {
+                  newPoeGem.modifiers["increasedMeleeMaxHitFlat"] = parseInt(nonSupport[index].explicitMods[0].replace(/^\D+/g, ''));
+                } 
+                if(nonSupport[index].explicitMods[j].includes("Curse")) {
+                  newPoeGem.modifiers["increasedChanceToApplyConfusionCurse"] = parseInt(nonSupport[index].explicitMods[0].replace(/^\D+/g, ''));
+                } 
+                if(nonSupport[index].explicitMods[j].includes("Brand")) {
+                  newPoeGem.modifiers["increasedChanceToApplyConfusionCurse"] = parseInt(nonSupport[index].explicitMods[0].replace(/^\D+/g, ''));
+                }   
+                if(nonSupport[index].explicitMods[j].includes("Totem")) {
+                  newPoeGem.modifiers["increasedSummoningMaxHit"] = parseInt(nonSupport[index].explicitMods[0].replace(/^\D+/g, ''));
+                }                     
+              }
+              idLog.push(nonSupport[index].name, Object.keys(newPoeGem.modifiers))
+              // if (Object.keys(newPoeGem.modifiers).length < 1) {
+                newPoeGem.customDescription = nonSupport[index].secDescrText
+              // }
+              if (newPoeGem.id) { itemPackage.items.add(newPoeGem) }
+              itemPackage.items.modify({
+                id: "monad:lootbox",
+                dropTable: {
+                  add: [
+                    {
+                      itemID: `monad:${newPoeGem.id}`,
+                      minQuantity: 1,
+                      maxQuantity: 1,
+                      weight: 1
+                    }
+                  ]
+                },
+              })
+            }
             for (let index = 0; index < monadItemsKeys.length; index++) {
               const id = monadItemsKeys[index]
               const type = monadItems[id].type
@@ -242,14 +310,14 @@ export async function setup(ctx: Modding.ModContext) {
                 const newModifiers: any = {
 
                 }
-                const newequipmentStatsFinal:any[] = []
+                const newequipmentStatsFinal: any[] = []
 
                 if (monadItems[id].stats) {
                   const tempStats: any[] = monadItems[id].stats
                   const statKeys: any[] = Object.keys(tempStats)
                   if (statKeys.length > 0) {
                     for (let m = 0; m < statKeys.length; m++) {
-                      if(kcm) {
+                      if (kcm) {
                         // traitApplied: `${typeSingularNameLower}TraitApplied`,
                         // increasedDamage: `increasedDamageAgainst${typePluralName}`,
                         // decreasedDamage: `decreasedDamageAgainst${typePluralName}`,
@@ -286,13 +354,13 @@ export async function setup(ctx: Modding.ModContext) {
                         // const monadSpecies = ['demon', 'undead', 'animal', "SeaCreature", "MythicalCreature", "Elemental", "Human", "Dragon", "Orc", "Robot", "Goblin", "Elf"] as const;
                         if (statKeys[m] === 'demonDamageReductionPerc') {
                           newModifiers['decreasedDamageTakenFromDemons'] = Math.floor(tempStats[statKeys[m]])
-                        }  
+                        }
                         if (statKeys[m] === 'undeadDamageReductionPerc') {
                           newModifiers['decreasedDamageTakenFromUndead'] = Math.floor(tempStats[statKeys[m]])
-                        }  
+                        }
                       }
                       // 'stabAttackBonus' | 'slashAttackBonus' | 'blockAttackBonus' | 'rangedAttackBonus' | 'magicAttackBonus' | 'meleeStrengthBonus' | 'rangedStrengthBonus' | 'magicDamageBonus' | 'meleeDefenceBonus' | 'rangedDefenceBonus' | 'magicDefenceBonus' | 'damageReduction' | 'summoningMaxhit' 
-                      
+
                       // 'MP'  'MPPerc'  'endurancePerc' | 'willpowerPerc' | 'dexterityPerc' | 'sensePerc' | 'charismaPerc'  'magicDamageReductionPerc' | 'physicalDamageReductionPerc'  'manaRegenPerc';
                       if (statKeys[m] === 'controlUndead') {
                         newModifiers['increasedSummoningMaxHit'] = Math.floor(tempStats[statKeys[m]])
@@ -315,17 +383,6 @@ export async function setup(ctx: Modding.ModContext) {
                       }
                       else if (statKeys[m] === 'HPPerc' || statKeys[m] === 'vitalityPerc') {
                         newModifiers['increasedMaxHitpoints'] = (newModifiers['increasedMaxHitpoints'] || 0) + Math.floor(tempStats[statKeys[m]])
-                      }
-                      if (statKeys[m] === 'attackSpeed') {
-                        for (let q = 0; q < newequipmentStats.length; q++) {
-                          if (newequipmentStats[q].key === 'attackSpeed') {
-                            if(Math.floor(tempStats[statKeys[m]]) > 0) {
-                              newequipmentStats[q].value = Math.floor(tempStats[statKeys[m]])
-                            } else {
-                              newequipmentStats[q].value = 3000
-                            }
-                          }
-                        }
                       }
                       if (statKeys[m] === 'meleeDefenceBonus') {
                         for (let q = 0; q < newequipmentStats.length; q++) {
@@ -378,7 +435,7 @@ export async function setup(ctx: Modding.ModContext) {
                             newequipmentStats[q].value = Math.floor(tempStats[statKeys[m]])
                           }
                         }
-                      }                      
+                      }
                       else if (statKeys[m] === 'dexterity') {
                         for (let q = 0; q < newequipmentStats.length; q++) {
                           if (newequipmentStats[q].key === 'rangedAttackBonus' || newequipmentStats[q].key === 'rangedDefenceBonus') {
@@ -404,15 +461,21 @@ export async function setup(ctx: Modding.ModContext) {
                   }
 
                   for (let w = 0; w < newequipmentStats.length; w++) {
-                    if(newequipmentStats[w].value > 0) {
+                    if (newequipmentStats[w].value > 0) {
                       newequipmentStatsFinal.push(newequipmentStats[w])
                     }
                   }
                   idLog.push(id, newequipmentStatsFinal)
                 }
                 if (type === "Weapon") {
+                  newequipmentStatsFinal.push(
+                    {
+                      "key": "attackSpeed",
+                      "value": monadItems[id].stats.attackSpeed ? monadItems[id].stats.attackSpeed : 3000
+                    }
+                  )
                   newItem.equipmentStats = newequipmentStatsFinal
-                  newItem.modifiers = {...newItem.modifiers, ...newModifiers};
+                  newItem.modifiers = { ...newItem.modifiers, ...newModifiers };
                   newItem.tier = "none"
                   const Requirements = ['attackType', 'ammoTypeRequired', 'validSlots', 'occupiesSlots', 'equipRequirements', '', 'enemyModifiers', 'conditionalModifiers', 'specialAttacks', 'overrideSpecialChances', 'fightEffects', 'providedRunes', 'ammoType ', 'consumesChargesOn', 'consumesOn', 'consumesItemOn']
                   for (let j = 0; j < Requirements.length; j++) {
@@ -480,7 +543,7 @@ export async function setup(ctx: Modding.ModContext) {
                     }
                   }
                 }
-                if(Object.keys(newModifiers).length < 1) {
+                if (Object.keys(newModifiers).length < 1) {
                   newItem.customDescription = monadItems[id].description
                 }
                 if (newItem.itemType) { itemPackage.items.add(newItem) }
@@ -501,7 +564,6 @@ export async function setup(ctx: Modding.ModContext) {
                   },
                 })
               }
-
               itemPackage.items.modify({
                 id: "monad:lootbox",
                 dropTable: {
