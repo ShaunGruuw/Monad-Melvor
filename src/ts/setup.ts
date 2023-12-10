@@ -291,6 +291,7 @@ export async function setup(ctx: Modding.ModContext) {
                 }
               }
               idLog.push(pokemon3[index].name)
+              itemPackage.monsters.add(newMonster)
               itemPackage.pets.add(NewPet)
             }
             for (let index = 0; index < nonSupport.length; index++) {
