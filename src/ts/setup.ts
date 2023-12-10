@@ -181,20 +181,117 @@ export async function setup(ctx: Modding.ModContext) {
         const initialPackage = ctx.gameData.buildPackage((itemPackage: any) => {
           try {
             for (let index = 0; index < pokemon3.length; index++) {
-                const NewPet = {
-                    name: pokemon3[index].name,
-                    media: pokemon3[index].src,
-                    "id": pokemon3[index].name,
-                    "hint": "Pokemon Gen 3",
-                    "modifiers": {
-                      "increasedHolyDustFromBlessedOffering": 1
-                    },
-                    "activeInRaid": false,
-                    "scaleChanceWithMasteryPool": false,
-                    "ignoreCompletion": false
+              const NewPet = {
+                name: pokemon3[index].name,
+                media: pokemon3[index].src,
+                "id": pokemon3[index].name + "_pet",
+                "hint": "Pokemon Gen 3",
+                "modifiers": {
+                  "increasedHolyDustFromBlessedOffering": 1
+                },
+                "activeInRaid": false,
+                "scaleChanceWithMasteryPool": false,
+                "ignoreCompletion": false
+              }
+              const newMonster = {
+                "id": pokemon3[index].name + "_monster",
+                "name": pokemon3[index].name,
+                "media": pokemon3[index].src,
+                "levels": {
+                  "Attack": 1,
+                  "Defence": 1,
+                  "Hitpoints": 1,
+                  "Magic": 1,
+                  "Ranged": 1,
+                  "Strength": 1
+                },
+                "equipmentStats": [
+                  {
+                    "key": "attackSpeed",
+                    "value": 2400
+                  }
+                ],
+                "ignoreCompletion": false,
+                "attackType": "ranged",
+                "lootChance": 50,
+                "lootTable": [
+                  {
+                    "itemID": "melvorD:Steel_Arrows",
+                    "maxQuantity": 100,
+                    "minQuantity": 5,
+                    "weight": 100
+                  },
+                ],
+                "gpDrops": {
+                  "min": 1,
+                  "max": 100
+                },
+                "bones": {
+                  "itemID": "melvorD:Bones",
+                  "quantity": 1
+                },
+                "canSlayer": true,
+                "isBoss": false,
+                "selectedSpell": "melvorD:WindStrike",
+                "pet": {
+                  "id": "melvorD:ArcticYeti",
+                  "quantity": 1000
                 }
-                idLog.push(pokemon3[index].name)
-                itemPackage.pets.add(NewPet)
+              }
+              newMonster['pet'] = {
+                "id": "monad:" + pokemon3[index].name + "_pet",
+                "quantity": 1000
+              }
+              for (let j = 0; j < pokemon3[index].stats.length; j++) {
+                const attackType: any = {}
+                if (pokemon3[index].stats[j].stat.name === 'hp') newMonster['levels']['Hitpoints'] = pokemon3[index].stats[j].base_stat
+                if (pokemon3[index].stats[j].stat.name === 'attack') {
+                  newMonster['levels']['Attack'] = pokemon3[index].stats[j].base_stat
+                  attackType['Attack'] = pokemon3[index].stats[j].base_stat
+                }
+                if (pokemon3[index].stats[j].stat.name === 'defense') newMonster['levels']['Defence'] = pokemon3[index].stats[j].base_stat
+                if (pokemon3[index].stats[j].stat.name === 'defense') newMonster['equipmentStats'].push(
+                  {
+                    "key": "rangedDefenceBonus",
+                    "value": pokemon3[index].stats[j].base_stat
+                  },
+                  {
+                    "key": "meleeDefenceBonus",
+                    "value": pokemon3[index].stats[j].base_stat
+                  }
+                )
+                if (pokemon3[index].stats[j].stat.name === 'attack') newMonster['levels']['Strength'] = pokemon3[index].stats[j].base_stat
+                if (pokemon3[index].stats[j].stat.name === 'attack') newMonster['equipmentStats'].push(
+                  {
+                    "key": "meleeStrengthBonus",
+                    "value": pokemon3[index].stats[j].base_stat
+                  },
+                  {
+                    "key": "rangedStrengthBonus",
+                    "value": pokemon3[index].stats[j].base_stat
+                  }
+                )
+                if (pokemon3[index].stats[j].stat.name === 'attack') newMonster['levels']['Ranged'] = pokemon3[index].stats[j].base_stat
+                if (pokemon3[index].stats[j].stat.name === 'special-attack') {
+                  newMonster['levels']['Magic'] = pokemon3[index].stats[j].base_stat
+                  attackType['Magic'] = pokemon3[index].stats[j].base_stat
+                }
+                if (pokemon3[index].stats[j].stat.name === 'special-attack') newMonster['equipmentStats'].push({
+                  "key": "magicAttackBonus",
+                  "value": pokemon3[index].stats[j].base_stat
+                })
+                if (pokemon3[index].stats[j].stat.name === 'special-defense') newMonster['equipmentStats'].push({
+                  "key": "magicDefenceBonus",
+                  "value": pokemon3[index].stats[j].base_stat
+                })
+                if(attackType['Magic'] > attackType['Attack']) {
+                  newMonster["attackType"] = "magic"
+                } else {
+                  Math.random() < 0.5 ? newMonster["attackType"] = "ranged" : newMonster["attackType"] = "melee"
+                }
+              }
+              idLog.push(pokemon3[index].name)
+              itemPackage.pets.add(NewPet)
             }
             for (let index = 0; index < nonSupport.length; index++) {
               const newPoeGem: any = {
@@ -219,36 +316,36 @@ export async function setup(ctx: Modding.ModContext) {
                 }
               }
               for (let j = 0; j < nonSupport[index].explicitMods.length; j++) {
-                if(nonSupport[index].explicitMods[j].includes("Armour")) {
+                if (nonSupport[index].explicitMods[j].includes("Armour")) {
                   newPoeGem.modifiers["increasedFlatMeleeDefenceBonus"] = parseInt(nonSupport[index].explicitMods[0].replace(/^\D+/g, ''));
-                } 
-                if(nonSupport[index].explicitMods[j].includes("Damage")) {
+                }
+                if (nonSupport[index].explicitMods[j].includes("Damage")) {
                   newPoeGem.modifiers["increasedDamageToAllMonsters"] = parseInt(nonSupport[index].explicitMods[0].replace(/^\D+/g, ''));
-                } 
-                if(nonSupport[index].explicitMods[j].includes("Minions")) {
+                }
+                if (nonSupport[index].explicitMods[j].includes("Minions")) {
                   newPoeGem.modifiers["increasedSummoningMaxHit"] = parseInt(nonSupport[index].explicitMods[0].replace(/^\D+/g, ''));
-                } 
-                if(nonSupport[index].explicitMods[j].includes("Critical")) {
+                }
+                if (nonSupport[index].explicitMods[j].includes("Critical")) {
                   newPoeGem.modifiers["increasedMeleeCritChance"] = parseInt(nonSupport[index].explicitMods[0].replace(/^\D+/g, ''));
                   newPoeGem.modifiers["increasedRangedCritChance"] = parseInt(nonSupport[index].explicitMods[0].replace(/^\D+/g, ''));
                   newPoeGem.modifiers["increasedMagicCritChance"] = parseInt(nonSupport[index].explicitMods[0].replace(/^\D+/g, ''));
-                } 
-                if(nonSupport[index].explicitMods[j].includes("Melee")) {
+                }
+                if (nonSupport[index].explicitMods[j].includes("Melee")) {
                   newPoeGem.modifiers["increasedMeleeMaxHitFlat"] = parseInt(nonSupport[index].explicitMods[0].replace(/^\D+/g, ''));
-                } 
-                if(nonSupport[index].explicitMods[j].includes("Curse")) {
+                }
+                if (nonSupport[index].explicitMods[j].includes("Curse")) {
                   newPoeGem.modifiers["increasedChanceToApplyConfusionCurse"] = parseInt(nonSupport[index].explicitMods[0].replace(/^\D+/g, ''));
-                } 
-                if(nonSupport[index].explicitMods[j].includes("Brand")) {
+                }
+                if (nonSupport[index].explicitMods[j].includes("Brand")) {
                   newPoeGem.modifiers["increasedChanceToApplyConfusionCurse"] = parseInt(nonSupport[index].explicitMods[0].replace(/^\D+/g, ''));
-                }   
-                if(nonSupport[index].explicitMods[j].includes("Totem")) {
+                }
+                if (nonSupport[index].explicitMods[j].includes("Totem")) {
                   newPoeGem.modifiers["increasedSummoningMaxHit"] = parseInt(nonSupport[index].explicitMods[0].replace(/^\D+/g, ''));
-                }                     
+                }
               }
               // idLog.push(nonSupport[index].name, Object.keys(newPoeGem.modifiers))
               // if (Object.keys(newPoeGem.modifiers).length < 1) {
-                newPoeGem.customDescription = nonSupport[index].secDescrText
+              newPoeGem.customDescription = nonSupport[index].secDescrText
               // }
               if (newPoeGem.id) { itemPackage.items.add(newPoeGem) }
               itemPackage.items.modify({
