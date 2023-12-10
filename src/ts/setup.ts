@@ -5,7 +5,6 @@
 // Game data for registration
 import { ItemList as monadItems } from '../data/monad-data';
 import { nonSupport } from '../data/poe.data';
-import pokemon3 from '../data/data.pokemon.3.json';
 import Pokemon from '../data/data.allPokemon.json'
 
 
@@ -176,265 +175,182 @@ export async function setup(ctx: Modding.ModContext) {
           cmim.forceBaseModTypeActive("SeaCreature");
         }
 
-        const monadItemsKeys: any[] = Object.keys(monadItems)
         const idLog: any[] = []
-        // Error: [test] Error constructing NamespacedObject. Local ID "Training Health Potion" is invalid.
         const initialPackage = ctx.gameData.buildPackage((itemPackage: any) => {
           try {
+            const allPokemonId: any[] = []
+            const MagicPokemonList: any[] = []
             for (let index = 0; index < Pokemon.length; index++) {
               const NewPet: any = {
-                  name: Pokemon[index].name.english,
-                  media: Pokemon[index].image.hires,
-                  "id": Pokemon[index].id + "_pet",
-                  "hint": "Pokemon",
-                  "modifiers": {
-          
-                  },
-                  "activeInRaid": false,
-                  "scaleChanceWithMasteryPool": false,
-                  "ignoreCompletion": false
+                name: Pokemon[index].name.english,
+                media: Pokemon[index].image.hires,
+                "id": Pokemon[index].id + "_pet",
+                "hint": "Pokemon",
+                "modifiers": {
+
+                },
+                "activeInRaid": false,
+                "scaleChanceWithMasteryPool": false,
+                "ignoreCompletion": false
               }
               const newMonster: any = {
-                  "id": Pokemon[index].id + "_monster",
-                  "name": Pokemon[index].name.english,
-                  "media": Pokemon[index].image.hires,
-                  "levels": {
-                      "Attack": 1,
-                      "Defence": 1,
-                      "Hitpoints": 1,
-                      "Magic": 1,
-                      "Ranged": 1,
-                      "Strength": 1
+                "id": Pokemon[index].id + "_monster",
+                "name": Pokemon[index].name.english,
+                "media": Pokemon[index].image.hires,
+                "levels": {
+                  "Attack": 1,
+                  "Defence": 1,
+                  "Hitpoints": 1,
+                  "Magic": 1,
+                  "Ranged": 1,
+                  "Strength": 1
+                },
+                "equipmentStats": [
+
+                ],
+                "specialAttacks": [],
+                "passives": [],
+                "ignoreCompletion": false,
+                "attackType": "ranged",
+                "lootChance": 100,
+                "lootTable": [
+                  {
+                    "itemID": "melvorD:Steel_Arrows",
+                    "maxQuantity": 10,
+                    "minQuantity": 5,
+                    "weight": 100
                   },
-                  "equipmentStats": [
-          
-                  ],
-                  "specialAttacks": [],
-                  "passives": [],
-                  "ignoreCompletion": false,
-                  "attackType": "ranged",
-                  "lootChance": 100,
-                  "lootTable": [
-                      {
-                          "itemID": "melvorD:Steel_Arrows",
-                          "maxQuantity": 10,
-                          "minQuantity": 5,
-                          "weight": 100
-                      },
-                  ],
-                  "gpDrops": {
-                      "min": 1,
-                      "max": 100
-                  },
-                  "bones": {
-                      "itemID": "melvorD:Bones",
-                      "quantity": 1
-                  },
-                  "canSlayer": true,
-                  "isBoss": false,
-                  "selectedSpell": "melvorD:WindStrike",
-                  "pet": {
-          
-                  }
+                ],
+                "gpDrops": {
+                  "min": 1,
+                  "max": 100
+                },
+                "bones": {
+                  "itemID": "melvorD:Bones",
+                  "quantity": 1
+                },
+                "canSlayer": true,
+                "isBoss": false,
+                "selectedSpell": "melvorD:WindStrike",
+                "pet": {
+
+                }
               }
               newMonster['pet'] = {
-                  "id": "monad:" + Pokemon[index].id + "_pet",
-                  "quantity": 3
+                "id": "monad:" + Pokemon[index].id + "_pet",
+                "quantity": 3
               }
               const attackType: any = {}
               const PokemonStatsKeys = Object.keys(Pokemon[index].base)
               for (let j = 0; j < PokemonStatsKeys.length; j++) {
-                  if (PokemonStatsKeys[j] === 'HP') newMonster['levels']['Hitpoints'] = Pokemon[index].base.HP
-                  if (PokemonStatsKeys[j] === 'Attack') {
-                      newMonster['levels']['Attack'] = Pokemon[index].base.Attack
-                      attackType['Attack'] = Pokemon[index].base.Attack
+                if (PokemonStatsKeys[j] === 'HP') newMonster['levels']['Hitpoints'] = Pokemon[index].base.HP
+                if (PokemonStatsKeys[j] === 'Attack') {
+                  newMonster['levels']['Attack'] = Pokemon[index].base.Attack
+                  attackType['Attack'] = Pokemon[index].base.Attack
+                }
+                if (PokemonStatsKeys[j] === 'Defense') newMonster['levels']['Defence'] = Pokemon[index].base.Defense
+                if (PokemonStatsKeys[j] === 'Defense') newMonster['equipmentStats'].push(
+                  {
+                    "key": "rangedDefenceBonus",
+                    "value": Pokemon[index].base.Defense
+                  },
+                  {
+                    "key": "meleeDefenceBonus",
+                    "value": Pokemon[index].base.Defense
                   }
-                  if (PokemonStatsKeys[j] === 'Defense') newMonster['levels']['Defence'] = Pokemon[index].base.Defense
-                  if (PokemonStatsKeys[j] === 'Defense') newMonster['equipmentStats'].push(
-                      {
-                          "key": "rangedDefenceBonus",
-                          "value": Pokemon[index].base.Defense
-                      },
-                      {
-                          "key": "meleeDefenceBonus",
-                          "value": Pokemon[index].base.Defense
-                      }
-                  )
-                  if (PokemonStatsKeys[j] === 'Attack') newMonster['levels']['Strength'] = Pokemon[index].base.Attack
-                  if (PokemonStatsKeys[j] === 'Attack') newMonster['equipmentStats'].push(
-                      {
-                          "key": "meleeStrengthBonus",
-                          "value": Pokemon[index].base.Attack
-                      },
-                      {
-                          "key": "rangedStrengthBonus",
-                          "value": Pokemon[index].base.Attack
-                      }
-                  )
-                  if (PokemonStatsKeys[j] === 'Attack') newMonster['levels']['Ranged'] = Pokemon[index].base.Attack
-                  if (PokemonStatsKeys[j] === 'Sp. Attack') {
-                      newMonster['levels']['Magic'] = Pokemon[index].base['Sp. Attack']
-                      attackType['Magic'] = Pokemon[index].base['Sp. Attack']
+                )
+                if (PokemonStatsKeys[j] === 'Attack') newMonster['levels']['Strength'] = Pokemon[index].base.Attack
+                if (PokemonStatsKeys[j] === 'Attack') newMonster['equipmentStats'].push(
+                  {
+                    "key": "meleeStrengthBonus",
+                    "value": Pokemon[index].base.Attack
+                  },
+                  {
+                    "key": "rangedStrengthBonus",
+                    "value": Pokemon[index].base.Attack
                   }
-                  if (PokemonStatsKeys[j] === 'Sp. Attack') newMonster['equipmentStats'].push({
-                      "key": "magicAttackBonus",
-                      "value": Pokemon[index].base['Sp. Attack']
-                  })
-                  if (PokemonStatsKeys[j] === 'Sp. Defense') newMonster['equipmentStats'].push({
-                      "key": "magicDefenceBonus",
-                      "value": Pokemon[index].base['Sp. Defense']
-                  })
+                )
+                if (PokemonStatsKeys[j] === 'Attack') newMonster['levels']['Ranged'] = Pokemon[index].base.Attack
+                if (PokemonStatsKeys[j] === 'Sp. Attack') {
+                  newMonster['levels']['Magic'] = Pokemon[index].base['Sp. Attack']
+                  attackType['Magic'] = Pokemon[index].base['Sp. Attack']
+                }
+                if (PokemonStatsKeys[j] === 'Sp. Attack') newMonster['equipmentStats'].push({
+                  "key": "magicAttackBonus",
+                  "value": Pokemon[index].base['Sp. Attack']
+                })
+                if (PokemonStatsKeys[j] === 'Sp. Defense') newMonster['equipmentStats'].push({
+                  "key": "magicDefenceBonus",
+                  "value": Pokemon[index].base['Sp. Defense']
+                })
               }
               newMonster['equipmentStats'].push(
-                  {
-                      "key": "attackSpeed",
-                      "value": 2400 - Pokemon[index].base['Speed']
-                  }
+                {
+                  "key": "attackSpeed",
+                  "value": 2400 - Pokemon[index].base['Speed']
+                }
               )
               if (attackType['Magic'] > attackType['Attack']) {
-                  newMonster["attackType"] = "magic"
+                newMonster["attackType"] = "magic"
               } else {
-                  Math.random() < 0.5 ? newMonster["attackType"] = "ranged" : newMonster["attackType"] = "melee"
+                Math.random() < 0.5 ? newMonster["attackType"] = "ranged" : newMonster["attackType"] = "melee"
               }
-          
-              if(Pokemon[index].type.includes('Normal')) { NewPet.modifiers["increasedHolyDustFromBlessedOffering"] = 1 }
-              if(Pokemon[index].type.includes('Fighting')) { NewPet.modifiers["increasedHolyDustFromBlessedOffering"] = 1 }
-              if(Pokemon[index].type.includes('Flying')) { NewPet.modifiers["increasedHolyDustFromBlessedOffering"] = 1 }
-              if(Pokemon[index].type.includes('Poison')) { NewPet.modifiers["increasedHolyDustFromBlessedOffering"] = 1 }
-              if(Pokemon[index].type.includes('Ground')) { NewPet.modifiers["increasedHolyDustFromBlessedOffering"] = 1 }
-              if(Pokemon[index].type.includes('Rock')) { NewPet.modifiers["increasedHolyDustFromBlessedOffering"] = 1 }
-              if(Pokemon[index].type.includes('Bug')) { NewPet.modifiers["increasedFletchingBoltQuantity"] = 1 }
-              if(Pokemon[index].type.includes('Ghost')) { NewPet.modifiers["increasedFireRunesWhenMakingElementalRunes"] = 1 }
-              if(Pokemon[index].type.includes('Steel')) { NewPet.modifiers["increasedHolyDustFromBlessedOffering"] = 1 }
-              if(Pokemon[index].type.includes('Fire')) { NewPet.modifiers["increasedFiremakingLogGP"] = 1 }
-              if(Pokemon[index].type.includes('Water')) { NewPet.modifiers["increasedHolyDustFromBlessedOffering"] = 1 }
-              if(Pokemon[index].type.includes('Grass')) { NewPet.modifiers["increasedFlatFarmingYield"] = 1 }
-              if(Pokemon[index].type.includes('Electric')) { NewPet.modifiers["increasedHolyDustFromBlessedOffering"] = 1 }
-              if(Pokemon[index].type.includes('Psychic')) { NewPet.modifiers["increasedHolyDustFromBlessedOffering"] = 1 }
-              if(Pokemon[index].type.includes('Ice')) { NewPet.modifiers["increasedHolyDustFromBlessedOffering"] = 1 }
-              if(Pokemon[index].type.includes('Dragon')) { NewPet.modifiers["increasedPotionChargesFlat"] = 1 }
-              if(Pokemon[index].type.includes('Dark')) { NewPet.modifiers["increasedHolyDustFromBlessedOffering"] = 1 }
-              if(Pokemon[index].type.includes('Fairy')) { NewPet.modifiers["increasedTownshipGPProduction"] = 1 }
-              
-              idLog.push("monad:" + Pokemon[index].name + "_pet")
+
+              if (Pokemon[index].type.includes('Normal')) { NewPet.modifiers["increasedHolyDustFromBlessedOffering"] = 1 }
+              if (Pokemon[index].type.includes('Fighting')) { NewPet.modifiers["increasedHolyDustFromBlessedOffering"] = 1 }
+              if (Pokemon[index].type.includes('Flying')) { NewPet.modifiers["increasedHolyDustFromBlessedOffering"] = 1 }
+              if (Pokemon[index].type.includes('Poison')) { NewPet.modifiers["increasedHolyDustFromBlessedOffering"] = 1 }
+              if (Pokemon[index].type.includes('Ground')) { NewPet.modifiers["increasedHolyDustFromBlessedOffering"] = 1 }
+              if (Pokemon[index].type.includes('Rock')) { NewPet.modifiers["increasedHolyDustFromBlessedOffering"] = 1 }
+              if (Pokemon[index].type.includes('Bug')) { NewPet.modifiers["increasedFletchingBoltQuantity"] = 1 }
+              if (Pokemon[index].type.includes('Ghost')) { NewPet.modifiers["increasedFireRunesWhenMakingElementalRunes"] = 1 }
+              if (Pokemon[index].type.includes('Steel')) { NewPet.modifiers["increasedHolyDustFromBlessedOffering"] = 1 }
+              if (Pokemon[index].type.includes('Fire')) { NewPet.modifiers["increasedFiremakingLogGP"] = 1 }
+              if (Pokemon[index].type.includes('Water')) { NewPet.modifiers["increasedHolyDustFromBlessedOffering"] = 1 }
+              if (Pokemon[index].type.includes('Grass')) { NewPet.modifiers["increasedFlatFarmingYield"] = 1 }
+              if (Pokemon[index].type.includes('Electric')) { NewPet.modifiers["increasedHolyDustFromBlessedOffering"] = 1 }
+              if (Pokemon[index].type.includes('Psychic')) { NewPet.modifiers["increasedHolyDustFromBlessedOffering"] = 1 }
+              if (Pokemon[index].type.includes('Ice')) {
+                NewPet.modifiers["increasedHolyDustFromBlessedOffering"] = 1
+                MagicPokemonList.push(`monad:${NewPet['id']}`)
+              }
+              if (Pokemon[index].type.includes('Dragon')) { NewPet.modifiers["increasedPotionChargesFlat"] = 1 }
+              if (Pokemon[index].type.includes('Dark')) { NewPet.modifiers["increasedHolyDustFromBlessedOffering"] = 1 }
+              if (Pokemon[index].type.includes('Fairy')) { NewPet.modifiers["increasedTownshipGPProduction"] = 1 }
+
+              allPokemonId.push(`monad:${newMonster['id']}`)
               itemPackage.monsters.add(newMonster)
               itemPackage.pets.add(NewPet)
-          }
-            // for (let index = 0; index < pokemon3.length; index++) {
-            //   const NewPet: any = {
-            //     name: pokemon3[index].name,
-            //     media: pokemon3[index].src,
-            //     "id": pokemon3[index].name + "_pet",
-            //     "hint": "Pokemon Gen 3",
-            //     "modifiers": {
-            //       "increasedHolyDustFromBlessedOffering": 1
-            //     },
-            //     "activeInRaid": false,
-            //     "scaleChanceWithMasteryPool": false,
-            //     "ignoreCompletion": false
-            //   }
-            //   const newMonster: any = {
-            //     "id": pokemon3[index].name + "_monster",
-            //     "name": pokemon3[index].name,
-            //     "media": pokemon3[index].src,
-            //     "levels": {
-            //       "Attack": 1,
-            //       "Defence": 1,
-            //       "Hitpoints": 1,
-            //       "Magic": 1,
-            //       "Ranged": 1,
-            //       "Strength": 1
-            //     },
-            //     "equipmentStats": [
-            //       {
-            //         "key": "attackSpeed",
-            //         "value": 2400
-            //       }
-            //     ],
-            //     "specialAttacks": [],
-            //     "passives": [],
-            //     "ignoreCompletion": false,
-            //     "attackType": "ranged",
-            //     "lootChance": 50,
-            //     "lootTable": [
-            //       {
-            //         "itemID": "melvorD:Steel_Arrows",
-            //         "maxQuantity": 100,
-            //         "minQuantity": 5,
-            //         "weight": 100
-            //       },
-            //     ],
-            //     "gpDrops": {
-            //       "min": 1,
-            //       "max": 100
-            //     },
-            //     "bones": {
-            //       "itemID": "melvorD:Bones",
-            //       "quantity": 1
-            //     },
-            //     "canSlayer": true,
-            //     "isBoss": false,
-            //     "selectedSpell": "melvorD:WindStrike",
-            //     "pet": {
+            }
+            const PokemonMagicSkillData = {
+              "skillID": "melvorD:Magic",
+              "data": {
+                "pets": MagicPokemonList
+              }
+            }
+            itemPackage.skillData.add(PokemonMagicSkillData)
 
-            //     }
-            //   }
-            //   newMonster['pet'] = {
-            //     "id": "monad:" + pokemon3[index].name + "_pet",
-            //     "quantity": 3
-            //   }
-            //   const attackType: any = {}
-            //   for (let j = 0; j < pokemon3[index].stats.length; j++) {
-            //     if (pokemon3[index].stats[j].stat.name === 'hp') newMonster['levels']['Hitpoints'] = pokemon3[index].stats[j].base_stat
-            //     if (pokemon3[index].stats[j].stat.name === 'attack') {
-            //       newMonster['levels']['Attack'] = pokemon3[index].stats[j].base_stat
-            //       attackType['Attack'] = pokemon3[index].stats[j].base_stat
-            //     }
-            //     if (pokemon3[index].stats[j].stat.name === 'defense') newMonster['levels']['Defence'] = pokemon3[index].stats[j].base_stat
-            //     if (pokemon3[index].stats[j].stat.name === 'defense') newMonster['equipmentStats'].push(
-            //       {
-            //         "key": "rangedDefenceBonus",
-            //         "value": pokemon3[index].stats[j].base_stat
-            //       },
-            //       {
-            //         "key": "meleeDefenceBonus",
-            //         "value": pokemon3[index].stats[j].base_stat
-            //       }
-            //     )
-            //     if (pokemon3[index].stats[j].stat.name === 'attack') newMonster['levels']['Strength'] = pokemon3[index].stats[j].base_stat
-            //     if (pokemon3[index].stats[j].stat.name === 'attack') newMonster['equipmentStats'].push(
-            //       {
-            //         "key": "meleeStrengthBonus",
-            //         "value": pokemon3[index].stats[j].base_stat
-            //       },
-            //       {
-            //         "key": "rangedStrengthBonus",
-            //         "value": pokemon3[index].stats[j].base_stat
-            //       }
-            //     )
-            //     if (pokemon3[index].stats[j].stat.name === 'attack') newMonster['levels']['Ranged'] = pokemon3[index].stats[j].base_stat
-            //     if (pokemon3[index].stats[j].stat.name === 'special-attack') {
-            //       newMonster['levels']['Magic'] = pokemon3[index].stats[j].base_stat
-            //       attackType['Magic'] = pokemon3[index].stats[j].base_stat
-            //     }
-            //     if (pokemon3[index].stats[j].stat.name === 'special-attack') newMonster['equipmentStats'].push({
-            //       "key": "magicAttackBonus",
-            //       "value": pokemon3[index].stats[j].base_stat
-            //     })
-            //     if (pokemon3[index].stats[j].stat.name === 'special-defense') newMonster['equipmentStats'].push({
-            //       "key": "magicDefenceBonus",
-            //       "value": pokemon3[index].stats[j].base_stat
-            //     })
-            //   }
-            //   if(attackType['Magic'] > attackType['Attack']) {
-            //     newMonster["attackType"] = "magic"
-            //   } else {
-            //     Math.random() < 0.5 ? newMonster["attackType"] = "ranged" : newMonster["attackType"] = "melee"
-            //   }
-            //   idLog.push("monad:" + pokemon3[index].name + "_pet")
-            //   itemPackage.monsters.add(newMonster)
-            //   itemPackage.pets.add(NewPet)
-            // }
+
+
+            const pokemon_combatarea: any = {
+              "id": "pokemon_combatarea",
+              "name": "Pokemon",
+              "media": "img/icon.png",
+              "monsterIDs": allPokemonId,
+              "difficulty": [
+                0
+              ],
+              "entryRequirements": []
+            }
+            itemPackage.combatAreas.add(pokemon_combatarea)
+            const pokemon_combat_display_order = {
+              "insertAt": "End",
+              "ids": [
+                "monad:pokemon_combatarea"
+              ]
+            }
+            itemPackage.combatAreaDisplayOrder.add(pokemon_combat_display_order)
+
             for (let index = 0; index < nonSupport.length; index++) {
               const newPoeGem: any = {
                 "id": nonSupport[index].id,
@@ -504,6 +420,7 @@ export async function setup(ctx: Modding.ModContext) {
                 },
               })
             }
+            const monadItemsKeys: any[] = Object.keys(monadItems)
             for (let index = 0; index < monadItemsKeys.length; index++) {
               const id = monadItemsKeys[index]
               const type = monadItems[id].type
@@ -802,7 +719,7 @@ export async function setup(ctx: Modding.ModContext) {
                 if (Object.keys(newModifiers).length < 1) {
                   newItem.customDescription = monadItems[id].description
                 }
-                if (newItem.itemType) { itemPackage.items.add(newItem) }                
+                if (newItem.itemType) { itemPackage.items.add(newItem) }
                 else { errorLog.push("Unknown item", newItem) }
                 itemPackage.items.modify({
                   id: "monad:lootbox",
