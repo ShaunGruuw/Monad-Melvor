@@ -181,7 +181,7 @@ export async function setup(ctx: Modding.ModContext) {
         const initialPackage = ctx.gameData.buildPackage((itemPackage: any) => {
           try {
             for (let index = 0; index < pokemon3.length; index++) {
-              const NewPet = {
+              const NewPet: any = {
                 name: pokemon3[index].name,
                 media: pokemon3[index].src,
                 "id": pokemon3[index].name + "_pet",
@@ -193,7 +193,7 @@ export async function setup(ctx: Modding.ModContext) {
                 "scaleChanceWithMasteryPool": false,
                 "ignoreCompletion": false
               }
-              const newMonster = {
+              const newMonster: any = {
                 "id": pokemon3[index].name + "_monster",
                 "name": pokemon3[index].name,
                 "media": pokemon3[index].src,
@@ -211,6 +211,8 @@ export async function setup(ctx: Modding.ModContext) {
                     "value": 2400
                   }
                 ],
+                "specialAttacks": [],
+                "passives": [],
                 "ignoreCompletion": false,
                 "attackType": "ranged",
                 "lootChance": 50,
@@ -289,7 +291,7 @@ export async function setup(ctx: Modding.ModContext) {
                   Math.random() < 0.5 ? newMonster["attackType"] = "ranged" : newMonster["attackType"] = "melee"
                 }
               }
-              idLog.push(pokemon3[index].name)
+              idLog.push("monad:" + pokemon3[index].name + "_pet")
               itemPackage.monsters.add(newMonster)
               itemPackage.pets.add(NewPet)
             }
@@ -710,3 +712,9 @@ export async function setup(ctx: Modding.ModContext) {
 }
 
 // ["monad:TrainingHealthPotion","monad:Soulboundwand","monad:BoneLance","monad:TraineeBoneSpear","monad:PaladinEngelersBodyArmoursilverrank","monad:PaladinEngelersSalletsilverrank","monad:PaladinEngelersGauntletssilverrank","monad:PaladinEngelersSabatonsilverrank","monad:PaladinEngelersMacesilverrank","monad:PaladinEngelersShieldsilverrank","monad:PaladinEngelersCapesilverrank","monad:DemonHunterNecklace","monad:DemonHunterBracelet","monad:DemonHunterEaring","monad:DemonHunterRing","monad:ToadsSkinJacket","monad:CrownoftheDammed","monad:Ringofinitialundeadcontrol","monad:RingofLittleStrength","monad:PendentofMediumMagic","monad:WitchesHat","monad:QueensPawn","monad:Skullofvictim","monad:EnchantingQuill","monad:PrincessesCoin","monad:necklacemadeofteeth","monad:Blackscarf","monad:WhaleSkin","monad:LinenHalfgloves","monad:BattlemagesGloves","monad:BattlemagesHat","monad:BattlemagesRobe","monad:BattlemagesCrakows","monad:BattlemagesBreeches","monad:CottonScarf","monad:RayndrJackboots","monad:RoguesRing","monad:DarkElfsScimitar","monad:MeroyriXiphos","monad:RayndrFaceMask","monad:ShadowPiratesCoat","monad:LeatherPirateBoots","monad:BlackBand","monad:TidusEaring","monad:FeaturelessDeathwoodMask","monad:BlackBraidBracelet","monad:FrostGloves","monad:FlameGloves","monad:CeremonialWhiteStagMask","monad:HeavenlyWhiteStagMask","monad:AcademyRobeBlackYellow","monad:HuiLusBattleArmour","monad:HuiLusEnchantingGloves","monad:HuiLusBurningBoots","monad:OtariKote","monad:GlideMoroha","monad:GaleMoroha","monad:NiyoshoGakuran","monad:NiyoshoHakama","monad:OttosLeakyWand","monad:JokotoWakizashi","monad:Seifuku","monad:NiyoshoKimono","monad:AutumnCloak"]
+
+
+// pokemon 3
+
+
+// ["monad:treecko_pet","monad:grovyle_pet","monad:sceptile_pet","monad:torchic_pet","monad:combusken_pet","monad:blaziken_pet","monad:mudkip_pet","monad:marshtomp_pet","monad:swampert_pet","monad:poochyena_pet","monad:mightyena_pet","monad:zigzagoon_pet","monad:linoone_pet","monad:wurmple_pet","monad:silcoon_pet","monad:beautifly_pet","monad:cascoon_pet","monad:dustox_pet","monad:lotad_pet","monad:lombre_pet","monad:ludicolo_pet","monad:seedot_pet","monad:nuzleaf_pet","monad:shiftry_pet","monad:taillow_pet","monad:swellow_pet","monad:wingull_pet","monad:pelipper_pet","monad:ralts_pet","monad:kirlia_pet","monad:gardevoir_pet","monad:surskit_pet","monad:masquerain_pet","monad:shroomish_pet","monad:breloom_pet","monad:slakoth_pet","monad:vigoroth_pet","monad:slaking_pet","monad:nincada_pet","monad:ninjask_pet","monad:shedinja_pet","monad:whismur_pet","monad:loudred_pet","monad:exploud_pet","monad:makuhita_pet","monad:hariyama_pet","monad:azurill_pet","monad:nosepass_pet","monad:skitty_pet","monad:delcatty_pet","monad:sableye_pet","monad:mawile_pet","monad:aron_pet","monad:lairon_pet","monad:aggron_pet","monad:meditite_pet","monad:medicham_pet","monad:electrike_pet","monad:manectric_pet","monad:plusle_pet","monad:minun_pet","monad:volbeat_pet","monad:illumise_pet","monad:roselia_pet","monad:gulpin_pet","monad:swalot_pet","monad:carvanha_pet","monad:sharpedo_pet","monad:wailmer_pet","monad:wailord_pet","monad:numel_pet","monad:camerupt_pet","monad:torkoal_pet","monad:spoink_pet","monad:grumpig_pet","monad:spinda_pet","monad:trapinch_pet","monad:vibrava_pet","monad:flygon_pet","monad:cacnea_pet","monad:cacturne_pet","monad:swablu_pet","monad:altaria_pet","monad:zangoose_pet","monad:seviper_pet","monad:lunatone_pet","monad:solrock_pet","monad:barboach_pet","monad:whiscash_pet","monad:corphish_pet","monad:crawdaunt_pet","monad:baltoy_pet","monad:claydol_pet","monad:lileep_pet","monad:cradily_pet","monad:anorith_pet","monad:armaldo_pet","monad:feebas_pet","monad:milotic_pet","monad:castform_pet","monad:kecleon_pet","monad:shuppet_pet","monad:banette_pet","monad:duskull_pet","monad:dusclops_pet","monad:tropius_pet","monad:chimecho_pet","monad:absol_pet","monad:wynaut_pet","monad:snorunt_pet","monad:glalie_pet","monad:spheal_pet","monad:sealeo_pet","monad:walrein_pet","monad:clamperl_pet","monad:huntail_pet","monad:gorebyss_pet","monad:relicanth_pet","monad:luvdisc_pet","monad:bagon_pet","monad:shelgon_pet","monad:salamence_pet","monad:beldum_pet","monad:metang_pet","monad:metagross_pet","monad:regirock_pet","monad:regice_pet","monad:registeel_pet","monad:latias_pet","monad:latios_pet","monad:kyogre_pet","monad:groudon_pet","monad:rayquaza_pet","monad:jirachi_pet"]
