@@ -234,8 +234,7 @@ export async function setup(ctx: Modding.ModContext) {
                 "isBoss": false,
                 "selectedSpell": "melvorD:WindStrike",
                 "pet": {
-                  "id": "melvorD:ArcticYeti",
-                  "quantity": 1000
+
                 }
               }
               newMonster['pet'] = {
