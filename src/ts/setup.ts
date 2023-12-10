@@ -5,6 +5,8 @@
 // Game data for registration
 import { ItemList as monadItems } from '../data/monad-data';
 import { nonSupport } from '../data/poe.data';
+import pokemon3 from '../data/data.pokemon.3.json';
+
 
 // Styles
 // Will automatically load your styles upon loading the mod
@@ -178,6 +180,22 @@ export async function setup(ctx: Modding.ModContext) {
         // Error: [test] Error constructing NamespacedObject. Local ID "Training Health Potion" is invalid.
         const initialPackage = ctx.gameData.buildPackage((itemPackage: any) => {
           try {
+            for (let index = 0; index < pokemon3.length; index++) {
+                const NewPet = {
+                    name: pokemon3[index].name,
+                    media: pokemon3[index].src,
+                    "id": pokemon3[index].name,
+                    "hint": "Pokemon Gen 3",
+                    "modifiers": {
+                      "increasedHolyDustFromBlessedOffering": 1
+                    },
+                    "activeInRaid": false,
+                    "scaleChanceWithMasteryPool": false,
+                    "ignoreCompletion": false
+                }
+                idLog.push(pokemon3[index].name)
+                itemPackage.pets.add(NewPet)
+            }
             for (let index = 0; index < nonSupport.length; index++) {
               const newPoeGem: any = {
                 "id": nonSupport[index].id,
@@ -228,7 +246,7 @@ export async function setup(ctx: Modding.ModContext) {
                   newPoeGem.modifiers["increasedSummoningMaxHit"] = parseInt(nonSupport[index].explicitMods[0].replace(/^\D+/g, ''));
                 }                     
               }
-              idLog.push(nonSupport[index].name, Object.keys(newPoeGem.modifiers))
+              // idLog.push(nonSupport[index].name, Object.keys(newPoeGem.modifiers))
               // if (Object.keys(newPoeGem.modifiers).length < 1) {
                 newPoeGem.customDescription = nonSupport[index].secDescrText
               // }
@@ -465,7 +483,6 @@ export async function setup(ctx: Modding.ModContext) {
                       newequipmentStatsFinal.push(newequipmentStats[w])
                     }
                   }
-                  idLog.push(id, newequipmentStatsFinal)
                 }
                 if (type === "Weapon") {
                   newequipmentStatsFinal.push(
