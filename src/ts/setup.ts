@@ -180,6 +180,20 @@ export async function setup(ctx: Modding.ModContext) {
           try {
             const allPokemonId: any[] = []
             const MagicPokemonList: any[] = []
+            const WoodcuttingPokemonList: any[] = []
+            const FishingPokemonList: any[] = []
+            const FiremakingPokemonList: any[] = []
+            const CookingPokemonList: any[] = []
+            const MiningPokemonList: any[] = []
+            const SmithingPokemonList: any[] = []
+            const ThievingPokemonList: any[] = []
+            const FletchingPokemonList: any[] = []
+            const CraftingPokemonList: any[] = []
+            const RunecraftingPokemonList: any[] = []
+            const HerblorePokemonList: any[] = []
+            const AgilityPokemonList: any[] = []
+            const AstrologyPokemonList: any[] = []
+
             for (let index = 0; index < Pokemon.length; index++) {
               const NewPet: any = {
                 name: Pokemon[index].name.english,
@@ -296,32 +310,184 @@ export async function setup(ctx: Modding.ModContext) {
                 Math.random() < 0.5 ? newMonster["attackType"] = "ranged" : newMonster["attackType"] = "melee"
               }
 
-              if (Pokemon[index].type.includes('Normal')) { NewPet.modifiers["increasedHolyDustFromBlessedOffering"] = 1 }
-              if (Pokemon[index].type.includes('Fighting')) { NewPet.modifiers["increasedHolyDustFromBlessedOffering"] = 1 }
-              if (Pokemon[index].type.includes('Flying')) { NewPet.modifiers["increasedHolyDustFromBlessedOffering"] = 1 }
-              if (Pokemon[index].type.includes('Poison')) { NewPet.modifiers["increasedHolyDustFromBlessedOffering"] = 1 }
-              if (Pokemon[index].type.includes('Ground')) { NewPet.modifiers["increasedHolyDustFromBlessedOffering"] = 1 }
-              if (Pokemon[index].type.includes('Rock')) { NewPet.modifiers["increasedHolyDustFromBlessedOffering"] = 1 }
-              if (Pokemon[index].type.includes('Bug')) { NewPet.modifiers["increasedFletchingBoltQuantity"] = 1 }
-              if (Pokemon[index].type.includes('Ghost')) { NewPet.modifiers["increasedFireRunesWhenMakingElementalRunes"] = 1 }
-              if (Pokemon[index].type.includes('Steel')) { NewPet.modifiers["increasedHolyDustFromBlessedOffering"] = 1 }
-              if (Pokemon[index].type.includes('Fire')) { NewPet.modifiers["increasedFiremakingLogGP"] = 1 }
-              if (Pokemon[index].type.includes('Water')) { NewPet.modifiers["increasedHolyDustFromBlessedOffering"] = 1 }
-              if (Pokemon[index].type.includes('Grass')) { NewPet.modifiers["increasedFlatFarmingYield"] = 1 }
-              if (Pokemon[index].type.includes('Electric')) { NewPet.modifiers["increasedHolyDustFromBlessedOffering"] = 1 }
-              if (Pokemon[index].type.includes('Psychic')) { NewPet.modifiers["increasedHolyDustFromBlessedOffering"] = 1 }
+              // "increasedTownshipWoodProduction": 0,
+              // "increasedTownshipWoodcuttingProduction": 0,
+              // "increasedTownshipCoalProduction": 0,
+              // "increasedTownshipBarProduction": 0,
+              // "increasedTownshipClothingProduction": 0,
+              // "increasedTownshipFarmProduction": 0,
+              // "increasedTownshipFishingDockProduction": 0,
+              // "increasedTownshipFoodProduction": 0,
+              // "increasedTownshipEducation": 0,
+              // "increasedTownshipHerbProduction": 0,
+              // "increasedTownshipLeatherProduction": 0,
+              // "increasedTownshipRuneEssenceProduction": 0,
+              // "increasedTownshipMagicEmporiumProduction": 0,
+              // "increasedTownshipOrchardProduction": 0,
+              // "increasedTownshipStoneProduction": 0,
+
+              if (Pokemon[index].type.includes('Normal')) {
+                NewPet.modifiers["increasedTownshipForestProduction"] = 1
+                CraftingPokemonList.push(`monad:${NewPet['id']}`)
+              }
+              if (Pokemon[index].type.includes('Fighting')) {
+                NewPet.modifiers["increasedTownshipAridPlainsProduction"] = 1
+                CookingPokemonList.push(`monad:${NewPet['id']}`)
+              }
+              if (Pokemon[index].type.includes('Flying')) {
+                NewPet.modifiers["increasedTownshipJungleProduction"] = 1
+                FletchingPokemonList.push(`monad:${NewPet['id']}`)
+              }
+              if (Pokemon[index].type.includes('Poison')) {
+                NewPet.modifiers["increasedTownshipSwampProduction"] = 1
+                SmithingPokemonList.push(`monad:${NewPet['id']}`)
+              }
+              if (Pokemon[index].type.includes('Ground')) {
+                NewPet.modifiers["increasedTownshipDesertProduction"] = 1
+                RunecraftingPokemonList.push(`monad:${NewPet['id']}`)
+              }
+              if (Pokemon[index].type.includes('Rock')) {
+                NewPet.modifiers["increasedTownshipMountainsProduction"] = 1
+                MiningPokemonList.push(`monad:${NewPet['id']}`)
+              }
+              if (Pokemon[index].type.includes('Bug')) {
+                NewPet.modifiers["increasedFletchingBoltQuantity"] = 1
+                WoodcuttingPokemonList.push(`monad:${NewPet['id']}`)
+              }
+              if (Pokemon[index].type.includes('Ghost')) {
+                NewPet.modifiers["increasedFireRunesWhenMakingElementalRunes"] = 1
+                HerblorePokemonList.push(`monad:${NewPet['id']}`)
+              }
+              if (Pokemon[index].type.includes('Steel')) {
+                NewPet.modifiers["increasedTownshipBlacksmithProduction"] = 1
+                AgilityPokemonList.push(`monad:${NewPet['id']}`)
+              }
+              if (Pokemon[index].type.includes('Fire')) {
+                NewPet.modifiers["increasedFiremakingLogGP"] = 1
+                FiremakingPokemonList.push(`monad:${NewPet['id']}`)
+              }
+              if (Pokemon[index].type.includes('Water')) {
+                NewPet.modifiers["increasedTownshipWaterProduction"] = 1
+                FishingPokemonList.push(`monad:${NewPet['id']}`)
+              }
+              if (Pokemon[index].type.includes('Grass')) {
+                NewPet.modifiers["increasedFlatFarmingYield"] = 1
+                HerblorePokemonList.push(`monad:${NewPet['id']}`)
+              }
+              if (Pokemon[index].type.includes('Electric')) {
+                NewPet.modifiers["increasedTownshipValleyProduction"] = 1
+                FiremakingPokemonList.push(`monad:${NewPet['id']}`)
+              }
+              if (Pokemon[index].type.includes('Psychic')) {
+                NewPet.modifiers["increasedTownshipMaxStorage"] = 1
+                AstrologyPokemonList.push(`monad:${NewPet['id']}`)
+              }
               if (Pokemon[index].type.includes('Ice')) {
+                NewPet.modifiers["increasedTownshipSnowlandsProduction"] = 1
+                CookingPokemonList.push(`monad:${NewPet['id']}`)
+              }
+              if (Pokemon[index].type.includes('Dragon')) {
+                NewPet.modifiers["increasedPotionChargesFlat"] = 1
+                AstrologyPokemonList.push(`monad:${NewPet['id']}`)
+              }
+              if (Pokemon[index].type.includes('Dark')) {
+                NewPet.modifiers["increasedTownshipGPProduction"] = 1
+                ThievingPokemonList.push(`monad:${NewPet['id']}`)
+              }
+              if (Pokemon[index].type.includes('Fairy')) {
                 NewPet.modifiers["increasedHolyDustFromBlessedOffering"] = 1
                 MagicPokemonList.push(`monad:${NewPet['id']}`)
               }
-              if (Pokemon[index].type.includes('Dragon')) { NewPet.modifiers["increasedPotionChargesFlat"] = 1 }
-              if (Pokemon[index].type.includes('Dark')) { NewPet.modifiers["increasedHolyDustFromBlessedOffering"] = 1 }
-              if (Pokemon[index].type.includes('Fairy')) { NewPet.modifiers["increasedTownshipGPProduction"] = 1 }
 
               allPokemonId.push(`monad:${newMonster['id']}`)
               itemPackage.monsters.add(newMonster)
               itemPackage.pets.add(NewPet)
             }
+            
+            const PokemonCraftingSkillData = {
+              "skillID": "melvorD:Crafting",
+              "data": {
+                "pets": CraftingPokemonList
+              }
+            }
+            itemPackage.skillData.add(PokemonCraftingSkillData)
+            const PokemonFletchingSkillData = {
+              "skillID": "melvorD:Fletching",
+              "data": {
+                "pets": FletchingPokemonList
+              }
+            }
+            itemPackage.skillData.add(PokemonFletchingSkillData)
+            const PokemonSmithingSkillData = {
+              "skillID": "melvorD:Smithing",
+              "data": {
+                "pets": SmithingPokemonList
+              }
+            }
+            itemPackage.skillData.add(PokemonSmithingSkillData)
+            const PokemonRunecraftingSkillData = {
+              "skillID": "melvorD:Runecrafting",
+              "data": {
+                "pets": RunecraftingPokemonList
+              }
+            }
+            itemPackage.skillData.add(PokemonRunecraftingSkillData)
+            const PokemonMiningSkillData = {
+              "skillID": "melvorD:Mining",
+              "data": {
+                "pets": MiningPokemonList
+              }
+            }
+            itemPackage.skillData.add(PokemonMiningSkillData)
+            const PokemonWoodcuttingSkillData = {
+              "skillID": "melvorD:Woodcutting",
+              "data": {
+                "pets": WoodcuttingPokemonList
+              }
+            }
+            itemPackage.skillData.add(PokemonWoodcuttingSkillData)
+            const PokemonAgilitySkillData = {
+              "skillID": "melvorD:Agility",
+              "data": {
+                "pets": AgilityPokemonList
+              }
+            }
+            itemPackage.skillData.add(PokemonAgilitySkillData)
+            const PokemonFishingSkillData = {
+              "skillID": "melvorD:Fishing",
+              "data": {
+                "pets": FishingPokemonList
+              }
+            }
+            itemPackage.skillData.add(PokemonFishingSkillData)
+            const PokemonHerbloreSkillData = {
+              "skillID": "melvorD:Herblore",
+              "data": {
+                "pets": HerblorePokemonList
+              }
+            }
+            itemPackage.skillData.add(PokemonHerbloreSkillData)
+            const PokemonFiremakingSkillData = {
+              "skillID": "melvorD:Firemaking",
+              "data": {
+                "pets": FiremakingPokemonList
+              }
+            }
+            itemPackage.skillData.add(PokemonFiremakingSkillData)
+            const PokemonCookingSkillData = {
+              "skillID": "melvorD:Cooking",
+              "data": {
+                "pets": CookingPokemonList
+              }
+            }
+            itemPackage.skillData.add(PokemonCookingSkillData)
+            const PokemonAstrologySkillData = {
+              "skillID": "melvorD:Astrology",
+              "data": {
+                "pets": AstrologyPokemonList
+              }
+            }
+            itemPackage.skillData.add(PokemonAstrologySkillData)
             const PokemonMagicSkillData = {
               "skillID": "melvorD:Magic",
               "data": {
@@ -329,8 +495,13 @@ export async function setup(ctx: Modding.ModContext) {
               }
             }
             itemPackage.skillData.add(PokemonMagicSkillData)
-
-
+            const PokemonThievingSkillData = {
+              "skillID": "melvorD:Thieving",
+              "data": {
+                "pets": ThievingPokemonList
+              }
+            }
+            itemPackage.skillData.add(PokemonThievingSkillData)
 
             const pokemon_combatarea: any = {
               "id": "pokemon_combatarea",
