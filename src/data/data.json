@@ -97,6 +97,7 @@
         "equipmentStats": [],
         "itemType": "Equipment",
         "modifiers": {
+          "increasedMaxHitpoints": 0.1
         }
       },
       {
