@@ -97,7 +97,12 @@
         "equipmentStats": [],
         "itemType": "Equipment",
         "modifiers": {
-          "increasedMaxHitpoints": 0.1
+          "increasedHiddenSkillLevel": [
+            {
+              "skillID":"melvorD:Defence",
+              "value": 0.1
+            }
+          ]
         }
       },
       {
