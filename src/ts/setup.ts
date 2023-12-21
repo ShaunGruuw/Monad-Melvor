@@ -178,6 +178,7 @@ export async function setup(ctx: Modding.ModContext) {
         const idLog: any[] = []
         const initialPackage = ctx.gameData.buildPackage((itemPackage: any) => {
           try {
+            // const SRDURL = "https://www.dnd5eapi.co/api/images/monsters/aboleth.png"
             if (false && Pokemon) {
               const allPokemonId: any[] = []
               const MagicPokemonList: any[] = []
