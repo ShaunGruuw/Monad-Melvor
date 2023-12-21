@@ -178,7 +178,7 @@ export async function setup(ctx: Modding.ModContext) {
         const idLog: any[] = []
         const initialPackage = ctx.gameData.buildPackage((itemPackage: any) => {
           try {
-            if (Pokemon) {
+            if (false && Pokemon) {
               const allPokemonId: any[] = []
               const MagicPokemonList: any[] = []
               const WoodcuttingPokemonList: any[] = []
