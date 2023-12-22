@@ -6,6 +6,8 @@
 import { ItemList as monadItems } from '../data/monad-data';
 import { nonSupport } from '../data/poe.data';
 import Pokemon from '../data/data.allPokemon.json'
+import DnDmonsters from '../data/5e.data.json'
+
 
 
 // Styles
@@ -179,6 +181,54 @@ export async function setup(ctx: Modding.ModContext) {
         const initialPackage = ctx.gameData.buildPackage((itemPackage: any) => {
           try {
             // const SRDURL = "https://www.dnd5eapi.co/api/images/monsters/aboleth.png"
+            if(DnDmonsters) {
+              for (let index = 0; index < DnDmonsters.length; index++) {
+
+                const newMonster: any = {
+                    "id": DnDmonsters[index].name + "_monster",
+                    "name": DnDmonsters[index].name,
+                    "media": DnDmonsters[index].img_url,
+                    "levels": {
+                      "Attack": Math.pow(1.5, parseInt(DnDmonsters[index].STR)),
+                      "Defence": Math.pow(1.5, parseInt(DnDmonsters[index].CON)),
+                      "Hitpoints": Math.pow(1.5, parseInt(DnDmonsters[index]["Hit Points"])),
+                      "Magic": Math.pow(1.5, parseInt(DnDmonsters[index].INT)),
+                      "Ranged": Math.pow(1.5, parseInt(DnDmonsters[index].DEX)),
+                      "Strength": Math.pow(1.5, parseInt(DnDmonsters[index].STR))
+                    },
+                    "equipmentStats": [
+            
+                    ],
+                    "specialAttacks": [],
+                    "passives": [],
+                    "ignoreCompletion": false,
+                    "attackType": "ranged",
+                    "lootChance": 100,
+                    "lootTable": [
+                      {
+                        "itemID": "melvorD:Steel_Arrows",
+                        "maxQuantity": 10,
+                        "minQuantity": 5,
+                        "weight": 100
+                      },
+                    ],
+                    "gpDrops": {
+                      "min": 1,
+                      "max": 100
+                    },
+                    "bones": {
+                      "itemID": "melvorD:Bones",
+                      "quantity": 1
+                    },
+                    "canSlayer": true,
+                    "isBoss": false,
+                    "selectedSpell": "melvorD:WindStrike",
+                    "pet": {
+            
+                    }
+                  }
+            }
+            }
             if (false && Pokemon) {
               const allPokemonId: any[] = []
               const MagicPokemonList: any[] = []
