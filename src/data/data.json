@@ -137,6 +137,20 @@
         "sellsFor": 1,
         "healsFor": 3
       }
+    ],
+    "pets": [
+      {
+        "id": "test_pet",
+        "name": "test_pet",
+        "media": "assets/icon.png",
+        "scaleChanceWithMasteryPool": false,
+        "ignoreCompletion": false,
+        "modifiers": {
+          "increasedHolyDustFromBlessedOffering": 20
+        },
+        "activeInRaid": false,
+        "hint": "The White Gold Tower"
+      }
     ]
   },
   "modifications": {

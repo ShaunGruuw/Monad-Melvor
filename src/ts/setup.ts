@@ -26,6 +26,7 @@ import '../img/items/lootbox.png';
 // Reference images using `ctx.getResourceUrl`
 
 export async function setup(ctx: Modding.ModContext) {
+  const _namespace = "monad"
   const errorLog: any[] = []
   try {
     // Register our GameData
@@ -44,190 +45,185 @@ export async function setup(ctx: Modding.ModContext) {
         // const Abyssal = mod.manager.getLoadedModList().includes('Abyssal Rift')
         // const Pokeworld = mod.manager.getLoadedModList().includes('Pokeworld (Generation 1)')
         // const Runescape = mod.manager.getLoadedModList().includes('Runescape Encounters in Melvor')
-
-        if (kcm) {
-          const cmim = mod.api.customModifiersInMelvor;
-          if (!cmim) {
-            return;
-          }
-          const DragonList: any[] = [
-          ]
-          const HumansList: any[] = [
-          ]
-          const UndeadList: any[] = [
-            "melvorF:ElderVampire",
-          ]
-          const DemonList: any[] = [
-          ]
-          const AnimalList: any[] = [
-          ]
-          const GoblinList: any[] = [
-            "melvorD:Golbin",
-            "melvorD:RangedGolbin",
-          ]
-          const MythList: any[] = [
-          ]
-          const elfList: any[] = [
-          ]
-          const RobotsList: any[] = [
-          ]
-          const OrcList: any[] = [
-          ]
-          const SeaCreatureList: any[] = [
-          ]
-          const ElementalCreatureList: any[] = [
-          ]
-          const PlantList: any[] = [
-            "melvorD:Plant"
-          ]
-          if (TothEntitlement) {
-
-            UndeadList.push(
-              "melvorF:ElderVampire",
-              "melvorTotH:CursedSkeletonWarrior",
-              "melvorTotH:CursedSpirit",
-              "melvorTotH:LadyDarkheart",
-              "melvorTotH:Phantom",
-              "melvorTotH:Banshee",
-              "melvorTotH:Spectre",
-              "melvorTotH:VorloranDevastator",
-              "melvorTotH:VorloranWatcher",
-              "melvorTotH:VorloranProtector",
-            )
-            SeaCreatureList.push(
-              "melvorTotH:TwinSeaDragonSerpent",
-              "melvorTotH:Leviathan",
-            )
-            AnimalList.push(
-              "melvorTotH:PoisonToad",
-              "melvorTotH:Conda",
-              "melvorTotH:BurningSnake",
-              "melvorTotH:PolarBear",
-              "melvorTotH:SpectralIceWolf",
-              "melvorTotH:MonsterCroc",
-              "melvorTotH:ScouterSpider",
-              "melvorTotH:TrapperSpider",
-              "melvorTotH:WickedSpider",
-              "melvorTotH:BasherSpider",
-              "melvorTotH:EnforcerSpider",
-              "melvorTotH:GuardianSpider",
-              "melvorTotH:SpiderQueen",
-              "melvorTotH:Beholder",
-              "melvorTotH:ShadowBeast",
-            )
-            PlantList.push(
-              "melvorTotH:HungryPlant",
-              "melvorTotH:Alraune",
-              "melvorTotH:Morellia",
-              "melvorTotH:TreeGiant",
-              "melvorTotH:TreeSpirit",
-            )
-            DragonList.push(
-              "melvorTotH:Kongamato", "melvorTotH:GretYun", "melvorTotH:RaZu",
-            )
-            DemonList.push("melvorTotH:MagicFireDemon",)
-            MythList.push(
-              "melvorTotH:Manticore",
-              "melvorTotH:IceHydra",
-              "melvorTotH:Leviathan",
-              "melvorTotH:Siren",
-              "melvorTotH:GoliathWerewolf",
-              "melvorTotH:Torvair",
-              "melvorTotH:Arctair",
-              "melvorTotH:Harkair",
-              "melvorTotH:Cockatrice",
-              "melvorTotH:GuardianoftheHerald",
-            )
-            ElementalCreatureList.push(
-              "melvorTotH:InfernalGolem", "melvorTotH:Trogark", "melvorTotH:LargeIceTroll", "melvorTotH:FrostGolem", "melvorTotH:LightningSpirit", "melvorTotH:LightningGolem", "melvorTotH:LightningMonkey",
-            )
-            HumansList.push("melvorTotH:PlagueDoctor",)
-            //     "melvorTotH:TheHeraldPhase1",
-            //     "melvorTotH:TheHeraldPhase2",
-            //     "melvorTotH:TheHeraldPhase3"
-
-          }
-          if (mythLoaded) {
-            HumansList.push("mythMusic:Jester",
-              "mythMusic:Enchanted_Jester",
-              "mythMusic:Mystic_Jester")
-          }
-          cmim.addMonsters("Dragon", DragonList)
-          cmim.addMonsters("Human", HumansList)
-          cmim.addMonsters("Undead", UndeadList)
-          cmim.addMonsters("Demon", DemonList)
-          cmim.addMonsters("Animal", AnimalList)
-          cmim.addMonsters("MythicalCreature", MythList)
-          cmim.addMonsters("SeaCreature", SeaCreatureList)
-          cmim.addMonsters("Elemental", ElementalCreatureList)
-
-          cmim.registerOrUpdateType("Elf", "Elves", "https://cdn.melvor.net/core/v018/assets/media/pets/elf_rock.png", elfList, true);
-          cmim.registerOrUpdateType("Goblin", "Goblins", "https://cdn.melvor.net/core/v018/assets/media/monsters/goblin.png", GoblinList, true);
-          cmim.registerOrUpdateType("Robot", "Robots", "https://cdn.melvor.net/core/v018/assets/media/pets/smithing.png", RobotsList, true);
-          cmim.registerOrUpdateType("Orc", "Orcs", "https://cdn.melvor.net/core/v018/assets/media/monsters/goblin.png", OrcList, true);
-          cmim.registerOrUpdateType("Plant", "Plants", "https://cdn.melvor.net/core/v018/assets/media/monsters/plant.png", PlantList, true);
-
-          cmim.forceBaseModTypeActive("Dragon");
-          cmim.forceBaseModTypeActive("Undead");
-          cmim.forceBaseModTypeActive("Human");
-          cmim.forceBaseModTypeActive("Animal");
-          cmim.forceBaseModTypeActive("Demon");
-          cmim.forceBaseModTypeActive("Elemental");
-          cmim.forceBaseModTypeActive("MythicalCreature");
-          cmim.forceBaseModTypeActive("SeaCreature");
-        }
+        const DragonList: any[] = [
+        ]
+        const HumansList: any[] = [
+        ]
+        const UndeadList: any[] = [
+          "melvorF:ElderVampire",
+        ]
+        const DemonList: any[] = [
+        ]
+        const AnimalList: any[] = [
+        ]
+        const GoblinList: any[] = [
+          "melvorD:Golbin",
+          "melvorD:RangedGolbin",
+        ]
+        const MythList: any[] = [
+        ]
+        const elfList: any[] = [
+        ]
+        const RobotsList: any[] = [
+        ]
+        const OrcList: any[] = [
+        ]
+        const SeaCreatureList: any[] = [
+        ]
+        const ElementalCreatureList: any[] = [
+        ]
+        const PlantList: any[] = [
+          "melvorD:Plant"
+        ]
+        const OozesList: any[] = [
+        ]
+        const AberrationsList: any[] = [
+        ]
+        const CelestialsList: any[] = [
+        ]
+        const ConstructsList: any[] = [
+        ]
+        const FeyList: any[] = [
+        ]
+        const FiendList: any[] = [
+        ]
+        const GiantsList: any[] = [
+        ]
+        const MonstrositiesList: any[] = [
+        ]
 
         const idLog: any[] = []
         const initialPackage = ctx.gameData.buildPackage((itemPackage: any) => {
           try {
             // const SRDURL = "https://www.dnd5eapi.co/api/images/monsters/aboleth.png"
-            if(DnDmonsters) {
+            if (DnDmonsters) {
+              const d5monsterid = []
+              const sizes = {
+                Gargantuan: "melvorD:Magic_Bones",
+                Huge: "melvorD:Big_Bones",
+                Large: "melvorD:Big_Bones",
+                Medium: "melvorD:Bones",
+                Small: "melvorD:Bones",
+                Tiny: "melvorD:Bones"
+              }
+              const sizeList = Object.keys(sizes)
+
+              const species = {
+                "humanoid": HumansList,
+                "undead": UndeadList,
+                "aberration": AberrationsList,
+                "beast": AnimalList,
+                "celestial": CelestialsList,
+                "construct": ConstructsList,
+                "dragon": DragonList,
+                "elemental": ElementalCreatureList,
+                "fey": FeyList,
+                "fiend": FiendList,
+                "giant": GiantsList,
+                "monstrosity": MonstrositiesList,
+                "ooze": OozesList,
+                "plant": PlantList
+              }
+              const speciesList = Object.keys(species)
+
               for (let index = 0; index < DnDmonsters.length; index++) {
+                const NewMonsterID = DnDmonsters[index].name.replace(/[^a-zA-Z ]/g, "").replace(/\s/g, "") + "_monster"
+                const NewMonsterID_namespace = _namespace + ":" + NewMonsterID
+                d5monsterid.push(NewMonsterID_namespace)
+                let bones = "melvorD:Bones"
+                for (let j = 0; j < sizeList.length; j++) {
+                  if (DnDmonsters[index].meta.includes(sizeList[j])) {
+                    // @ts-ignore
+                    bones = sizes[sizeList[j]]
+                  }
+                }
+                if (DnDmonsters[index].meta.includes('Celestials')) {
+                  bones = 'melvorF:Holy_Dust'
+                }
+                if (DnDmonsters[index].meta.includes('dragon')) {
+                  bones = 'melvorD:Dragon_Bones'
+                }
+
+                for (let j = 0; j < speciesList.length; j++) {
+                  if (DnDmonsters[index].meta.includes(speciesList[j])) {
+                    // @ts-ignore
+                    species[speciesList[j]].push(NewMonsterID_namespace)
+                  }
+                }
 
                 const newMonster: any = {
-                    "id": DnDmonsters[index].name + "_monster",
-                    "name": DnDmonsters[index].name,
-                    "media": DnDmonsters[index].img_url,
-                    "levels": {
-                      "Attack": Math.pow(1.5, parseInt(DnDmonsters[index].STR)),
-                      "Defence": Math.pow(1.5, parseInt(DnDmonsters[index].CON)),
-                      "Hitpoints": Math.pow(1.5, parseInt(DnDmonsters[index]["Hit Points"])),
-                      "Magic": Math.pow(1.5, parseInt(DnDmonsters[index].INT)),
-                      "Ranged": Math.pow(1.5, parseInt(DnDmonsters[index].DEX)),
-                      "Strength": Math.pow(1.5, parseInt(DnDmonsters[index].STR))
+                  "id": NewMonsterID,
+                  "name": DnDmonsters[index].name,
+                  "media": DnDmonsters[index].img_url,
+                  "levels": {
+                    "Attack": Math.floor(Math.pow(1.5, parseInt(DnDmonsters[index].STR))),
+                    "Defence": Math.floor(Math.pow(1.5, parseInt(DnDmonsters[index].CON))),
+                    "Hitpoints": Math.floor(parseInt(DnDmonsters[index]["Hit Points"])) * 10,
+                    "Magic": Math.floor(Math.pow(1.5, parseInt(DnDmonsters[index].INT))),
+                    "Ranged": Math.floor(Math.pow(1.5, parseInt(DnDmonsters[index].DEX))),
+                    "Strength": Math.floor(Math.pow(1.5, parseInt(DnDmonsters[index].STR)))
+                  },
+                  "equipmentStats": [
+                    {
+                      "key": "damageReduction",
+                      "value": Math.floor(parseInt(DnDmonsters[index]["Armor Class"])) * 4
                     },
-                    "equipmentStats": [
-            
-                    ],
-                    "specialAttacks": [],
-                    "passives": [],
-                    "ignoreCompletion": false,
-                    "attackType": "ranged",
-                    "lootChance": 100,
-                    "lootTable": [
-                      {
-                        "itemID": "melvorD:Steel_Arrows",
-                        "maxQuantity": 10,
-                        "minQuantity": 5,
-                        "weight": 100
-                      },
-                    ],
-                    "gpDrops": {
-                      "min": 1,
-                      "max": 100
-                    },
-                    "bones": {
-                      "itemID": "melvorD:Bones",
-                      "quantity": 1
-                    },
-                    "canSlayer": true,
-                    "isBoss": false,
-                    "selectedSpell": "melvorD:WindStrike",
-                    "pet": {
-            
+                    {
+                      "key": "attackSpeed",
+                      "value": !!parseInt(DnDmonsters[index].Speed) ? Math.floor(40 / parseInt(DnDmonsters[index].Speed) * 1000) : 5000
                     }
+                  ],
+                  "specialAttacks": [],
+                  "passives": [],
+                  "ignoreCompletion": false,
+                  "attackType": parseInt(DnDmonsters[index].INT) > parseInt(DnDmonsters[index].STR) ? "magic" : Math.random() < 0.5 ? "melee" : "ranged",
+                  "lootChance": 100,
+                  "lootTable": [
+                    {
+                      "itemID": "melvorD:Steel_Arrows",
+                      "maxQuantity": 10,
+                      "minQuantity": 5,
+                      "weight": 100
+                    },
+                  ],
+                  "gpDrops": {
+                    "min": Math.floor(Math.pow(1.1, parseInt(DnDmonsters[index].Challenge))),
+                    "max": Math.floor(Math.pow(2.2, parseInt(DnDmonsters[index].Challenge)))
+                  },
+                  "bones": {
+                    "itemID": bones,
+                    "quantity": 1
+                  },
+                  "canSlayer": true,
+                  "isBoss": false,
+                  "selectedSpell": "melvorD:WindStrike",
+                  "pet": {
+                    "id": _namespace + ":" + "test_pet",
+                    "quantity": 3
                   }
-            }
+                }
+                itemPackage.monsters.add(newMonster)
+              }
+
+              const dnd_combatarea: any = {
+                "id": "dnd_combatarea",
+                "name": "DnD Monsters",
+                "media": "img/icon.png",
+                "monsterIDs": d5monsterid,
+                "difficulty": [
+                  0,
+                  6
+                ],
+                "entryRequirements": []
+              }
+              itemPackage.combatAreas.add(dnd_combatarea)
+              const dnd_combat_display_order = {
+                "insertAt": "End",
+                "ids": [
+                  `${_namespace}:dnd_combatarea`
+                ]
+              }
+              itemPackage.combatAreaDisplayOrder.add(dnd_combat_display_order)
             }
             if (false && Pokemon) {
               const allPokemonId: any[] = []
@@ -303,7 +299,7 @@ export async function setup(ctx: Modding.ModContext) {
                   }
                 }
                 newMonster['pet'] = {
-                  "id": "monad:" + Pokemon[index].id + "_pet",
+                  "id": _namespace + ":" + Pokemon[index].id + "_pet",
                   "quantity": 3
                 }
                 const attackType: any = {}
@@ -380,78 +376,78 @@ export async function setup(ctx: Modding.ModContext) {
 
                 if (Pokemon[index].type.includes('Normal')) {
                   NewPet.modifiers["increasedTownshipForestProduction"] = 1
-                  CraftingPokemonList.push(`monad:${NewPet['id']}`)
+                  CraftingPokemonList.push(`${_namespace}:${NewPet['id']}`)
                 }
                 if (Pokemon[index].type.includes('Fighting')) {
                   NewPet.modifiers["increasedTownshipAridPlainsProduction"] = 1
-                  CookingPokemonList.push(`monad:${NewPet['id']}`)
+                  CookingPokemonList.push(`${_namespace}:${NewPet['id']}`)
                 }
                 if (Pokemon[index].type.includes('Flying')) {
                   NewPet.modifiers["increasedTownshipJungleProduction"] = 1
-                  FletchingPokemonList.push(`monad:${NewPet['id']}`)
+                  FletchingPokemonList.push(`${_namespace}:${NewPet['id']}`)
                 }
                 if (Pokemon[index].type.includes('Poison')) {
                   NewPet.modifiers["increasedTownshipSwampProduction"] = 1
-                  SmithingPokemonList.push(`monad:${NewPet['id']}`)
+                  SmithingPokemonList.push(`${_namespace}:${NewPet['id']}`)
                 }
                 if (Pokemon[index].type.includes('Ground')) {
                   NewPet.modifiers["increasedTownshipDesertProduction"] = 1
-                  RunecraftingPokemonList.push(`monad:${NewPet['id']}`)
+                  RunecraftingPokemonList.push(`${_namespace}:${NewPet['id']}`)
                 }
                 if (Pokemon[index].type.includes('Rock')) {
                   NewPet.modifiers["increasedTownshipMountainsProduction"] = 1
-                  MiningPokemonList.push(`monad:${NewPet['id']}`)
+                  MiningPokemonList.push(`${_namespace}:${NewPet['id']}`)
                 }
                 if (Pokemon[index].type.includes('Bug')) {
                   NewPet.modifiers["increasedFletchingBoltQuantity"] = 1
-                  WoodcuttingPokemonList.push(`monad:${NewPet['id']}`)
+                  WoodcuttingPokemonList.push(`${_namespace}:${NewPet['id']}`)
                 }
                 if (Pokemon[index].type.includes('Ghost')) {
                   NewPet.modifiers["increasedFireRunesWhenMakingElementalRunes"] = 1
-                  HerblorePokemonList.push(`monad:${NewPet['id']}`)
+                  HerblorePokemonList.push(`${_namespace}:${NewPet['id']}`)
                 }
                 if (Pokemon[index].type.includes('Steel')) {
                   NewPet.modifiers["increasedTownshipBlacksmithProduction"] = 1
-                  AgilityPokemonList.push(`monad:${NewPet['id']}`)
+                  AgilityPokemonList.push(`${_namespace}:${NewPet['id']}`)
                 }
                 if (Pokemon[index].type.includes('Fire')) {
                   NewPet.modifiers["increasedFiremakingLogGP"] = 1
-                  FiremakingPokemonList.push(`monad:${NewPet['id']}`)
+                  FiremakingPokemonList.push(`${_namespace}:${NewPet['id']}`)
                 }
                 if (Pokemon[index].type.includes('Water')) {
                   NewPet.modifiers["increasedTownshipWaterProduction"] = 1
-                  FishingPokemonList.push(`monad:${NewPet['id']}`)
+                  FishingPokemonList.push(`${_namespace}:${NewPet['id']}`)
                 }
                 if (Pokemon[index].type.includes('Grass')) {
                   NewPet.modifiers["increasedFlatFarmingYield"] = 1
-                  HerblorePokemonList.push(`monad:${NewPet['id']}`)
+                  HerblorePokemonList.push(`${_namespace}:${NewPet['id']}`)
                 }
                 if (Pokemon[index].type.includes('Electric')) {
                   NewPet.modifiers["increasedTownshipValleyProduction"] = 1
-                  FiremakingPokemonList.push(`monad:${NewPet['id']}`)
+                  FiremakingPokemonList.push(`${_namespace}:${NewPet['id']}`)
                 }
                 if (Pokemon[index].type.includes('Psychic')) {
                   NewPet.modifiers["increasedTownshipMaxStorage"] = 1
-                  AstrologyPokemonList.push(`monad:${NewPet['id']}`)
+                  AstrologyPokemonList.push(`${_namespace}:${NewPet['id']}`)
                 }
                 if (Pokemon[index].type.includes('Ice')) {
                   NewPet.modifiers["increasedTownshipSnowlandsProduction"] = 1
-                  CookingPokemonList.push(`monad:${NewPet['id']}`)
+                  CookingPokemonList.push(`${_namespace}:${NewPet['id']}`)
                 }
                 if (Pokemon[index].type.includes('Dragon')) {
                   NewPet.modifiers["increasedPotionChargesFlat"] = 1
-                  AstrologyPokemonList.push(`monad:${NewPet['id']}`)
+                  AstrologyPokemonList.push(`${_namespace}:${NewPet['id']}`)
                 }
                 if (Pokemon[index].type.includes('Dark')) {
                   NewPet.modifiers["increasedTownshipGPProduction"] = 1
-                  ThievingPokemonList.push(`monad:${NewPet['id']}`)
+                  ThievingPokemonList.push(`${_namespace}:${NewPet['id']}`)
                 }
                 if (Pokemon[index].type.includes('Fairy')) {
                   NewPet.modifiers["increasedHolyDustFromBlessedOffering"] = 1
-                  MagicPokemonList.push(`monad:${NewPet['id']}`)
+                  MagicPokemonList.push(`${_namespace}:${NewPet['id']}`)
                 }
 
-                allPokemonId.push(`monad:${newMonster['id']}`)
+                allPokemonId.push(`${_namespace}:${newMonster['id']}`)
                 itemPackage.monsters.add(newMonster)
                 itemPackage.pets.add(NewPet)
               }
@@ -569,12 +565,12 @@ export async function setup(ctx: Modding.ModContext) {
               const pokemon_combat_display_order = {
                 "insertAt": "End",
                 "ids": [
-                  "monad:pokemon_combatarea"
+                  `${_namespace}:pokemon_combatarea`
                 ]
               }
               itemPackage.combatAreaDisplayOrder.add(pokemon_combat_display_order)
             }
-            if (nonSupport) {
+            if (false && nonSupport) {
               for (let index = 0; index < nonSupport.length; index++) {
                 const newPoeGem: any = {
                   "id": nonSupport[index].id,
@@ -635,7 +631,7 @@ export async function setup(ctx: Modding.ModContext) {
                   dropTable: {
                     add: [
                       {
-                        itemID: `monad:${newPoeGem.id}`,
+                        itemID: `${_namespace}:${newPoeGem.id}`,
                         minQuantity: 1,
                         maxQuantity: 1,
                         weight: 1
@@ -645,13 +641,13 @@ export async function setup(ctx: Modding.ModContext) {
                 })
               }
             }
-            if (monadItems) {
+            if (false && monadItems) {
               const monadItemsKeys: any[] = Object.keys(monadItems)
               for (let index = 0; index < monadItemsKeys.length; index++) {
                 const id = monadItemsKeys[index]
                 const type = monadItems[id].type
                 const itemID = id.replace(/[^a-zA-Z ]/g, "").replace(/\s/g, "")
-                if (game.items.getObjectByID(`monad:${itemID}`)) {
+                if (game.items.getObjectByID(`${_namespace}:${itemID}`)) {
                   return;
                 }
                 // const price = parseInt(monadItems[id].long.replace(/\D/g,'')) // for shop data
@@ -660,7 +656,7 @@ export async function setup(ctx: Modding.ModContext) {
                   const newIDs: any[] = []
                   if (monadItems[id].itemIDs && monadItems[id].itemIDs.length > 0) {
                     for (let j = 0; j < monadItems[id].itemIDs.length; j++) {
-                      newIDs.push('monad:' + monadItems[id].itemIDs[j].replace(/[^a-zA-Z ]/g, "").replace(/\s/g, ""))
+                      newIDs.push(_namespace + ":" + monadItems[id].itemIDs[j].replace(/[^a-zA-Z ]/g, "").replace(/\s/g, ""))
                     }
                   }
                   const newSynergy: any = {
@@ -952,7 +948,7 @@ export async function setup(ctx: Modding.ModContext) {
                     dropTable: {
                       add: [
                         {
-                          itemID: `monad:${itemID}`,
+                          itemID: `${_namespace}:${itemID}`,
                           minQuantity: 1,
                           maxQuantity: 1,
                           weight: 1
@@ -967,7 +963,7 @@ export async function setup(ctx: Modding.ModContext) {
                     dropTable: {
                       add: [
                         {
-                          itemID: `monad:${itemID}`,
+                          itemID: `${_namespace}:${itemID}`,
                           minQuantity: 1,
                           maxQuantity: 1,
                           weight: 1
@@ -985,6 +981,118 @@ export async function setup(ctx: Modding.ModContext) {
         initialPackage.add();
         game.monad = initialPackage
         game.idLog = idLog
+
+        if (kcm) {
+          const cmim = mod.api.customModifiersInMelvor;
+          if (!cmim) {
+            return;
+          }
+          if (TothEntitlement) {
+            UndeadList.push(
+              "melvorF:ElderVampire",
+              "melvorTotH:CursedSkeletonWarrior",
+              "melvorTotH:CursedSpirit",
+              "melvorTotH:LadyDarkheart",
+              "melvorTotH:Phantom",
+              "melvorTotH:Banshee",
+              "melvorTotH:Spectre",
+              "melvorTotH:VorloranDevastator",
+              "melvorTotH:VorloranWatcher",
+              "melvorTotH:VorloranProtector",
+            )
+            SeaCreatureList.push(
+              "melvorTotH:TwinSeaDragonSerpent",
+              "melvorTotH:Leviathan",
+            )
+            AnimalList.push(
+              "melvorTotH:PoisonToad",
+              "melvorTotH:Conda",
+              "melvorTotH:BurningSnake",
+              "melvorTotH:PolarBear",
+              "melvorTotH:SpectralIceWolf",
+              "melvorTotH:MonsterCroc",
+              "melvorTotH:ScouterSpider",
+              "melvorTotH:TrapperSpider",
+              "melvorTotH:WickedSpider",
+              "melvorTotH:BasherSpider",
+              "melvorTotH:EnforcerSpider",
+              "melvorTotH:GuardianSpider",
+              "melvorTotH:SpiderQueen",
+              "melvorTotH:Beholder",
+              "melvorTotH:ShadowBeast",
+            )
+            PlantList.push(
+              "melvorTotH:HungryPlant",
+              "melvorTotH:Alraune",
+              "melvorTotH:Morellia",
+              "melvorTotH:TreeGiant",
+              "melvorTotH:TreeSpirit",
+            )
+            DragonList.push(
+              "melvorTotH:Kongamato", "melvorTotH:GretYun", "melvorTotH:RaZu",
+            )
+            DemonList.push("melvorTotH:MagicFireDemon",)
+            MythList.push(
+              "melvorTotH:Manticore",
+              "melvorTotH:IceHydra",
+              "melvorTotH:Leviathan",
+              "melvorTotH:Siren",
+              "melvorTotH:GoliathWerewolf",
+              "melvorTotH:Torvair",
+              "melvorTotH:Arctair",
+              "melvorTotH:Harkair",
+              "melvorTotH:Cockatrice",
+              "melvorTotH:GuardianoftheHerald",
+            )
+            ElementalCreatureList.push(
+              "melvorTotH:InfernalGolem", "melvorTotH:Trogark", "melvorTotH:LargeIceTroll", "melvorTotH:FrostGolem", "melvorTotH:LightningSpirit", "melvorTotH:LightningGolem", "melvorTotH:LightningMonkey",
+            )
+            HumansList.push("melvorTotH:PlagueDoctor",)
+            //     "melvorTotH:TheHeraldPhase1",
+            //     "melvorTotH:TheHeraldPhase2",
+            //     "melvorTotH:TheHeraldPhase3"
+
+          }
+          if (mythLoaded) {
+            HumansList.push("mythMusic:Jester",
+              "mythMusic:Enchanted_Jester",
+              "mythMusic:Mystic_Jester")
+          }
+          cmim.addMonsters("Dragon", DragonList)
+          cmim.addMonsters("Human", HumansList)
+          cmim.addMonsters("Undead", UndeadList)
+          cmim.addMonsters("Demon", DemonList)
+          cmim.addMonsters("Animal", AnimalList)
+          cmim.addMonsters("MythicalCreature", MythList)
+          cmim.addMonsters("SeaCreature", SeaCreatureList)
+          cmim.addMonsters("Elemental", ElementalCreatureList)
+
+          cmim.registerOrUpdateType("Elf", "Elves", "https://cdn.melvor.net/core/v018/assets/media/pets/elf_rock.png", elfList, true);
+          cmim.registerOrUpdateType("Goblin", "Goblins", "https://cdn.melvor.net/core/v018/assets/media/monsters/goblin.png", GoblinList, true);
+          cmim.registerOrUpdateType("Robot", "Robots", "https://cdn.melvor.net/core/v018/assets/media/pets/smithing.png", RobotsList, true);
+          cmim.registerOrUpdateType("Orc", "Orcs", "https://cdn.melvor.net/core/v018/assets/media/monsters/goblin.png", OrcList, true);
+          cmim.registerOrUpdateType("Plant", "Plants", "https://cdn.melvor.net/core/v018/assets/media/monsters/plant.png", PlantList, true);
+
+          cmim.registerOrUpdateType("Ooze", "Oozes", "https://cdn.melvor.net/core/v018/assets/media/monsters/plant.png", OozesList, true);
+          cmim.registerOrUpdateType("Aberration", "Aberrations", "https://cdn.melvor.net/core/v018/assets/media/monsters/plant.png", AberrationsList, true);
+
+          cmim.registerOrUpdateType("Celestial", "Celestials", "https://cdn.melvor.net/core/v018/assets/media/monsters/plant.png", CelestialsList, true);
+          cmim.registerOrUpdateType("Construct", "Constructs", "https://cdn.melvor.net/core/v018/assets/media/monsters/plant.png", ConstructsList, true);
+          cmim.registerOrUpdateType("Fey", "Feys", "https://cdn.melvor.net/core/v018/assets/media/monsters/plant.png", FeyList, true);
+          cmim.registerOrUpdateType("Fiend", "Fiends", "https://cdn.melvor.net/core/v018/assets/media/monsters/plant.png", FiendList, true);
+          cmim.registerOrUpdateType("Giant", "Giants", "https://cdn.melvor.net/core/v018/assets/media/monsters/plant.png", GiantsList, true);
+          cmim.registerOrUpdateType("monstrosity", "Monstrosities", "https://cdn.melvor.net/core/v018/assets/media/monsters/plant.png", MonstrositiesList, true);
+          // mod.api.customModifiersInMelvor.getMonstersOfType('Ooze')
+
+          cmim.forceBaseModTypeActive("Dragon");
+          cmim.forceBaseModTypeActive("Undead");
+          cmim.forceBaseModTypeActive("Human");
+          cmim.forceBaseModTypeActive("Animal");
+          cmim.forceBaseModTypeActive("Demon");
+          cmim.forceBaseModTypeActive("Elemental");
+          cmim.forceBaseModTypeActive("MythicalCreature");
+          cmim.forceBaseModTypeActive("SeaCreature");
+        }
       } catch (error) {
         errorLog.push("Error, Monad onModsLoaded", error)
       }
@@ -995,10 +1103,10 @@ export async function setup(ctx: Modding.ModContext) {
   game.monadErrorLog = errorLog
 }
 
-                    // game.items.registeredObjects.forEach(item => {
-                    //     if(item._namespace.name === "tes") {
-                    //         game.bank.addItem(item, 1, true, true, false);
-                    //     }
-                    // })
+// game.items.registeredObjects.forEach(item => {
+//     if(item._namespace.name === "tes") {
+//         game.bank.addItem(item, 1, true, true, false);
+//     }
+// })
 
 // ["monad:TrainingHealthPotion","monad:Soulboundwand","monad:BoneLance","monad:TraineeBoneSpear","monad:PaladinEngelersBodyArmoursilverrank","monad:PaladinEngelersSalletsilverrank","monad:PaladinEngelersGauntletssilverrank","monad:PaladinEngelersSabatonsilverrank","monad:PaladinEngelersMacesilverrank","monad:PaladinEngelersShieldsilverrank","monad:PaladinEngelersCapesilverrank","monad:DemonHunterNecklace","monad:DemonHunterBracelet","monad:DemonHunterEaring","monad:DemonHunterRing","monad:ToadsSkinJacket","monad:CrownoftheDammed","monad:Ringofinitialundeadcontrol","monad:RingofLittleStrength","monad:PendentofMediumMagic","monad:WitchesHat","monad:QueensPawn","monad:Skullofvictim","monad:EnchantingQuill","monad:PrincessesCoin","monad:necklacemadeofteeth","monad:Blackscarf","monad:WhaleSkin","monad:LinenHalfgloves","monad:BattlemagesGloves","monad:BattlemagesHat","monad:BattlemagesRobe","monad:BattlemagesCrakows","monad:BattlemagesBreeches","monad:CottonScarf","monad:RayndrJackboots","monad:RoguesRing","monad:DarkElfsScimitar","monad:MeroyriXiphos","monad:RayndrFaceMask","monad:ShadowPiratesCoat","monad:LeatherPirateBoots","monad:BlackBand","monad:TidusEaring","monad:FeaturelessDeathwoodMask","monad:BlackBraidBracelet","monad:FrostGloves","monad:FlameGloves","monad:CeremonialWhiteStagMask","monad:HeavenlyWhiteStagMask","monad:AcademyRobeBlackYellow","monad:HuiLusBattleArmour","monad:HuiLusEnchantingGloves","monad:HuiLusBurningBoots","monad:OtariKote","monad:GlideMoroha","monad:GaleMoroha","monad:NiyoshoGakuran","monad:NiyoshoHakama","monad:OttosLeakyWand","monad:JokotoWakizashi","monad:Seifuku","monad:NiyoshoKimono","monad:AutumnCloak"]
