@@ -142,14 +142,47 @@
       {
         "id": "test_pet",
         "name": "test_pet",
-        "media": "assets/icon.png",
+        "media": "img/icon.png",
         "scaleChanceWithMasteryPool": false,
         "ignoreCompletion": false,
         "modifiers": {
           "increasedHolyDustFromBlessedOffering": 20
         },
         "activeInRaid": false,
-        "hint": "The White Gold Tower"
+        "hint": "test_pet"
+      }
+    ],
+    "dungeons": [
+      {
+        "id": "Monad_Dungeon",
+        "name": "Monad Dungeon",
+        "media": "img/icon.png",
+        "monsterIDs": [
+          "monad:Kappa"
+        ],
+        "difficulty": [
+          6
+        ],
+        "entryRequirements": [
+        ],
+        "rewardItemIDs": [
+          "monad:lootbox"
+        ],
+        "dropBones": true,
+        "pet": {
+          "petID": "monad:test_pet",
+          "weight": 6
+        },
+        "fixedPetClears": false,
+        "pauseOnBosses": false
+      }
+    ],
+    "dungeonDisplayOrder": [
+      {
+        "insertAt": "End",
+        "ids": [
+          "monad:Monad_Dungeon"
+        ]
       }
     ]
   },

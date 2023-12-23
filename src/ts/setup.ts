@@ -8,8 +8,6 @@ import { nonSupport } from '../data/poe.data';
 import Pokemon from '../data/data.allPokemon.json'
 import DnDmonsters from '../data/5e.data.json'
 
-
-
 // Styles
 // Will automatically load your styles upon loading the mod
 import '../css/styles.css';
@@ -54,7 +52,7 @@ export async function setup(ctx: Modding.ModContext) {
         ]
         const DemonList: any[] = [
         ]
-        const AnimalList: any[] = [
+        const BeastList: any[] = [
         ]
         const GoblinList: any[] = [
           "melvorD:Golbin",
@@ -112,7 +110,7 @@ export async function setup(ctx: Modding.ModContext) {
                 "humanoid": HumansList,
                 "undead": UndeadList,
                 "aberration": AberrationsList,
-                "beast": AnimalList,
+                "beast": BeastList,
                 "celestial": CelestialsList,
                 "construct": ConstructsList,
                 "dragon": DragonList,
@@ -225,7 +223,7 @@ export async function setup(ctx: Modding.ModContext) {
               }
               itemPackage.combatAreaDisplayOrder.add(dnd_combat_display_order)
             }
-            if (false && Pokemon) {
+            if (Pokemon) {
               const allPokemonId: any[] = []
               const MagicPokemonList: any[] = []
               const WoodcuttingPokemonList: any[] = []
@@ -570,7 +568,7 @@ export async function setup(ctx: Modding.ModContext) {
               }
               itemPackage.combatAreaDisplayOrder.add(pokemon_combat_display_order)
             }
-            if (false && nonSupport) {
+            if (nonSupport) {
               for (let index = 0; index < nonSupport.length; index++) {
                 const newPoeGem: any = {
                   "id": nonSupport[index].id,
@@ -626,22 +624,9 @@ export async function setup(ctx: Modding.ModContext) {
                   newPoeGem.customDescription = nonSupport[index].secDescrText
                 }
                 if (newPoeGem.id) { itemPackage.items.add(newPoeGem) }
-                itemPackage.items.modify({
-                  id: "monad:lootbox",
-                  dropTable: {
-                    add: [
-                      {
-                        itemID: `${_namespace}:${newPoeGem.id}`,
-                        minQuantity: 1,
-                        maxQuantity: 1,
-                        weight: 1
-                      }
-                    ]
-                  },
-                })
               }
             }
-            if (false && monadItems) {
+            if (monadItems) {
               const monadItemsKeys: any[] = Object.keys(monadItems)
               for (let index = 0; index < monadItemsKeys.length; index++) {
                 const id = monadItemsKeys[index]
@@ -747,7 +732,7 @@ export async function setup(ctx: Modding.ModContext) {
                           // increasedDamageTakenFromFireSpells: Standard,
                           // decreasedDamageTakenFromFireSpells: Standard,
 
-                          // const monadSpecies = ['demon', 'undead', 'animal', "SeaCreature", "MythicalCreature", "Elemental", "Human", "Dragon", "Orc", "Robot", "Goblin", "Elf"] as const;
+                          // const monadSpecies = ['demon', 'undead', 'Beast', "SeaCreature", "MythicalCreature", "Elemental", "Human", "Dragon", "Orc", "Robot", "Goblin", "Elf"] as const;
                           if (statKeys[m] === 'demonDamageReductionPerc') {
                             newModifiers['decreasedDamageTakenFromDemons'] = Math.floor(tempStats[statKeys[m]])
                           }
@@ -943,35 +928,165 @@ export async function setup(ctx: Modding.ModContext) {
                   }
                   if (newItem.itemType) { itemPackage.items.add(newItem) }
                   else { errorLog.push("Unknown item", newItem) }
-                  itemPackage.items.modify({
-                    id: "monad:lootbox",
-                    dropTable: {
-                      add: [
-                        {
-                          itemID: `${_namespace}:${itemID}`,
-                          minQuantity: 1,
-                          maxQuantity: 1,
-                          weight: 1
-                        }
-                      ]
-                    },
-                  })
                 }
-                if (tes) {
-                  itemPackage.items.modify({
-                    id: "tes:lootbox",
-                    dropTable: {
-                      add: [
-                        {
-                          itemID: `${_namespace}:${itemID}`,
-                          minQuantity: 1,
-                          maxQuantity: 1,
-                          weight: 1
-                        }
-                      ]
-                    },
-                  })
+
+              }
+            }
+            // items = []
+            // monsters = []
+            // while items.length > 0. push items into monster drop table
+
+            // Dungon monstes don't drop items
+            // Add a single dungon with a loot box
+            if (true) {
+              try {
+                const bannedList: any = {
+                  "Sweetroll": true,
+                  "Crown_of_Rhaelyx": true,
+                  "Cooking_Gloves": true,
+                  "Mining_Gloves": true,
+                  "Smithing_Gloves": true,
+                  "Gem_Gloves": true,
+                  "Thieving_Gloves": true,
+                  "Empty_Food": true,
+                  "Empty_Equipment": true,
+                  "Meteorite_Dust": true,
+                  "Lemonade_Full": true,
+                  "Locked_Chest": true,
+                  "Locked_Chest_Key": true,
+                  "I_Cant_See_Helmet": true,
+                  "Lemonade_Nope_this_is_half_full_now": true,
+                  "Lemonade_Wow_this_is_slow": true,
+                  "Lemonade_Maybe_this_is_half_full": true,
+                  "Lemonade_Just_over_half_full": true,
+                  "Lemonade_Half_full": true,
+                  "Lemonade_A_little_bit_more_now": true,
+                  "Lemonade_Has_a_bit_now": true,
+                  "Lemonade_Not_much": true,
+                  "Lemonade_Not_as_empty_as_before": true,
+                  "Lemonade_Still_very_empty": true,
+                  "Lemonade_Very_empty": true,
+                  "Lemonade_Empty": true,
+                  "Lemonade_Just_fill_it_up_already": true,
+                  "Lemonade_Still_not_full": true,
+                  "Lemonade_Again_still_not_full": true,
+                  "Lemonade_Less_than_before_because_you_drank_some": true,
+                  "Lemonade_Back_to_where_we_were_before": true,
+                  "Lemonade_Haha_just_joking_hurry_up": true,
+                  "Lemonade_Wait_for_it": true,
+                  "Lemonade_Wait_for_it2": true,
+                  "Lemonade_Oh_still_not_full": true,
+                  "Lemonade_YAY_ITS_FINALLY_FULL": true,
+                  "Lemonade_What_about_now": true,
+                  "Lemonade_Now": true,
+                  "Lemonade_Okay_this_looks_pretty_full_now": true,
+                  "Lemonade_Wait_this_might_be_half_full_now": true,
+                  "Lemonade_How_full_is_it_supposed_to_be": true,
+                  "Lemonade_Still_almost_full": true,
+                  "Lemonade_Almost_full": true
                 }
+                const bannedNameSpace: any = {
+                  "tes": true
+                }
+                const categoryBan: any = {
+                  "Limes": true,
+                  "Lemon": true,
+                  "Events": true,
+                  "Event": true
+                }
+                const _namespaceItemList: any[] = [] // split into item ranks, then pass into monster ranks
+                const initialPackage = ctx.gameData.buildPackage(itemPackage => {
+                  game.items.registeredObjects.forEach((item: any) => {
+                    try {
+                      if (item) {
+                        // Skip the item if its localID is in the bannedList
+                        if (bannedList[item.localID]) {
+                          return;
+                        }
+                        if (bannedNameSpace[item.namespace]) {
+                          return;
+                        }
+                        if (categoryBan[item.category]) {
+                          return;
+                        }
+                        if (item.swalData) {
+                          return;
+                        }
+                        if (item.namespace === _namespace) {
+                          // item.sellsFor, split based on price, 0 cost items go in their own thing.
+                          _namespaceItemList.push(`${item.namespace}:${item.localID}`)
+                          itemPackage.items.modify({
+                            id: `${_namespace}:lootbox`,
+                            dropTable: {
+                              add: [
+                                {
+                                  itemID: `${item.namespace}:${item.localID}`,
+                                  minQuantity: 1,
+                                  maxQuantity: 1,
+                                  weight: 1
+                                }
+                              ]
+                            },
+                          })
+                        }
+                        if (tes && item.namespace === _namespace) {
+                          itemPackage.items.modify({
+                            id: "tes:lootbox",
+                            dropTable: {
+                              add: [
+                                {
+                                  itemID: `${item.namespace}:${item.localID}`,
+                                  minQuantity: 1,
+                                  maxQuantity: 1,
+                                  weight: 1
+                                }
+                              ]
+                            },
+                          })
+                        }
+                      }
+                    } catch (error) {
+                      console.log(error)
+                    }
+                  })
+                  if (_namespaceItemList.length > 0) {
+                    game.monsters.forEach(monster => {
+                      if (monster && monster.namespace === _namespace) {
+                        itemPackage.dungeons.modify({
+                          "id": `${_namespace}:Monad_Dungeon`,
+                          "monsters": {
+                            "add": [
+                              {
+                                "monsterID": `${monster.namespace}:${monster.localID}`,
+                                "insertAt": 0
+                              }
+                            ]
+                          }
+                        })
+                        if (_namespaceItemList.length > 0) {
+                          itemPackage.monsters.modify({
+                            "id": `${monster.namespace}:${monster.localID}`,
+                            "lootTable": {
+                              "add": [
+                                {
+                                  "itemID": `${_namespaceItemList.pop()}`,
+                                  "maxQuantity": 1,
+                                  "minQuantity": 1,
+                                  "weight": 1
+                                }
+                              ]
+                            }
+                          });
+                        } else {
+                          return;
+                        }
+                      }
+                    })
+                  }
+                })
+                initialPackage.add();
+              } catch (error) {
+                console.log(error)
               }
             }
           } catch (error) {
@@ -1004,7 +1119,7 @@ export async function setup(ctx: Modding.ModContext) {
               "melvorTotH:TwinSeaDragonSerpent",
               "melvorTotH:Leviathan",
             )
-            AnimalList.push(
+            BeastList.push(
               "melvorTotH:PoisonToad",
               "melvorTotH:Conda",
               "melvorTotH:BurningSnake",
@@ -1062,7 +1177,7 @@ export async function setup(ctx: Modding.ModContext) {
           cmim.addMonsters("Human", HumansList)
           cmim.addMonsters("Undead", UndeadList)
           cmim.addMonsters("Demon", DemonList)
-          cmim.addMonsters("Animal", AnimalList)
+          cmim.addMonsters("Beast", BeastList)
           cmim.addMonsters("MythicalCreature", MythList)
           cmim.addMonsters("SeaCreature", SeaCreatureList)
           cmim.addMonsters("Elemental", ElementalCreatureList)
@@ -1087,7 +1202,7 @@ export async function setup(ctx: Modding.ModContext) {
           cmim.forceBaseModTypeActive("Dragon");
           cmim.forceBaseModTypeActive("Undead");
           cmim.forceBaseModTypeActive("Human");
-          cmim.forceBaseModTypeActive("Animal");
+          cmim.forceBaseModTypeActive("Beast");
           cmim.forceBaseModTypeActive("Demon");
           cmim.forceBaseModTypeActive("Elemental");
           cmim.forceBaseModTypeActive("MythicalCreature");
