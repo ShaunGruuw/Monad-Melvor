@@ -21,7 +21,7 @@ export async function setup(ctx: Modding.ModContext) {
   try {
     // Register our GameData
     await ctx.gameData.addPackage('data.json');
-    await ctx.gameData.addPackage('monad-data.json');
+    // await ctx.gameData.addPackage('monad-data.json');
     ctx.onModsLoaded(async () => {
       try {
         const TothEntitlement = cloudManager.hasTotHEntitlement
@@ -621,7 +621,7 @@ export async function setup(ctx: Modding.ModContext) {
                 if (newPoeGem.id) { itemPackage.items.add(newPoeGem), allItems.push(_namespace + ":" + nonSupport[index].id) }
               }
             }
-            if (false && monadItems) {
+            if (monadItems) {
               try {
                 const monadItemsKeys: any[] = Object.keys(monadItems)
                 for (let index = 0; index < monadItemsKeys.length; index++) {
@@ -641,7 +641,10 @@ export async function setup(ctx: Modding.ModContext) {
                       }
                     }
                     const newSynergy: any = {
-                      "itemIDs": newIDs
+                      "itemIDs": newIDs,
+                      "playerModifiers":{
+                        
+                      }
                     }
                     if (newSynergy.itemIDs.length > 0) {
                       const Requirements = ['conditionalModifiers', "enemyModifiers", "equipmentStats", "playerModifiers"]
@@ -665,7 +668,7 @@ export async function setup(ctx: Modding.ModContext) {
                       "ignoreCompletion": false,
                       "obtainFromItemLog": false,
                       "golbinRaidExclusive": false,
-                      "sellsFor": monadItems[id].sellsFor,
+                      "sellsFor": monadItems[id].sellsFor
                       // "customDescription": monadItems[id].description,
                     }
                     const newequipmentStats: any[] = [
@@ -882,6 +885,7 @@ export async function setup(ctx: Modding.ModContext) {
                           newItem[Requirements[j]] = monadItems[id][Requirements[j]]
                         }
                       }
+                      newItem.tier = 0
                     }
                     else if (type === "Readable") {
                       const Requirements = ['modalID', 'swalData']
@@ -1196,7 +1200,7 @@ export async function setup(ctx: Modding.ModContext) {
 }
 
 // game.items.registeredObjects.forEach(item => {
-//     if(item._namespace.name === "tes") {
+//     if(item._namespace.name === "monad") {
 //         game.bank.addItem(item, 1, true, true, false);
 //     }
 // })
