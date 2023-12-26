@@ -14,6 +14,9 @@ import '../img/items/Miolite_Gloves.png';
 import '../img/people/owl.jpg';
 import '../img/items/lootbox.png';
 
+function randomNumber(min: number, max: number) {
+  return Math.floor(Math.random() * (max - min) + min);
+}
 
 export async function setup(ctx: Modding.ModContext) {
   const _namespace = "monad"
@@ -80,6 +83,17 @@ export async function setup(ctx: Modding.ModContext) {
         ]
         const allMonsters: any[] = []
         const allItems: any[] = []
+        const junkItems: any[] = []
+        const commonItems: any[] = []
+        const normalItems: any[] = []
+        const intermediateItems: any[] = []
+        const advancedItems: any[] = []
+        const rareItems: any[] = []
+        const epicItems: any[] = []
+        const legendaryItems: any[] = []
+        const uniqueItems: any[] = []
+        const growthItems: any[] = []
+        const questItems: any[] = []
         const idLog: any[] = []
         const initialPackage = ctx.gameData.buildPackage((itemPackage: any) => {
           try {
@@ -191,7 +205,7 @@ export async function setup(ctx: Modding.ModContext) {
                   }
                 }
                 if (newMonster.id) {
-                  allMonsters.push(_namespace + ":" + NewMonsterID)
+                  allMonsters.push({ namespace: _namespace, localID: NewMonsterID, gpDrops: { min: newMonster.gpDrops.min, max: newMonster.gpDrops.max } })
                   itemPackage.monsters.add(newMonster)
                 }
               }
@@ -216,7 +230,7 @@ export async function setup(ctx: Modding.ModContext) {
               }
               itemPackage.combatAreaDisplayOrder.add(dnd_combat_display_order)
             }
-            if (Pokemon) {
+            if (false && Pokemon) {
               const allPokemonId: any[] = []
               const MagicPokemonList: any[] = []
               const WoodcuttingPokemonList: any[] = []
@@ -439,7 +453,7 @@ export async function setup(ctx: Modding.ModContext) {
                 }
 
                 allPokemonId.push(`${_namespace}:${newMonster['id']}`)
-                allMonsters.push(`${_namespace}:${newMonster['id']}`)
+                allMonsters.push({ namespace: `${_namespace}`, localID: `${newMonster['id']}` })
                 itemPackage.monsters.add(newMonster)
                 itemPackage.pets.add(NewPet)
               }
@@ -562,7 +576,7 @@ export async function setup(ctx: Modding.ModContext) {
               }
               itemPackage.combatAreaDisplayOrder.add(pokemon_combat_display_order)
             }
-            if (nonSupport) {
+            if (true && nonSupport) {
               for (let index = 0; index < nonSupport.length; index++) {
                 const newPoeGem: any = {
                   "id": nonSupport[index].id,
@@ -614,9 +628,9 @@ export async function setup(ctx: Modding.ModContext) {
                   }
 
                   if (nonSupport[index].explicitMods[j].includes("Stun")) {
-                    if(nonSupport[index].properties[0].name.includes("Melee")) {
+                    if (nonSupport[index].properties[0].name.includes("Melee")) {
                       newPoeGem.modifiers["increasedMeleeStunChance"] = parseInt(nonSupport[index].explicitMods[0].replace(/^\D+/g, ''));
-                    } else {                      
+                    } else {
                       newPoeGem.modifiers["increasedGlobalStunChance"] = parseInt(nonSupport[index].explicitMods[0].replace(/^\D+/g, ''));
                     }
                   }
@@ -629,7 +643,7 @@ export async function setup(ctx: Modding.ModContext) {
                 if (newPoeGem.id) { itemPackage.items.add(newPoeGem), allItems.push(_namespace + ":" + nonSupport[index].id) }
               }
             }
-            if (monadItems) {
+            if (false && monadItems) {
               try {
                 const monadItemsKeys: any[] = Object.keys(monadItems)
                 for (let index = 0; index < monadItemsKeys.length; index++) {
@@ -650,8 +664,8 @@ export async function setup(ctx: Modding.ModContext) {
                     }
                     const newSynergy: any = {
                       "itemIDs": newIDs,
-                      "playerModifiers":{
-                        
+                      "playerModifiers": {
+
                       }
                     }
                     if (newSynergy.itemIDs.length > 0) {
@@ -672,7 +686,7 @@ export async function setup(ctx: Modding.ModContext) {
                       "category": monadItems[id].category,
                       "type": type,
                       "itemType": type,
-                      "media": monadItems[id].image || "",
+                      "media": monadItems[id]?.image || "",
                       "ignoreCompletion": false,
                       "obtainFromItemLog": false,
                       "golbinRaidExclusive": false,
@@ -750,7 +764,7 @@ export async function setup(ctx: Modding.ModContext) {
 
                           // 'MP'  'MPPerc'  'endurancePerc' | 'willpowerPerc' | 'dexterityPerc' | 'sensePerc' | 'charismaPerc'  'magicDamageReductionPerc' | 'physicalDamageReductionPerc'  'manaRegenPerc';
                           if (statKeys[m] === 'controlUndead') {
-                            newModifiers['increasedSummoningMaxHit'] = Math.floor(tempStats[statKeys[m]])
+                            newModifiers['increasedSummoningMaxHit'] = Math.floor(tempStats[statKeys[m]]) * 10
                           }
                           if (statKeys[m] === 'strengthPerc') {
                             newModifiers['increasedMeleeStrengthBonus'] = Math.floor(tempStats[statKeys[m]])
@@ -989,7 +1003,7 @@ export async function setup(ctx: Modding.ModContext) {
                   "Lemonade_Almost_full": true
                 }
                 const bannedNameSpace: any = {
-                  "tes": true
+                  // "tes": true
                 }
                 const categoryBan: any = {
                   "Limes": true,
@@ -998,6 +1012,7 @@ export async function setup(ctx: Modding.ModContext) {
                   "Event": true
                 }
                 const _namespaceItemList: any[] = [] // split into item ranks, then pass into monster ranks
+                // All items already in the game
                 game.items.registeredObjects.forEach((item: any) => {
                   try {
                     if (item) {
@@ -1017,12 +1032,104 @@ export async function setup(ctx: Modding.ModContext) {
                       if (item.namespace === _namespace && `${item.localID}` !== 'lootbox') {
                         allItems.push(`${item.namespace}:${item.localID}`)
                       }
+                      if (`${item.localID}` !== 'lootbox' && item.namespace.includes('melvorD')) {
+                        // https://wiki.melvoridle.com/index.php?title=Table_of_Items
+
+                        if (item.sellsFor < 1) questItems.push(item.namespace + ':' + item.localID)
+
+                        if (item.sellsFor < 30) junkItems.push(item.namespace + ':' + item.localID)
+
+                        if (item.sellsFor < 40) commonItems.push(item.namespace + ':' + item.localID)
+
+                        if (item.sellsFor < 200) normalItems.push(item.namespace + ':' + item.localID)
+
+                        if (item.sellsFor < 400) intermediateItems.push(item.namespace + ':' + item.localID)
+
+                        if (item.sellsFor < 600) advancedItems.push(item.namespace + ':' + item.localID)
+
+                        if (item.sellsFor < 3000) rareItems.push(item.namespace + ':' + item.localID)
+
+                        if (item.sellsFor < 4000) epicItems.push(item.namespace + ':' + item.localID)
+
+                        if (item.sellsFor < 5000) legendaryItems.push(item.namespace + ':' + item.localID)
+
+                        if (item.sellsFor < 100000) legendaryItems.push(item.namespace + ':' + item.localID)
+
+                        if (item.sellsFor < 1000000) uniqueItems.push(item.namespace + ':' + item.localID)
+
+                        if (item.sellsFor < 10000000) growthItems.push(item.namespace + ':' + item.localID)
+                      } else if (`${item.localID}` !== 'lootbox' && item.namespace.includes('melvorF')) {
+                        // https://wiki.melvoridle.com/index.php?title=Table_of_Items
+
+                        if (item.sellsFor < 1) questItems.push(item.namespace + ':' + item.localID)
+
+                        if (item.sellsFor < 30) junkItems.push(item.namespace + ':' + item.localID)
+
+                        if (item.sellsFor < 40) commonItems.push(item.namespace + ':' + item.localID)
+
+                        if (item.sellsFor < 200) normalItems.push(item.namespace + ':' + item.localID)
+
+                        if (item.sellsFor < 400) intermediateItems.push(item.namespace + ':' + item.localID)
+
+                        if (item.sellsFor < 600) advancedItems.push(item.namespace + ':' + item.localID)
+
+                        if (item.sellsFor < 3000) rareItems.push(item.namespace + ':' + item.localID)
+
+                        if (item.sellsFor < 4000) epicItems.push(item.namespace + ':' + item.localID)
+
+                        if (item.sellsFor < 5000) legendaryItems.push(item.namespace + ':' + item.localID)
+
+                        if (item.sellsFor < 100000) legendaryItems.push(item.namespace + ':' + item.localID)
+
+                        if (item.sellsFor < 1000000) uniqueItems.push(item.namespace + ':' + item.localID)
+
+                        if (item.sellsFor < 10000000) growthItems.push(item.namespace + ':' + item.localID)
+                      } else if (TothEntitlement && `${item.localID}` !== 'lootbox' && item.namespace.includes('melvorTotH')) {
+                        // https://wiki.melvoridle.com/index.php?title=Table_of_Items
+
+                        if (item.sellsFor < 1) questItems.push(item.namespace + ':' + item.localID)
+
+                        if (item.sellsFor < 30) junkItems.push(item.namespace + ':' + item.localID)
+
+                        if (item.sellsFor < 40) commonItems.push(item.namespace + ':' + item.localID)
+
+                        if (item.sellsFor < 200) normalItems.push(item.namespace + ':' + item.localID)
+
+                        if (item.sellsFor < 400) intermediateItems.push(item.namespace + ':' + item.localID)
+
+                        if (item.sellsFor < 600) advancedItems.push(item.namespace + ':' + item.localID)
+
+                        if (item.sellsFor < 3000) rareItems.push(item.namespace + ':' + item.localID)
+
+                        if (item.sellsFor < 4000) epicItems.push(item.namespace + ':' + item.localID)
+
+                        if (item.sellsFor < 5000) legendaryItems.push(item.namespace + ':' + item.localID)
+
+                        if (item.sellsFor < 100000) legendaryItems.push(item.namespace + ':' + item.localID)
+
+                        if (item.sellsFor < 1000000) uniqueItems.push(item.namespace + ':' + item.localID)
+
+                        if (item.sellsFor < 10000000) growthItems.push(item.namespace + ':' + item.localID)
+                      }
                     }
                   } catch (error) {
                     errorLog.push("game.items.registeredObjects.forEach ", error)
                   }
                 })
+                // All items added from this mod
                 allItems.forEach(item => {
+                  if (bannedList[item.localID]) {
+                    return;
+                  }
+                  if (bannedNameSpace[item.namespace]) {
+                    return;
+                  }
+                  if (categoryBan[item.category]) {
+                    return;
+                  }
+                  if (item.swalData) {
+                    return;
+                  }
                   // item.sellsFor, split based on price, 0 cost items go in their own thing.
                   _namespaceItemList.push(`${item}`)
                   itemPackage.items.modify({
@@ -1039,20 +1146,21 @@ export async function setup(ctx: Modding.ModContext) {
                     },
                   })
                 })
+                // All monsters already in the game
                 game.monsters.forEach(monster => {
                   if (monster && monster.namespace === _namespace) {
-                    allMonsters.push(`${monster.namespace}:${monster.localID}`)
+                    allMonsters.push(monster)
                   }
                 })
+                // All monsters added from this mod
                 allMonsters.forEach(monster => {
                   if (monster) {
-                    idLog.push(`${monster}`)
                     itemPackage.dungeons.modify({
                       "id": `${_namespace}:Monad_Dungeon`,
                       "monsters": {
                         "add": [
                           {
-                            "monsterID": `${monster}`,
+                            "monsterID": `${monster.namespace + ':' + monster.localID}`,
                             "insertAt": 0
                           }
                         ]
@@ -1060,7 +1168,7 @@ export async function setup(ctx: Modding.ModContext) {
                     })
                     if (_namespaceItemList.length > 0) {
                       itemPackage.monsters.modify({
-                        "id": `${monster}`,
+                        "id": `${monster.namespace + ':' + monster.localID}`,
                         "lootTable": {
                           "add": [
                             {
@@ -1073,6 +1181,39 @@ export async function setup(ctx: Modding.ModContext) {
                         }
                       });
                     }
+
+                    if (monster.gpDrops.max < 40 && commonItems.length > 0) {
+                      itemPackage.monsters.modify({
+                        "id": `${monster.namespace + ':' + monster.localID}`,
+                        "lootTable": {
+                          "add": [
+                            {
+                              "itemID": `${commonItems.shift()}`,
+                              "maxQuantity": randomNumber(1, 100),
+                              "minQuantity": 1,
+                              "weight": 1
+                            }
+                          ]
+                        }
+                      });
+                    }
+                    if (monster.gpDrops.max < 30 && junkItems.length > 0) {
+                      itemPackage.monsters.modify({
+                        "id": `${monster.namespace + ':' + monster.localID}`,
+                        "lootTable": {
+                          "add": [
+                            {
+                              "itemID": `${junkItems.shift()}`,
+                              "maxQuantity": randomNumber(1, 100),
+                              "minQuantity": 1,
+                              "weight": 1
+                            }
+                          ]
+                        }
+                      });
+                    } 
+                    // do for other item lists and dont add else so more monsters get more items.
+                    // align quanaity with combat level
                   }
                 })
               } catch (error) {
@@ -1085,6 +1226,7 @@ export async function setup(ctx: Modding.ModContext) {
         });
         initialPackage.add();
         game.monad = initialPackage
+        idLog.push(junkItems)
         game.idLog = idLog
         if (kcm) {
           const cmim = mod.api.customModifiersInMelvor;
