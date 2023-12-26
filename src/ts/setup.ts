@@ -615,7 +615,7 @@ export async function setup(ctx: Modding.ModContext) {
                 }
                 // idLog.push(nonSupport[index].name, Object.keys(newPoeGem.modifiers))
                 if (Object.keys(newPoeGem.modifiers).length < 1) {
-                  newPoeGem.customDescription = nonSupport[index].secDescrText
+                  // newPoeGem.customDescription = nonSupport[index].secDescrText
                 }
 
                 if (newPoeGem.id) { itemPackage.items.add(newPoeGem), allItems.push(_namespace + ":" + nonSupport[index].id) }
