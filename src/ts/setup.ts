@@ -1206,3 +1206,18 @@ export async function setup(ctx: Modding.ModContext) {
 // })
 
 // ["monad:TrainingHealthPotion","monad:Soulboundwand","monad:BoneLance","monad:TraineeBoneSpear","monad:PaladinEngelersBodyArmoursilverrank","monad:PaladinEngelersSalletsilverrank","monad:PaladinEngelersGauntletssilverrank","monad:PaladinEngelersSabatonsilverrank","monad:PaladinEngelersMacesilverrank","monad:PaladinEngelersShieldsilverrank","monad:PaladinEngelersCapesilverrank","monad:DemonHunterNecklace","monad:DemonHunterBracelet","monad:DemonHunterEaring","monad:DemonHunterRing","monad:ToadsSkinJacket","monad:CrownoftheDammed","monad:Ringofinitialundeadcontrol","monad:RingofLittleStrength","monad:PendentofMediumMagic","monad:WitchesHat","monad:QueensPawn","monad:Skullofvictim","monad:EnchantingQuill","monad:PrincessesCoin","monad:necklacemadeofteeth","monad:Blackscarf","monad:WhaleSkin","monad:LinenHalfgloves","monad:BattlemagesGloves","monad:BattlemagesHat","monad:BattlemagesRobe","monad:BattlemagesCrakows","monad:BattlemagesBreeches","monad:CottonScarf","monad:RayndrJackboots","monad:RoguesRing","monad:DarkElfsScimitar","monad:MeroyriXiphos","monad:RayndrFaceMask","monad:ShadowPiratesCoat","monad:LeatherPirateBoots","monad:BlackBand","monad:TidusEaring","monad:FeaturelessDeathwoodMask","monad:BlackBraidBracelet","monad:FrostGloves","monad:FlameGloves","monad:CeremonialWhiteStagMask","monad:HeavenlyWhiteStagMask","monad:AcademyRobeBlackYellow","monad:HuiLusBattleArmour","monad:HuiLusEnchantingGloves","monad:HuiLusBurningBoots","monad:OtariKote","monad:GlideMoroha","monad:GaleMoroha","monad:NiyoshoGakuran","monad:NiyoshoHakama","monad:OttosLeakyWand","monad:JokotoWakizashi","monad:Seifuku","monad:NiyoshoKimono","monad:AutumnCloak"]
+
+
+// yee!
+// "Fire Blast" for example, could add, depending on your attack type:
+// Burn damage (for Melee and Ranged)
+// "Free" Fire Runes (like the Fire elemental staves do, I mean) and/or More damage to Fire elemental spells (for Magic)
+// I remember there being "Trap" gems
+// those could be slower attack speed for monsters, and +x% to whatever element they might be
+// I remember there being at least Poison and Fire (since those were the ones I used)
+// Al [S/Mas/P - 11.2/1.3/2.6%] — Today at 3:52 PM
+// also elemental and non-elemental Teleport/Dash gems
+// Teleport ones could be +x% to whichever element they might be, and +y% attack speed/-z attack interval
+// and same for Dash, except the attack speed bonus should be lower than the Teleport ones, but maybe higher element damage?
+// Teleport due to being faster (literally instant) movement
+// Dash being slower but also leaving a damaging trail/AoE of some kind to and from where you moved
