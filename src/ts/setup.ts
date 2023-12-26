@@ -164,7 +164,7 @@ export async function setup(ctx: Modding.ModContext) {
                   "specialAttacks": [],
                   "passives": [],
                   "ignoreCompletion": false,
-                  "attackType": parseInt(DnDmonsters[index].INT) > parseInt(DnDmonsters[index].STR) ? "magic" : Math.random() < 0.5 ? "melee" : "ranged",
+                  "attackType": parseInt(DnDmonsters[index].INT) > parseInt(DnDmonsters[index].STR) ? "magic" : parseInt(DnDmonsters[index].DEX) > parseInt(DnDmonsters[index].STR) ? "ranged" : "melee",
                   "lootChance": 100,
                   "lootTable": [
                     {
@@ -611,6 +611,14 @@ export async function setup(ctx: Modding.ModContext) {
                   }
                   if (nonSupport[index].explicitMods[j].includes("Totem")) {
                     newPoeGem.modifiers["increasedSummoningMaxHit"] = parseInt(nonSupport[index].explicitMods[0].replace(/^\D+/g, ''));
+                  }
+
+                  if (nonSupport[index].explicitMods[j].includes("Stun")) {
+                    if(nonSupport[index].properties[0].name.includes("Melee")) {
+                      newPoeGem.modifiers["increasedMeleeStunChance"] = parseInt(nonSupport[index].explicitMods[0].replace(/^\D+/g, ''));
+                    } else {                      
+                      newPoeGem.modifiers["increasedGlobalStunChance"] = parseInt(nonSupport[index].explicitMods[0].replace(/^\D+/g, ''));
+                    }
                   }
                 }
                 // idLog.push(nonSupport[index].name, Object.keys(newPoeGem.modifiers))

@@ -547,7 +547,6 @@ export const ItemList: any = {
     "category": "Combat",
     type: "Set",
     itemIDs: ["Paladin Engeler's Body Armour (silver rank)", "Paladin Engeler's Sabaton (silver rank)", "Paladin Engeler's Sallet (silver rank)"],
-    image: "",
     validSlots: [],
     occupiesSlots: []
   },
@@ -561,7 +560,6 @@ export const ItemList: any = {
     "category": "Combat",
     type: "Set",
     itemIDs: ["Paladin Engeler's Body Armour (silver rank)", "Paladin Engeler's Sabaton (silver rank)", "Paladin Engeler's Sallet (silver rank)", "Paladin Engeler's Gauntlets (silver rank)"],
-    image: "",
     validSlots: [],
     occupiesSlots: []
   },
@@ -576,7 +574,6 @@ export const ItemList: any = {
     "category": "Combat",
     type: "Set",
     itemIDs: ["Paladin Engeler's Body Armour (silver rank)", "Paladin Engeler's Sabaton (silver rank)", "Paladin Engeler's Sallet (silver rank)", "Paladin Engeler's Gauntlets (silver rank)", "Paladin Engeler's Cape (silver rank)", "Paladin Engeler's Shield (silver rank)", "Paladin Engeler's Mace (silver rank)"],
-    image: "",
     validSlots: [],
     occupiesSlots: []
   },
@@ -938,7 +935,6 @@ export const ItemList: any = {
     "category": "Combat",
     type: "Set",
     itemIDs: ["Battlemage's Gloves", "Battlemage's Hat", "Battlemage's Robe", "Battlemage's Crakows", "Battlemage's Breeches"],
-    image: ""
   },
   "Cotton Scarf": {
     name: "Cotton Scarf",
@@ -1152,7 +1148,7 @@ export const ItemList: any = {
     9: {
       name: "Black Band +9",
       description: "Dexterity: +9.",
-      image: "",
+      image: "img/Black_Band.png",
       rating: "normal",
       stats: { dexterity: 9 },
       long: "", // Price since it was shown In a shop.
@@ -1173,7 +1169,7 @@ export const ItemList: any = {
     9: {
       name: "Tidus Earing",
       description: "Dexterity +9, Swimming speed +5, Can breath underwater for 5 minutes.",
-      image: "",
+      image: "https://image.vector-park.jp/images/item/original2/019/2017/08/24/019-201708240761_1.jpg?t=1572379770",
       rating: "normal",
       stats: { dexterity: 9 },
       long: "", // Price since it was shown In a shop.
@@ -1292,7 +1288,7 @@ export const ItemList: any = {
     0: {
       name: "Ceremonial White Stag Mask",
       description: "",
-      image: "",
+      image: "img/owl.jpg",
       rating: "normal",
       stats: { "magic": 10 },
       long: "", // Price since it was shown In a shop.
@@ -1325,7 +1321,7 @@ export const ItemList: any = {
       name: "Heavenly White Stag Mask",
       description:
         "Magic: +1, Disease resistance + 20%, Mana regeneration + 10%, blessing of 建御雷 [Takemikazuchi].",
-      image: "",
+      image: "img/owl.jpg",
       rating: "unique",
       stats: { magic: 1, },
       long: "Blessing of 建御雷 [Takemikazuchi]: Resist lightning +10%, Lightning cost - 10%, Lightning power +10%.", // Price since it was shown In a shop.
@@ -1345,7 +1341,7 @@ export const ItemList: any = {
       name: "Heavenly White Stag Mask",
       description:
         "Magic: +2, Disease resistance + 20%, Mana regeneration + 20%, blessing of 建御雷 [Takemikazuchi].",
-      image: "",
+      image: "img/owl.jpg",
       rating: "unique",
       stats: { magic: 2 },
       long: "Blessing of 建御雷 [Takemikazuchi]: Resist lightning +20%, Lightning cost - 15%, Lightning power +20%.", // Price since it was shown In a shop.
@@ -1402,7 +1398,7 @@ export const ItemList: any = {
     0: {
       name: "Hui Lu's Battle Armour",
       description: "???",
-      image: "",
+      image: "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fget.wallhere.com%2Fphoto%2FHua-Lu-drawing-digital-art-samurai-men-creature-armor-tie-1557857.jpg",
       rating: "normal",
       stats: {},
       long: "", // Price since it was shown In a shop.
@@ -1433,7 +1429,7 @@ export const ItemList: any = {
     0: {
       name: "Hui Lu's Enchanting Gloves",
       description: "???",
-      image: "",
+      image: "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fget.wallhere.com%2Fphoto%2FHua-Lu-drawing-digital-art-samurai-men-creature-armor-tie-1557857.jpg",
       rating: "normal",
       stats: {},
       long: "", // Price since it was shown In a shop.
@@ -1464,7 +1460,7 @@ export const ItemList: any = {
     0: {
       name: "Hui Lu's Burning Boots",
       description: "???",
-      image: "",
+      image: "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fget.wallhere.com%2Fphoto%2FHua-Lu-drawing-digital-art-samurai-men-creature-armor-tie-1557857.jpg",
       rating: "normal",
       stats: {},
       long: "", // Price since it was shown In a shop.
@@ -1543,7 +1539,6 @@ export const ItemList: any = {
     rating: "rare",
     stats: {},
     note: "",
-    image: "",
     sellsFor: 0,
     "category": "Combat",
     type: "Set",
