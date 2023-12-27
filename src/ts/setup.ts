@@ -15,6 +15,9 @@ import '../img/people/owl.jpg';
 import '../img/items/lootbox.png';
 
 function randomNumber(min: number, max: number) {
+  if(min > max) {
+    return 1
+  }
   return Math.floor(Math.random() * (max - min) + min);
 }
 
@@ -33,7 +36,7 @@ function combatLevelCalc({
 
   const offenselvl =  0.325 * ( Math.max( attstr, Math.floor( Magic * 1.5 ), Math.floor( Ranged * 1.5 ) ) )
 
-  return baselvl + offenselvl
+  return Math.floor(baselvl + offenselvl)
 }
 
 
@@ -1209,7 +1212,7 @@ export async function setup(ctx: Modding.ModContext) {
                           "add": [
                             {
                               "itemID": `${junkItems.shift()}`,
-                              "maxQuantity": randomNumber(1, 100),
+                              "maxQuantity": randomNumber(1, combatLevelCalc(monster.levels) * 2),
                               "minQuantity": 1,
                               "weight": 100
                             }
@@ -1224,7 +1227,7 @@ export async function setup(ctx: Modding.ModContext) {
                           "add": [
                             {
                               "itemID": `${commonItems.shift()}`,
-                              "maxQuantity": randomNumber(1, 10),
+                              "maxQuantity": randomNumber(1, combatLevelCalc(monster.levels)),
                               "minQuantity": 1,
                               "weight": 60
                             }
@@ -1239,7 +1242,7 @@ export async function setup(ctx: Modding.ModContext) {
                           "add": [
                             {
                               "itemID": `${normalItems.shift()}`,
-                              "maxQuantity": randomNumber(1, 6),
+                              "maxQuantity": randomNumber(1, Math.floor(combatLevelCalc(monster.levels) / 2)),
                               "minQuantity": 1,
                               "weight": 40
                             }
@@ -1254,7 +1257,7 @@ export async function setup(ctx: Modding.ModContext) {
                           "add": [
                             {
                               "itemID": `${intermediateItems.shift()}`,
-                              "maxQuantity": randomNumber(1, 10),
+                              "maxQuantity": randomNumber(1, Math.floor(combatLevelCalc(monster.levels) / 4)),
                               "minQuantity": 1,
                               "weight": 30
                             }
@@ -1269,7 +1272,7 @@ export async function setup(ctx: Modding.ModContext) {
                           "add": [
                             {
                               "itemID": `${advancedItems.shift()}`,
-                              "maxQuantity": randomNumber(1, 10),
+                              "maxQuantity": randomNumber(1, Math.floor(combatLevelCalc(monster.levels) / 6)),
                               "minQuantity": 1,
                               "weight": 20
                             }
@@ -1284,7 +1287,7 @@ export async function setup(ctx: Modding.ModContext) {
                           "add": [
                             {
                               "itemID": `${rareItems.shift()}`,
-                              "maxQuantity": randomNumber(1, 10),
+                              "maxQuantity": randomNumber(1, Math.floor(combatLevelCalc(monster.levels) / 10)),
                               "minQuantity": 1,
                               "weight": 10
                             }
@@ -1299,7 +1302,7 @@ export async function setup(ctx: Modding.ModContext) {
                           "add": [
                             {
                               "itemID": `${epicItems.shift()}`,
-                              "maxQuantity": randomNumber(1, 10),
+                              "maxQuantity": randomNumber(1, Math.floor(combatLevelCalc(monster.levels) / 20)),
                               "minQuantity": 1,
                               "weight": 5
                             }
