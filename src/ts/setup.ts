@@ -158,10 +158,11 @@ export async function setup(ctx: Modding.ModContext) {
           "Lemonade_Wait_this_might_be_half_full_now": true,
           "Lemonade_How_full_is_it_supposed_to_be": true,
           "Lemonade_Still_almost_full": true,
-          "Lemonade_Almost_full": true
+          "Lemonade_Almost_full": true,
+          "lootbox": true
         }
         const bannedNameSpace: any = {
-          // "tes": true
+          "tes": true
         }
         const categoryBan: any = {
           "Limes": true,
@@ -1047,67 +1048,21 @@ export async function setup(ctx: Modding.ModContext) {
                       if (item.swalData) {
                         return;
                       }
-                      if (item.namespace === _namespace && `${item.localID}` !== 'lootbox') {
-                        allItems.push(`${item.namespace}:${item.localID}`)
+                      if (item.ignoreCompletion) {
+                        idLog.push(item.localID)
+                        return;
                       }
-                      if (`${item.localID}` !== 'lootbox' && item.namespace.includes('melvorD')) {
+                      if (item.namespace === _namespace) {
+                        allItems.push(`${item.namespace}:${item.localID}`)
+                      } else {
                         // https://wiki.melvoridle.com/index.php?title=Table_of_Items
+                        allItems.push(`${item.namespace}:${item.localID}`)
 
-                        if (item.sellsFor < 1) questItems.push(item.namespace + ':' + item.localID)
+                        if (item.sellsFor < 1 && item.type != "Misc") questItems.push(item.namespace + ':' + item.localID)
 
-                        if (item.sellsFor < 30) junkItems.push(item.namespace + ':' + item.localID)
-
-                        if (item.sellsFor < 40) commonItems.push(item.namespace + ':' + item.localID)
-
-                        if (item.sellsFor < 200) normalItems.push(item.namespace + ':' + item.localID)
-
-                        if (item.sellsFor < 400) intermediateItems.push(item.namespace + ':' + item.localID)
-
-                        if (item.sellsFor < 600) advancedItems.push(item.namespace + ':' + item.localID)
-
-                        if (item.sellsFor < 3000) rareItems.push(item.namespace + ':' + item.localID)
-
-                        if (item.sellsFor < 4000) epicItems.push(item.namespace + ':' + item.localID)
-
-                        if (item.sellsFor < 5000) legendaryItems.push(item.namespace + ':' + item.localID)
-
-                        if (item.sellsFor < 100000) legendaryItems.push(item.namespace + ':' + item.localID)
-
-                        if (item.sellsFor < 1000000) uniqueItems.push(item.namespace + ':' + item.localID)
-
-                        if (item.sellsFor < 10000000) growthItems.push(item.namespace + ':' + item.localID)
-                      } else if (`${item.localID}` !== 'lootbox' && item.namespace.includes('melvorF')) {
-                        // https://wiki.melvoridle.com/index.php?title=Table_of_Items
-
-                        if (item.sellsFor < 1) questItems.push(item.namespace + ':' + item.localID)
-
-                        if (item.sellsFor < 30) junkItems.push(item.namespace + ':' + item.localID)
-
-                        if (item.sellsFor < 40) commonItems.push(item.namespace + ':' + item.localID)
-
-                        if (item.sellsFor < 200) normalItems.push(item.namespace + ':' + item.localID)
-
-                        if (item.sellsFor < 400) intermediateItems.push(item.namespace + ':' + item.localID)
-
-                        if (item.sellsFor < 600) advancedItems.push(item.namespace + ':' + item.localID)
-
-                        if (item.sellsFor < 3000) rareItems.push(item.namespace + ':' + item.localID)
-
-                        if (item.sellsFor < 4000) epicItems.push(item.namespace + ':' + item.localID)
-
-                        if (item.sellsFor < 5000) legendaryItems.push(item.namespace + ':' + item.localID)
-
-                        if (item.sellsFor < 100000) legendaryItems.push(item.namespace + ':' + item.localID)
-
-                        if (item.sellsFor < 1000000) uniqueItems.push(item.namespace + ':' + item.localID)
-
-                        if (item.sellsFor < 10000000) growthItems.push(item.namespace + ':' + item.localID)
-                      } else if (TothEntitlement && `${item.localID}` !== 'lootbox' && item.namespace.includes('melvorTotH')) {
-                        // https://wiki.melvoridle.com/index.php?title=Table_of_Items
-
-                        if (item.sellsFor < 1) questItems.push(item.namespace + ':' + item.localID)
-
-                        if (item.sellsFor < 30) junkItems.push(item.namespace + ':' + item.localID)
+                        if (item.sellsFor < 30) {
+                          junkItems.push(item.namespace + ':' + item.localID)
+                        }
 
                         if (item.sellsFor < 40) commonItems.push(item.namespace + ':' + item.localID)
 
@@ -1146,6 +1101,9 @@ export async function setup(ctx: Modding.ModContext) {
                     return;
                   }
                   if (item.swalData) {
+                    return;
+                  }
+                  if (item.ignoreCompletion) {
                     return;
                   }
                   // item.sellsFor, split based on price, 0 cost items go in their own thing.
@@ -1206,7 +1164,7 @@ export async function setup(ctx: Modding.ModContext) {
                           }
                         });
                       }
-                      if (combatLevelCalc(monster.levels) < 71 && junkItems.length > 0) {
+                      if (combatLevelCalc(monster.levels) > 1 && junkItems.length > 0) {
                         itemPackage.monsters.modify({
                           "id": monsterId,
                           "lootTable": {
@@ -1386,7 +1344,7 @@ export async function setup(ctx: Modding.ModContext) {
         });
         initialPackage.add();
         game.monad = initialPackage
-        idLog.push(`junk: ${junkItems.length}`, `Common: ${commonItems.length}`, `normalItems: ${normalItems.length}`, `intermediateItems: ${intermediateItems.length}`, `advancedItems: ${advancedItems.length}`, `rareItems: ${rareItems.length}`, `epicItems: ${epicItems.length}`, `legendaryItems: ${legendaryItems.length}`, `uniqueItems: ${uniqueItems.length}`, `growthItems: ${growthItems.length}`, `questItems: ${questItems.length}`)
+        // idLog.push(`junk: ${junkItems.length}`, `Common: ${commonItems.length}`, `normalItems: ${normalItems.length}`, `intermediateItems: ${intermediateItems.length}`, `advancedItems: ${advancedItems.length}`, `rareItems: ${rareItems.length}`, `epicItems: ${epicItems.length}`, `legendaryItems: ${legendaryItems.length}`, `uniqueItems: ${uniqueItems.length}`, `growthItems: ${growthItems.length}`, `questItems: ${questItems.length}`)
         game.idLog = idLog
         if (kcm) {
           const cmim = mod.api.customModifiersInMelvor;
