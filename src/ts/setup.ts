@@ -1189,7 +1189,7 @@ export async function setup(ctx: Modding.ModContext) {
                           "add": [
                             {
                               "itemID": `${commonItems.shift()}`,
-                              "maxQuantity": randomNumber(1, 100),
+                              "maxQuantity": randomNumber(1, 10),
                               "minQuantity": 1,
                               "weight": 1
                             }
