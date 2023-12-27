@@ -18,6 +18,25 @@ function randomNumber(min: number, max: number) {
   return Math.floor(Math.random() * (max - min) + min);
 }
 
+function combatLevelCalc({
+  Attack = 1,
+  Strength = 1,
+  Defence = 1,
+  Hitpoints = 1,
+  Prayer = 1,
+  Ranged = 1, 
+  Magic = 1
+}) {
+  const attstr = Attack + Strength
+  console.log(attstr)
+  const baselvl = 0.25 * ( Defence + Hitpoints + Math.floor( Prayer * 0.5 ) )
+
+  const offenselvl =  0.325 * ( Math.max( attstr, Math.floor( Magic * 1.5 ), Math.floor( Ranged * 1.5 ) ) )
+
+  return baselvl + offenselvl
+}
+
+
 export async function setup(ctx: Modding.ModContext) {
   const _namespace = "monad"
   const errorLog: any[] = []
@@ -1182,22 +1201,8 @@ export async function setup(ctx: Modding.ModContext) {
                       });
                     }
 
-                    if (monster.gpDrops.max < 40 && commonItems.length > 0) {
-                      itemPackage.monsters.modify({
-                        "id": `${monster.namespace + ':' + monster.localID}`,
-                        "lootTable": {
-                          "add": [
-                            {
-                              "itemID": `${commonItems.shift()}`,
-                              "maxQuantity": randomNumber(1, 10),
-                              "minQuantity": 1,
-                              "weight": 1
-                            }
-                          ]
-                        }
-                      });
-                    }
-                    if (monster.gpDrops.max < 30 && junkItems.length > 0) {
+
+                    if (combatLevelCalc(monster.levels) < 30 && junkItems.length > 0) {
                       itemPackage.monsters.modify({
                         "id": `${monster.namespace + ':' + monster.localID}`,
                         "lootTable": {
@@ -1206,12 +1211,162 @@ export async function setup(ctx: Modding.ModContext) {
                               "itemID": `${junkItems.shift()}`,
                               "maxQuantity": randomNumber(1, 100),
                               "minQuantity": 1,
-                              "weight": 1
+                              "weight": 100
                             }
                           ]
                         }
                       });
                     } 
+                    if (combatLevelCalc(monster.levels) < 40 && commonItems.length > 0) {
+                      itemPackage.monsters.modify({
+                        "id": `${monster.namespace + ':' + monster.localID}`,
+                        "lootTable": {
+                          "add": [
+                            {
+                              "itemID": `${commonItems.shift()}`,
+                              "maxQuantity": randomNumber(1, 10),
+                              "minQuantity": 1,
+                              "weight": 60
+                            }
+                          ]
+                        }
+                      });
+                    }
+                    if (combatLevelCalc(monster.levels) < 40 && normalItems.length > 0) {
+                      itemPackage.monsters.modify({
+                        "id": `${monster.namespace + ':' + monster.localID}`,
+                        "lootTable": {
+                          "add": [
+                            {
+                              "itemID": `${normalItems.shift()}`,
+                              "maxQuantity": randomNumber(1, 6),
+                              "minQuantity": 1,
+                              "weight": 40
+                            }
+                          ]
+                        }
+                      });
+                    }
+                    if (combatLevelCalc(monster.levels) < 40 && intermediateItems.length > 0) {
+                      itemPackage.monsters.modify({
+                        "id": `${monster.namespace + ':' + monster.localID}`,
+                        "lootTable": {
+                          "add": [
+                            {
+                              "itemID": `${intermediateItems.shift()}`,
+                              "maxQuantity": randomNumber(1, 10),
+                              "minQuantity": 1,
+                              "weight": 30
+                            }
+                          ]
+                        }
+                      });
+                    }
+                    if (combatLevelCalc(monster.levels) < 40 && advancedItems.length > 0) {
+                      itemPackage.monsters.modify({
+                        "id": `${monster.namespace + ':' + monster.localID}`,
+                        "lootTable": {
+                          "add": [
+                            {
+                              "itemID": `${advancedItems.shift()}`,
+                              "maxQuantity": randomNumber(1, 10),
+                              "minQuantity": 1,
+                              "weight": 20
+                            }
+                          ]
+                        }
+                      });
+                    }
+                    if (combatLevelCalc(monster.levels) < 40 && rareItems.length > 0) {
+                      itemPackage.monsters.modify({
+                        "id": `${monster.namespace + ':' + monster.localID}`,
+                        "lootTable": {
+                          "add": [
+                            {
+                              "itemID": `${rareItems.shift()}`,
+                              "maxQuantity": randomNumber(1, 10),
+                              "minQuantity": 1,
+                              "weight": 10
+                            }
+                          ]
+                        }
+                      });
+                    }
+                    if (combatLevelCalc(monster.levels) < 40 && epicItems.length > 0) {
+                      itemPackage.monsters.modify({
+                        "id": `${monster.namespace + ':' + monster.localID}`,
+                        "lootTable": {
+                          "add": [
+                            {
+                              "itemID": `${epicItems.shift()}`,
+                              "maxQuantity": randomNumber(1, 10),
+                              "minQuantity": 1,
+                              "weight": 5
+                            }
+                          ]
+                        }
+                      });
+                    }
+                    if (combatLevelCalc(monster.levels) < 40 && legendaryItems.length > 0) {
+                      itemPackage.monsters.modify({
+                        "id": `${monster.namespace + ':' + monster.localID}`,
+                        "lootTable": {
+                          "add": [
+                            {
+                              "itemID": `${legendaryItems.shift()}`,
+                              "maxQuantity": 1,
+                              "minQuantity": 1,
+                              "weight": 1
+                            }
+                          ]
+                        }
+                      });
+                    }
+                    if (combatLevelCalc(monster.levels) < 40 && uniqueItems.length > 0) {
+                      itemPackage.monsters.modify({
+                        "id": `${monster.namespace + ':' + monster.localID}`,
+                        "lootTable": {
+                          "add": [
+                            {
+                              "itemID": `${uniqueItems.shift()}`,
+                              "maxQuantity": 1,
+                              "minQuantity": 1,
+                              "weight": 1
+                            }
+                          ]
+                        }
+                      });
+                    }
+                    if (combatLevelCalc(monster.levels) < 40 && growthItems.length > 0) {
+                      itemPackage.monsters.modify({
+                        "id": `${monster.namespace + ':' + monster.localID}`,
+                        "lootTable": {
+                          "add": [
+                            {
+                              "itemID": `${growthItems.shift()}`,
+                              "maxQuantity": 1,
+                              "minQuantity": 1,
+                              "weight": 1
+                            }
+                          ]
+                        }
+                      });
+                    }
+                    if (false && combatLevelCalc(monster.levels) < 40 && questItems.length > 0) {
+                      itemPackage.monsters.modify({
+                        "id": `${monster.namespace + ':' + monster.localID}`,
+                        "lootTable": {
+                          "add": [
+                            {
+                              "itemID": `${questItems.shift()}`,
+                              "maxQuantity": 1,
+                              "minQuantity": 1,
+                              "weight": 1
+                            }
+                          ]
+                        }
+                      });
+                    }
                     // do for other item lists and dont add else so more monsters get more items.
                     // align quanaity with combat level
                   }
@@ -1226,7 +1381,7 @@ export async function setup(ctx: Modding.ModContext) {
         });
         initialPackage.add();
         game.monad = initialPackage
-        idLog.push(junkItems)
+        idLog.push(`junk: ${junkItems.length}`, `Common: ${commonItems.length}`, `normalItems: ${normalItems.length}`, `intermediateItems: ${intermediateItems.length}`, `advancedItems: ${advancedItems.length}`, `rareItems: ${rareItems.length}`, `epicItems: ${epicItems.length}`, `legendaryItems: ${legendaryItems.length}`, `uniqueItems: ${uniqueItems.length}`, `growthItems: ${growthItems.length}`, `questItems: ${questItems.length}`)
         game.idLog = idLog
         if (kcm) {
           const cmim = mod.api.customModifiersInMelvor;
