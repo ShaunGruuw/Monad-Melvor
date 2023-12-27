@@ -31,11 +31,8 @@ function combatLevelCalc({
   Magic = 1
 }) {
   const attstr = Attack + Strength
-  console.log(attstr)
   const baselvl = 0.25 * ( Defence + Hitpoints + Math.floor( Prayer * 0.5 ) )
-
   const offenselvl =  0.325 * ( Math.max( attstr, Math.floor( Magic * 1.5 ), Math.floor( Ranged * 1.5 ) ) )
-
   return Math.floor(baselvl + offenselvl)
 }
 
