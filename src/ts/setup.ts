@@ -178,7 +178,7 @@ export async function setup(ctx: Modding.ModContext) {
         const initialPackage = ctx.gameData.buildPackage((itemPackage: any) => {
           try {
             // const SRDURL = "https://www.dnd5eapi.co/api/images/monsters/aboleth.png"
-            if (true && DnDmonsters) {
+            if (false && DnDmonsters) {
               const d5monsterid = []
               const sizes = {
                 Gargantuan: "melvorD:Magic_Bones",
