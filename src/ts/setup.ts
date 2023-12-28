@@ -37,6 +37,11 @@ function combatLevelCalc({
   return Math.floor(baselvl + offenselvl)
 }
 
+function calculateRewardsMax(CL = 1, maxLimit = 1) {
+  const ans = (CL/3000)*(CL+200) < 1 ? 1 : (CL/3000)*(CL+200)
+  return ans > maxLimit ? maxLimit : Math.floor(ans);
+}
+
 
 export async function setup(ctx: Modding.ModContext) {
   const _namespace = "monad"
@@ -648,7 +653,7 @@ export async function setup(ctx: Modding.ModContext) {
               }
               itemPackage.combatAreaDisplayOrder.add(pokemon_combat_display_order)
             }
-            if (true && nonSupport) {
+            if (false && nonSupport) {
               for (let index = 0; index < nonSupport.length; index++) {
                 const newPoeGem: any = {
                   "id": nonSupport[index].id,
@@ -715,7 +720,7 @@ export async function setup(ctx: Modding.ModContext) {
                 if (newPoeGem.id) { itemPackage.items.add(newPoeGem), allItems.push(_namespace + ":" + nonSupport[index].id) }
               }
             }
-            if (true && monadItems) {
+            if (false && monadItems) {
               try {
                 const monadItemsKeys: any[] = Object.keys(monadItems)
                 for (let index = 0; index < monadItemsKeys.length; index++) {
@@ -1049,7 +1054,102 @@ export async function setup(ctx: Modding.ModContext) {
                         return;
                       }
                       if (item.ignoreCompletion) {
-                        idLog.push(item.localID)
+                      //   [
+                      //     "Burnt_Shrimp",
+                      //     "Burnt_Sardine",
+                      //     "Burnt_Herring",
+                      //     "Burnt_Trout",
+                      //     "Burnt_Salmon",
+                      //     "Burnt_Lobster",
+                      //     "Burnt_Swordfish",
+                      //     "Burnt_Crab",
+                      //     "Burnt_Shark",
+                      //     "Burnt_Manta_Ray",
+                      //     "Burnt_Whale",
+                      //     "Amulet_of_Calculated_Promotion",
+                      //     "Burnt_Anglerfish",
+                      //     "Burnt_Fanfish",
+                      //     "Burnt_Seahorse",
+                      //     "Burnt_Carp",
+                      //     "Eight",
+                      //     "Event_Clue_1",
+                      //     "Event_Clue_2",
+                      //     "Event_Clue_3",
+                      //     "Event_Clue_4",
+                      //     "Cake_Base",
+                      //     "Candle",
+                      //     "Magical_Icing",
+                      //     "Magical_Flavouring",
+                      //     "Birthday_Cake",
+                      //     "Birthday_Token",
+                      //     "Purple_Party_Hat",
+                      //     "Futures_Prophecy",
+                      //     "Yellow_Party_Hat",
+                      //     "Red_Herring",
+                      //     "Cool_Glasses",
+                      //     "Enchanted_Topaz_Bolts",
+                      //     "Enchanted_Sapphire_Bolts",
+                      //     "Enchanted_Ruby_Bolts",
+                      //     "Enchanted_Emerald_Bolts",
+                      //     "Enchanted_Diamond_Bolts",
+                      //     "Enchanted_Jadestone_Bolts",
+                      //     "Poison_Ring",
+                      //     "Burning_Ring",
+                      //     "Frostburn_Ring",
+                      //     "Mystery_Wand",
+                      //     "Poison_Arrows",
+                      //     "Fire_Arrows",
+                      //     "Frost_Arrows",
+                      //     "Burning_Wand",
+                      //     "Frostburn_Wand",
+                      //     "Ring_Of_Balance",
+                      //     "Flying_Cape",
+                      //     "Amulet_Of_Healing",
+                      //     "Sword_Of_Some_Reliability",
+                      //     "One_Layer_Shield",
+                      //     "Warding_Shield",
+                      //     "Tilted_Crossbow",
+                      //     "Ultimate_Speed_Boots",
+                      //     "Almighty_Ring",
+                      //     "Punching_Bag_Platebody",
+                      //     "Precision_Gloves",
+                      //     "Heavy_Gloves",
+                      //     "Ultimate_Slapping_Gloves",
+                      //     "Amulet_Of_Burning_Leech",
+                      //     "Amulet_Of_Poison_Leech",
+                      //     "Magic_Crit_Amulet",
+                      //     "Melee_Crit_Amulet",
+                      //     "Bloodthirst_Amulet",
+                      //     "Dragon_Head_Helmet",
+                      //     "Stonewall_Shield",
+                      //     "Impossible_Longbow",
+                      //     "Throwing_Dragon_Sword",
+                      //     "Cape_of_Completion",
+                      //     "Unknown_Evil",
+                      //     "New_Dawn",
+                      //     "Abnormal_Log",
+                      //     "Lemon_Cake",
+                      //     "Lemon_Cake_Perfect",
+                      //     "Beginning_Of_The_End",
+                      //     "Impending_Darkness",
+                      //     "Superior_Cape_Of_Completion",
+                      //     "Woodcutting_Lesser_Relic",
+                      //     "Fishing_Lesser_Relic",
+                      //     "Firemaking_Lesser_Relic",
+                      //     "Cooking_Lesser_Relic",
+                      //     "Mining_Lesser_Relic",
+                      //     "Smithing_Lesser_Relic",
+                      //     "Thieving_Lesser_Relic",
+                      //     "Fletching_Lesser_Relic",
+                      //     "Crafting_Lesser_Relic",
+                      //     "Runecrafting_Lesser_Relic",
+                      //     "Herblore_Lesser_Relic",
+                      //     "Agility_Lesser_Relic",
+                      //     "Summoning_Lesser_Relic",
+                      //     "Astrology_Lesser_Relic",
+                      //     "Cape_of_Completion_AoD",
+                      //     "Test_Gem"
+                      // ]
                         return;
                       }
                       if (item.namespace === _namespace) {
@@ -1060,29 +1160,29 @@ export async function setup(ctx: Modding.ModContext) {
 
                         if (item.sellsFor < 1 && item.type != "Misc") questItems.push(item.namespace + ':' + item.localID)
 
-                        if (item.sellsFor < 30) {
+                        else if (item.sellsFor < 30) {
                           junkItems.push(item.namespace + ':' + item.localID)
                         }
 
-                        if (item.sellsFor < 40) commonItems.push(item.namespace + ':' + item.localID)
+                        else if (item.sellsFor < 40) commonItems.push(item.namespace + ':' + item.localID)
 
-                        if (item.sellsFor < 200) normalItems.push(item.namespace + ':' + item.localID)
+                        else if (item.sellsFor < 200) normalItems.push(item.namespace + ':' + item.localID)
 
-                        if (item.sellsFor < 400) intermediateItems.push(item.namespace + ':' + item.localID)
+                        else if (item.sellsFor < 400) intermediateItems.push(item.namespace + ':' + item.localID)
 
-                        if (item.sellsFor < 600) advancedItems.push(item.namespace + ':' + item.localID)
+                        else if (item.sellsFor < 600) advancedItems.push(item.namespace + ':' + item.localID)
 
-                        if (item.sellsFor < 3000) rareItems.push(item.namespace + ':' + item.localID)
+                        else if (item.sellsFor < 3000) rareItems.push(item.namespace + ':' + item.localID)
 
-                        if (item.sellsFor < 4000) epicItems.push(item.namespace + ':' + item.localID)
+                        else if (item.sellsFor < 4000) epicItems.push(item.namespace + ':' + item.localID)
 
-                        if (item.sellsFor < 5000) legendaryItems.push(item.namespace + ':' + item.localID)
+                        else if (item.sellsFor < 100000) {
+                          legendaryItems.push(item.namespace + ':' + item.localID)
+                        }
 
-                        if (item.sellsFor < 100000) legendaryItems.push(item.namespace + ':' + item.localID)
+                        else if (item.sellsFor < 1000000) uniqueItems.push(item.namespace + ':' + item.localID)
 
-                        if (item.sellsFor < 1000000) uniqueItems.push(item.namespace + ':' + item.localID)
-
-                        if (item.sellsFor < 10000000) growthItems.push(item.namespace + ':' + item.localID)
+                        else { growthItems.push(item.namespace + ':' + item.localID) }
                       }
                     }
                   } catch (error) {
@@ -1091,23 +1191,8 @@ export async function setup(ctx: Modding.ModContext) {
                 })
                 // All items added from this mod
                 allItems.forEach(item => {
-                  if (bannedList[item.localID]) {
-                    return;
-                  }
-                  if (bannedNameSpace[item.namespace]) {
-                    return;
-                  }
-                  if (categoryBan[item.category]) {
-                    return;
-                  }
-                  if (item.swalData) {
-                    return;
-                  }
-                  if (item.ignoreCompletion) {
-                    return;
-                  }
-                  // item.sellsFor, split based on price, 0 cost items go in their own thing.
-                  _namespaceItemList.push(`${item}`)
+                  if(item.includes(_namespace)) { _namespaceItemList.push(`${item}`) }
+
                   itemPackage.items.modify({
                     id: `${_namespace}:lootbox`,
                     dropTable: {
@@ -1171,7 +1256,7 @@ export async function setup(ctx: Modding.ModContext) {
                             "add": [
                               {
                                 "itemID": `${junkItems.shift()}`,
-                                "maxQuantity": randomNumber(1, combatLevelCalc(monster.levels) * 2),
+                                "maxQuantity": randomNumber(1, calculateRewardsMax(combatLevelCalc(monster.levels), 100)),
                                 "minQuantity": 1,
                                 "weight": 100
                               }
@@ -1186,7 +1271,7 @@ export async function setup(ctx: Modding.ModContext) {
                             "add": [
                               {
                                 "itemID": `${commonItems.shift()}`,
-                                "maxQuantity": randomNumber(1, combatLevelCalc(monster.levels)),
+                                "maxQuantity": randomNumber(1, calculateRewardsMax(combatLevelCalc(monster.levels), 70)),
                                 "minQuantity": 1,
                                 "weight": 60
                               }
@@ -1201,7 +1286,7 @@ export async function setup(ctx: Modding.ModContext) {
                             "add": [
                               {
                                 "itemID": `${normalItems.shift()}`,
-                                "maxQuantity": randomNumber(1, Math.floor(combatLevelCalc(monster.levels) / 2)),
+                                "maxQuantity": randomNumber(1, calculateRewardsMax(combatLevelCalc(monster.levels), 50)),
                                 "minQuantity": 1,
                                 "weight": 40
                               }
@@ -1216,7 +1301,7 @@ export async function setup(ctx: Modding.ModContext) {
                             "add": [
                               {
                                 "itemID": `${intermediateItems.shift()}`,
-                                "maxQuantity": randomNumber(1, Math.floor(combatLevelCalc(monster.levels) / 4)),
+                                "maxQuantity": randomNumber(1, calculateRewardsMax(combatLevelCalc(monster.levels), 20)),
                                 "minQuantity": 1,
                                 "weight": 30
                               }
@@ -1231,7 +1316,7 @@ export async function setup(ctx: Modding.ModContext) {
                             "add": [
                               {
                                 "itemID": `${advancedItems.shift()}`,
-                                "maxQuantity": randomNumber(1, Math.floor(combatLevelCalc(monster.levels) / 6)),
+                                "maxQuantity": randomNumber(1, calculateRewardsMax(combatLevelCalc(monster.levels), 10)),
                                 "minQuantity": 1,
                                 "weight": 20
                               }
@@ -1246,7 +1331,7 @@ export async function setup(ctx: Modding.ModContext) {
                             "add": [
                               {
                                 "itemID": `${rareItems.shift()}`,
-                                "maxQuantity": randomNumber(1, Math.floor(combatLevelCalc(monster.levels) / 10)),
+                                "maxQuantity": randomNumber(1, calculateRewardsMax(combatLevelCalc(monster.levels), 6)),
                                 "minQuantity": 1,
                                 "weight": 10
                               }
@@ -1261,7 +1346,7 @@ export async function setup(ctx: Modding.ModContext) {
                             "add": [
                               {
                                 "itemID": `${epicItems.shift()}`,
-                                "maxQuantity": randomNumber(1, Math.floor(combatLevelCalc(monster.levels) / 20)),
+                                "maxQuantity": randomNumber(1, calculateRewardsMax(combatLevelCalc(monster.levels), 2)),
                                 "minQuantity": 1,
                                 "weight": 5
                               }
@@ -1344,7 +1429,7 @@ export async function setup(ctx: Modding.ModContext) {
         });
         initialPackage.add();
         game.monad = initialPackage
-        // idLog.push(`junk: ${junkItems.length}`, `Common: ${commonItems.length}`, `normalItems: ${normalItems.length}`, `intermediateItems: ${intermediateItems.length}`, `advancedItems: ${advancedItems.length}`, `rareItems: ${rareItems.length}`, `epicItems: ${epicItems.length}`, `legendaryItems: ${legendaryItems.length}`, `uniqueItems: ${uniqueItems.length}`, `growthItems: ${growthItems.length}`, `questItems: ${questItems.length}`)
+        idLog.push(`junk: ${junkItems.length}`, `Common: ${commonItems.length}`, `normalItems: ${normalItems.length}`, `intermediateItems: ${intermediateItems.length}`, `advancedItems: ${advancedItems.length}`, `rareItems: ${rareItems.length}`, `epicItems: ${epicItems.length}`, `legendaryItems: ${legendaryItems.length}`, `uniqueItems: ${uniqueItems.length}`, `growthItems: ${growthItems.length}`, `questItems: ${questItems.length}`)
         game.idLog = idLog
         if (kcm) {
           const cmim = mod.api.customModifiersInMelvor;
