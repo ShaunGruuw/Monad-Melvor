@@ -608,7 +608,7 @@ export const ItemList: any = {
     type: "Equipment",
     // melvor
     // equipmentStats will be converted from stats
-    validSlots: ["Platebody"],
+    validSlots: ["Helmet"],
     occupiesSlots: [],
     equipRequirements: [],
     modifiers: {},
