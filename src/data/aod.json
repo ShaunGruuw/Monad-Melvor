@@ -8,7 +8,7 @@
             "name": "cheat",
             "category": "Combat",
             "type": "Armour",
-            "media": "assets/dragon.png",
+            "media": "img/owl.jpg",
             "ignoreCompletion": true,
             "obtainFromItemLog": false,
             "golbinRaidExclusive": false,
