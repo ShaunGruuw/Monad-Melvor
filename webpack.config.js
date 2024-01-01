@@ -23,6 +23,7 @@ module.exports = {
       patterns: [
         { from: 'manifest.json', to: 'manifest.json' },
         { from: 'src/data/data.json', to: 'data.json' },
+        { from: 'src/data/aod.json', to: 'aod.json' },
         { from: 'src/data/monad-data.json', to: 'monad-data.json' }
       ]
     })
