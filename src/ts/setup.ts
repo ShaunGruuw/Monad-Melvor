@@ -184,7 +184,7 @@ export async function setup(ctx: Modding.ModContext) {
         const initialPackage = ctx.gameData.buildPackage((itemPackage: any) => {
           try {
             // const SRDURL = "https://www.dnd5eapi.co/api/images/monsters/aboleth.png"
-            if (true && DnDmonsters) {
+            if (false && DnDmonsters) {
               const d5monsterid = []
               const sizes = {
                 Gargantuan: "melvorD:Magic_Bones",
@@ -726,7 +726,7 @@ export async function setup(ctx: Modding.ModContext) {
                 if (newPoeGem.id) { itemPackage.items.add(newPoeGem), allItems.push(_namespace + ":" + nonSupport[index].id) }
               }
             }
-            if (false && monadItems) {
+            if (true && monadItems) {
               try {
                 const monadItemsKeys: any[] = Object.keys(monadItems)
                 for (let index = 0; index < monadItemsKeys.length; index++) {
