@@ -57,8 +57,6 @@ export async function setup(ctx: Modding.ModContext) {
     }
     ctx.onModsLoaded(async () => {
       try {
-
-
         const kcm = mod.manager.getLoadedModList().includes('Custom Modifiers in Melvor')
         // const tes = mod.manager.getLoadedModList().includes("The Elder Scrolls")
         const mythLoaded = mod.manager.getLoadedModList().includes("[Myth] Music")
@@ -1219,9 +1217,10 @@ export async function setup(ctx: Modding.ModContext) {
                     allMonsters.push(monster)
                   }
                 })
+                idLog.push(allMonsters)
                 // All monsters added from this mod
                 allMonsters.forEach(monster => {
-                  if (monster) {
+                  if (monster) {                    
                     let monsterId = ''
                     if (monster instanceof Monster) {
                       monsterId = `${monster.namespace + ':' + monster.localID}`
@@ -1435,7 +1434,6 @@ export async function setup(ctx: Modding.ModContext) {
         });
         initialPackage.add();
         game.monad = initialPackage
-        idLog.push(`junk: ${junkItems.length}`, `Common: ${commonItems.length}`, `normalItems: ${normalItems.length}`, `intermediateItems: ${intermediateItems.length}`, `advancedItems: ${advancedItems.length}`, `rareItems: ${rareItems.length}`, `epicItems: ${epicItems.length}`, `legendaryItems: ${legendaryItems.length}`, `uniqueItems: ${uniqueItems.length}`, `growthItems: ${growthItems.length}`, `questItems: ${questItems.length}`)
         game.idLog = idLog
         if (kcm) {
           const cmim = mod.api.customModifiersInMelvor;
