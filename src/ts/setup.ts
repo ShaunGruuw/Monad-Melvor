@@ -1213,9 +1213,9 @@ export async function setup(ctx: Modding.ModContext) {
                 })
                 // All monsters already in the game
                 game.monsters.forEach(monster => {
-                  if (monster && monster.namespace === _namespace) {
+                  // if (monster && monster.namespace === _namespace) {
                     allMonsters.push(monster)
-                  }
+                  // }
                 })
                 idLog.push(allMonsters)
                 // All monsters added from this mod
