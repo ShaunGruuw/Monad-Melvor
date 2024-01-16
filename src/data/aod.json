@@ -23,6 +23,8 @@
             "equipmentStats": [],
             "itemType": "Equipment",
             "modifiers": {
+              "increasedSummoningMaxHit": 1000,
+              "decreasedSummoningAttackIntervalPercent": 1000,
               "increasedHPRegenFlat": 1000,
               "increasedMaxHitpoints": 10000,
               "increasedDamageToAllMonsters": 100,
