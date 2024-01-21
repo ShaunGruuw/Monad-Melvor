@@ -2,6 +2,7 @@ import { ItemList as monadItems } from '../data/monad-data';
 import { nonSupport } from '../data/poe.data';
 import Pokemon from '../data/data.allPokemon.json'
 import DnDmonsters from '../data/5e.data.json'
+import DnDMagicitems from '../data/5e-SRD-Magic-Items.json'
 
 // Styles
 import '../css/styles.css';
@@ -1037,6 +1038,134 @@ export async function setup(ctx: Modding.ModContext) {
                 errorLog.push("Error @ monadItems ", error)
               }
             }
+            if (true && DnDMagicitems) {
+              function getMediaFromType(type: string) {
+                return `img/${type.replace(' ', '').toLowerCase()}.jpg`
+              }
+              function getSellPriceFromDisc(Disc: string) {
+                if (Disc === 'Common') {
+                  return 10;
+                }
+                if (Disc === 'Uncommon') {
+                  return 100;
+                }
+                if (Disc === 'Rare') {
+                  return 1000;
+                }
+                if (Disc === 'Very Rare') {
+                  return 10000;
+                }
+                if (Disc === 'Legendary') {
+                  return 100000;
+                }
+                return 0;
+              }
+
+              function getValidSlots(item: any) {
+                // "Helmet",
+                // "Platebody",
+                // "Platelegs",
+                // "Boots",
+                // "Weapon",
+                // "Shield",
+                // "Amulet",
+                // "Ring",
+                // "Gloves",
+                // "Quiver",
+                // "Cape",
+                // "Passive",
+                // "Summon1",
+                // "Summon2",
+                // "Consumable",
+                // "Gem" 
+                if(item.name.includes('Ammunition')) {
+                  return ['Quiver'];
+              }
+                if (item.name.includes('amulet')) {
+                  return ['Amulet'];
+                }
+                if (item.name.includes('greaves')) {
+                  return ['Platelegs'];
+                }
+                if (item.name.includes('cloak')) {
+                  return ['Cape'];
+                }
+                if (item.name.includes('cape')) {
+                  return ['Cape'];
+                }
+                if (item.name.includes('boot')) {
+                  return ['Boots'];
+                }
+                if (item.name.includes('glove')) {
+                  return ['Gloves'];
+                }
+                if (item.name.includes('hat')) {
+                  return ['Helmet'];
+                }
+                if (item.name.includes('helmet')) {
+                  return ['Helmet'];
+                }
+                if (item.name.includes('Shield')) {
+                  return ['Shield'];
+                }
+                const Disc = item.equipment_category.name.replace('Armor', 'Armour')
+                if (Disc === 'Staffs') {
+                  return ['Weapon'];
+                }
+                if (Disc === 'Wands') {
+                  return ['Weapon'];
+                }
+                if (Disc === 'Weapons') {
+                  return ['Weapon'];
+                }
+                if (Disc === 'Wondrous Items') {
+                  return ['Passive'];
+                }
+                if (Disc === 'Armour') {
+                  return ['Platebody'];
+                }
+                if (Disc === 'Potions') {
+                  return ['Consumable'];
+                }
+                if (Disc === 'Scrolls') {
+                  return ['Consumable'];
+                }
+                if (Disc === 'Rings') {
+                  return ['Ring'];
+                }
+                if (Disc === 'Rods') {
+                  return ['Weapon'];
+                }
+                return [];
+              }
+              const uniqueIDs: [string] = ['']
+              for (let index = 0; index < DnDMagicitems.length; index++) {
+                let itemID = DnDMagicitems[index].name.replace(/[^a-zA-Z ]/g, "").replace(/\s/g, "")
+                uniqueIDs.push(itemID)
+                while (uniqueIDs.includes(itemID)) {
+                  itemID = itemID + Math.floor(Math.random()*1000000)
+                }
+                const templateItem = {
+                  "id": itemID,
+                  "name": DnDMagicitems[index].name,
+                  "category": DnDMagicitems[index].equipment_category.name.replace('Armor', 'Armour'),
+                  "type": DnDMagicitems[index].equipment_category.name.replace('Armor', 'Armour').replace('Ammunition', 'Ammo'),
+                  "itemType": "Equipment",
+                  "media": getMediaFromType(DnDMagicitems[index].equipment_category.name),
+                  "ignoreCompletion": false,
+                  "obtainFromItemLog": false,
+                  "golbinRaidExclusive": false,
+                  "sellsFor": getSellPriceFromDisc(DnDMagicitems[index].rarity.name),
+                  // "customDescription": monadItems[id].description,
+                  "tier": "none",
+                  "validSlots": getValidSlots(DnDMagicitems[index].equipment_category.name.replace('Armor', 'Armour')),
+                  "occupiesSlots": DnDMagicitems[index].equipment_category.name === 'Staffs' ? ["Shield"] : [],
+                  "equipRequirements": [],
+                  "equipmentStats": [],
+                }
+                itemPackage.items.add(templateItem)
+              }
+            }
             if (true) {
               try {
                 const _namespaceItemList: any[] = [] // split into item ranks, then pass into monster ranks
@@ -1214,13 +1343,13 @@ export async function setup(ctx: Modding.ModContext) {
                 // All monsters already in the game
                 game.monsters.forEach(monster => {
                   // if (monster && monster.namespace === _namespace) {
-                    allMonsters.push(monster)
+                  allMonsters.push(monster)
                   // }
                 })
                 idLog.push(allMonsters)
                 // All monsters added from this mod
                 allMonsters.forEach(monster => {
-                  if (monster) {                    
+                  if (monster) {
                     let monsterId = ''
                     if (monster instanceof Monster) {
                       monsterId = `${monster.namespace + ':' + monster.localID}`
