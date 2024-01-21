@@ -1040,7 +1040,7 @@ export async function setup(ctx: Modding.ModContext) {
             }
             if (true && DnDMagicitems) {
               function getMediaFromType(type: string) {
-                return `img/${type.replace(' ', '').toLowerCase()}.jpg`
+                return `img/${type.replace(' ', '').toLowerCase().replace('wondrousitems', 'wondrousitem')}.jpg`
               }
               function getSellPriceFromDisc(Disc: string) {
                 if (Disc === 'Common') {
@@ -1078,9 +1078,12 @@ export async function setup(ctx: Modding.ModContext) {
                 // "Summon2",
                 // "Consumable",
                 // "Gem" 
-                if(item.name.includes('Ammunition')) {
+                if (item.equipment_category.name.includes('Weapon')) {
+                  return ['Weapon'];
+                }
+                if (item.name.includes('Ammunition')) {
                   return ['Quiver'];
-              }
+                }
                 if (item.name.includes('amulet')) {
                   return ['Amulet'];
                 }
@@ -1141,16 +1144,18 @@ export async function setup(ctx: Modding.ModContext) {
               const uniqueIDs: [string] = ['']
               for (let index = 0; index < DnDMagicitems.length; index++) {
                 let itemID = DnDMagicitems[index].name.replace(/[^a-zA-Z ]/g, "").replace(/\s/g, "")
-                uniqueIDs.push(itemID)
-                while (uniqueIDs.includes(itemID)) {
-                  itemID = itemID + Math.floor(Math.random()*1000000)
+                if(uniqueIDs.includes(itemID)) {
+                  while (uniqueIDs.includes(itemID)) {
+                      itemID = itemID + Math.floor(Math.random() * 1000000)
+                  }
                 }
-                const templateItem = {
+                uniqueIDs.push(itemID)
+                const templateItem: any = {
                   "id": itemID,
                   "name": DnDMagicitems[index].name,
                   "category": DnDMagicitems[index].equipment_category.name.replace('Armor', 'Armour'),
                   "type": DnDMagicitems[index].equipment_category.name.replace('Armor', 'Armour').replace('Ammunition', 'Ammo'),
-                  "itemType": "Equipment",
+                  "itemType": DnDMagicitems[index].equipment_category.name.includes('Weapon') ? "Weapon" : DnDMagicitems[index].equipment_category.name.includes('Potion') ? "Potion" : "Equipment",
                   "media": getMediaFromType(DnDMagicitems[index].equipment_category.name),
                   "ignoreCompletion": false,
                   "obtainFromItemLog": false,
@@ -1158,10 +1163,42 @@ export async function setup(ctx: Modding.ModContext) {
                   "sellsFor": getSellPriceFromDisc(DnDMagicitems[index].rarity.name),
                   // "customDescription": monadItems[id].description,
                   "tier": "none",
-                  "validSlots": getValidSlots(DnDMagicitems[index].equipment_category.name.replace('Armor', 'Armour')),
-                  "occupiesSlots": DnDMagicitems[index].equipment_category.name === 'Staffs' ? ["Shield"] : [],
+                  "validSlots": getValidSlots(DnDMagicitems[index]),
+                  "occupiesSlots": DnDMagicitems[index].name.toLocaleLowerCase().includes('bow') ? ['Shield'] : DnDMagicitems[index].equipment_category.name === 'Staffs' ? ['Shield'] : [],
                   "equipRequirements": [],
                   "equipmentStats": [],
+                }
+                if (DnDMagicitems[index].equipment_category.name.includes('Potion')) {
+                  delete templateItem["validSlots"]
+                  delete templateItem["occupiesSlots"]
+                  delete templateItem["equipRequirements"]
+                  delete templateItem["equipmentStats"]
+                  delete templateItem["tier"]
+
+                  templateItem["charges"] = 10
+                  templateItem["tier"] = 0,
+                    templateItem["action"] = "melvorD:Fishing",
+                    templateItem["consumesOn"] = [
+                      {
+                        "type": "FishingAction"
+                      }
+                    ]
+                }
+                if (DnDMagicitems[index].equipment_category.name.includes('Weapon')) {
+                  const Disc = DnDMagicitems[index].equipment_category.name.replace('Armor', 'Armour')
+                  if (Disc === 'Staffs') {
+                    templateItem['attackType'] = "magic"
+                  }
+                  else if (Disc === 'Wands') {
+                    templateItem['attackType'] = "magic"
+                  } else if (Disc === 'Bow') {
+                    templateItem['attackType'] = "ranged"
+                  } else if (DnDMagicitems[index].name.toLocaleLowerCase().includes('bow')) {
+                    templateItem['attackType'] = "ranged"
+                  } else {
+                    templateItem['attackType'] = "melee"
+                  }
+
                 }
                 itemPackage.items.add(templateItem)
               }
