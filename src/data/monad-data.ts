@@ -80,6 +80,12 @@ interface monadItem {
   7?: Partial<monadItem> | Partial<monadEquipmentItemData> | monadWeaponItemData | monadFoodItemData | monadBoneItemData | monadPotionItemData | monadReadableItemData | monadOpenableItemData | monadMiscItemData | monadSetItemData;
   8?: Partial<monadItem> | Partial<monadEquipmentItemData> | monadWeaponItemData | monadFoodItemData | monadBoneItemData | monadPotionItemData | monadReadableItemData | monadOpenableItemData | monadMiscItemData | monadSetItemData;
   9?: Partial<monadItem> | Partial<monadEquipmentItemData> | monadWeaponItemData | monadFoodItemData | monadBoneItemData | monadPotionItemData | monadReadableItemData | monadOpenableItemData | monadMiscItemData | monadSetItemData;
+  // For some spcific items that extend this one
+  type: string;
+  itemIDs?: (string | SynergyGroup)[];
+  equipmentStats?: EquipStatPair[];
+  stats?: monadStatPair;
+  modifiers?: PlayerModifierData;
 }
 interface monadEquipmentItemData extends monadBaseEquipmentItemData {
   type: 'Equipment';
@@ -221,7 +227,10 @@ interface monadSetItemData extends Partial<monadBaseEquipmentItemData> {
 interface monadItemList {
   [key: string]: monadItem | monadEquipmentItemData | monadWeaponItemData | monadFoodItemData | monadBoneItemData | monadPotionItemData | monadReadableItemData | monadOpenableItemData | monadMiscItemData | monadSetItemData;
 }
-export const ItemList: any = {
+
+export declare type AnyMonadItemData = monadItem | monadEquipmentItemData | monadWeaponItemData | monadFoodItemData | monadBoneItemData | monadPotionItemData | monadReadableItemData | monadOpenableItemData | monadMiscItemData | monadSetItemData;
+
+export const ItemList: monadItemList = {
   // Each item can be enchanted by level / 10. That is how you increase the stats, not an automatic increase.
   "Training Health Potion": {
     type: "Potion",
@@ -230,7 +239,7 @@ export const ItemList: any = {
     image: "img/BloodPotion.png",
     long: "¤1", // Price since it was shown In a shop.
     note: "",
-    sellsFor: 0,
+    sellsFor: 1,
     rating: "junk",
     category: "Potion",
     // Melvor
@@ -254,17 +263,76 @@ export const ItemList: any = {
     rating: "normal",
     stats: { sense: 1, attackSpeed: 2600 },
     note: "",
-    sellsFor: 0,
+    sellsFor: 3200000,
     type: "Weapon",
     "category": "wand",
     attackType: "magic",
     // melvor
-    // equipmentStats will be converted from stats
     validSlots: ["Weapon"],
     occupiesSlots: [],
     equipRequirements: [],
-    modifiers: {},
-    enemyModifiers: {}
+    modifiers: {
+      "increasedSummoningMaxHit": 100
+    },
+    enemyModifiers: {},
+    equipmentStats: [
+      {
+        "key": "stabAttackBonus",
+        "value": 0
+      },
+      {
+        "key": "slashAttackBonus",
+        "value": 0
+      },
+      {
+        "key": "blockAttackBonus",
+        "value": 0
+      },
+      {
+        "key": "rangedAttackBonus",
+        "value": 0
+      },
+      {
+        "key": "magicAttackBonus",
+        "value": 40
+      },
+      {
+        "key": "meleeStrengthBonus",
+        "value": 0
+      },
+      {
+        "key": "rangedStrengthBonus",
+        "value": 0
+      },
+      {
+        "key": "magicDamageBonus",
+        "value": 60
+      },
+      {
+        "key": "meleeDefenceBonus",
+        "value": 0
+      },
+      {
+        "key": "rangedDefenceBonus",
+        "value": 0
+      },
+      {
+        "key": "magicDefenceBonus",
+        "value": 0
+      },
+      {
+        "key": "damageReduction",
+        "value": 1
+      },
+      {
+        "key": "summoningMaxhit",
+        "value": 100
+      },
+      {
+        "key": "attackSpeed",
+        "value": 2600
+      }
+    ],
   },
   "Bone Lance": {
     name: "Bone Lance",
@@ -275,17 +343,76 @@ export const ItemList: any = {
     rating: "normal",
     stats: {},
     note: "",
-    sellsFor: 0,
+    sellsFor: 1,
     "category": "Combat",
     type: "Weapon",
     "attackType": "melee",
     // melvor
-    // equipmentStats will be converted from stats
     validSlots: ["Weapon"],
     occupiesSlots: [],
     equipRequirements: [],
-    modifiers: {},
-    enemyModifiers: {}
+    modifiers: {
+      "increasedMeleeMaxHitFlat": 1
+    },
+    enemyModifiers: {},
+    "equipmentStats": [
+      {
+        "key": "stabAttackBonus",
+        "value": 26
+      },
+      {
+        "key": "slashAttackBonus",
+        "value": -4
+      },
+      {
+        "key": "blockAttackBonus",
+        "value": 26
+      },
+      {
+        "key": "rangedAttackBonus",
+        "value": 0
+      },
+      {
+        "key": "magicAttackBonus",
+        "value": 0
+      },
+      {
+        "key": "meleeStrengthBonus",
+        "value": 0
+      },
+      {
+        "key": "rangedStrengthBonus",
+        "value": 0
+      },
+      {
+        "key": "magicDamageBonus",
+        "value": 0
+      },
+      {
+        "key": "meleeDefenceBonus",
+        "value": 0
+      },
+      {
+        "key": "rangedDefenceBonus",
+        "value": 0
+      },
+      {
+        "key": "magicDefenceBonus",
+        "value": 0
+      },
+      {
+        "key": "damageReduction",
+        "value": 0
+      },
+      {
+        "key": "summoningMaxhit",
+        "value": 0
+      },
+      {
+        "key": "attackSpeed",
+        "value": 3000
+      }
+    ]
   },
   "Trainee Bone Spear": {
     name: "Trainee Bone Spear",
@@ -295,17 +422,75 @@ export const ItemList: any = {
     rating: "junk",
     stats: {},
     note: "",
-    sellsFor: 0,
+    sellsFor: 1,
     "category": "Combat",
     type: "Weapon",
     "attackType": "melee",
     // melvor
-    // equipmentStats will be converted from stats
+
     validSlots: ["Weapon"],
     occupiesSlots: [], // "Shield" if two handed
     equipRequirements: [],
     modifiers: {},
-    enemyModifiers: {}
+    enemyModifiers: {},
+    "equipmentStats": [
+      {
+        "key": "stabAttackBonus",
+        "value": 26
+      },
+      {
+        "key": "slashAttackBonus",
+        "value": -4
+      },
+      {
+        "key": "blockAttackBonus",
+        "value": 26
+      },
+      {
+        "key": "rangedAttackBonus",
+        "value": 0
+      },
+      {
+        "key": "magicAttackBonus",
+        "value": 0
+      },
+      {
+        "key": "meleeStrengthBonus",
+        "value": 0
+      },
+      {
+        "key": "rangedStrengthBonus",
+        "value": 0
+      },
+      {
+        "key": "magicDamageBonus",
+        "value": 0
+      },
+      {
+        "key": "meleeDefenceBonus",
+        "value": 0
+      },
+      {
+        "key": "rangedDefenceBonus",
+        "value": 0
+      },
+      {
+        "key": "magicDefenceBonus",
+        "value": 0
+      },
+      {
+        "key": "damageReduction",
+        "value": 0
+      },
+      {
+        "key": "summoningMaxhit",
+        "value": 0
+      },
+      {
+        "key": "attackSpeed",
+        "value": 3000
+      }
+    ]
   },
   "Paladin Engeler's Body Armour (silver rank)": {
     name: "Paladin Engeler's Body Armour (silver rank)",
@@ -314,16 +499,34 @@ export const ItemList: any = {
     rating: "epic",
     stats: { endurance: 1, endurancePerc: 10, physicalDamageReduction: 10 },
     note: "",
-    sellsFor: 0,
+    sellsFor: 1,
     "category": "Combat",
     type: "Equipment",
     image: "https://ottotsuma.github.io/images/people/w1.jpg",
     // melvor
-    // equipmentStats will be converted from stats
+    "equipmentStats": [
+      {
+        "key": "magicDefenceBonus",
+        "value": 50
+      },
+      {
+        "key": "rangedDefenceBonus",
+        "value": 250
+      },
+      {
+        "key": "meleeDefenceBonus",
+        "value": 250
+      },
+      {
+        "key": "damageReduction",
+        "value": 10
+      }
+    ],
     validSlots: ["Platebody"],
     occupiesSlots: [],
     equipRequirements: [],
-    modifiers: {},
+    modifiers: {
+    },
     enemyModifiers: {}
   },
   "Paladin Engeler's Sallet (silver rank)": {
@@ -332,12 +535,29 @@ export const ItemList: any = {
     rating: "epic",
     stats: { endurance: 1.8 },
     note: "",
-    sellsFor: 0,
+    sellsFor: 1,
     "category": "Combat",
     type: "Equipment",
     image: "https://ottotsuma.github.io/images/people/w1.jpg",
     // melvor
-    // equipmentStats will be converted from stats
+    "equipmentStats": [
+      {
+        "key": "magicDefenceBonus",
+        "value": 15
+      },
+      {
+        "key": "rangedDefenceBonus",
+        "value": 95
+      },
+      {
+        "key": "meleeDefenceBonus",
+        "value": 95
+      },
+      {
+        "key": "damageReduction",
+        "value": 10
+      }
+    ],
     validSlots: ["Helmet"],
     occupiesSlots: [],
     equipRequirements: [],
@@ -350,12 +570,29 @@ export const ItemList: any = {
     rating: "epic",
     stats: { endurance: 1 },
     note: "",
-    sellsFor: 0,
+    sellsFor: 1,
     "category": "Combat",
     type: "Equipment",
     image: "https://ottotsuma.github.io/images/people/w1.jpg",
     // melvor
-    // equipmentStats will be converted from stats
+    "equipmentStats": [
+      {
+        "key": "magicDefenceBonus",
+        "value": 15
+      },
+      {
+        "key": "rangedDefenceBonus",
+        "value": 12
+      },
+      {
+        "key": "meleeDefenceBonus",
+        "value": 12
+      },
+      {
+        "key": "damageReduction",
+        "value": 10
+      }
+    ],
     validSlots: ["Gloves"],
     occupiesSlots: [],
     equipRequirements: [],
@@ -368,12 +605,29 @@ export const ItemList: any = {
     rating: "epic",
     stats: { endurance: 1.2 },
     note: "",
-    sellsFor: 0,
+    sellsFor: 1,
     "category": "Combat",
     type: "Equipment",
     image: "https://ottotsuma.github.io/images/people/w1.jpg",
     // melvor
-    // equipmentStats will be converted from stats
+    "equipmentStats": [
+      {
+        "key": "magicDefenceBonus",
+        "value": 15
+      },
+      {
+        "key": "rangedDefenceBonus",
+        "value": 30
+      },
+      {
+        "key": "meleeDefenceBonus",
+        "value": 30
+      },
+      {
+        "key": "damageReduction",
+        "value": 10
+      }
+    ],
     validSlots: ["Boots"],
     occupiesSlots: [],
     equipRequirements: [],
@@ -386,13 +640,34 @@ export const ItemList: any = {
     rating: "epic",
     stats: { strength: 3, strengthPerc: 1 },
     note: "",
-    sellsFor: 0,
+    sellsFor: 1,
     "category": "Combat",
     type: "Weapon",
     image: "https://ottotsuma.github.io/images/people/w1.jpg",
     "attackType": "melee",
     // melvor
-    // equipmentStats will be converted from stats
+    "equipmentStats": [
+      {
+        "key": "attackSpeed",
+        "value": 3200
+      },
+      {
+        "key": "stabAttackBonus",
+        "value": 10
+      },
+      {
+        "key": "slashAttackBonus",
+        "value": 10
+      },
+      {
+        "key": "blockAttackBonus",
+        "value": 160
+      },
+      {
+        "key": "meleeStrengthBonus",
+        "value": 300
+      }
+    ],
     validSlots: ["Weapon"],
     occupiesSlots: [], // "Shield" if two handed
     equipRequirements: [],
@@ -406,12 +681,29 @@ export const ItemList: any = {
     rating: "epic",
     stats: { "demonDamageReductionPerc": 7, undeadDamageReductionPerc: 7, blockPerc: 20, meleeDefenceBonus: 100, rangedDefenceBonus: 100 },
     note: "",
-    sellsFor: 0,
+    sellsFor: 1,
     "category": "Combat",
     type: "Equipment",
     image: "https://ottotsuma.github.io/images/people/w1.jpg",
     // melvor
-    // equipmentStats will be converted from stats
+    "equipmentStats": [
+      {
+        "key": "meleeDefenceBonus",
+        "value": 310
+      },
+      {
+        "key": "rangedDefenceBonus",
+        "value": 210
+      },
+      {
+        "key": "magicDefenceBonus",
+        "value": 30
+      },
+      {
+        "key": "damageReduction",
+        "value": 10
+      }
+    ],
     validSlots: ["Shield"],
     occupiesSlots: [],
     equipRequirements: [],
@@ -424,12 +716,41 @@ export const ItemList: any = {
     rating: "epic",
     stats: { HP: 315, MP: 225 },
     note: "",
-    sellsFor: 0,
+    sellsFor: 1,
     "category": "Combat",
     type: "Equipment",
     image: "https://ottotsuma.github.io/images/people/w1.jpg",
     // melvor
-    // equipmentStats will be converted from stats
+    "equipmentStats": [
+      {
+        "key": "magicDefenceBonus",
+        "value": 80
+      },
+      {
+        "key": "meleeDefenceBonus",
+        "value": 80
+      },
+      {
+        "key": "rangedDefenceBonus",
+        "value": 80
+      },
+      {
+        "key": "slashAttackBonus",
+        "value": 40
+      },
+      {
+        "key": "blockAttackBonus",
+        "value": 40
+      },
+      {
+        "key": "stabAttackBonus",
+        "value": 40
+      },
+      {
+        "key": "meleeStrengthBonus",
+        "value": 20
+      }
+    ],
     validSlots: ["Cape"],
     occupiesSlots: [],
     equipRequirements: [],
@@ -452,12 +773,12 @@ export const ItemList: any = {
       demonDamageReductionPerc: 3
     },
     note: "",
-    sellsFor: 0,
+    sellsFor: 1,
     "category": "Combat",
     type: "Equipment",
     image: "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fi.pinimg.com%2Foriginals%2Faa%2Fce%2F84%2Faace8423095c3544a43b45708415ed82.png",
     // melvor
-    // equipmentStats will be converted from stats
+
     validSlots: ["Amulet"],
     occupiesSlots: [],
     equipRequirements: [],
@@ -475,12 +796,12 @@ export const ItemList: any = {
       "demonDamageReductionPerc": 3, // "1.03 This change will require "stats" code changes"
     },
     note: "",
-    sellsFor: 0,
+    sellsFor: 1,
     "category": "Combat",
     type: "Equipment",
     image: "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fi.pinimg.com%2Foriginals%2Faa%2F43%2Fb9%2Faa43b99db20d309cdb7389b15cab69cc.png",
     // melvor
-    // equipmentStats will be converted from stats
+
     validSlots: ["Ring", "Passive"],
     occupiesSlots: [],
     equipRequirements: [],
@@ -498,12 +819,12 @@ export const ItemList: any = {
     },
     rating: "epic",
     note: "",
-    sellsFor: 0,
+    sellsFor: 1,
     "category": "Combat",
     type: "Equipment",
     image: "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fcdn1.iconfinder.com%2Fdata%2Ficons%2Fdress-up%2F200%2Fdress_ear_earrings_jewel_rings-512.png",
     // melvor
-    // equipmentStats will be converted from stats
+
     validSlots: ["Ring", "Passive"],
     occupiesSlots: [],
     equipRequirements: [],
@@ -521,12 +842,12 @@ export const ItemList: any = {
     },
     rating: "epic",
     note: "",
-    sellsFor: 0,
+    sellsFor: 1,
     "category": "Combat",
     type: "Equipment",
     image: "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fcdn.shopify.com%2Fs%2Ffiles%2F1%2F0201%2F1744%2Fproducts%2FStrata.Wide.Realtree.GreenOrange.Angle.png",
     // melvor
-    // equipmentStats will be converted from stats
+
     validSlots: ["Ring", "Passive"],
     occupiesSlots: [],
     equipRequirements: [],
@@ -543,7 +864,7 @@ export const ItemList: any = {
       stats: { endurance: 1, HP: 22 }
     },
     note: "",
-    sellsFor: 0,
+    sellsFor: 1,
     "category": "Combat",
     type: "Set",
     itemIDs: ["Paladin Engeler's Body Armour (silver rank)", "Paladin Engeler's Sabaton (silver rank)", "Paladin Engeler's Sallet (silver rank)"],
@@ -554,9 +875,9 @@ export const ItemList: any = {
     name: "Paladin Engeler's Set",
     description: "Crit Rate: +1, Critical Damage: +3%.",
     rating: "epic",
-    stats: { CriticalHitChance: 1, CriticalHitDamage: 3},
+    stats: { CriticalHitChance: 1, CriticalHitDamage: 3 },
     note: "",
-    sellsFor: 0,
+    sellsFor: 1,
     "category": "Combat",
     type: "Set",
     itemIDs: ["Paladin Engeler's Body Armour (silver rank)", "Paladin Engeler's Sabaton (silver rank)", "Paladin Engeler's Sallet (silver rank)", "Paladin Engeler's Gauntlets (silver rank)"],
@@ -568,9 +889,9 @@ export const ItemList: any = {
     description:
       "Skill: One of the Twelve; Increases all stats by 12% for 7 seconds.",
     rating: "epic",
-    stats: { },
+    stats: {},
     note: "",
-    sellsFor: 0,
+    sellsFor: 1,
     "category": "Combat",
     type: "Set",
     itemIDs: ["Paladin Engeler's Body Armour (silver rank)", "Paladin Engeler's Sabaton (silver rank)", "Paladin Engeler's Sallet (silver rank)", "Paladin Engeler's Gauntlets (silver rank)", "Paladin Engeler's Cape (silver rank)", "Paladin Engeler's Shield (silver rank)", "Paladin Engeler's Mace (silver rank)"],
@@ -587,10 +908,59 @@ export const ItemList: any = {
     long: "", // Price since it was shown In a shop.
     note: "https://ffxiv.gamerescape.com/wiki/Category:Rogue_Body/iLevel_30-39",
     type: "Equipment",
-    sellsFor: 0,
+    sellsFor: 1,
     "category": "Combat",
     // melvor
-    // equipmentStats will be converted from stats
+    "equipmentStats": [
+      {
+        "key": "stabAttackBonus",
+        "value": 3
+      },
+      {
+        "key": "slashAttackBonus",
+        "value": 3
+      },
+      {
+        "key": "blockAttackBonus",
+        "value": 3
+      },
+      {
+        "key": "magicAttackBonus",
+        "value": 3
+      },
+      {
+        "key": "magicDamageBonus",
+        "value": 0
+      },
+      {
+        "key": "rangedAttackBonus",
+        "value": 3
+      },
+      {
+        "key": "rangedStrengthBonus",
+        "value": 0
+      },
+      {
+        "key": "meleeStrengthBonus",
+        "value": 3
+      },
+      {
+        "key": "meleeDefenceBonus",
+        "value": 3
+      },
+      {
+        "key": "rangedDefenceBonus",
+        "value": 3
+      },
+      {
+        "key": "magicDefenceBonus",
+        "value": 3
+      },
+      {
+        "key": "damageReduction",
+        "value": 0
+      }
+    ],
     validSlots: ["Platebody"],
     occupiesSlots: [],
     equipRequirements: [],
@@ -607,12 +977,37 @@ export const ItemList: any = {
     note: "Ch5, kings crown",
     type: "Equipment",
     // melvor
-    // equipmentStats will be converted from stats
+    "equipmentStats": [
+      {
+        "key": "damageReduction",
+        "value": 4
+      },
+      {
+        "key": "rangedDefenceBonus",
+        "value": 10
+      },
+      {
+        "key": "magicDefenceBonus",
+        "value": 10
+      },
+      {
+        "key": "meleeDefenceBonus",
+        "value": 10
+      },
+      {
+        "key": "rangedAttackBonus",
+        "value": -10
+      },
+      {
+        "key": "magicAttackBonus",
+        "value": 10
+      }
+    ],
     validSlots: ["Helmet"],
     occupiesSlots: [],
     equipRequirements: [],
     modifiers: {},
-    enemyModifiers: {}, sellsFor: 0,
+    enemyModifiers: {}, sellsFor: 1,
     "category": "Combat",
   },
   "Ring of initial undead control": {
@@ -625,12 +1020,12 @@ export const ItemList: any = {
     note: "Ch5, kings ring",
     type: "Equipment",
     // melvor
-    // equipmentStats will be converted from stats
+
     validSlots: ["Ring"],
     occupiesSlots: [],
     equipRequirements: [],
     modifiers: {},
-    enemyModifiers: {}, sellsFor: 0,
+    enemyModifiers: {}, sellsFor: 1,
     "category": "Combat",
   },
   "Ring of Little Strength": {
@@ -643,12 +1038,12 @@ export const ItemList: any = {
     note: "Ch11, queens ring",
     type: "Equipment",
     // melvor
-    // equipmentStats will be converted from stats
+
     validSlots: ["Ring"],
     occupiesSlots: [],
     equipRequirements: [],
     modifiers: {},
-    enemyModifiers: {}, sellsFor: 0,
+    enemyModifiers: {}, sellsFor: 1,
     "category": "Combat",
   },
   "Pendent of Medium Magic": {
@@ -661,12 +1056,12 @@ export const ItemList: any = {
     note: "Ch11",
     type: "Equipment",
     // melvor
-    // equipmentStats will be converted from stats
+
     validSlots: ["Amulet"],
     occupiesSlots: [],
     equipRequirements: [],
     modifiers: {},
-    enemyModifiers: {}, sellsFor: 0,
+    enemyModifiers: {}, sellsFor: 1,
     "category": "Combat",
   },
   "Witches Hat": {
@@ -679,12 +1074,41 @@ export const ItemList: any = {
     note: "Ch11",
     type: "Equipment",
     // melvor
-    // equipmentStats will be converted from stats
+    "equipmentStats": [
+      {
+        "key": "damageReduction",
+        "value": 4
+      },
+      {
+        "key": "rangedDefenceBonus",
+        "value": 10
+      },
+      {
+        "key": "magicDefenceBonus",
+        "value": 10
+      },
+      {
+        "key": "meleeDefenceBonus",
+        "value": 10
+      },
+      {
+        "key": "slashAttackBonus",
+        "value": 10
+      },
+      {
+        "key": "stabAttackBonus",
+        "value": 10
+      },
+      {
+        "key": "rangedAttackBonus",
+        "value": -10
+      }
+    ],
     validSlots: ["Helmet"],
     occupiesSlots: [],
     equipRequirements: [],
     modifiers: {},
-    enemyModifiers: {}, sellsFor: 0,
+    enemyModifiers: {}, sellsFor: 1,
     "category": "Combat",
   },
   "Queen's Pawn": {
@@ -697,14 +1121,14 @@ export const ItemList: any = {
     note: "Ch11, Tiara",
     type: "Equipment",
     // melvor
-    // equipmentStats will be converted from stats
+
     validSlots: ["Passive"],
     occupiesSlots: [],
     equipRequirements: [],
     modifiers: {},
     enemyModifiers: {},
     specialAttacks: ['monad:AnimateStone'],
-    overrideSpecialChances: [15], sellsFor: 0,
+    overrideSpecialChances: [15], sellsFor: 1,
     "category": "Combat",
   },
   "Skull of victim": {
@@ -716,10 +1140,10 @@ export const ItemList: any = {
     long: "", // Price since it was shown In a shop.
     note: "Ch11, Skull",
     type: "Equipment",
-    sellsFor: 0,
+    sellsFor: 1,
     "category": "Combat",
     // melvor
-    // equipmentStats will be converted from stats
+
     validSlots: ["Passive"],
     occupiesSlots: [],
     equipRequirements: [],
@@ -732,13 +1156,13 @@ export const ItemList: any = {
     image: "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fi.pinimg.com%2Foriginals%2F4d%2Fea%2Fa3%2F4deaa39ea2c9b61448246b35d9208b62.jpg",
     stats: { Enchanting: 5 },
     rating: "normal",
-    sellsFor: 0,
+    sellsFor: 1,
     "category": "Combat",
     long: "", // Price since it was shown In a shop.
     note: "Ch11, Quill",
     type: "Equipment",
     // melvor
-    // equipmentStats will be converted from stats
+
     validSlots: ["Weapon"],
     occupiesSlots: [],
     equipRequirements: [],
@@ -750,7 +1174,7 @@ export const ItemList: any = {
     description: "(???).",
     image: "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.thirdwayindustries.com%2Fwp-content%2Fuploads%2F2021%2F03%2Ftales_coin_princess.png",
     rating: "junk",
-    sellsFor: 0,
+    sellsFor: 1,
     "category": "Combat",
     long: "", // Price since it was shown In a shop.
     note: "Ch11, Coin",
@@ -765,10 +1189,10 @@ export const ItemList: any = {
     long: "", // Price since it was shown In a shop.
     note: "Ch17",
     type: "Equipment",
-    sellsFor: 0,
+    sellsFor: 1,
     "category": "Combat",
     // melvor
-    // equipmentStats will be converted from stats
+
     validSlots: ["Amulet"],
     occupiesSlots: [],
     equipRequirements: [],
@@ -783,11 +1207,11 @@ export const ItemList: any = {
     stats: {},
     long: "", // Price since it was shown In a shop.
     note: "",
-    sellsFor: 0,
+    sellsFor: 1,
     "category": "Combat",
     type: "Equipment",
     // melvor
-    // equipmentStats will be converted from stats
+
     validSlots: ["Amulet"],
     occupiesSlots: [],
     equipRequirements: [],
@@ -801,7 +1225,7 @@ export const ItemList: any = {
     rating: "normal",
     long: "", // Price since it was shown In a shop.
     note: "",
-    sellsFor: 0,
+    sellsFor: 1,
     "category": "Combat",
     type: "Misc",
   },
@@ -814,11 +1238,40 @@ export const ItemList: any = {
     stats: { dexterity: 1 },
     long: "", // Price since it was shown In a shop.
     note: "",
-    sellsFor: 0,
+    sellsFor: 1,
     "category": "Combat",
     type: "Equipment",
     // melvor
-    // equipmentStats will be converted from stats
+    "equipmentStats": [
+      {
+        "key": "damageReduction",
+        "value": 4
+      },
+      {
+        "key": "rangedDefenceBonus",
+        "value": 10
+      },
+      {
+        "key": "magicDefenceBonus",
+        "value": 10
+      },
+      {
+        "key": "meleeDefenceBonus",
+        "value": 10
+      },
+      {
+        "key": "slashAttackBonus",
+        "value": 10
+      },
+      {
+        "key": "stabAttackBonus",
+        "value": 10
+      },
+      {
+        "key": "rangedAttackBonus",
+        "value": -10
+      }
+    ],
     validSlots: ["Gloves"],
     occupiesSlots: [],
     equipRequirements: [],
@@ -834,11 +1287,40 @@ export const ItemList: any = {
     stats: { magic: 1, willpower: 1, SpellSpeed: 1 },
     long: "", // Price since it was shown In a shop.
     note: "",
-    sellsFor: 0,
+    sellsFor: 1,
     "category": "Combat",
     type: "Equipment",
     // melvor
-    // equipmentStats will be converted from stats
+    "equipmentStats": [
+      {
+        "key": "damageReduction",
+        "value": 4
+      },
+      {
+        "key": "rangedDefenceBonus",
+        "value": 10
+      },
+      {
+        "key": "magicDefenceBonus",
+        "value": 10
+      },
+      {
+        "key": "meleeDefenceBonus",
+        "value": 10
+      },
+      {
+        "key": "slashAttackBonus",
+        "value": 10
+      },
+      {
+        "key": "stabAttackBonus",
+        "value": 10
+      },
+      {
+        "key": "rangedAttackBonus",
+        "value": -10
+      }
+    ],
     validSlots: ["Gloves"],
     occupiesSlots: [],
     equipRequirements: [],
@@ -854,11 +1336,40 @@ export const ItemList: any = {
     stats: { magic: 1, willpower: 1, SpellSpeed: 1 },
     long: "", // Price since it was shown In a shop.
     note: "",
-    sellsFor: 0,
+    sellsFor: 1,
     "category": "Combat",
     type: "Equipment",
     // melvor
-    // equipmentStats will be converted from stats
+    "equipmentStats": [
+      {
+        "key": "damageReduction",
+        "value": 4
+      },
+      {
+        "key": "rangedDefenceBonus",
+        "value": 10
+      },
+      {
+        "key": "magicDefenceBonus",
+        "value": 10
+      },
+      {
+        "key": "meleeDefenceBonus",
+        "value": 10
+      },
+      {
+        "key": "slashAttackBonus",
+        "value": 10
+      },
+      {
+        "key": "stabAttackBonus",
+        "value": 10
+      },
+      {
+        "key": "rangedAttackBonus",
+        "value": -10
+      }
+    ],
     validSlots: ["Helmet"],
     occupiesSlots: [],
     equipRequirements: [],
@@ -874,11 +1385,28 @@ export const ItemList: any = {
     stats: { magic: 1, willpower: 1, SpellSpeed: 1 },
     long: "", // Price since it was shown In a shop.
     note: "",
-    sellsFor: 0,
+    sellsFor: 1,
     "category": "Combat",
     type: "Equipment",
     // melvor
-    // equipmentStats will be converted from stats
+    "equipmentStats": [
+      {
+        "key": "magicDamageBonus",
+        "value": 5
+      },
+      {
+        "key": "magicAttackBonus",
+        "value": 30
+      },
+      {
+        "key": "magicDefenceBonus",
+        "value": 30
+      },
+      {
+        "key": "damageReduction",
+        "value": 5
+      }
+    ],
     validSlots: ["Platebody"],
     occupiesSlots: [],
     equipRequirements: [],
@@ -894,11 +1422,40 @@ export const ItemList: any = {
     stats: { magic: 1, willpower: 1, SpellSpeed: 1 },
     long: "", // Price since it was shown In a shop.
     note: "",
-    sellsFor: 0,
+    sellsFor: 1,
     "category": "Combat",
     type: "Equipment",
     // melvor
-    // equipmentStats will be converted from stats
+    "equipmentStats": [
+      {
+        "key": "damageReduction",
+        "value": 4
+      },
+      {
+        "key": "rangedDefenceBonus",
+        "value": 10
+      },
+      {
+        "key": "magicDefenceBonus",
+        "value": 10
+      },
+      {
+        "key": "meleeDefenceBonus",
+        "value": 10
+      },
+      {
+        "key": "slashAttackBonus",
+        "value": 10
+      },
+      {
+        "key": "stabAttackBonus",
+        "value": 10
+      },
+      {
+        "key": "rangedAttackBonus",
+        "value": -10
+      }
+    ],
     validSlots: ["Boots"],
     occupiesSlots: [],
     equipRequirements: [],
@@ -914,11 +1471,28 @@ export const ItemList: any = {
     stats: { magic: 1, willpower: 1, SpellSpeed: 1 },
     long: "", // Price since it was shown In a shop.
     note: "",
-    sellsFor: 0,
+    sellsFor: 1,
     "category": "Combat",
     type: "Equipment",
     // melvor
-    // equipmentStats will be converted from stats
+    "equipmentStats": [
+      {
+        "key": "magicDamageBonus",
+        "value": 5
+      },
+      {
+        "key": "magicAttackBonus",
+        "value": 30
+      },
+      {
+        "key": "magicDefenceBonus",
+        "value": 30
+      },
+      {
+        "key": "damageReduction",
+        "value": 5
+      }
+    ],
     validSlots: ["Platelegs"],
     occupiesSlots: [],
     equipRequirements: [],
@@ -931,7 +1505,7 @@ export const ItemList: any = {
     rating: "normal",
     stats: { magic: 1, willpower: 1, SpellSpeed: 1 },
     note: "",
-    sellsFor: 0,
+    sellsFor: 1,
     "category": "Combat",
     type: "Set",
     itemIDs: ["Battlemage's Gloves", "Battlemage's Hat", "Battlemage's Robe", "Battlemage's Crakows", "Battlemage's Breeches"],
@@ -945,11 +1519,11 @@ export const ItemList: any = {
     stats: {},
     long: "", // Price since it was shown In a shop.
     note: "",
-    sellsFor: 0,
+    sellsFor: 1,
     "category": "Combat",
     type: "Equipment",
     // melvor
-    // equipmentStats will be converted from stats
+
     validSlots: ["Amulet"],
     occupiesSlots: [],
     equipRequirements: [],
@@ -965,11 +1539,40 @@ export const ItemList: any = {
     stats: { endurance: 1, CriticalHitChance: +1 },
     long: "", // Price since it was shown In a shop.
     note: "",
-    sellsFor: 0,
+    sellsFor: 1,
     "category": "Combat",
     type: "Equipment",
     // melvor
-    // equipmentStats will be converted from stats
+    "equipmentStats": [
+      {
+        "key": "damageReduction",
+        "value": 4
+      },
+      {
+        "key": "rangedDefenceBonus",
+        "value": 10
+      },
+      {
+        "key": "magicDefenceBonus",
+        "value": 10
+      },
+      {
+        "key": "meleeDefenceBonus",
+        "value": 10
+      },
+      {
+        "key": "slashAttackBonus",
+        "value": 10
+      },
+      {
+        "key": "stabAttackBonus",
+        "value": 10
+      },
+      {
+        "key": "rangedAttackBonus",
+        "value": -10
+      }
+    ],
     validSlots: ["Boots"],
     occupiesSlots: [],
     equipRequirements: [],
@@ -986,10 +1589,10 @@ export const ItemList: any = {
     long: "", // Price since it was shown In a shop.
     note: "https://ffxiv.gamerescape.com/wiki/Category:Ring/iLevel_30-39",
     type: "Equipment",
-    sellsFor: 0,
+    sellsFor: 1,
     "category": "Combat",
     // melvor
-    // equipmentStats will be converted from stats
+
     validSlots: ["Ring"],
     occupiesSlots: [],
     equipRequirements: [],
@@ -1017,7 +1620,7 @@ export const ItemList: any = {
       note: "https://ffxiv.gamerescape.com/wiki/Category:Ring/iLevel_30-39",
       type: "Equipment",
       // melvor
-      // equipmentStats will be converted from stats
+
       validSlots: ["Platebody"],
       occupiesSlots: [],
       equipRequirements: [],
@@ -1034,12 +1637,33 @@ export const ItemList: any = {
     stats: { strength: 1, slashAttackBonus: 3 },
     long: "", // Price since it was shown In a shop.
     note: "",
-    sellsFor: 0,
+    sellsFor: 1,
     "category": "Combat",
     type: "Weapon",
     "attackType": "melee",
     // melvor
-    // equipmentStats will be converted from stats
+    "equipmentStats": [
+      {
+        "key": "attackSpeed",
+        "value": 2400
+      },
+      {
+        "key": "stabAttackBonus",
+        "value": 24
+      },
+      {
+        "key": "slashAttackBonus",
+        "value": 75
+      },
+      {
+        "key": "blockAttackBonus",
+        "value": 28
+      },
+      {
+        "key": "meleeStrengthBonus",
+        "value": 75
+      }
+    ],
     validSlots: ["Weapon"],
     occupiesSlots: [],
     equipRequirements: [],
@@ -1055,12 +1679,33 @@ export const ItemList: any = {
     stats: { strength: 1 },
     long: "", // Price since it was shown In a shop.
     note: "",
-    sellsFor: 0,
+    sellsFor: 1,
     "category": "Combat",
     type: "Weapon",
     "attackType": "melee",
     // melvor
-    // equipmentStats will be converted from stats
+    "equipmentStats": [
+      {
+        "key": "attackSpeed",
+        "value": 3100
+      },
+      {
+        "key": "stabAttackBonus",
+        "value": 86
+      },
+      {
+        "key": "slashAttackBonus",
+        "value": 86
+      },
+      {
+        "key": "blockAttackBonus",
+        "value": 86
+      },
+      {
+        "key": "meleeStrengthBonus",
+        "value": 126
+      }
+    ],
     validSlots: ["Weapon"],
     occupiesSlots: [],
     equipRequirements: [],
@@ -1075,11 +1720,40 @@ export const ItemList: any = {
     stats: { diseaseResistancePerc: 3 },
     long: "", // Price since it was shown In a shop.
     note: "",
-    sellsFor: 0,
+    sellsFor: 1,
     "category": "Combat",
     type: "Equipment",
     // melvor
-    // equipmentStats will be converted from stats
+    "equipmentStats": [
+      {
+        "key": "damageReduction",
+        "value": 4
+      },
+      {
+        "key": "rangedDefenceBonus",
+        "value": 10
+      },
+      {
+        "key": "magicDefenceBonus",
+        "value": 10
+      },
+      {
+        "key": "meleeDefenceBonus",
+        "value": 10
+      },
+      {
+        "key": "slashAttackBonus",
+        "value": 10
+      },
+      {
+        "key": "stabAttackBonus",
+        "value": 10
+      },
+      {
+        "key": "rangedAttackBonus",
+        "value": -10
+      }
+    ],
     validSlots: ["Helmet"],
     occupiesSlots: [],
     equipRequirements: [],
@@ -1095,11 +1769,60 @@ export const ItemList: any = {
     stats: { stealthInShadowsPerc: 40, waterResistancePerc: 2, waterResistance: 150 },
     long: "", // Price since it was shown In a shop.
     note: "",
-    sellsFor: 0,
+    sellsFor: 1,
     "category": "Combat",
     type: "Equipment",
     // melvor
-    // equipmentStats will be converted from stats
+    "equipmentStats": [
+      {
+        "key": "stabAttackBonus",
+        "value": 3
+      },
+      {
+        "key": "slashAttackBonus",
+        "value": 3
+      },
+      {
+        "key": "blockAttackBonus",
+        "value": 3
+      },
+      {
+        "key": "magicAttackBonus",
+        "value": 3
+      },
+      {
+        "key": "magicDamageBonus",
+        "value": 3
+      },
+      {
+        "key": "rangedAttackBonus",
+        "value": 3
+      },
+      {
+        "key": "rangedStrengthBonus",
+        "value": 3
+      },
+      {
+        "key": "meleeStrengthBonus",
+        "value": 3
+      },
+      {
+        "key": "meleeDefenceBonus",
+        "value": 120
+      },
+      {
+        "key": "rangedDefenceBonus",
+        "value": 100
+      },
+      {
+        "key": "magicDefenceBonus",
+        "value": 50
+      },
+      {
+        "key": "damageReduction",
+        "value": 5
+      }
+    ],
     validSlots: ["Cape"],
     occupiesSlots: [],
     equipRequirements: [],
@@ -1116,11 +1839,60 @@ export const ItemList: any = {
     stats: { endurance: 1 },
     long: "", // Price since it was shown In a shop.
     note: "",
-    sellsFor: 0,
+    sellsFor: 1,
     "category": "Combat",
     type: "Equipment",
     // melvor
-    // equipmentStats will be converted from stats
+    "equipmentStats": [
+      {
+        "key": "stabAttackBonus",
+        "value": 3
+      },
+      {
+        "key": "slashAttackBonus",
+        "value": 3
+      },
+      {
+        "key": "blockAttackBonus",
+        "value": 3
+      },
+      {
+        "key": "magicAttackBonus",
+        "value": 3
+      },
+      {
+        "key": "magicDamageBonus",
+        "value": 0
+      },
+      {
+        "key": "rangedAttackBonus",
+        "value": 3
+      },
+      {
+        "key": "rangedStrengthBonus",
+        "value": 0
+      },
+      {
+        "key": "meleeStrengthBonus",
+        "value": 12
+      },
+      {
+        "key": "meleeDefenceBonus",
+        "value": 22
+      },
+      {
+        "key": "rangedDefenceBonus",
+        "value": 6
+      },
+      {
+        "key": "magicDefenceBonus",
+        "value": 9
+      },
+      {
+        "key": "damageReduction",
+        "value": 5
+      }
+    ],
     validSlots: ["Boots"],
     occupiesSlots: [],
     equipRequirements: [],
@@ -1135,11 +1907,11 @@ export const ItemList: any = {
     stats: { dexterity: 1 },
     long: "", // Price since it was shown In a shop.
     note: "",
-    sellsFor: 0,
+    sellsFor: 1,
     "category": "Combat",
     type: "Equipment",
     // melvor
-    // equipmentStats will be converted from stats
+
     validSlots: ["Ring"],
     occupiesSlots: [],
     equipRequirements: [],
@@ -1153,7 +1925,7 @@ export const ItemList: any = {
       stats: { dexterity: 9 },
       long: "", // Price since it was shown In a shop.
       note: "",
-      sellsFor: 0,
+      sellsFor: 1,
       "category": "Combat",
       type: "Equipment",
     },
@@ -1174,17 +1946,17 @@ export const ItemList: any = {
       stats: { dexterity: 9 },
       long: "", // Price since it was shown In a shop.
       note: "",
-      sellsFor: 0,
+      sellsFor: 1,
       "category": "Combat",
       type: "Equipment",
     },
     long: "", // Price since it was shown In a shop.
     note: "",
-    sellsFor: 0,
+    sellsFor: 1,
     "category": "Combat",
     type: "Equipment",
     // melvor
-    // equipmentStats will be converted from stats
+
     validSlots: ["Ring"],
     occupiesSlots: [],
     equipRequirements: [],
@@ -1199,11 +1971,40 @@ export const ItemList: any = {
     stats: {},
     long: "", // Price since it was shown In a shop.
     note: "",
-    sellsFor: 0,
+    sellsFor: 1,
     "category": "Combat",
     type: "Equipment",
     // melvor
-    // equipmentStats will be converted from stats
+    "equipmentStats": [
+      {
+        "key": "damageReduction",
+        "value": 4
+      },
+      {
+        "key": "rangedDefenceBonus",
+        "value": 10
+      },
+      {
+        "key": "magicDefenceBonus",
+        "value": 10
+      },
+      {
+        "key": "meleeDefenceBonus",
+        "value": 10
+      },
+      {
+        "key": "slashAttackBonus",
+        "value": 10
+      },
+      {
+        "key": "stabAttackBonus",
+        "value": 10
+      },
+      {
+        "key": "rangedAttackBonus",
+        "value": -10
+      }
+    ],
     validSlots: ["Helmet"],
     occupiesSlots: [],
     equipRequirements: [],
@@ -1218,11 +2019,11 @@ export const ItemList: any = {
     stats: {},
     long: "", // Price since it was shown In a shop.
     note: "",
-    sellsFor: 0,
+    sellsFor: 1,
     "category": "Combat",
     type: "Equipment",
     // melvor
-    // equipmentStats will be converted from stats
+
     validSlots: ["Ring"],
     occupiesSlots: [],
     equipRequirements: [],
@@ -1237,11 +2038,60 @@ export const ItemList: any = {
     stats: {},
     long: "", // Price since it was shown In a shop.
     note: "",
-    sellsFor: 0,
+    sellsFor: 1,
     "category": "Combat",
     type: "Equipment",
     // melvor
-    // equipmentStats will be converted from stats
+    "equipmentStats": [
+      {
+        "key": "stabAttackBonus",
+        "value": 3
+      },
+      {
+        "key": "slashAttackBonus",
+        "value": 3
+      },
+      {
+        "key": "blockAttackBonus",
+        "value": 3
+      },
+      {
+        "key": "magicAttackBonus",
+        "value": 3
+      },
+      {
+        "key": "magicDamageBonus",
+        "value": 0
+      },
+      {
+        "key": "rangedAttackBonus",
+        "value": 3
+      },
+      {
+        "key": "rangedStrengthBonus",
+        "value": 0
+      },
+      {
+        "key": "meleeStrengthBonus",
+        "value": 3
+      },
+      {
+        "key": "meleeDefenceBonus",
+        "value": 3
+      },
+      {
+        "key": "rangedDefenceBonus",
+        "value": 3
+      },
+      {
+        "key": "magicDefenceBonus",
+        "value": 3
+      },
+      {
+        "key": "damageReduction",
+        "value": 0
+      }
+    ],
     validSlots: ["Gloves"],
     occupiesSlots: [],
     equipRequirements: [],
@@ -1256,11 +2106,60 @@ export const ItemList: any = {
     stats: {},
     long: "", // Price since it was shown In a shop.
     note: "",
-    sellsFor: 0,
+    sellsFor: 1,
     "category": "Combat",
     type: "Equipment",
     // melvor
-    // equipmentStats will be converted from stats
+    "equipmentStats": [
+      {
+        "key": "stabAttackBonus",
+        "value": 3
+      },
+      {
+        "key": "slashAttackBonus",
+        "value": 3
+      },
+      {
+        "key": "blockAttackBonus",
+        "value": 3
+      },
+      {
+        "key": "magicAttackBonus",
+        "value": 3
+      },
+      {
+        "key": "magicDamageBonus",
+        "value": 0
+      },
+      {
+        "key": "rangedAttackBonus",
+        "value": 3
+      },
+      {
+        "key": "rangedStrengthBonus",
+        "value": 0
+      },
+      {
+        "key": "meleeStrengthBonus",
+        "value": 3
+      },
+      {
+        "key": "meleeDefenceBonus",
+        "value": 3
+      },
+      {
+        "key": "rangedDefenceBonus",
+        "value": 3
+      },
+      {
+        "key": "magicDefenceBonus",
+        "value": 3
+      },
+      {
+        "key": "damageReduction",
+        "value": 0
+      }
+    ],
     validSlots: ["Gloves"],
     occupiesSlots: [],
     equipRequirements: [],
@@ -1275,11 +2174,40 @@ export const ItemList: any = {
     stats: { "magic": 1 },
     long: "", // Price since it was shown In a shop.
     note: "",
-    sellsFor: 0,
+    sellsFor: 1,
     "category": "Combat",
     type: "Equipment",
     // melvor
-    // equipmentStats will be converted from stats
+    "equipmentStats": [
+      {
+        "key": "damageReduction",
+        "value": 4
+      },
+      {
+        "key": "rangedDefenceBonus",
+        "value": 10
+      },
+      {
+        "key": "magicDefenceBonus",
+        "value": 10
+      },
+      {
+        "key": "meleeDefenceBonus",
+        "value": 10
+      },
+      {
+        "key": "slashAttackBonus",
+        "value": 10
+      },
+      {
+        "key": "stabAttackBonus",
+        "value": 10
+      },
+      {
+        "key": "rangedAttackBonus",
+        "value": -10
+      }
+    ],
     validSlots: ["Helmet"],
     occupiesSlots: [],
     equipRequirements: [],
@@ -1293,7 +2221,7 @@ export const ItemList: any = {
       stats: { "magic": 10 },
       long: "", // Price since it was shown In a shop.
       note: "",
-      sellsFor: 0,
+      sellsFor: 1,
       "category": "Combat",
       type: "Equipment",
     },
@@ -1307,11 +2235,40 @@ export const ItemList: any = {
     stats: { magic: 2, diseaseResistancePerc: 20, manaRegenPerc: 20, lightningResistancePerc: 20, lightningCostPercg: 15 },
     long: "Blessing of 建御雷 [Takemikazuchi]: Resist lightning +20%, Lightning cost - 15%, Lightning power +20%.", // Price since it was shown In a shop.
     note: "",
-    sellsFor: 0,
+    sellsFor: 1,
     "category": "Combat",
     type: "Equipment",
     // melvor
-    // equipmentStats will be converted from stats
+    "equipmentStats": [
+      {
+        "key": "damageReduction",
+        "value": 4
+      },
+      {
+        "key": "rangedDefenceBonus",
+        "value": 10
+      },
+      {
+        "key": "magicDefenceBonus",
+        "value": 10
+      },
+      {
+        "key": "meleeDefenceBonus",
+        "value": 10
+      },
+      {
+        "key": "slashAttackBonus",
+        "value": 10
+      },
+      {
+        "key": "stabAttackBonus",
+        "value": 10
+      },
+      {
+        "key": "rangedAttackBonus",
+        "value": -10
+      }
+    ],
     validSlots: ["Helmet"],
     occupiesSlots: [],
     equipRequirements: [],
@@ -1326,11 +2283,11 @@ export const ItemList: any = {
       stats: { magic: 1, },
       long: "Blessing of 建御雷 [Takemikazuchi]: Resist lightning +10%, Lightning cost - 10%, Lightning power +10%.", // Price since it was shown In a shop.
       note: "",
-      sellsFor: 0,
+      sellsFor: 1,
       "category": "Combat",
       type: "Equipment",
       // melvor
-      // equipmentStats will be converted from stats
+
       validSlots: ["Platebody"],
       occupiesSlots: [],
       equipRequirements: [],
@@ -1346,11 +2303,11 @@ export const ItemList: any = {
       stats: { magic: 2 },
       long: "Blessing of 建御雷 [Takemikazuchi]: Resist lightning +20%, Lightning cost - 15%, Lightning power +20%.", // Price since it was shown In a shop.
       note: "",
-      sellsFor: 0,
+      sellsFor: 1,
       "category": "Combat",
       type: "Equipment",
       // melvor
-      // equipmentStats will be converted from stats
+
       validSlots: ["Platebody"],
       occupiesSlots: [],
       equipRequirements: [],
@@ -1366,11 +2323,28 @@ export const ItemList: any = {
     stats: { magic: 2, HP: 10, lightningIncreasedDamage: 2 },
     long: "", // Price since it was shown In a shop.
     note: "",
-    sellsFor: 0,
+    sellsFor: 1,
     "category": "Combat",
     type: "Equipment",
     // melvor
-    // equipmentStats will be converted from stats
+    "equipmentStats": [
+      {
+        "key": "magicDamageBonus",
+        "value": 5
+      },
+      {
+        "key": "magicAttackBonus",
+        "value": 30
+      },
+      {
+        "key": "magicDefenceBonus",
+        "value": 30
+      },
+      {
+        "key": "damageReduction",
+        "value": 5
+      }
+    ],
     validSlots: ["Platebody"],
     occupiesSlots: [],
     equipRequirements: [],
@@ -1385,11 +2359,32 @@ export const ItemList: any = {
     stats: {},
     long: "", // Price since it was shown In a shop.
     note: "",
-    sellsFor: 0,
+    sellsFor: 1,
     "category": "Combat",
     type: "Equipment",
     // melvor
-    // equipmentStats will be converted from stats
+    "equipmentStats": [
+      {
+        "key": "magicDefenceBonus",
+        "value": -6
+      },
+      {
+        "key": "rangedDefenceBonus",
+        "value": 106
+      },
+      {
+        "key": "meleeDefenceBonus",
+        "value": 109
+      },
+      {
+        "key": "rangedAttackBonus",
+        "value": -10
+      },
+      {
+        "key": "magicAttackBonus",
+        "value": -30
+      }
+    ],
     validSlots: ["Platebody"],
     occupiesSlots: [],
     equipRequirements: [],
@@ -1403,7 +2398,7 @@ export const ItemList: any = {
       stats: {},
       long: "", // Price since it was shown In a shop.
       note: "",
-      sellsFor: 0,
+      sellsFor: 1,
       "category": "Combat",
       type: "Equipment",
     },
@@ -1416,11 +2411,28 @@ export const ItemList: any = {
     stats: {},
     long: "", // Price since it was shown In a shop.
     note: "",
-    sellsFor: 0,
+    sellsFor: 1,
     "category": "Combat",
     type: "Equipment",
     // melvor
-    // equipmentStats will be converted from stats
+    "equipmentStats": [
+      {
+        "key": "meleeDefenceBonus",
+        "value": 8
+      },
+      {
+        "key": "stabAttackBonus",
+        "value": 8
+      },
+      {
+        "key": "slashAttackBonus",
+        "value": 8
+      },
+      {
+        "key": "blockAttackBonus",
+        "value": 8
+      }
+    ],
     validSlots: ["Gloves"],
     occupiesSlots: [],
     equipRequirements: [],
@@ -1434,7 +2446,7 @@ export const ItemList: any = {
       stats: {},
       long: "", // Price since it was shown In a shop.
       note: "",
-      sellsFor: 0,
+      sellsFor: 1,
       "category": "Combat",
       type: "Equipment",
     },
@@ -1447,11 +2459,24 @@ export const ItemList: any = {
     stats: {},
     long: "", // Price since it was shown In a shop.
     note: "",
-    sellsFor: 0,
+    sellsFor: 1,
     "category": "Combat",
     type: "Equipment",
     // melvor
-    // equipmentStats will be converted from stats
+    "equipmentStats": [
+      {
+        "key": "meleeDefenceBonus",
+        "value": 16
+      },
+      {
+        "key": "rangedAttackBonus",
+        "value": -1
+      },
+      {
+        "key": "magicAttackBonus",
+        "value": -3
+      }
+    ],
     validSlots: ["Boots"],
     occupiesSlots: [],
     equipRequirements: [],
@@ -1465,7 +2490,7 @@ export const ItemList: any = {
       stats: {},
       long: "", // Price since it was shown In a shop.
       note: "",
-      sellsFor: 0,
+      sellsFor: 1,
       "category": "Combat",
       type: "Equipment",
     },
@@ -1480,11 +2505,28 @@ export const ItemList: any = {
     },
     long: "", // Price since it was shown In a shop.
     note: "",
-    sellsFor: 0,
+    sellsFor: 1,
     "category": "Combat",
     type: "Equipment",
     // melvor
-    // equipmentStats will be converted from stats
+    "equipmentStats": [
+      {
+        "key": "meleeDefenceBonus",
+        "value": 8
+      },
+      {
+        "key": "stabAttackBonus",
+        "value": 8
+      },
+      {
+        "key": "slashAttackBonus",
+        "value": 8
+      },
+      {
+        "key": "blockAttackBonus",
+        "value": 8
+      }
+    ],
     validSlots: ["Gloves"],
     occupiesSlots: [],
     equipRequirements: [],
@@ -1501,11 +2543,32 @@ export const ItemList: any = {
     long: "", // Price since it was shown In a shop.
     note: "Moroha is the type of blade. Ice.",
     type: "Weapon",
-    sellsFor: 0,
+    sellsFor: 1,
     "category": "Combat",
     "attackType": "melee",
     // melvor
-    // equipmentStats will be converted from stats
+    "equipmentStats": [
+      {
+        "key": "meleeDefenceBonus",
+        "value": 56
+      },
+      {
+        "key": "rangedDefenceBonus",
+        "value": 58
+      },
+      {
+        "key": "magicDefenceBonus",
+        "value": -1
+      },
+      {
+        "key": "magicAttackBonus",
+        "value": -8
+      },
+      {
+        "key": "rangedAttackBonus",
+        "value": -2
+      }
+    ],
     validSlots: ["Shield"],
     occupiesSlots: [],
     equipRequirements: [],
@@ -1522,11 +2585,11 @@ export const ItemList: any = {
     long: "", // Price since it was shown In a shop.
     note: "Moroha is the type of blade. Wind.",
     type: "Weapon",
-    sellsFor: 0,
+    sellsFor: 1,
     attackType: "melee",
     "category": "Combat",
     // melvor
-    // equipmentStats will be converted from stats
+
     validSlots: ["Weapon"],
     occupiesSlots: [],
     equipRequirements: [],
@@ -1539,7 +2602,7 @@ export const ItemList: any = {
     rating: "rare",
     stats: {},
     note: "",
-    sellsFor: 0,
+    sellsFor: 1,
     "category": "Combat",
     type: "Set",
     itemIDs: ["Gale Moroha", "Glide Moroha"],
@@ -1552,10 +2615,10 @@ export const ItemList: any = {
     note: "gakuran (学ラン)",
     image: "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2F3.bp.blogspot.com%2F-F5Tt2VoG3U0%2FU-8FvYC1ERI%2FAAAAAAAAkxY%2FYiSzIsYU6-Y%2Fs800%2Fseifuku_gakuran.png",
     type: "Equipment",
-    sellsFor: 0,
+    sellsFor: 1,
     "category": "Combat",
     // melvor
-    // equipmentStats will be converted from stats
+
     validSlots: ["Platebody"],
     occupiesSlots: [],
     equipRequirements: [],
@@ -1570,10 +2633,10 @@ export const ItemList: any = {
     note: "Originally students just wore standard everyday clothes to school; kimono for female students, with hakama for male students. During the Meiji period, students began to wear uniforms modelled after Western dress.",
     image: "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fi.pinimg.com%2Foriginals%2Ffd%2Fe6%2F75%2Ffde675e4fe3d7eeef19e5b4e2fab8366.png",
     type: "Equipment",
-    sellsFor: 0,
+    sellsFor: 1,
     "category": "Combat",
     // melvor
-    // equipmentStats will be converted from stats
+
     validSlots: ["Platebody"],
     occupiesSlots: [],
     equipRequirements: [],
@@ -1589,13 +2652,26 @@ export const ItemList: any = {
       command: 1
     },
     note: "",
-    sellsFor: 0,
+    sellsFor: 1,
     "category": "Combat",
     image: "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fi.pinimg.com%2Foriginals%2Fd6%2F20%2F7a%2Fd6207a896f16deb3df75e9ca32f3de82.jpg",
     type: "Weapon",
     attackType: "magic",
     // melvor
-    // equipmentStats will be converted from stats
+    "equipmentStats": [
+      {
+        "key": "attackSpeed",
+        "value": 2600
+      },
+      {
+        "key": "magicAttackBonus",
+        "value": 12
+      },
+      {
+        "key": "damageReduction",
+        "value": 3
+      }
+    ],
     validSlots: ["Weapon"],
     occupiesSlots: [],
     equipRequirements: [],
@@ -1612,13 +2688,13 @@ export const ItemList: any = {
     image: "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.medievalcollectibles.com%2Fwp-content%2Fuploads%2F2019%2F04%2FMC-TR-005.png",
     attackType: "melee",
     // melvor
-    // equipmentStats will be converted from stats
+
     validSlots: ["Weapon"],
     occupiesSlots: [],
     equipRequirements: [],
     modifiers: {},
     enemyModifiers: {},
-    sellsFor: 0,
+    sellsFor: 1,
     "category": "Combat",
   },
   "Seifuku": {
@@ -1629,10 +2705,10 @@ export const ItemList: any = {
     image: "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fnanj-challenge.up.seesaa.net%2Fimage%2Fseifuku_sailor.png",
     note: "seifuku (制服). The sailor fuku (セーラー服, sērā fuku) (lit. 'sailor outfit') is a common style of uniform worn by female middle school students, traditionally by high school students.",
     type: "Equipment",
-    sellsFor: 0,
+    sellsFor: 1,
     "category": "Combat",
     // melvor
-    // equipmentStats will be converted from stats
+
     validSlots: ["Platebody"],
     occupiesSlots: [],
     equipRequirements: [],
@@ -1646,11 +2722,11 @@ export const ItemList: any = {
     stats: {},
     note: "",
     image: "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.pngmart.com%2Ffiles%2F22%2FKimono-PNG-Isolated-Transparent.png",
-    sellsFor: 0,
+    sellsFor: 1,
     "category": "Combat",
     type: "Equipment",
     // melvor
-    // equipmentStats will be converted from stats
+
     validSlots: ["Platebody"],
     occupiesSlots: [],
     equipRequirements: [],
@@ -1664,11 +2740,11 @@ export const ItemList: any = {
     image: "https://ottotsuma.github.io/images/items/bc253ed84af1a472a0b23f1f07600190.jpg",
     stats: {},
     note: "",
-    sellsFor: 0,
+    sellsFor: 1,
     "category": "Combat",
     type: "Equipment",
     // melvor
-    // equipmentStats will be converted from stats
+
     validSlots: ["Cape"],
     occupiesSlots: [],
     equipRequirements: [],

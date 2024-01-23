@@ -13,7 +13,7 @@
         "ignoreCompletion": false,
         "obtainFromItemLog": false,
         "golbinRaidExclusive": false,
-        "sellsFor": 0,
+        "sellsFor": 1,
         "customDescription": "Recovers 1HP every 5 seconds for the next 120 seconds.",
         "modifiers": {},
         "charges": 5,
@@ -34,40 +34,40 @@
         "ignoreCompletion": false,
         "obtainFromItemLog": false,
         "golbinRaidExclusive": false,
-        "sellsFor": 0,
+        "sellsFor": 3200000,
         "customDescription": "Third Eye (active skill). Control minion: +1, sense: +1,",
         "equipmentStats": [
           {
             "key": "stabAttackBonus",
-            "value": 26000
+            "value": 0
           },
           {
             "key": "slashAttackBonus",
-            "value": 26000
+            "value": 0
           },
           {
             "key": "blockAttackBonus",
-            "value": 26000
+            "value": 0
           },
           {
             "key": "rangedAttackBonus",
-            "value": 26000
+            "value": 0
           },
           {
             "key": "magicAttackBonus",
-            "value": 26000
+            "value": 40
           },
           {
             "key": "meleeStrengthBonus",
-            "value": 26000
+            "value": 0
           },
           {
             "key": "rangedStrengthBonus",
-            "value": 26000
+            "value": 0
           },
           {
             "key": "magicDamageBonus",
-            "value": 26000
+            "value": 60
           },
           {
             "key": "meleeDefenceBonus",
@@ -75,26 +75,28 @@
           },
           {
             "key": "rangedDefenceBonus",
-            "value": 26000
+            "value": 0
           },
           {
             "key": "magicDefenceBonus",
-            "value": 26000
+            "value": 0
           },
           {
             "key": "damageReduction",
-            "value": 26000
+            "value": 1
           },
           {
             "key": "summoningMaxhit",
-            "value": 26000
+            "value": 100
           },
           {
             "key": "attackSpeed",
-            "value": 3000
+            "value": 2600
           }
         ],
-        "modifiers": {},
+        "modifiers": {
+          "increasedSummoningMaxHit": 100
+        },
         "tier": "none",
         "attackType": "magic",
         "validSlots": [
@@ -102,7 +104,9 @@
         ],
         "occupiesSlots": [],
         "equipRequirements": [],
-        "enemyModifiers": {}
+        "enemyModifiers": {
+          
+        }
       },
       {
         "id": "BoneLance",
@@ -114,20 +118,19 @@
         "ignoreCompletion": false,
         "obtainFromItemLog": false,
         "golbinRaidExclusive": false,
-        "sellsFor": 0,
-        "customDescription": "",
+        "sellsFor": 1,
         "equipmentStats": [
           {
             "key": "stabAttackBonus",
-            "value": 0
+            "value": 26
           },
           {
             "key": "slashAttackBonus",
-            "value": 0
+            "value": -4
           },
           {
             "key": "blockAttackBonus",
-            "value": 0
+            "value": 26
           },
           {
             "key": "rangedAttackBonus",
@@ -174,7 +177,9 @@
             "value": 3000
           }
         ],
-        "modifiers": {},
+        "modifiers": {
+          "increasedMeleeMaxHitFlat": 1
+        },
         "tier": "none",
         "attackType": "melee",
         "validSlots": [
@@ -194,20 +199,20 @@
         "ignoreCompletion": false,
         "obtainFromItemLog": false,
         "golbinRaidExclusive": false,
-        "sellsFor": 0,
+        "sellsFor": 1,
         "customDescription": "Tiny increase in spear proficiency when equipped.",
         "equipmentStats": [
           {
             "key": "stabAttackBonus",
-            "value": 0
+            "value": 26
           },
           {
             "key": "slashAttackBonus",
-            "value": 0
+            "value": -4
           },
           {
             "key": "blockAttackBonus",
-            "value": 0
+            "value": 26
           },
           {
             "key": "rangedAttackBonus",
@@ -274,63 +279,32 @@
         "ignoreCompletion": false,
         "obtainFromItemLog": false,
         "golbinRaidExclusive": false,
-        "sellsFor": 0,
+        "sellsFor": 1,
         "customDescription": "Reduces physical damage taken by 10%, except spears. Endurance +1, Endurance +10%.",
         "equipmentStats": [
           {
-            "key": "stabAttackBonus",
-            "value": 100
-          },
-          {
-            "key": "slashAttackBonus",
-            "value": 100
-          },
-          {
-            "key": "blockAttackBonus",
-            "value": 100
-          },
-          {
-            "key": "rangedAttackBonus",
-            "value": 100
-          },
-          {
-            "key": "magicAttackBonus",
-            "value": 100
-          },
-          {
-            "key": "meleeStrengthBonus",
-            "value": 100
-          },
-          {
-            "key": "rangedStrengthBonus",
-            "value": 100
-          },
-          {
-            "key": "magicDamageBonus",
-            "value": 100
-          },
-          {
-            "key": "meleeDefenceBonus",
-            "value": 100
+            "key": "magicDefenceBonus",
+            "value": 50
           },
           {
             "key": "rangedDefenceBonus",
-            "value": 100
+            "value": 250
           },
           {
-            "key": "magicDefenceBonus",
-            "value": 100
+            "key": "meleeDefenceBonus",
+            "value": 250
           },
           {
             "key": "damageReduction",
-            "value": 100
-          },
-          {
-            "key": "summoningMaxhit",
-            "value": 100
+            "value": 10
           }
         ],
-        "modifiers": {},
+        "modifiers": {
+          "increasedDamageReductionAgainstMelee": 10,
+          "increasedDamageReductionAgainstRanged": 10,
+          "increasedMaxHitpoints": 10,
+          "increasedFlatMaxHitpoints": 10
+        },
         "tier": "none",
         "validSlots": [
           "Platebody"
@@ -349,7 +323,7 @@
         "ignoreCompletion": false,
         "obtainFromItemLog": false,
         "golbinRaidExclusive": false,
-        "sellsFor": 0,
+        "sellsFor": 1,
         "customDescription": "Endurance +1.8.",
         "equipmentStats": [
           {
@@ -424,7 +398,7 @@
         "ignoreCompletion": false,
         "obtainFromItemLog": false,
         "golbinRaidExclusive": false,
-        "sellsFor": 0,
+        "sellsFor": 1,
         "customDescription": "Endurance +1.",
         "equipmentStats": [
           {
@@ -499,7 +473,7 @@
         "ignoreCompletion": false,
         "obtainFromItemLog": false,
         "golbinRaidExclusive": false,
-        "sellsFor": 0,
+        "sellsFor": 1,
         "customDescription": "Endurance +1.2.",
         "equipmentStats": [
           {
@@ -574,7 +548,7 @@
         "ignoreCompletion": false,
         "obtainFromItemLog": false,
         "golbinRaidExclusive": false,
-        "sellsFor": 0,
+        "sellsFor": 1,
         "customDescription": "Strength +3.",
         "equipmentStats": [
           {
@@ -654,7 +628,7 @@
         "ignoreCompletion": false,
         "obtainFromItemLog": false,
         "golbinRaidExclusive": false,
-        "sellsFor": 0,
+        "sellsFor": 1,
         "customDescription": "Threat increased 20%, Reduce received damage from Demons by 7%, Reduce received damage from Undead by 7%, chance to block 20%.",
         "equipmentStats": [
           {
@@ -729,7 +703,7 @@
         "ignoreCompletion": false,
         "obtainFromItemLog": false,
         "golbinRaidExclusive": false,
-        "sellsFor": 0,
+        "sellsFor": 1,
         "customDescription": "Increase HP by 315, Increase MP by 225.",
         "equipmentStats": [
           {
@@ -806,7 +780,7 @@
         "ignoreCompletion": false,
         "obtainFromItemLog": false,
         "golbinRaidExclusive": false,
-        "sellsFor": 0,
+        "sellsFor": 1,
         "customDescription": "Reduces physical damage taken by 15, Reduces magical damage taken by 17, Reduce received damage from Demons by 3%",
         "equipmentStats": [
           {
@@ -881,7 +855,7 @@
         "ignoreCompletion": false,
         "obtainFromItemLog": false,
         "golbinRaidExclusive": false,
-        "sellsFor": 0,
+        "sellsFor": 1,
         "customDescription": "Reduces physical damage taken by 15, Reduces magical damage taken by 17, Reduce received damage from Demons by 3%",
         "equipmentStats": [
           {
@@ -957,7 +931,7 @@
         "ignoreCompletion": false,
         "obtainFromItemLog": false,
         "golbinRaidExclusive": false,
-        "sellsFor": 0,
+        "sellsFor": 1,
         "customDescription": "Reduces physical damage taken by 15, Reduces magical damage taken by 17, Reduce received damage from Demons by 3%",
         "equipmentStats": [
           {
@@ -1033,7 +1007,7 @@
         "ignoreCompletion": false,
         "obtainFromItemLog": false,
         "golbinRaidExclusive": false,
-        "sellsFor": 0,
+        "sellsFor": 1,
         "customDescription": "Reduces physical damage taken by 15, Reduces magical damage taken by 17, Reduce received damage from Demons by 3%",
         "equipmentStats": [
           {
@@ -1109,7 +1083,7 @@
         "ignoreCompletion": false,
         "obtainFromItemLog": false,
         "golbinRaidExclusive": false,
-        "sellsFor": 0,
+        "sellsFor": 1,
         "customDescription": "Has a small chance to poison on contact, dexterity +1.",
         "equipmentStats": [
           {
@@ -1184,7 +1158,7 @@
         "ignoreCompletion": false,
         "obtainFromItemLog": false,
         "golbinRaidExclusive": false,
-        "sellsFor": 0,
+        "sellsFor": 1,
         "customDescription": "Magic + 25, -5 Charisma, control undead +1.",
         "equipmentStats": [
           {
@@ -1259,7 +1233,7 @@
         "ignoreCompletion": false,
         "obtainFromItemLog": false,
         "golbinRaidExclusive": false,
-        "sellsFor": 0,
+        "sellsFor": 1,
         "customDescription": "mag + 10, Control undead +1.",
         "equipmentStats": [
           {
@@ -1334,7 +1308,7 @@
         "ignoreCompletion": false,
         "obtainFromItemLog": false,
         "golbinRaidExclusive": false,
-        "sellsFor": 0,
+        "sellsFor": 1,
         "customDescription": "Strength +1.",
         "equipmentStats": [
           {
@@ -1409,7 +1383,7 @@
         "ignoreCompletion": false,
         "obtainFromItemLog": false,
         "golbinRaidExclusive": false,
-        "sellsFor": 0,
+        "sellsFor": 1,
         "customDescription": "magic +2, strength -1.",
         "equipmentStats": [
           {
@@ -1484,7 +1458,7 @@
         "ignoreCompletion": false,
         "obtainFromItemLog": false,
         "golbinRaidExclusive": false,
-        "sellsFor": 0,
+        "sellsFor": 1,
         "customDescription": "magic +30.",
         "equipmentStats": [
           {
@@ -1559,7 +1533,7 @@
         "ignoreCompletion": false,
         "obtainFromItemLog": false,
         "golbinRaidExclusive": false,
-        "sellsFor": 0,
+        "sellsFor": 1,
         "customDescription": "Skill: Animate stone.",
         "equipmentStats": [
           {
@@ -1640,7 +1614,7 @@
         "ignoreCompletion": false,
         "obtainFromItemLog": false,
         "golbinRaidExclusive": false,
-        "sellsFor": 0,
+        "sellsFor": 1,
         "customDescription": "Control undead +2.",
         "equipmentStats": [
           {
@@ -1715,7 +1689,7 @@
         "ignoreCompletion": false,
         "obtainFromItemLog": false,
         "golbinRaidExclusive": false,
-        "sellsFor": 0,
+        "sellsFor": 1,
         "customDescription": "Enchanting chance of success + 5%.",
         "equipmentStats": [
           {
@@ -1790,7 +1764,7 @@
         "ignoreCompletion": false,
         "obtainFromItemLog": false,
         "golbinRaidExclusive": false,
-        "sellsFor": 0,
+        "sellsFor": 1,
         "customDescription": "(???)."
       },
       {
@@ -1803,7 +1777,7 @@
         "ignoreCompletion": false,
         "obtainFromItemLog": false,
         "golbinRaidExclusive": false,
-        "sellsFor": 0,
+        "sellsFor": 1,
         "customDescription": "(???).",
         "equipmentStats": [
           {
@@ -1878,7 +1852,7 @@
         "ignoreCompletion": false,
         "obtainFromItemLog": false,
         "golbinRaidExclusive": false,
-        "sellsFor": 0,
+        "sellsFor": 1,
         "customDescription": "Hides users identity.",
         "equipmentStats": [
           {
@@ -1953,7 +1927,7 @@
         "ignoreCompletion": false,
         "obtainFromItemLog": false,
         "golbinRaidExclusive": false,
-        "sellsFor": 0,
+        "sellsFor": 1,
         "customDescription": "Coating boats to go faster."
       },
       {
@@ -1966,7 +1940,7 @@
         "ignoreCompletion": false,
         "obtainFromItemLog": false,
         "golbinRaidExclusive": false,
-        "sellsFor": 0,
+        "sellsFor": 1,
         "customDescription": "Dexterity +1.",
         "equipmentStats": [
           {
@@ -2041,7 +2015,7 @@
         "ignoreCompletion": false,
         "obtainFromItemLog": false,
         "golbinRaidExclusive": false,
-        "sellsFor": 0,
+        "sellsFor": 1,
         "customDescription": "Magic +1, Willpower: +1, Spell Speed: +1%.",
         "equipmentStats": [
           {
@@ -2116,7 +2090,7 @@
         "ignoreCompletion": false,
         "obtainFromItemLog": false,
         "golbinRaidExclusive": false,
-        "sellsFor": 0,
+        "sellsFor": 1,
         "customDescription": "Magic +1, Willpower: +1, Spell Speed: +1%.",
         "equipmentStats": [
           {
@@ -2191,7 +2165,7 @@
         "ignoreCompletion": false,
         "obtainFromItemLog": false,
         "golbinRaidExclusive": false,
-        "sellsFor": 0,
+        "sellsFor": 1,
         "customDescription": "Magic +1, Willpower: +1, Spell Speed: +1%.",
         "equipmentStats": [
           {
@@ -2266,7 +2240,7 @@
         "ignoreCompletion": false,
         "obtainFromItemLog": false,
         "golbinRaidExclusive": false,
-        "sellsFor": 0,
+        "sellsFor": 1,
         "customDescription": "Magic +1, Willpower: +1, Spell Speed: +1%.",
         "equipmentStats": [
           {
@@ -2341,7 +2315,7 @@
         "ignoreCompletion": false,
         "obtainFromItemLog": false,
         "golbinRaidExclusive": false,
-        "sellsFor": 0,
+        "sellsFor": 1,
         "customDescription": "Magic +1, Willpower: +1, Spell Speed: +1%.",
         "equipmentStats": [
           {
@@ -2416,8 +2390,8 @@
         "ignoreCompletion": false,
         "obtainFromItemLog": false,
         "golbinRaidExclusive": false,
-        "sellsFor": 0,
-        "customDescription": "",
+        "sellsFor": 1,
+        
         "equipmentStats": [
           {
             "key": "stabAttackBonus",
@@ -2491,7 +2465,7 @@
         "ignoreCompletion": false,
         "obtainFromItemLog": false,
         "golbinRaidExclusive": false,
-        "sellsFor": 0,
+        "sellsFor": 1,
         "customDescription": "Critical hit rate: +1, Endurance: +1.",
         "equipmentStats": [
           {
@@ -2566,7 +2540,7 @@
         "ignoreCompletion": false,
         "obtainFromItemLog": false,
         "golbinRaidExclusive": false,
-        "sellsFor": 0,
+        "sellsFor": 1,
         "customDescription": "Critical hit rate: +1, Dexterity: +1.",
         "equipmentStats": [
           {
@@ -2641,7 +2615,7 @@
         "ignoreCompletion": false,
         "obtainFromItemLog": false,
         "golbinRaidExclusive": false,
-        "sellsFor": 0,
+        "sellsFor": 1,
         "customDescription": "Cutting deals 3% more damage, strength: +1.",
         "equipmentStats": [
           {
@@ -2721,7 +2695,7 @@
         "ignoreCompletion": false,
         "obtainFromItemLog": false,
         "golbinRaidExclusive": false,
-        "sellsFor": 0,
+        "sellsFor": 1,
         "customDescription": "strength: +1.",
         "equipmentStats": [
           {
@@ -2801,7 +2775,7 @@
         "ignoreCompletion": false,
         "obtainFromItemLog": false,
         "golbinRaidExclusive": false,
-        "sellsFor": 0,
+        "sellsFor": 1,
         "customDescription": "Disease resistance +3%.",
         "equipmentStats": [
           {
@@ -2876,7 +2850,7 @@
         "ignoreCompletion": false,
         "obtainFromItemLog": false,
         "golbinRaidExclusive": false,
-        "sellsFor": 0,
+        "sellsFor": 1,
         "customDescription": "Hiding in shadows is 40% more effective. +150 water resistance. 2% water resistance.",
         "equipmentStats": [
           {
@@ -2951,7 +2925,7 @@
         "ignoreCompletion": false,
         "obtainFromItemLog": false,
         "golbinRaidExclusive": false,
-        "sellsFor": 0,
+        "sellsFor": 1,
         "customDescription": "+1 Endurance.",
         "equipmentStats": [
           {
@@ -3026,7 +3000,7 @@
         "ignoreCompletion": false,
         "obtainFromItemLog": false,
         "golbinRaidExclusive": false,
-        "sellsFor": 0,
+        "sellsFor": 1,
         "customDescription": "Dexterity: +1.",
         "equipmentStats": [
           {
@@ -3101,7 +3075,7 @@
         "ignoreCompletion": false,
         "obtainFromItemLog": false,
         "golbinRaidExclusive": false,
-        "sellsFor": 0,
+        "sellsFor": 1,
         "customDescription": "Dexterity +9, Swimming speed +5, Can breath underwater for 5 minutes.",
         "equipmentStats": [
           {
@@ -3176,7 +3150,7 @@
         "ignoreCompletion": false,
         "obtainFromItemLog": false,
         "golbinRaidExclusive": false,
-        "sellsFor": 0,
+        "sellsFor": 1,
         "customDescription": "Hides the users stats, name and other details.",
         "equipmentStats": [
           {
@@ -3251,8 +3225,8 @@
         "ignoreCompletion": false,
         "obtainFromItemLog": false,
         "golbinRaidExclusive": false,
-        "sellsFor": 0,
-        "customDescription": "",
+        "sellsFor": 1,
+        
         "equipmentStats": [
           {
             "key": "stabAttackBonus",
@@ -3326,8 +3300,8 @@
         "ignoreCompletion": false,
         "obtainFromItemLog": false,
         "golbinRaidExclusive": false,
-        "sellsFor": 0,
-        "customDescription": "",
+        "sellsFor": 1,
+        
         "equipmentStats": [
           {
             "key": "stabAttackBonus",
@@ -3401,8 +3375,8 @@
         "ignoreCompletion": false,
         "obtainFromItemLog": false,
         "golbinRaidExclusive": false,
-        "sellsFor": 0,
-        "customDescription": "",
+        "sellsFor": 1,
+        
         "equipmentStats": [
           {
             "key": "stabAttackBonus",
@@ -3476,8 +3450,8 @@
         "ignoreCompletion": false,
         "obtainFromItemLog": false,
         "golbinRaidExclusive": false,
-        "sellsFor": 0,
-        "customDescription": "",
+        "sellsFor": 1,
+        
         "equipmentStats": [
           {
             "key": "stabAttackBonus",
@@ -3551,7 +3525,7 @@
         "ignoreCompletion": false,
         "obtainFromItemLog": false,
         "golbinRaidExclusive": false,
-        "sellsFor": 0,
+        "sellsFor": 1,
         "customDescription": "Magic: +2, Disease resistance + 20%, Mana regeneration + 20%, blessing of 建御雷 [Takemikazuchi].",
         "equipmentStats": [
           {
@@ -3626,7 +3600,7 @@
         "ignoreCompletion": false,
         "obtainFromItemLog": false,
         "golbinRaidExclusive": false,
-        "sellsFor": 0,
+        "sellsFor": 1,
         "customDescription": "Magic: +2, Lightning +2%, HP +10.",
         "equipmentStats": [
           {
@@ -3703,8 +3677,8 @@
         "ignoreCompletion": false,
         "obtainFromItemLog": false,
         "golbinRaidExclusive": false,
-        "sellsFor": 0,
-        "customDescription": "",
+        "sellsFor": 1,
+        
         "equipmentStats": [
           {
             "key": "stabAttackBonus",
@@ -3778,8 +3752,8 @@
         "ignoreCompletion": false,
         "obtainFromItemLog": false,
         "golbinRaidExclusive": false,
-        "sellsFor": 0,
-        "customDescription": "",
+        "sellsFor": 1,
+        
         "equipmentStats": [
           {
             "key": "stabAttackBonus",
@@ -3853,8 +3827,8 @@
         "ignoreCompletion": false,
         "obtainFromItemLog": false,
         "golbinRaidExclusive": false,
-        "sellsFor": 0,
-        "customDescription": "",
+        "sellsFor": 1,
+        
         "equipmentStats": [
           {
             "key": "stabAttackBonus",
@@ -3928,7 +3902,7 @@
         "ignoreCompletion": false,
         "obtainFromItemLog": false,
         "golbinRaidExclusive": false,
-        "sellsFor": 0,
+        "sellsFor": 1,
         "customDescription": "Endurance +1, Skill: Powdered Snow Defense (Passive).",
         "equipmentStats": [
           {
@@ -4003,7 +3977,7 @@
         "ignoreCompletion": false,
         "obtainFromItemLog": false,
         "golbinRaidExclusive": false,
-        "sellsFor": 0,
+        "sellsFor": 1,
         "customDescription": "Deals +5 ice damage. Ice skills cost 5% less mana, other skills cost 2% less mana.",
         "equipmentStats": [
           {
@@ -4083,7 +4057,7 @@
         "ignoreCompletion": false,
         "obtainFromItemLog": false,
         "golbinRaidExclusive": false,
-        "sellsFor": 0,
+        "sellsFor": 1,
         "customDescription": "Deals +1 wind damage. Attack speed starts at 10% of user maximum speed. Skill cool downs are reduced 3%.",
         "equipmentStats": [
           {
@@ -4163,7 +4137,7 @@
         "ignoreCompletion": false,
         "obtainFromItemLog": false,
         "golbinRaidExclusive": false,
-        "sellsFor": 0,
+        "sellsFor": 1,
         "customDescription": "The male school uniform of Niyosho.",
         "equipmentStats": [
           {
@@ -4238,7 +4212,7 @@
         "ignoreCompletion": false,
         "obtainFromItemLog": false,
         "golbinRaidExclusive": false,
-        "sellsFor": 0,
+        "sellsFor": 1,
         "customDescription": "The school uniform of Niyosho.",
         "equipmentStats": [
           {
@@ -4313,7 +4287,7 @@
         "ignoreCompletion": false,
         "obtainFromItemLog": false,
         "golbinRaidExclusive": false,
-        "sellsFor": 0,
+        "sellsFor": 1,
         "customDescription": "Can only be used by Otto. Command +1, Command over plant's +4.",
         "equipmentStats": [
           {
@@ -4393,7 +4367,7 @@
         "ignoreCompletion": false,
         "obtainFromItemLog": false,
         "golbinRaidExclusive": false,
-        "sellsFor": 0,
+        "sellsFor": 1,
         "customDescription": "A 55cm length short sword. This sword was made long ago, it is very worn.",
         "equipmentStats": [
           {
@@ -4473,7 +4447,7 @@
         "ignoreCompletion": false,
         "obtainFromItemLog": false,
         "golbinRaidExclusive": false,
-        "sellsFor": 0,
+        "sellsFor": 1,
         "customDescription": "High school sailor outfit worn by female students of Niyosho.",
         "equipmentStats": [
           {
@@ -4548,7 +4522,7 @@
         "ignoreCompletion": false,
         "obtainFromItemLog": false,
         "golbinRaidExclusive": false,
-        "sellsFor": 0,
+        "sellsFor": 1,
         "customDescription": "A kimono made in Niyosho.",
         "equipmentStats": [
           {
@@ -4623,7 +4597,7 @@
         "ignoreCompletion": false,
         "obtainFromItemLog": false,
         "golbinRaidExclusive": false,
-        "sellsFor": 0,
+        "sellsFor": 1,
         "customDescription": "Once a day you can cause the leaves on this cloak to swirl around you, obscuring you from sight for one minute.",
         "equipmentStats": [
           {

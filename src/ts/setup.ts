@@ -1,4 +1,5 @@
-import { ItemList as monadItems } from '../data/monad-data';
+// @ts-nocheck
+import { ItemList as monadItems, AnyMonadItemData } from '../data/monad-data';
 import { nonSupport } from '../data/poe.data';
 import Pokemon from '../data/data.allPokemon.json'
 import DnDmonsters from '../data/5e.data.json'
@@ -21,7 +22,6 @@ function randomNumber(min: number, max: number) {
   }
   return Math.floor(Math.random() * (max - min) + min);
 }
-
 
 function combatLevelCalc({
   Attack = 1,
@@ -47,6 +47,7 @@ function calculateRewardsMax(CL = 1, maxLimit = 1) {
 export async function setup(ctx: Modding.ModContext) {
   const _namespace = "monad"
   const errorLog: any[] = []
+  const idLog: any[] = []
   try {
     const TothEntitlement = cloudManager.hasTotHEntitlement
     const AoDEntitlement = cloudManager.hasAoDEntitlement
@@ -65,67 +66,66 @@ export async function setup(ctx: Modding.ModContext) {
         // const Abyssal = mod.manager.getLoadedModList().includes('Abyssal Rift')
         // const Pokeworld = mod.manager.getLoadedModList().includes('Pokeworld (Generation 1)')
         // const Runescape = mod.manager.getLoadedModList().includes('Runescape Encounters in Melvor')
-        const DragonList: any[] = [
+        const DragonList: Array<string> = [
         ]
-        const HumansList: any[] = [
+        const HumansList: Array<string> = [
         ]
-        const UndeadList: any[] = [
+        const UndeadList: Array<string> = [
           "melvorF:ElderVampire",
         ]
-        const DemonList: any[] = [
+        const DemonList: Array<string> = [
         ]
-        const BeastList: any[] = [
+        const BeastList: Array<string> = [
         ]
-        const GoblinList: any[] = [
+        const GoblinList: Array<string> = [
           "melvorD:Golbin",
           "melvorD:RangedGolbin",
         ]
-        const MythList: any[] = [
+        const MythList: Array<string> = [
         ]
-        const elfList: any[] = [
+        const elfList: Array<string> = [
         ]
-        const RobotsList: any[] = [
+        const RobotsList: Array<string> = [
         ]
-        const OrcList: any[] = [
+        const OrcList: Array<string> = [
         ]
-        const SeaCreatureList: any[] = [
+        const SeaCreatureList: Array<string> = [
         ]
-        const ElementalCreatureList: any[] = [
+        const ElementalCreatureList: Array<string> = [
         ]
-        const PlantList: any[] = [
+        const PlantList: Array<string> = [
           "melvorD:Plant"
         ]
-        const OozesList: any[] = [
+        const OozesList: Array<string> = [
         ]
-        const AberrationsList: any[] = [
+        const AberrationsList: Array<string> = [
         ]
-        const CelestialsList: any[] = [
+        const CelestialsList: Array<string> = [
         ]
-        const ConstructsList: any[] = [
+        const ConstructsList: Array<string> = [
         ]
-        const FeyList: any[] = [
+        const FeyList: Array<string> = [
         ]
-        const FiendList: any[] = [
+        const FiendList: Array<string> = [
         ]
-        const GiantsList: any[] = [
+        const GiantsList: Array<string> = [
         ]
-        const MonstrositiesList: any[] = [
+        const MonstrositiesList: Array<string> = [
         ]
         const allMonsters: (MonsterData | Monster)[] = []
-        const allItems: any[] = []
-        const junkItems: any[] = []
-        const commonItems: any[] = []
-        const normalItems: any[] = []
-        const intermediateItems: any[] = []
-        const advancedItems: any[] = []
-        const rareItems: any[] = []
-        const epicItems: any[] = []
-        const legendaryItems: any[] = []
-        const uniqueItems: any[] = []
-        const growthItems: any[] = []
-        const questItems: any[] = []
-        const idLog: any[] = []
-        const bannedList: any = {
+        const allItems: Array<string> = []
+        const junkItems: Array<string> = []
+        const commonItems: Array<string> = []
+        const normalItems: Array<string> = []
+        const intermediateItems: Array<string> = []
+        const advancedItems: Array<string> = []
+        const rareItems: Array<string> = []
+        const epicItems: Array<string> = []
+        const legendaryItems: Array<string> = []
+        const uniqueItems: Array<string> = []
+        const growthItems: Array<string> = []
+        const questItems: Array<string> = []
+        const bannedList = {
           "Sweetroll": true,
           "Crown_of_Rhaelyx": true,
           "Cooking_Gloves": true,
@@ -170,16 +170,16 @@ export async function setup(ctx: Modding.ModContext) {
           "Lemonade_Still_almost_full": true,
           "Lemonade_Almost_full": true,
           "lootbox": true
-        }
-        const bannedNameSpace: any = {
+        } as const;
+        const bannedNameSpace = {
           "tes": true
-        }
-        const categoryBan: any = {
+        } as const;
+        const categoryBan = {
           "Limes": true,
           "Lemon": true,
           "Events": true,
           "Event": true
-        }
+        } as const;
         const initialPackage = ctx.gameData.buildPackage((itemPackage: any) => {
           try {
             // const SRDURL = "https://www.dnd5eapi.co/api/images/monsters/aboleth.png"
@@ -238,6 +238,16 @@ export async function setup(ctx: Modding.ModContext) {
                   }
                 }
 
+                function DnDcalcattacktype(int: string, dex: string, str: string) {
+                  if (parseInt(int) > parseInt(dex) && parseInt(int) > parseInt(str)) { return "magic" }
+                  if (parseInt(dex) > parseInt(int) && parseInt(dex) > parseInt(str)) { return "ranged" }
+                  if (parseInt(str) > parseInt(int) && parseInt(str) > parseInt(dex)) { return "melee" }
+                  // we had a tie in two stats
+                  if (parseInt(int) > parseInt(dex)) { return "magic" }
+                  if (parseInt(dex) > parseInt(int)) { return "ranged" }
+                  return "melee"
+                }
+
                 const newMonster: MonsterData = {
                   "id": NewMonsterID,
                   "name": DnDmonsters[index].name,
@@ -263,7 +273,7 @@ export async function setup(ctx: Modding.ModContext) {
                   "specialAttacks": [],
                   "passives": [],
                   "ignoreCompletion": false,
-                  "attackType": parseInt(DnDmonsters[index].INT) > parseInt(DnDmonsters[index].STR) ? "magic" : parseInt(DnDmonsters[index].DEX) > parseInt(DnDmonsters[index].STR) ? "ranged" : "melee",
+                  "attackType": DnDcalcattacktype(DnDmonsters[index].INT, DnDmonsters[index].DEX, DnDmonsters[index].STR),
                   "lootChance": 100,
                   "lootTable": [
                     {
@@ -314,6 +324,170 @@ export async function setup(ctx: Modding.ModContext) {
                 ]
               }
               itemPackage.combatAreaDisplayOrder.add(dnd_combat_display_order)
+            }
+            if (false && DnDMagicitems) {
+              function getMediaFromType(type: string) {
+                return `img/${type.replace(' ', '').toLowerCase().replace('wondrousitems', 'wondrousitem')}.jpg`
+              }
+              function getSellPriceFromDisc(Disc: string) {
+                if (Disc === 'Common') {
+                  return 10;
+                }
+                if (Disc === 'Uncommon') {
+                  return 100;
+                }
+                if (Disc === 'Rare') {
+                  return 1000;
+                }
+                if (Disc === 'Very Rare') {
+                  return 10000;
+                }
+                if (Disc === 'Legendary') {
+                  return 100000;
+                }
+                return 0;
+              }
+
+              function getValidSlots(item: any) {
+                // "Helmet",
+                // "Platebody",
+                // "Platelegs",
+                // "Boots",
+                // "Weapon",
+                // "Shield",
+                // "Amulet",
+                // "Ring",
+                // "Gloves",
+                // "Quiver",
+                // "Cape",
+                // "Passive",
+                // "Summon1",
+                // "Summon2",
+                // "Consumable",
+                // "Gem" 
+                if (item.equipment_category.name.includes('Weapon')) {
+                  return ['Weapon'];
+                }
+                if (item.name.includes('Ammunition')) {
+                  return ['Quiver'];
+                }
+                if (item.name.includes('amulet')) {
+                  return ['Amulet'];
+                }
+                if (item.name.includes('greaves')) {
+                  return ['Platelegs'];
+                }
+                if (item.name.includes('cloak')) {
+                  return ['Cape'];
+                }
+                if (item.name.includes('cape')) {
+                  return ['Cape'];
+                }
+                if (item.name.includes('boot')) {
+                  return ['Boots'];
+                }
+                if (item.name.includes('glove')) {
+                  return ['Gloves'];
+                }
+                if (item.name.includes('hat')) {
+                  return ['Helmet'];
+                }
+                if (item.name.includes('helmet')) {
+                  return ['Helmet'];
+                }
+                if (item.name.includes('Shield')) {
+                  return ['Shield'];
+                }
+                const Disc = item.equipment_category.name.replace('Armor', 'Armour')
+                if (Disc === 'Staffs') {
+                  return ['Weapon'];
+                }
+                if (Disc === 'Wands') {
+                  return ['Weapon'];
+                }
+                if (Disc === 'Weapons') {
+                  return ['Weapon'];
+                }
+                if (Disc === 'Wondrous Items') {
+                  return ['Passive'];
+                }
+                if (Disc === 'Armour') {
+                  return ['Platebody'];
+                }
+                if (Disc === 'Potions') {
+                  return ['Consumable'];
+                }
+                if (Disc === 'Scrolls') {
+                  return ['Consumable'];
+                }
+                if (Disc === 'Rings') {
+                  return ['Ring'];
+                }
+                if (Disc === 'Rods') {
+                  return ['Weapon'];
+                }
+                return [];
+              }
+              const uniqueIDs: [string] = ['']
+              for (let index = 0; index < DnDMagicitems.length; index++) {
+                let itemID = DnDMagicitems[index].name.replace(/[^a-zA-Z ]/g, "").replace(/\s/g, "")
+                if (uniqueIDs.includes(itemID)) {
+                  while (uniqueIDs.includes(itemID)) {
+                    itemID = itemID + Math.floor(Math.random() * 1000000)
+                  }
+                }
+                uniqueIDs.push(itemID)
+                const templateItem: any = {
+                  "id": itemID,
+                  "name": DnDMagicitems[index].name,
+                  "category": DnDMagicitems[index].equipment_category.name.replace('Armor', 'Armour'),
+                  "type": DnDMagicitems[index].equipment_category.name.replace('Armor', 'Armour').replace('Ammunition', 'Ammo'),
+                  "itemType": DnDMagicitems[index].equipment_category.name.includes('Weapon') ? "Weapon" : DnDMagicitems[index].equipment_category.name.includes('Potion') ? "Potion" : "Equipment",
+                  "media": getMediaFromType(DnDMagicitems[index].equipment_category.name),
+                  "ignoreCompletion": false,
+                  "obtainFromItemLog": false,
+                  "golbinRaidExclusive": false,
+                  "sellsFor": getSellPriceFromDisc(DnDMagicitems[index].rarity.name),
+                  "tier": "none",
+                  "validSlots": getValidSlots(DnDMagicitems[index]),
+                  "occupiesSlots": DnDMagicitems[index].name.toLocaleLowerCase().includes('bow') ? ['Shield'] : DnDMagicitems[index].equipment_category.name === 'Staffs' ? ['Shield'] : [],
+                  "equipRequirements": [],
+                  "equipmentStats": [],
+                }
+                if (DnDMagicitems[index].equipment_category.name.includes('Potion')) {
+                  delete templateItem["validSlots"]
+                  delete templateItem["occupiesSlots"]
+                  delete templateItem["equipRequirements"]
+                  delete templateItem["equipmentStats"]
+                  delete templateItem["tier"]
+
+                  templateItem["charges"] = 10
+                  templateItem["tier"] = 0,
+                    templateItem["action"] = "melvorD:Fishing",
+                    templateItem["consumesOn"] = [
+                      {
+                        "type": "FishingAction"
+                      }
+                    ]
+                }
+                if (DnDMagicitems[index].equipment_category.name.includes('Weapon')) {
+                  const Disc = DnDMagicitems[index].equipment_category.name.replace('Armor', 'Armour')
+                  if (Disc === 'Staffs') {
+                    templateItem['attackType'] = "magic"
+                  }
+                  else if (Disc === 'Wands') {
+                    templateItem['attackType'] = "magic"
+                  } else if (Disc === 'Bow') {
+                    templateItem['attackType'] = "ranged"
+                  } else if (DnDMagicitems[index].name.toLocaleLowerCase().includes('bow')) {
+                    templateItem['attackType'] = "ranged"
+                  } else {
+                    templateItem['attackType'] = "melee"
+                  }
+
+                }
+                itemPackage.items.add(templateItem)
+              }
             }
             if (false && Pokemon) {
               const allPokemonId: any[] = []
@@ -727,9 +901,10 @@ export async function setup(ctx: Modding.ModContext) {
             }
             if (true && monadItems) {
               try {
-                const monadItemsKeys: any[] = Object.keys(monadItems)
+                const monadItemsKeys: Array<string> = Object.keys(monadItems)
                 for (let index = 0; index < monadItemsKeys.length; index++) {
                   const id = monadItemsKeys[index]
+                  // const monadItem: AnyMonadItemData = monadItems[id]
                   const type = monadItems[id].type
                   const itemID = id.replace(/[^a-zA-Z ]/g, "").replace(/\s/g, "")
                   if (game.items.getObjectByID(`${_namespace}:${itemID}`)) {
@@ -738,13 +913,13 @@ export async function setup(ctx: Modding.ModContext) {
                   // const price = parseInt(monadItems[id].long.replace(/\D/g,'')) // for shop data
                   if (type === "Set") {
                     // Add to set effects / ItemSynergyData
-                    const newIDs: any[] = []
+                    const newIDs: Array<string> = []
                     if (monadItems[id].itemIDs && monadItems[id].itemIDs.length > 0) {
                       for (let j = 0; j < monadItems[id].itemIDs.length; j++) {
                         newIDs.push(_namespace + ":" + monadItems[id].itemIDs[j].replace(/[^a-zA-Z ]/g, "").replace(/\s/g, ""))
                       }
                     }
-                    const newSynergy: any = {
+                    const newSynergy: ItemSynergyData = {
                       "itemIDs": newIDs,
                       "playerModifiers": {
 
@@ -762,7 +937,7 @@ export async function setup(ctx: Modding.ModContext) {
                   }
                   else {
                     // Is added to items / AnyItemData
-                    const newItem: any = {
+                    const newItem: AnyItemData = {
                       "id": itemID,
                       "name": monadItems[id].name,
                       "category": monadItems[id].category,
@@ -775,7 +950,7 @@ export async function setup(ctx: Modding.ModContext) {
                       "sellsFor": monadItems[id].sellsFor
                       // "customDescription": monadItems[id].description,
                     }
-                    const newequipmentStats: any[] = [
+                    const newequipmentStats: ItemStats[] = monadItems[id].equipmentStats ? monadItems[id].equipmentStats : [
                       { "key": 'stabAttackBonus', "value": 0 },
                       { "key": 'slashAttackBonus', "value": 0 },
                       { "key": 'blockAttackBonus', "value": 0 },
@@ -790,14 +965,14 @@ export async function setup(ctx: Modding.ModContext) {
                       { "key": 'damageReduction', "value": 0 },
                       { "key": 'summoningMaxhit', "value": 0 }
                     ]
-                    const newModifiers: any = {
+                    const newModifiers: PlayerModifiers = monadItems[id].modifiers ? monadItems[id].modifiers : {
 
                     }
                     const newequipmentStatsFinal: any[] = []
 
                     if (monadItems[id].stats) {
-                      const tempStats: any[] = monadItems[id].stats
-                      const statKeys: any[] = Object.keys(tempStats)
+                      const tempStats = monadItems[id].stats
+                      const statKeys: Array<string> = Object.keys(tempStats)
                       if (statKeys.length > 0) {
                         for (let m = 0; m < statKeys.length; m++) {
                           if (kcm) {
@@ -1038,186 +1213,21 @@ export async function setup(ctx: Modding.ModContext) {
                 errorLog.push("Error @ monadItems ", error)
               }
             }
-            if (true && DnDMagicitems) {
-              function getMediaFromType(type: string) {
-                return `img/${type.replace(' ', '').toLowerCase().replace('wondrousitems', 'wondrousitem')}.jpg`
-              }
-              function getSellPriceFromDisc(Disc: string) {
-                if (Disc === 'Common') {
-                  return 10;
-                }
-                if (Disc === 'Uncommon') {
-                  return 100;
-                }
-                if (Disc === 'Rare') {
-                  return 1000;
-                }
-                if (Disc === 'Very Rare') {
-                  return 10000;
-                }
-                if (Disc === 'Legendary') {
-                  return 100000;
-                }
-                return 0;
-              }
-
-              function getValidSlots(item: any) {
-                // "Helmet",
-                // "Platebody",
-                // "Platelegs",
-                // "Boots",
-                // "Weapon",
-                // "Shield",
-                // "Amulet",
-                // "Ring",
-                // "Gloves",
-                // "Quiver",
-                // "Cape",
-                // "Passive",
-                // "Summon1",
-                // "Summon2",
-                // "Consumable",
-                // "Gem" 
-                if (item.equipment_category.name.includes('Weapon')) {
-                  return ['Weapon'];
-                }
-                if (item.name.includes('Ammunition')) {
-                  return ['Quiver'];
-                }
-                if (item.name.includes('amulet')) {
-                  return ['Amulet'];
-                }
-                if (item.name.includes('greaves')) {
-                  return ['Platelegs'];
-                }
-                if (item.name.includes('cloak')) {
-                  return ['Cape'];
-                }
-                if (item.name.includes('cape')) {
-                  return ['Cape'];
-                }
-                if (item.name.includes('boot')) {
-                  return ['Boots'];
-                }
-                if (item.name.includes('glove')) {
-                  return ['Gloves'];
-                }
-                if (item.name.includes('hat')) {
-                  return ['Helmet'];
-                }
-                if (item.name.includes('helmet')) {
-                  return ['Helmet'];
-                }
-                if (item.name.includes('Shield')) {
-                  return ['Shield'];
-                }
-                const Disc = item.equipment_category.name.replace('Armor', 'Armour')
-                if (Disc === 'Staffs') {
-                  return ['Weapon'];
-                }
-                if (Disc === 'Wands') {
-                  return ['Weapon'];
-                }
-                if (Disc === 'Weapons') {
-                  return ['Weapon'];
-                }
-                if (Disc === 'Wondrous Items') {
-                  return ['Passive'];
-                }
-                if (Disc === 'Armour') {
-                  return ['Platebody'];
-                }
-                if (Disc === 'Potions') {
-                  return ['Consumable'];
-                }
-                if (Disc === 'Scrolls') {
-                  return ['Consumable'];
-                }
-                if (Disc === 'Rings') {
-                  return ['Ring'];
-                }
-                if (Disc === 'Rods') {
-                  return ['Weapon'];
-                }
-                return [];
-              }
-              const uniqueIDs: [string] = ['']
-              for (let index = 0; index < DnDMagicitems.length; index++) {
-                let itemID = DnDMagicitems[index].name.replace(/[^a-zA-Z ]/g, "").replace(/\s/g, "")
-                if(uniqueIDs.includes(itemID)) {
-                  while (uniqueIDs.includes(itemID)) {
-                      itemID = itemID + Math.floor(Math.random() * 1000000)
-                  }
-                }
-                uniqueIDs.push(itemID)
-                const templateItem: any = {
-                  "id": itemID,
-                  "name": DnDMagicitems[index].name,
-                  "category": DnDMagicitems[index].equipment_category.name.replace('Armor', 'Armour'),
-                  "type": DnDMagicitems[index].equipment_category.name.replace('Armor', 'Armour').replace('Ammunition', 'Ammo'),
-                  "itemType": DnDMagicitems[index].equipment_category.name.includes('Weapon') ? "Weapon" : DnDMagicitems[index].equipment_category.name.includes('Potion') ? "Potion" : "Equipment",
-                  "media": getMediaFromType(DnDMagicitems[index].equipment_category.name),
-                  "ignoreCompletion": false,
-                  "obtainFromItemLog": false,
-                  "golbinRaidExclusive": false,
-                  "sellsFor": getSellPriceFromDisc(DnDMagicitems[index].rarity.name),
-                  // "customDescription": monadItems[id].description,
-                  "tier": "none",
-                  "validSlots": getValidSlots(DnDMagicitems[index]),
-                  "occupiesSlots": DnDMagicitems[index].name.toLocaleLowerCase().includes('bow') ? ['Shield'] : DnDMagicitems[index].equipment_category.name === 'Staffs' ? ['Shield'] : [],
-                  "equipRequirements": [],
-                  "equipmentStats": [],
-                }
-                if (DnDMagicitems[index].equipment_category.name.includes('Potion')) {
-                  delete templateItem["validSlots"]
-                  delete templateItem["occupiesSlots"]
-                  delete templateItem["equipRequirements"]
-                  delete templateItem["equipmentStats"]
-                  delete templateItem["tier"]
-
-                  templateItem["charges"] = 10
-                  templateItem["tier"] = 0,
-                    templateItem["action"] = "melvorD:Fishing",
-                    templateItem["consumesOn"] = [
-                      {
-                        "type": "FishingAction"
-                      }
-                    ]
-                }
-                if (DnDMagicitems[index].equipment_category.name.includes('Weapon')) {
-                  const Disc = DnDMagicitems[index].equipment_category.name.replace('Armor', 'Armour')
-                  if (Disc === 'Staffs') {
-                    templateItem['attackType'] = "magic"
-                  }
-                  else if (Disc === 'Wands') {
-                    templateItem['attackType'] = "magic"
-                  } else if (Disc === 'Bow') {
-                    templateItem['attackType'] = "ranged"
-                  } else if (DnDMagicitems[index].name.toLocaleLowerCase().includes('bow')) {
-                    templateItem['attackType'] = "ranged"
-                  } else {
-                    templateItem['attackType'] = "melee"
-                  }
-
-                }
-                itemPackage.items.add(templateItem)
-              }
-            }
             if (true) {
               try {
-                const _namespaceItemList: any[] = [] // split into item ranks, then pass into monster ranks
+                const _namespaceItemList: Array<string> = [] // split into item ranks, then pass into monster ranks
                 // All items already in the game
                 game.items.registeredObjects.forEach((item: any) => {
                   try {
                     if (item) {
                       // Skip the item if its localID is in the bannedList
-                      if (bannedList[item.localID]) {
+                      if (Object.keys(bannedList).includes(item.localID)) {
                         return;
                       }
-                      if (bannedNameSpace[item.namespace]) {
+                      if (Object.keys(bannedNameSpace).includes(item.namespace)) {
                         return;
                       }
-                      if (categoryBan[item.category]) {
+                      if (Object.keys(categoryBan).includes(item.category)) {
                         return;
                       }
                       if (item.swalData) {
