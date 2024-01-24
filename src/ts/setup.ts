@@ -948,7 +948,6 @@ export async function setup(ctx: Modding.ModContext) {
                       "obtainFromItemLog": false,
                       "golbinRaidExclusive": false,
                       "sellsFor": monadItems[id].sellsFor
-                      // "customDescription": monadItems[id].description,
                     }
                     const newequipmentStats: ItemStats[] = monadItems[id].equipmentStats ? monadItems[id].equipmentStats : [
                       { "key": 'stabAttackBonus', "value": 0 },
@@ -976,40 +975,36 @@ export async function setup(ctx: Modding.ModContext) {
                       if (statKeys.length > 0) {
                         for (let m = 0; m < statKeys.length; m++) {
                           if (kcm) {
-                            // traitApplied: `${typeSingularNameLower}TraitApplied`,
-                            // increasedDamage: `increasedDamageAgainst${typePluralName}`,
-                            // decreasedDamage: `decreasedDamageAgainst${typePluralName}`,
-                            // increasedDamageTaken: `increasedDamageTakenFrom${typePluralName}`,
-                            // decreasedDamageTaken: `decreasedDamageTakenFrom${typePluralName}`,
-                            // increasedMaxHitPercent: `increasedMaxHitPercentAgainst${typePluralName}`,
-                            // decreasedMaxHitPercent: `decreasedMaxHitPercentAgainst${typePluralName}`,
-                            // increasedMaxHitFlat: `increasedMaxHitFlatAgainst${typePluralName}`,
-                            // decreasedMaxHitFlat: `decreasedMaxHitFlatAgainst${typePluralName}`,
-                            // increasedMinHitBasedOnMaxHit: `increasedMinHitBasedOnMaxHitAgainst${typePluralName}`,
-                            // decreasedMinHitBasedOnMaxHit: `decreasedMinHitBasedOnMaxHitAgainst${typePluralName}`,
-                            // increasedFlatMinHit: `increasedFlatMinHitAgainst${typePluralName}`,
-                            // decreasedFlatMinHit: `decreasedFlatMinHitAgainst${typePluralName}`,
-                            // increasedGlobalAccuracy: `increasedGlobalAccuracyAgainst${typePluralName}`,
-                            // decreasedGlobalAccuracy: `decreasedGlobalAccuracyAgainst${typePluralName}`,
-                            // increasedDamageReduction: `increasedDamageReductionAgainst${typePluralName}`,
-                            // decreasedDamageReduction: `decreasedDamageReductionAgainst${typePluralName}`,
-                            // increasedChanceToApplyTraitInfiniteOnSpawn: `increasedChanceToApply${typeSingularName}TraitInfiniteOnSpawn`,
-                            // decreasedChanceToApplyTraitInfiniteOnSpawn: `decreasedChanceToApply${typeSingularName}TraitInfiniteOnSpawn`,
-                            // applyTraitTurnsOnSpawn: `apply${typeSingularName}TraitTurnsOnSpawn`,
-                            // increasedChanceToApplyTrait: `increasedChanceToApply${typeSingularName}Trait`,
-                            // decreasedChanceToApplyTrait: `decreasedChanceToApply${typeSingularName}Trait`,
-                            // applyTraitTurns: `apply${typeSingularName}TraitTurns`
-
-                            // increasedDamageTakenFromAirSpells: Standard,
-                            // decreasedDamageTakenFromAirSpells: Standard,
-                            // increasedDamageTakenFromWaterSpells: Standard,
-                            // decreasedDamageTakenFromWaterSpells: Standard,
-                            // increasedDamageTakenFromEarthSpells: Standard,
-                            // decreasedDamageTakenFromEarthSpells: Standard,
-                            // increasedDamageTakenFromFireSpells: Standard,
-                            // decreasedDamageTakenFromFireSpells: Standard,
-
-                            // const monadSpecies = ['demon', 'undead', 'Beast', "SeaCreature", "MythicalCreature", "Elemental", "Human", "Dragon", "Orc", "Robot", "Goblin", "Elf"] as const;
+                            if (statKeys[m] === 'elfDamageReductionPerc') {
+                              newModifiers['decreasedDamageTakenFromElfs'] = Math.floor(tempStats[statKeys[m]])
+                            }
+                            if (statKeys[m] === 'goblinDamageReductionPerc') {
+                              newModifiers['decreasedDamageTakenFromGoblins'] = Math.floor(tempStats[statKeys[m]])
+                            }
+                            if (statKeys[m] === 'robotDamageReductionPerc') {
+                              newModifiers['decreasedDamageTakenFromRobots'] = Math.floor(tempStats[statKeys[m]])
+                            }
+                            if (statKeys[m] === 'orcDamageReductionPerc') {
+                              newModifiers['decreasedDamageTakenFromOrcs'] = Math.floor(tempStats[statKeys[m]])
+                            }
+                            if (statKeys[m] === 'dragonDamageReductionPerc') {
+                              newModifiers['decreasedDamageTakenFromDragons'] = Math.floor(tempStats[statKeys[m]])
+                            }
+                            if (statKeys[m] === 'humanDamageReductionPerc') {
+                              newModifiers['decreasedDamageTakenFromHumans'] = Math.floor(tempStats[statKeys[m]])
+                            }
+                            if (statKeys[m] === 'elementalDamageReductionPerc') {
+                              newModifiers['decreasedDamageTakenFromElementals'] = Math.floor(tempStats[statKeys[m]])
+                            }
+                            if (statKeys[m] === 'mythicalcreatureDamageReductionPerc') {
+                              newModifiers['decreasedDamageTakenFromMythicalCreatures'] = Math.floor(tempStats[statKeys[m]])
+                            }
+                            if (statKeys[m] === 'seacreatureDamageReductionPerc') {
+                              newModifiers['decreasedDamageTakenFromSeaCreatures'] = Math.floor(tempStats[statKeys[m]])
+                            }
+                            if (statKeys[m] === 'beastDamageReductionPerc') {
+                              newModifiers['decreasedDamageTakenFromBeasts'] = Math.floor(tempStats[statKeys[m]])
+                            }
                             if (statKeys[m] === 'demonDamageReductionPerc') {
                               newModifiers['decreasedDamageTakenFromDemons'] = Math.floor(tempStats[statKeys[m]])
                             }
@@ -1017,9 +1012,11 @@ export async function setup(ctx: Modding.ModContext) {
                               newModifiers['decreasedDamageTakenFromUndead'] = Math.floor(tempStats[statKeys[m]])
                             }
                           }
-                          // 'stabAttackBonus' | 'slashAttackBonus' | 'blockAttackBonus' | 'rangedAttackBonus' | 'magicAttackBonus' | 'meleeStrengthBonus' | 'rangedStrengthBonus' | 'magicDamageBonus' | 'meleeDefenceBonus' | 'rangedDefenceBonus' | 'magicDefenceBonus' | 'damageReduction' | 'summoningMaxhit' 
-
-                          // 'MP'  'MPPerc'  'endurancePerc' | 'willpowerPerc' | 'dexterityPerc' | 'sensePerc' | 'charismaPerc'  'magicDamageReductionPerc' | 'physicalDamageReductionPerc'  'manaRegenPerc';
+                          // diseaseResistancePerc
+                          // lightningResistancePerc
+                          // manaRegenPerc
+                          // manaRegenPerc
+                          // lightningIncreasedDamage
                           if (statKeys[m] === 'controlUndead') {
                             newModifiers['increasedSummoningMaxHit'] = Math.floor(tempStats[statKeys[m]]) * 10
                           }
@@ -1039,7 +1036,7 @@ export async function setup(ctx: Modding.ModContext) {
                           if (statKeys[m] === 'HP' || statKeys[m] === 'vitality') {
                             newModifiers['increasedFlatMaxHitpoints'] = (newModifiers['increasedFlatMaxHitpoints'] || 0) + Math.floor(tempStats[statKeys[m]] / 10)
                           }
-                          else if (statKeys[m] === 'HPPerc' || statKeys[m] === 'vitalityPerc') {
+                          if (statKeys[m] === 'HPPerc' || statKeys[m] === 'vitalityPerc') {
                             newModifiers['increasedMaxHitpoints'] = (newModifiers['increasedMaxHitpoints'] || 0) + Math.floor(tempStats[statKeys[m]])
                           }
                           if (statKeys[m] === 'meleeDefenceBonus') {
@@ -1056,35 +1053,35 @@ export async function setup(ctx: Modding.ModContext) {
                               }
                             }
                           }
-                          else if (statKeys[m] === 'strength') {
+                          if (statKeys[m] === 'strength') {
                             for (let q = 0; q < newequipmentStats.length; q++) {
                               if (newequipmentStats[q].key === 'meleeStrengthBonus' || newequipmentStats[q].key === 'rangedStrengthBonus') {
                                 newequipmentStats[q].value = newequipmentStats[q].value + Math.floor(tempStats[statKeys[m]] * 10)
                               }
                             }
                           }
-                          else if (statKeys[m] === 'endurance') {
+                          if (statKeys[m] === 'endurance') {
                             for (let q = 0; q < newequipmentStats.length; q++) {
                               if (newequipmentStats[q].key === 'meleeDefenceBonus' || newequipmentStats[q].key === 'rangedDefenceBonus') {
                                 newequipmentStats[q].value = newequipmentStats[q].value + Math.floor(tempStats[statKeys[m]] * 2)
                               }
                             }
                           }
-                          else if (statKeys[m] === 'physicalDamageReduction') {
+                          if (statKeys[m] === 'physicalDamageReduction') {
                             for (let q = 0; q < newequipmentStats.length; q++) {
                               if (newequipmentStats[q].key === 'meleeDefenceBonus' || newequipmentStats[q].key === 'rangedDefenceBonus') {
                                 newequipmentStats[q].value = newequipmentStats[q].value + Math.floor(tempStats[statKeys[m]] * 2)
                               }
                             }
                           }
-                          else if (statKeys[m] === 'willpower' || statKeys[m] === 'magicDamageReduction') {
+                          if (statKeys[m] === 'willpower' || statKeys[m] === 'magicDamageReduction') {
                             for (let q = 0; q < newequipmentStats.length; q++) {
                               if (newequipmentStats[q].key === 'magicDefenceBonus') {
                                 newequipmentStats[q].value = Math.floor(tempStats[statKeys[m]])
                               }
                             }
                           }
-                          else if (statKeys[m] === 'magic') {
+                          if (statKeys[m] === 'magic') {
                             for (let q = 0; q < newequipmentStats.length; q++) {
                               if (newequipmentStats[q].key === 'magicAttackBonus') {
                                 newequipmentStats[q].value = Math.floor(tempStats[statKeys[m]] * 3)
@@ -1094,21 +1091,21 @@ export async function setup(ctx: Modding.ModContext) {
                               }
                             }
                           }
-                          else if (statKeys[m] === 'dexterity') {
+                          if (statKeys[m] === 'dexterity') {
                             for (let q = 0; q < newequipmentStats.length; q++) {
                               if (newequipmentStats[q].key === 'rangedAttackBonus' || newequipmentStats[q].key === 'rangedDefenceBonus') {
                                 newequipmentStats[q].value = Math.floor(tempStats[statKeys[m]])
                               }
                             }
                           }
-                          else if (statKeys[m] === 'sense') {
+                          if (statKeys[m] === 'sense') {
                             for (let q = 0; q < newequipmentStats.length; q++) {
                               if (newequipmentStats[q].key === 'damageReduction') {
                                 newequipmentStats[q].value = Math.floor(tempStats[statKeys[m]])
                               }
                             }
                           }
-                          else if (statKeys[m] === 'charisma') {
+                          if (statKeys[m] === 'charisma') {
                             for (let q = 0; q < newequipmentStats.length; q++) {
                               if (newequipmentStats[q].key === 'summoningMaxhit') {
                                 newequipmentStats[q].value = Math.floor(tempStats[statKeys[m]])
@@ -1117,7 +1114,6 @@ export async function setup(ctx: Modding.ModContext) {
                           }
                         }
                       }
-
                       for (let w = 0; w < newequipmentStats.length; w++) {
                         if (newequipmentStats[w].value > 0) {
                           newequipmentStatsFinal.push(newequipmentStats[w])

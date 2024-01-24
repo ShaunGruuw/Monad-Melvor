@@ -2232,7 +2232,7 @@ export const ItemList: monadItemList = {
       "Magic: +2, Disease resistance + 20%, Mana regeneration + 20%, blessing of 建御雷 [Takemikazuchi].",
     image: "img/owl.jpg",
     rating: "unique",
-    stats: { magic: 2, diseaseResistancePerc: 20, manaRegenPerc: 20, lightningResistancePerc: 20, lightningCostPercg: 15 },
+    stats: { magic: 2, diseaseResistancePerc: 20, manaRegenPerc: 20, lightningResistancePerc: 20, lightningCostPerc: 15 },
     long: "Blessing of 建御雷 [Takemikazuchi]: Resist lightning +20%, Lightning cost - 15%, Lightning power +20%.", // Price since it was shown In a shop.
     note: "",
     sellsFor: 1,
