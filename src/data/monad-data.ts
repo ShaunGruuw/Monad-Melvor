@@ -1221,7 +1221,7 @@ export const ItemList: monadItemList = {
   "Whale Skin": {
     name: "Whale Skin",
     description: "Coating boats to go faster.",
-    image: "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fpreview.redd.it%2Fomnyzp2yoqt21.png",
+    image: "https://i.redd.it/eyoqcw8tm0u21.png",
     rating: "normal",
     long: "", // Price since it was shown In a shop.
     note: "",
