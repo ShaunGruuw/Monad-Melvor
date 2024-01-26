@@ -1399,7 +1399,7 @@ export async function setup(ctx: Modding.ModContext) {
                     } else {
                       monsterId = `${_namespace + ':' + monster.id}`
                     }
-                    if (monsterId) {
+                    if (monsterId && !monster.isBoss) {
                       itemPackage.dungeons.modify({
                         "id": `${_namespace}:Monad_Dungeon`,
                         "monsters": {
