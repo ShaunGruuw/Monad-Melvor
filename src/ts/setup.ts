@@ -43,6 +43,45 @@ function calculateRewardsMax(CL = 1, maxLimit = 1) {
   return ans > maxLimit ? maxLimit : Math.floor(ans);
 }
 
+function getMagicSpell(magicLevel: number, isDragon = false) {
+  // game.standardSpells
+  // spell = game.standardSpells.getObjectByID("runescapeEncountersInMelvor:Storm_Of_Armadyl")
+  // spell.requirements []
+  // spell.requiredItem {}
+  // spell.level
+    const spells = {
+      1: "melvorD:WindStrike",
+      3: "melvorD:WaterStrike",
+      6: "melvorD:EarthStrike",
+      10: "melvorD:FireStrike",
+      14: "melvorD:WindBolt",
+      16: "melvorD:WaterBolt",
+      19: "melvorD:EarthBolt",
+      23: "melvorD:FireBolt",
+      28: "melvorD:WindBlast",
+      30: "melvorD:WaterBlast",
+      33: "melvorD:EarthBlast",
+      37: "melvorD:FireBlast",
+      43: "melvorD:WindWave",
+      45: "melvorD:WaterWave",
+      48: "melvorD:EarthWave",
+      52: "melvorD:FireWave",
+      57: "melvorD:WindSurge",
+      61: "melvorD:WaterSurge",
+      64: "melvorD:EarthSurge",
+      68: "melvorD:FireSurge"
+    }
+    if(isDragon || magicLevel > 67) {
+      return "melvorD:FireSurge"
+    }
+    const counts = Object.keys(spells)
+    const output = counts.reduce((prev, curr) => Math.abs(curr - magicLevel) < Math.abs(prev - magicLevel) ? curr : prev) 
+    return spells[output]
+}
+
+// function modifyMaxHit(monster) {
+//   return Math.floor(numberMultiplier * monster.selectedSpell.maxHit * (1 + 0 / 100 ) * (1+ (monster.levels.magic +1)/200))
+// }
 
 export async function setup(ctx: Modding.ModContext) {
   const _namespace = "monad"
@@ -293,7 +332,7 @@ export async function setup(ctx: Modding.ModContext) {
                   },
                   "canSlayer": true,
                   "isBoss": false,
-                  "selectedSpell": "melvorD:WindStrike",
+                  "selectedSpell": getMagicSpell(Math.floor(Math.pow(1.5, parseInt(DnDmonsters[index].INT)))),
                   "pet": {
                     "id": _namespace + ":" + "test_pet",
                     "quantity": 3
@@ -615,6 +654,7 @@ export async function setup(ctx: Modding.ModContext) {
                 )
                 if (attackType['Magic'] > attackType['Attack']) {
                   newMonster["attackType"] = "magic"
+                  newMonster[selectedSpell] = getMagicSpell(newMonster.levels.Magic)
                 } else {
                   Math.random() < 0.5 ? newMonster["attackType"] = "ranged" : newMonster["attackType"] = "melee"
                 }
