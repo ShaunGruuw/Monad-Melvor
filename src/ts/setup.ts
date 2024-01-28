@@ -1051,12 +1051,37 @@ export async function setup(ctx: Modding.ModContext) {
                             if (statKeys[m] === 'undeadDamageReductionPerc') {
                               newModifiers['decreasedDamageTakenFromUndead'] = Math.floor(tempStats[statKeys[m]])
                             }
+                            if (statKeys[m] === 'lightningResistancePerc') {
+                              newModifiers['decreasedDamageTakenFromFireSpells'] = Math.floor(tempStats[statKeys[m]])
+                            }
+                          } 
+                          //  'Enchanting' | 'SpellSpeed' | 'swimSpeed' | 'stealthInShadowsPerc' | 'controlPlants' | 'command'
+                          // underwaterBreathing
+                          // allSkillCooldownPerc
+                          // iceCostPerc
+                          // allCostPerc
+                          // lightningCostPerc
+                          if (statKeys[m] === 'windIncreasedDamage') {
+                            newModifiers['increasedMaxWaterSpellDmg'] = Math.floor(tempStats[statKeys[m]])
                           }
-                          // diseaseResistancePerc
-                          // lightningResistancePerc
-                          // manaRegenPerc
-                          // manaRegenPerc
-                          // lightningIncreasedDamage
+                          if (statKeys[m] === 'windIncreasedDamage') {
+                            newModifiers['increasedMaxAirSpellDmg'] = Math.floor(tempStats[statKeys[m]])
+                          }
+                          if (statKeys[m] === 'blockPerc') {
+                            newModifiers['increasedChanceToDodge'] = Math.floor(tempStats[statKeys[m]])
+                          }
+                          if (statKeys[m] === 'manaRegenPerc') {
+                            newModifiers['increasedHitpointRegeneration'] = Math.floor(tempStats[statKeys[m]])
+                          }
+                          if (statKeys[m] === 'lightningIncreasedDamage') {
+                            newModifiers['increasedMaxFireSpellDmg'] = Math.floor(tempStats[statKeys[m]])
+                          }
+                          if (statKeys[m] === 'diseaseResistance') {
+                            newModifiers['poisonImmunity'] = Math.floor(tempStats[statKeys[m]])
+                          }
+                          if (statKeys[m] === 'diseaseResistancePerc') {
+                            newModifiers['poisonImmunity'] = Math.floor(tempStats[statKeys[m]])
+                          }
                           if (statKeys[m] === 'controlUndead') {
                             newModifiers['increasedSummoningMaxHit'] = Math.floor(tempStats[statKeys[m]]) * 10
                           }
