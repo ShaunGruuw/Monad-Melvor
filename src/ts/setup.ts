@@ -316,11 +316,11 @@ export async function setup(ctx: Modding.ModContext) {
                   "lootChance": 100,
                   "lootTable": [
                     {
-                      "itemID": "melvorD:Steel_Arrows",
+                      "itemID": "dnd:dndCoin",
                       "maxQuantity": 10,
                       "minQuantity": 5,
                       "weight": 100
-                    },
+                    }
                   ],
                   "gpDrops": {
                     "min": Math.floor(Math.pow(1.1, parseInt(DnDmonsters[index].Challenge))),
