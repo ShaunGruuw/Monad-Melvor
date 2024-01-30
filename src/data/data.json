@@ -66,7 +66,7 @@
         "levels": {
           "Attack": 2,
           "Defence": 2,
-          "Hitpoints": 3,
+          "Hitpoints": 3333,
           "Magic": 1,
           "Ranged": 1,
           "Strength": 3
