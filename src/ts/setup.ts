@@ -1766,12 +1766,12 @@ export async function setup(ctx: Modding.ModContext) {
           cmim.registerOrUpdateType("Ooze", "Oozes", "https://cdn.melvor.net/core/v018/assets/media/monsters/plant.png", OozesList, true);
           cmim.registerOrUpdateType("Aberration", "Aberrations", "https://cdn.melvor.net/core/v018/assets/media/monsters/plant.png", AberrationsList, true);
 
-          cmim.registerOrUpdateType("Celestial", "Celestials", "https://cdn.melvor.net/core/v018/assets/media/monsters/plant.png", CelestialsList, true);
+          cmim.registerOrUpdateType("Angel", "Angels", "https://cdn.melvor.net/core/v018/assets/media/monsters/plant.png", CelestialsList, true);
           cmim.registerOrUpdateType("Construct", "Constructs", "https://cdn.melvor.net/core/v018/assets/media/monsters/plant.png", ConstructsList, true);
           cmim.registerOrUpdateType("Fey", "Feys", "https://cdn.melvor.net/core/v018/assets/media/monsters/plant.png", FeyList, true);
-          cmim.registerOrUpdateType("Fiend", "Fiends", "https://cdn.melvor.net/core/v018/assets/media/monsters/plant.png", FiendList, true);
+          cmim.registerOrUpdateType("Demon", "Demons", "https://cdn.melvor.net/core/v018/assets/media/monsters/plant.png", FiendList, true);
           cmim.registerOrUpdateType("Giant", "Giants", "https://cdn.melvor.net/core/v018/assets/media/monsters/plant.png", GiantsList, true);
-          cmim.registerOrUpdateType("monstrosity", "Monstrosities", "https://cdn.melvor.net/core/v018/assets/media/monsters/plant.png", MonstrositiesList, true);
+          // cmim.registerOrUpdateType("monstrosity", "Monstrosities", "https://cdn.melvor.net/core/v018/assets/media/monsters/plant.png", MonstrositiesList, true);
           // mod.api.customModifiersInMelvor.getMonstersOfType('Ooze')
 
           cmim.forceBaseModTypeActive("Dragon");
