@@ -105,6 +105,7 @@ export async function setup(ctx: Modding.ModContext) {
         // const Abyssal = mod.manager.getLoadedModList().includes('Abyssal Rift')
         // const Pokeworld = mod.manager.getLoadedModList().includes('Pokeworld (Generation 1)')
         // const Runescape = mod.manager.getLoadedModList().includes('Runescape Encounters in Melvor')
+        // "(Skill) Classes and Species"
         const DragonList: Array<string> = [
         ]
         const HumansList: Array<string> = [
