@@ -520,7 +520,16 @@ export const ItemList: monadItemList = {
       {
         "key": "damageReduction",
         "value": 10
-      }
+      },
+      { "key": 'stabAttackBonus', "value": 0 },
+      { "key": 'slashAttackBonus', "value": 0 },
+      { "key": 'blockAttackBonus', "value": 0 },
+      { "key": 'rangedAttackBonus', "value": 0 },
+      { "key": 'magicAttackBonus', "value": 0 },
+      { "key": 'meleeStrengthBonus', "value": 0 },
+      { "key": 'rangedStrengthBonus', "value": 0 },
+      { "key": 'magicDamageBonus', "value": 0 },
+      { "key": 'summoningMaxhit', "value": 0 }
     ],
     validSlots: ["Platebody"],
     occupiesSlots: [],
@@ -556,7 +565,17 @@ export const ItemList: monadItemList = {
       {
         "key": "damageReduction",
         "value": 10
-      }
+      },
+
+      { "key": 'stabAttackBonus', "value": 0 },
+      { "key": 'slashAttackBonus', "value": 0 },
+      { "key": 'blockAttackBonus', "value": 0 },
+      { "key": 'rangedAttackBonus', "value": 0 },
+      { "key": 'magicAttackBonus', "value": 0 },
+      { "key": 'meleeStrengthBonus', "value": 0 },
+      { "key": 'rangedStrengthBonus', "value": 0 },
+      { "key": 'magicDamageBonus', "value": 0 },
+      { "key": 'summoningMaxhit', "value": 0 }
     ],
     validSlots: ["Helmet"],
     occupiesSlots: [],
@@ -626,7 +645,16 @@ export const ItemList: monadItemList = {
       {
         "key": "damageReduction",
         "value": 10
-      }
+      },
+      { "key": 'stabAttackBonus', "value": 0 },
+      { "key": 'slashAttackBonus', "value": 0 },
+      { "key": 'blockAttackBonus', "value": 0 },
+      { "key": 'rangedAttackBonus', "value": 0 },
+      { "key": 'magicAttackBonus', "value": 0 },
+      { "key": 'meleeStrengthBonus', "value": 0 },
+      { "key": 'rangedStrengthBonus', "value": 0 },
+      { "key": 'magicDamageBonus', "value": 0 },
+      { "key": 'summoningMaxhit', "value": 0 }
     ],
     validSlots: ["Boots"],
     occupiesSlots: [],
@@ -666,7 +694,16 @@ export const ItemList: monadItemList = {
       {
         "key": "meleeStrengthBonus",
         "value": 300
-      }
+      },
+      { "key": 'rangedAttackBonus', "value": 0 },
+      { "key": 'magicAttackBonus', "value": 0 },
+      { "key": 'rangedStrengthBonus', "value": 0 },
+      { "key": 'magicDamageBonus', "value": 0 },
+      { "key": 'meleeDefenceBonus', "value": 0 },
+      { "key": 'rangedDefenceBonus', "value": 0 },
+      { "key": 'magicDefenceBonus', "value": 0 },
+      { "key": 'damageReduction', "value": 0 },
+      { "key": 'summoningMaxhit', "value": 0 }
     ],
     validSlots: ["Weapon"],
     occupiesSlots: [], // "Shield" if two handed
@@ -702,7 +739,16 @@ export const ItemList: monadItemList = {
       {
         "key": "damageReduction",
         "value": 10
-      }
+      },
+      { "key": 'stabAttackBonus', "value": 0 },
+      { "key": 'slashAttackBonus', "value": 0 },
+      { "key": 'blockAttackBonus', "value": 0 },
+      { "key": 'rangedAttackBonus', "value": 0 },
+      { "key": 'magicAttackBonus', "value": 0 },
+      { "key": 'meleeStrengthBonus', "value": 0 },
+      { "key": 'rangedStrengthBonus', "value": 0 },
+      { "key": 'magicDamageBonus', "value": 0 },
+      { "key": 'summoningMaxhit', "value": 0 }
     ],
     validSlots: ["Shield"],
     occupiesSlots: [],
@@ -749,7 +795,14 @@ export const ItemList: monadItemList = {
       {
         "key": "meleeStrengthBonus",
         "value": 20
-      }
+      },
+
+      { "key": 'rangedAttackBonus', "value": 0 },
+      { "key": 'magicAttackBonus', "value": 0 },
+      { "key": 'rangedStrengthBonus', "value": 0 },
+      { "key": 'magicDefenceBonus', "value": 0 },
+      { "key": 'damageReduction', "value": 0 },
+      { "key": 'summoningMaxhit', "value": 0 }
     ],
     validSlots: ["Cape"],
     occupiesSlots: [],
@@ -778,7 +831,21 @@ export const ItemList: monadItemList = {
     type: "Equipment",
     image: "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fi.pinimg.com%2Foriginals%2Faa%2Fce%2F84%2Faace8423095c3544a43b45708415ed82.png",
     // melvor
-
+    equipmentStats:[
+      { "key": 'stabAttackBonus', "value": 0 },
+      { "key": 'slashAttackBonus', "value": 0 },
+      { "key": 'blockAttackBonus', "value": 0 },
+      { "key": 'rangedAttackBonus', "value": 0 },
+      { "key": 'magicAttackBonus', "value": 0 },
+      { "key": 'meleeStrengthBonus', "value": 0 },
+      { "key": 'rangedStrengthBonus', "value": 0 },
+      { "key": 'magicDamageBonus', "value": 0 },
+      { "key": 'meleeDefenceBonus', "value": 0 },
+      { "key": 'rangedDefenceBonus', "value": 0 },
+      { "key": 'magicDefenceBonus', "value": 0 },
+      { "key": 'damageReduction', "value": 0 },
+      { "key": 'summoningMaxhit', "value": 0 }
+    ],
     validSlots: ["Amulet"],
     occupiesSlots: [],
     equipRequirements: [],
@@ -801,7 +868,21 @@ export const ItemList: monadItemList = {
     type: "Equipment",
     image: "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fi.pinimg.com%2Foriginals%2Faa%2F43%2Fb9%2Faa43b99db20d309cdb7389b15cab69cc.png",
     // melvor
-
+    equipmentStats:[
+      { "key": 'stabAttackBonus', "value": 0 },
+      { "key": 'slashAttackBonus', "value": 0 },
+      { "key": 'blockAttackBonus', "value": 0 },
+      { "key": 'rangedAttackBonus', "value": 0 },
+      { "key": 'magicAttackBonus', "value": 0 },
+      { "key": 'meleeStrengthBonus', "value": 0 },
+      { "key": 'rangedStrengthBonus', "value": 0 },
+      { "key": 'magicDamageBonus', "value": 0 },
+      { "key": 'meleeDefenceBonus', "value": 0 },
+      { "key": 'rangedDefenceBonus', "value": 0 },
+      { "key": 'magicDefenceBonus', "value": 0 },
+      { "key": 'damageReduction', "value": 0 },
+      { "key": 'summoningMaxhit', "value": 0 }
+    ],
     validSlots: ["Ring", "Passive"],
     occupiesSlots: [],
     equipRequirements: [],
@@ -824,7 +905,21 @@ export const ItemList: monadItemList = {
     type: "Equipment",
     image: "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fcdn1.iconfinder.com%2Fdata%2Ficons%2Fdress-up%2F200%2Fdress_ear_earrings_jewel_rings-512.png",
     // melvor
-
+    equipmentStats:[
+      { "key": 'stabAttackBonus', "value": 0 },
+      { "key": 'slashAttackBonus', "value": 0 },
+      { "key": 'blockAttackBonus', "value": 0 },
+      { "key": 'rangedAttackBonus', "value": 0 },
+      { "key": 'magicAttackBonus', "value": 0 },
+      { "key": 'meleeStrengthBonus', "value": 0 },
+      { "key": 'rangedStrengthBonus', "value": 0 },
+      { "key": 'magicDamageBonus', "value": 0 },
+      { "key": 'meleeDefenceBonus', "value": 0 },
+      { "key": 'rangedDefenceBonus', "value": 0 },
+      { "key": 'magicDefenceBonus', "value": 0 },
+      { "key": 'damageReduction', "value": 0 },
+      { "key": 'summoningMaxhit', "value": 0 }
+    ],
     validSlots: ["Ring", "Passive"],
     occupiesSlots: [],
     equipRequirements: [],
@@ -847,7 +942,21 @@ export const ItemList: monadItemList = {
     type: "Equipment",
     image: "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fcdn.shopify.com%2Fs%2Ffiles%2F1%2F0201%2F1744%2Fproducts%2FStrata.Wide.Realtree.GreenOrange.Angle.png",
     // melvor
-
+    equipmentStats:[
+      { "key": 'stabAttackBonus', "value": 0 },
+      { "key": 'slashAttackBonus', "value": 0 },
+      { "key": 'blockAttackBonus', "value": 0 },
+      { "key": 'rangedAttackBonus', "value": 0 },
+      { "key": 'magicAttackBonus', "value": 0 },
+      { "key": 'meleeStrengthBonus', "value": 0 },
+      { "key": 'rangedStrengthBonus', "value": 0 },
+      { "key": 'magicDamageBonus', "value": 0 },
+      { "key": 'meleeDefenceBonus', "value": 0 },
+      { "key": 'rangedDefenceBonus', "value": 0 },
+      { "key": 'magicDefenceBonus', "value": 0 },
+      { "key": 'damageReduction', "value": 0 },
+      { "key": 'summoningMaxhit', "value": 0 }
+    ],
     validSlots: ["Ring", "Passive"],
     occupiesSlots: [],
     equipRequirements: [],
@@ -959,7 +1068,8 @@ export const ItemList: monadItemList = {
       {
         "key": "damageReduction",
         "value": 0
-      }
+      },
+      { "key": 'summoningMaxhit', "value": 0 }
     ],
     validSlots: ["Platebody"],
     occupiesSlots: [],
@@ -1001,7 +1111,16 @@ export const ItemList: monadItemList = {
       {
         "key": "magicAttackBonus",
         "value": 10
-      }
+      },
+
+      
+      { "key": 'stabAttackBonus', "value": 0 },
+      { "key": 'slashAttackBonus', "value": 0 },
+      { "key": 'blockAttackBonus', "value": 0 },
+      { "key": 'meleeStrengthBonus', "value": 0 },
+      { "key": 'rangedStrengthBonus', "value": 0 },
+      { "key": 'magicDamageBonus', "value": 0 },
+      { "key": 'summoningMaxhit', "value": 0 }
     ],
     validSlots: ["Helmet"],
     occupiesSlots: [],
@@ -1020,7 +1139,21 @@ export const ItemList: monadItemList = {
     note: "Ch5, kings ring",
     type: "Equipment",
     // melvor
-
+    equipmentStats:[
+      { "key": 'stabAttackBonus', "value": 0 },
+      { "key": 'slashAttackBonus', "value": 0 },
+      { "key": 'blockAttackBonus', "value": 0 },
+      { "key": 'rangedAttackBonus', "value": 0 },
+      { "key": 'magicAttackBonus', "value": 0 },
+      { "key": 'meleeStrengthBonus', "value": 0 },
+      { "key": 'rangedStrengthBonus', "value": 0 },
+      { "key": 'magicDamageBonus', "value": 0 },
+      { "key": 'meleeDefenceBonus', "value": 0 },
+      { "key": 'rangedDefenceBonus', "value": 0 },
+      { "key": 'magicDefenceBonus', "value": 0 },
+      { "key": 'damageReduction', "value": 0 },
+      { "key": 'summoningMaxhit', "value": 0 }
+    ],
     validSlots: ["Ring"],
     occupiesSlots: [],
     equipRequirements: [],
@@ -1038,7 +1171,21 @@ export const ItemList: monadItemList = {
     note: "Ch11, queens ring",
     type: "Equipment",
     // melvor
-
+    equipmentStats:[
+      { "key": 'stabAttackBonus', "value": 0 },
+      { "key": 'slashAttackBonus', "value": 0 },
+      { "key": 'blockAttackBonus', "value": 0 },
+      { "key": 'rangedAttackBonus', "value": 0 },
+      { "key": 'magicAttackBonus', "value": 0 },
+      { "key": 'meleeStrengthBonus', "value": 0 },
+      { "key": 'rangedStrengthBonus', "value": 0 },
+      { "key": 'magicDamageBonus', "value": 0 },
+      { "key": 'meleeDefenceBonus', "value": 0 },
+      { "key": 'rangedDefenceBonus', "value": 0 },
+      { "key": 'magicDefenceBonus', "value": 0 },
+      { "key": 'damageReduction', "value": 0 },
+      { "key": 'summoningMaxhit', "value": 0 }
+    ],
     validSlots: ["Ring"],
     occupiesSlots: [],
     equipRequirements: [],
@@ -1056,7 +1203,21 @@ export const ItemList: monadItemList = {
     note: "Ch11",
     type: "Equipment",
     // melvor
-
+    equipmentStats:[
+      { "key": 'stabAttackBonus', "value": 0 },
+      { "key": 'slashAttackBonus', "value": 0 },
+      { "key": 'blockAttackBonus', "value": 0 },
+      { "key": 'rangedAttackBonus', "value": 0 },
+      { "key": 'magicAttackBonus', "value": 0 },
+      { "key": 'meleeStrengthBonus', "value": 0 },
+      { "key": 'rangedStrengthBonus', "value": 0 },
+      { "key": 'magicDamageBonus', "value": 0 },
+      { "key": 'meleeDefenceBonus', "value": 0 },
+      { "key": 'rangedDefenceBonus', "value": 0 },
+      { "key": 'magicDefenceBonus', "value": 0 },
+      { "key": 'damageReduction', "value": 0 },
+      { "key": 'summoningMaxhit', "value": 0 }
+    ],
     validSlots: ["Amulet"],
     occupiesSlots: [],
     equipRequirements: [],
@@ -1102,7 +1263,14 @@ export const ItemList: monadItemList = {
       {
         "key": "rangedAttackBonus",
         "value": -10
-      }
+      },
+      { "key": 'blockAttackBonus', "value": 0 },
+      { "key": 'magicAttackBonus', "value": 0 },
+      { "key": 'meleeStrengthBonus', "value": 0 },
+      { "key": 'rangedStrengthBonus', "value": 0 },
+      { "key": 'magicDamageBonus', "value": 0 },
+      { "key": 'magicDefenceBonus', "value": 0 },
+      { "key": 'summoningMaxhit', "value": 0 }
     ],
     validSlots: ["Helmet"],
     occupiesSlots: [],
@@ -1121,7 +1289,21 @@ export const ItemList: monadItemList = {
     note: "Ch11, Tiara",
     type: "Equipment",
     // melvor
-
+    equipmentStats:[
+      { "key": 'stabAttackBonus', "value": 0 },
+      { "key": 'slashAttackBonus', "value": 0 },
+      { "key": 'blockAttackBonus', "value": 0 },
+      { "key": 'rangedAttackBonus', "value": 0 },
+      { "key": 'magicAttackBonus', "value": 0 },
+      { "key": 'meleeStrengthBonus', "value": 0 },
+      { "key": 'rangedStrengthBonus', "value": 0 },
+      { "key": 'magicDamageBonus', "value": 0 },
+      { "key": 'meleeDefenceBonus', "value": 0 },
+      { "key": 'rangedDefenceBonus', "value": 0 },
+      { "key": 'magicDefenceBonus', "value": 0 },
+      { "key": 'damageReduction', "value": 0 },
+      { "key": 'summoningMaxhit', "value": 0 }
+    ],
     validSlots: ["Passive"],
     occupiesSlots: [],
     equipRequirements: [],
@@ -1143,7 +1325,21 @@ export const ItemList: monadItemList = {
     sellsFor: 1,
     "category": "Combat",
     // melvor
-
+    equipmentStats:[
+      { "key": 'stabAttackBonus', "value": 0 },
+      { "key": 'slashAttackBonus', "value": 0 },
+      { "key": 'blockAttackBonus', "value": 0 },
+      { "key": 'rangedAttackBonus', "value": 0 },
+      { "key": 'magicAttackBonus', "value": 0 },
+      { "key": 'meleeStrengthBonus', "value": 0 },
+      { "key": 'rangedStrengthBonus', "value": 0 },
+      { "key": 'magicDamageBonus', "value": 0 },
+      { "key": 'meleeDefenceBonus', "value": 0 },
+      { "key": 'rangedDefenceBonus', "value": 0 },
+      { "key": 'magicDefenceBonus', "value": 0 },
+      { "key": 'damageReduction', "value": 0 },
+      { "key": 'summoningMaxhit', "value": 0 }
+    ],
     validSlots: ["Passive"],
     occupiesSlots: [],
     equipRequirements: [],
@@ -1162,7 +1358,21 @@ export const ItemList: monadItemList = {
     note: "Ch11, Quill",
     type: "Equipment",
     // melvor
-
+    equipmentStats:[
+      { "key": 'stabAttackBonus', "value": 0 },
+      { "key": 'slashAttackBonus', "value": 0 },
+      { "key": 'blockAttackBonus', "value": 0 },
+      { "key": 'rangedAttackBonus', "value": 0 },
+      { "key": 'magicAttackBonus', "value": 0 },
+      { "key": 'meleeStrengthBonus', "value": 0 },
+      { "key": 'rangedStrengthBonus', "value": 0 },
+      { "key": 'magicDamageBonus', "value": 0 },
+      { "key": 'meleeDefenceBonus', "value": 0 },
+      { "key": 'rangedDefenceBonus', "value": 0 },
+      { "key": 'magicDefenceBonus', "value": 0 },
+      { "key": 'damageReduction', "value": 0 },
+      { "key": 'summoningMaxhit', "value": 0 }
+    ],
     validSlots: ["Weapon"],
     occupiesSlots: [],
     equipRequirements: [],
@@ -1192,7 +1402,21 @@ export const ItemList: monadItemList = {
     sellsFor: 1,
     "category": "Combat",
     // melvor
-
+    equipmentStats:[
+      { "key": 'stabAttackBonus', "value": 0 },
+      { "key": 'slashAttackBonus', "value": 0 },
+      { "key": 'blockAttackBonus', "value": 0 },
+      { "key": 'rangedAttackBonus', "value": 0 },
+      { "key": 'magicAttackBonus', "value": 0 },
+      { "key": 'meleeStrengthBonus', "value": 0 },
+      { "key": 'rangedStrengthBonus', "value": 0 },
+      { "key": 'magicDamageBonus', "value": 0 },
+      { "key": 'meleeDefenceBonus', "value": 0 },
+      { "key": 'rangedDefenceBonus', "value": 0 },
+      { "key": 'magicDefenceBonus', "value": 0 },
+      { "key": 'damageReduction', "value": 0 },
+      { "key": 'summoningMaxhit', "value": 0 }
+    ],
     validSlots: ["Amulet"],
     occupiesSlots: [],
     equipRequirements: [],
@@ -1211,7 +1435,21 @@ export const ItemList: monadItemList = {
     "category": "Combat",
     type: "Equipment",
     // melvor
-
+    equipmentStats:[
+      { "key": 'stabAttackBonus', "value": 0 },
+      { "key": 'slashAttackBonus', "value": 0 },
+      { "key": 'blockAttackBonus', "value": 0 },
+      { "key": 'rangedAttackBonus', "value": 0 },
+      { "key": 'magicAttackBonus', "value": 0 },
+      { "key": 'meleeStrengthBonus', "value": 0 },
+      { "key": 'rangedStrengthBonus', "value": 0 },
+      { "key": 'magicDamageBonus', "value": 0 },
+      { "key": 'meleeDefenceBonus', "value": 0 },
+      { "key": 'rangedDefenceBonus', "value": 0 },
+      { "key": 'magicDefenceBonus', "value": 0 },
+      { "key": 'damageReduction', "value": 0 },
+      { "key": 'summoningMaxhit', "value": 0 }
+    ],
     validSlots: ["Amulet"],
     occupiesSlots: [],
     equipRequirements: [],
@@ -1319,7 +1557,13 @@ export const ItemList: monadItemList = {
       {
         "key": "rangedAttackBonus",
         "value": -10
-      }
+      },
+      { "key": 'blockAttackBonus', "value": 0 },
+      { "key": 'magicAttackBonus', "value": 0 },
+      { "key": 'meleeStrengthBonus', "value": 0 },
+      { "key": 'rangedStrengthBonus', "value": 0 },
+      { "key": 'magicDamageBonus', "value": 0 },
+      { "key": 'summoningMaxhit', "value": 0 }
     ],
     validSlots: ["Gloves"],
     occupiesSlots: [],
@@ -1368,7 +1612,13 @@ export const ItemList: monadItemList = {
       {
         "key": "rangedAttackBonus",
         "value": -10
-      }
+      },
+      { "key": 'blockAttackBonus', "value": 0 },
+      { "key": 'magicAttackBonus', "value": 0 },
+      { "key": 'meleeStrengthBonus', "value": 0 },
+      { "key": 'rangedStrengthBonus', "value": 0 },
+      { "key": 'magicDamageBonus', "value": 0 },
+      { "key": 'summoningMaxhit', "value": 0 }
     ],
     validSlots: ["Helmet"],
     occupiesSlots: [],
@@ -1405,7 +1655,16 @@ export const ItemList: monadItemList = {
       {
         "key": "damageReduction",
         "value": 5
-      }
+      },
+      { "key": 'stabAttackBonus', "value": 0 },
+      { "key": 'slashAttackBonus', "value": 0 },
+      { "key": 'blockAttackBonus', "value": 0 },
+      { "key": 'rangedAttackBonus', "value": 0 },
+      { "key": 'meleeStrengthBonus', "value": 0 },
+      { "key": 'rangedStrengthBonus', "value": 0 },
+      { "key": 'meleeDefenceBonus', "value": 0 },
+      { "key": 'rangedDefenceBonus', "value": 0 },
+      { "key": 'summoningMaxhit', "value": 0 }
     ],
     validSlots: ["Platebody"],
     occupiesSlots: [],
@@ -1454,7 +1713,13 @@ export const ItemList: monadItemList = {
       {
         "key": "rangedAttackBonus",
         "value": -10
-      }
+      },
+      { "key": 'blockAttackBonus', "value": 0 },
+      { "key": 'magicAttackBonus', "value": 0 },
+      { "key": 'meleeStrengthBonus', "value": 0 },
+      { "key": 'rangedStrengthBonus', "value": 0 },
+      { "key": 'magicDamageBonus', "value": 0 },
+      { "key": 'summoningMaxhit', "value": 0 }
     ],
     validSlots: ["Boots"],
     occupiesSlots: [],
@@ -1491,7 +1756,17 @@ export const ItemList: monadItemList = {
       {
         "key": "damageReduction",
         "value": 5
-      }
+      },
+      
+      { "key": 'stabAttackBonus', "value": 0 },
+      { "key": 'slashAttackBonus', "value": 0 },
+      { "key": 'blockAttackBonus', "value": 0 },
+      { "key": 'rangedAttackBonus', "value": 0 },
+      { "key": 'meleeStrengthBonus', "value": 0 },
+      { "key": 'rangedStrengthBonus', "value": 0 },
+      { "key": 'meleeDefenceBonus', "value": 0 },
+      { "key": 'rangedDefenceBonus', "value": 0 },
+      { "key": 'summoningMaxhit', "value": 0 }
     ],
     validSlots: ["Platelegs"],
     occupiesSlots: [],
@@ -1523,7 +1798,21 @@ export const ItemList: monadItemList = {
     "category": "Combat",
     type: "Equipment",
     // melvor
-
+    equipmentStats:[
+      { "key": 'stabAttackBonus', "value": 0 },
+      { "key": 'slashAttackBonus', "value": 0 },
+      { "key": 'blockAttackBonus', "value": 0 },
+      { "key": 'rangedAttackBonus', "value": 0 },
+      { "key": 'magicAttackBonus', "value": 0 },
+      { "key": 'meleeStrengthBonus', "value": 0 },
+      { "key": 'rangedStrengthBonus', "value": 0 },
+      { "key": 'magicDamageBonus', "value": 0 },
+      { "key": 'meleeDefenceBonus', "value": 0 },
+      { "key": 'rangedDefenceBonus', "value": 0 },
+      { "key": 'magicDefenceBonus', "value": 0 },
+      { "key": 'damageReduction', "value": 0 },
+      { "key": 'summoningMaxhit', "value": 0 }
+    ],
     validSlots: ["Amulet"],
     occupiesSlots: [],
     equipRequirements: [],
@@ -1592,7 +1881,21 @@ export const ItemList: monadItemList = {
     sellsFor: 1,
     "category": "Combat",
     // melvor
-
+    equipmentStats:[
+      { "key": 'stabAttackBonus', "value": 0 },
+      { "key": 'slashAttackBonus', "value": 0 },
+      { "key": 'blockAttackBonus', "value": 0 },
+      { "key": 'rangedAttackBonus', "value": 0 },
+      { "key": 'magicAttackBonus', "value": 0 },
+      { "key": 'meleeStrengthBonus', "value": 0 },
+      { "key": 'rangedStrengthBonus', "value": 0 },
+      { "key": 'magicDamageBonus', "value": 0 },
+      { "key": 'meleeDefenceBonus', "value": 0 },
+      { "key": 'rangedDefenceBonus', "value": 0 },
+      { "key": 'magicDefenceBonus', "value": 0 },
+      { "key": 'damageReduction', "value": 0 },
+      { "key": 'summoningMaxhit', "value": 0 }
+    ],
     validSlots: ["Ring"],
     occupiesSlots: [],
     equipRequirements: [],
@@ -1821,7 +2124,8 @@ export const ItemList: monadItemList = {
       {
         "key": "damageReduction",
         "value": 5
-      }
+      },
+      { "key": 'summoningMaxhit', "value": 0 }
     ],
     validSlots: ["Cape"],
     occupiesSlots: [],
@@ -1911,7 +2215,21 @@ export const ItemList: monadItemList = {
     "category": "Combat",
     type: "Equipment",
     // melvor
-
+    equipmentStats:[
+      { "key": 'stabAttackBonus', "value": 0 },
+      { "key": 'slashAttackBonus', "value": 0 },
+      { "key": 'blockAttackBonus', "value": 0 },
+      { "key": 'rangedAttackBonus', "value": 0 },
+      { "key": 'magicAttackBonus', "value": 0 },
+      { "key": 'meleeStrengthBonus', "value": 0 },
+      { "key": 'rangedStrengthBonus', "value": 0 },
+      { "key": 'magicDamageBonus', "value": 0 },
+      { "key": 'meleeDefenceBonus', "value": 0 },
+      { "key": 'rangedDefenceBonus', "value": 0 },
+      { "key": 'magicDefenceBonus', "value": 0 },
+      { "key": 'damageReduction', "value": 0 },
+      { "key": 'summoningMaxhit', "value": 0 }
+    ],
     validSlots: ["Ring"],
     occupiesSlots: [],
     equipRequirements: [],
@@ -1956,7 +2274,21 @@ export const ItemList: monadItemList = {
     "category": "Combat",
     type: "Equipment",
     // melvor
-
+    equipmentStats:[
+      { "key": 'stabAttackBonus', "value": 0 },
+      { "key": 'slashAttackBonus', "value": 0 },
+      { "key": 'blockAttackBonus', "value": 0 },
+      { "key": 'rangedAttackBonus', "value": 0 },
+      { "key": 'magicAttackBonus', "value": 0 },
+      { "key": 'meleeStrengthBonus', "value": 0 },
+      { "key": 'rangedStrengthBonus', "value": 0 },
+      { "key": 'magicDamageBonus', "value": 0 },
+      { "key": 'meleeDefenceBonus', "value": 0 },
+      { "key": 'rangedDefenceBonus', "value": 0 },
+      { "key": 'magicDefenceBonus', "value": 0 },
+      { "key": 'damageReduction', "value": 0 },
+      { "key": 'summoningMaxhit', "value": 0 }
+    ],
     validSlots: ["Ring"],
     occupiesSlots: [],
     equipRequirements: [],
@@ -2003,7 +2335,8 @@ export const ItemList: monadItemList = {
       {
         "key": "rangedAttackBonus",
         "value": -10
-      }
+      },
+      { "key": 'summoningMaxhit', "value": 0 }
     ],
     validSlots: ["Helmet"],
     occupiesSlots: [],
@@ -2023,7 +2356,21 @@ export const ItemList: monadItemList = {
     "category": "Combat",
     type: "Equipment",
     // melvor
-
+    equipmentStats:[
+      { "key": 'stabAttackBonus', "value": 0 },
+      { "key": 'slashAttackBonus', "value": 0 },
+      { "key": 'blockAttackBonus', "value": 0 },
+      { "key": 'rangedAttackBonus', "value": 0 },
+      { "key": 'magicAttackBonus', "value": 0 },
+      { "key": 'meleeStrengthBonus', "value": 0 },
+      { "key": 'rangedStrengthBonus', "value": 0 },
+      { "key": 'magicDamageBonus', "value": 0 },
+      { "key": 'meleeDefenceBonus', "value": 0 },
+      { "key": 'rangedDefenceBonus', "value": 0 },
+      { "key": 'magicDefenceBonus', "value": 0 },
+      { "key": 'damageReduction', "value": 0 },
+      { "key": 'summoningMaxhit', "value": 0 }
+    ],
     validSlots: ["Ring"],
     occupiesSlots: [],
     equipRequirements: [],
@@ -2090,7 +2437,8 @@ export const ItemList: monadItemList = {
       {
         "key": "damageReduction",
         "value": 0
-      }
+      },
+      { "key": 'summoningMaxhit', "value": 0 }
     ],
     validSlots: ["Gloves"],
     occupiesSlots: [],
@@ -2158,7 +2506,8 @@ export const ItemList: monadItemList = {
       {
         "key": "damageReduction",
         "value": 0
-      }
+      },
+      { "key": 'summoningMaxhit', "value": 0 }
     ],
     validSlots: ["Gloves"],
     occupiesSlots: [],
@@ -2206,7 +2555,13 @@ export const ItemList: monadItemList = {
       {
         "key": "rangedAttackBonus",
         "value": -10
-      }
+      },
+      { "key": 'blockAttackBonus', "value": 0 },
+      { "key": 'magicAttackBonus', "value": 0 },
+      { "key": 'meleeStrengthBonus', "value": 0 },
+      { "key": 'rangedStrengthBonus', "value": 0 },
+      { "key": 'magicDamageBonus', "value": 0 },
+      { "key": 'summoningMaxhit', "value": 0 }
     ],
     validSlots: ["Helmet"],
     occupiesSlots: [],
@@ -2267,7 +2622,13 @@ export const ItemList: monadItemList = {
       {
         "key": "rangedAttackBonus",
         "value": -10
-      }
+      },
+      { "key": 'blockAttackBonus', "value": 0 },
+      { "key": 'magicAttackBonus', "value": 0 },
+      { "key": 'meleeStrengthBonus', "value": 0 },
+      { "key": 'rangedStrengthBonus', "value": 0 },
+      { "key": 'magicDamageBonus', "value": 0 },
+      { "key": 'summoningMaxhit', "value": 0 }
     ],
     validSlots: ["Helmet"],
     occupiesSlots: [],
@@ -2287,7 +2648,21 @@ export const ItemList: monadItemList = {
       "category": "Combat",
       type: "Equipment",
       // melvor
-
+      equipmentStats:[
+        { "key": 'stabAttackBonus', "value": 0 },
+        { "key": 'slashAttackBonus', "value": 0 },
+        { "key": 'blockAttackBonus', "value": 0 },
+        { "key": 'rangedAttackBonus', "value": 0 },
+        { "key": 'magicAttackBonus', "value": 0 },
+        { "key": 'meleeStrengthBonus', "value": 0 },
+        { "key": 'rangedStrengthBonus', "value": 0 },
+        { "key": 'magicDamageBonus', "value": 0 },
+        { "key": 'meleeDefenceBonus', "value": 0 },
+        { "key": 'rangedDefenceBonus', "value": 0 },
+        { "key": 'magicDefenceBonus', "value": 0 },
+        { "key": 'damageReduction', "value": 0 },
+        { "key": 'summoningMaxhit', "value": 0 }
+      ],
       validSlots: ["Platebody"],
       occupiesSlots: [],
       equipRequirements: [],
@@ -2307,7 +2682,21 @@ export const ItemList: monadItemList = {
       "category": "Combat",
       type: "Equipment",
       // melvor
-
+      equipmentStats:[
+        { "key": 'stabAttackBonus', "value": 0 },
+        { "key": 'slashAttackBonus', "value": 0 },
+        { "key": 'blockAttackBonus', "value": 0 },
+        { "key": 'rangedAttackBonus', "value": 0 },
+        { "key": 'magicAttackBonus', "value": 0 },
+        { "key": 'meleeStrengthBonus', "value": 0 },
+        { "key": 'rangedStrengthBonus', "value": 0 },
+        { "key": 'magicDamageBonus', "value": 0 },
+        { "key": 'meleeDefenceBonus', "value": 0 },
+        { "key": 'rangedDefenceBonus', "value": 0 },
+        { "key": 'magicDefenceBonus', "value": 0 },
+        { "key": 'damageReduction', "value": 0 },
+        { "key": 'summoningMaxhit', "value": 0 }
+      ],
       validSlots: ["Platebody"],
       occupiesSlots: [],
       equipRequirements: [],
@@ -2343,7 +2732,16 @@ export const ItemList: monadItemList = {
       {
         "key": "damageReduction",
         "value": 5
-      }
+      },
+      { "key": 'stabAttackBonus', "value": 0 },
+      { "key": 'slashAttackBonus', "value": 0 },
+      { "key": 'blockAttackBonus', "value": 0 },
+      { "key": 'rangedAttackBonus', "value": 0 },
+      { "key": 'meleeStrengthBonus', "value": 0 },
+      { "key": 'rangedStrengthBonus', "value": 0 },
+      { "key": 'meleeDefenceBonus', "value": 0 },
+      { "key": 'rangedDefenceBonus', "value": 0 },
+      { "key": 'summoningMaxhit', "value": 0 }
     ],
     validSlots: ["Platebody"],
     occupiesSlots: [],
@@ -2383,7 +2781,16 @@ export const ItemList: monadItemList = {
       {
         "key": "magicAttackBonus",
         "value": -30
-      }
+      },
+      
+      { "key": 'stabAttackBonus', "value": 0 },
+      { "key": 'slashAttackBonus', "value": 0 },
+      { "key": 'blockAttackBonus', "value": 0 },
+      { "key": 'meleeStrengthBonus', "value": 0 },
+      { "key": 'rangedStrengthBonus', "value": 0 },
+      { "key": 'magicDamageBonus', "value": 0 },
+      { "key": 'damageReduction', "value": 0 },
+      { "key": 'summoningMaxhit', "value": 0 }
     ],
     validSlots: ["Platebody"],
     occupiesSlots: [],
@@ -2431,7 +2838,14 @@ export const ItemList: monadItemList = {
       {
         "key": "blockAttackBonus",
         "value": 8
-      }
+      },
+      { "key": 'meleeStrengthBonus', "value": 0 },
+      { "key": 'rangedStrengthBonus', "value": 0 },
+      { "key": 'magicDamageBonus', "value": 0 },
+      { "key": 'rangedDefenceBonus', "value": 0 },
+      { "key": 'magicDefenceBonus', "value": 0 },
+      { "key": 'damageReduction', "value": 0 },
+      { "key": 'summoningMaxhit', "value": 0 }
     ],
     validSlots: ["Gloves"],
     occupiesSlots: [],
@@ -2475,7 +2889,20 @@ export const ItemList: monadItemList = {
       {
         "key": "magicAttackBonus",
         "value": -3
-      }
+      },
+
+      
+      { "key": 'stabAttackBonus', "value": 0 },
+      { "key": 'slashAttackBonus', "value": 0 },
+      { "key": 'blockAttackBonus', "value": 0 },
+      { "key": 'meleeStrengthBonus', "value": 0 },
+      { "key": 'rangedStrengthBonus', "value": 0 },
+      { "key": 'magicDamageBonus', "value": 0 },
+      { "key": 'rangedDefenceBonus', "value": 0 },
+      { "key": 'magicDefenceBonus', "value": 0 },
+      { "key": 'damageReduction', "value": 0 },
+      { "key": 'summoningMaxhit', "value": 0 }
+    
     ],
     validSlots: ["Boots"],
     occupiesSlots: [],
@@ -2525,7 +2952,16 @@ export const ItemList: monadItemList = {
       {
         "key": "blockAttackBonus",
         "value": 8
-      }
+      },
+      { "key": 'rangedAttackBonus', "value": 0 },
+      { "key": 'magicAttackBonus', "value": 0 },
+      { "key": 'meleeStrengthBonus', "value": 0 },
+      { "key": 'rangedStrengthBonus', "value": 0 },
+      { "key": 'magicDamageBonus', "value": 0 },
+      { "key": 'rangedDefenceBonus', "value": 0 },
+      { "key": 'magicDefenceBonus', "value": 0 },
+      { "key": 'damageReduction', "value": 0 },
+      { "key": 'summoningMaxhit', "value": 0 }
     ],
     validSlots: ["Gloves"],
     occupiesSlots: [],
@@ -2567,7 +3003,15 @@ export const ItemList: monadItemList = {
       {
         "key": "rangedAttackBonus",
         "value": -2
-      }
+      },
+      { "key": 'stabAttackBonus', "value": 0 },
+      { "key": 'slashAttackBonus', "value": 0 },
+      { "key": 'blockAttackBonus', "value": 0 },
+      { "key": 'meleeStrengthBonus', "value": 0 },
+      { "key": 'rangedStrengthBonus', "value": 0 },
+      { "key": 'magicDamageBonus', "value": 0 },
+      { "key": 'damageReduction', "value": 0 },
+      { "key": 'summoningMaxhit', "value": 0 }
     ],
     validSlots: ["Shield"],
     occupiesSlots: [],
@@ -2589,7 +3033,25 @@ export const ItemList: monadItemList = {
     attackType: "melee",
     "category": "Combat",
     // melvor
-
+    equipmentStats:[
+      {
+        "key": "attackSpeed",
+        "value": 2600
+      },
+      { "key": 'stabAttackBonus', "value": 0 },
+      { "key": 'slashAttackBonus', "value": 0 },
+      { "key": 'blockAttackBonus', "value": 0 },
+      { "key": 'rangedAttackBonus', "value": 0 },
+      { "key": 'magicAttackBonus', "value": 0 },
+      { "key": 'meleeStrengthBonus', "value": 0 },
+      { "key": 'rangedStrengthBonus', "value": 0 },
+      { "key": 'magicDamageBonus', "value": 0 },
+      { "key": 'meleeDefenceBonus', "value": 0 },
+      { "key": 'rangedDefenceBonus', "value": 0 },
+      { "key": 'magicDefenceBonus', "value": 0 },
+      { "key": 'damageReduction', "value": 0 },
+      { "key": 'summoningMaxhit', "value": 0 }
+    ],
     validSlots: ["Weapon"],
     occupiesSlots: [],
     equipRequirements: [],
@@ -2618,7 +3080,21 @@ export const ItemList: monadItemList = {
     sellsFor: 1,
     "category": "Combat",
     // melvor
-
+    equipmentStats:[
+      { "key": 'stabAttackBonus', "value": 0 },
+      { "key": 'slashAttackBonus', "value": 0 },
+      { "key": 'blockAttackBonus', "value": 0 },
+      { "key": 'rangedAttackBonus', "value": 0 },
+      { "key": 'magicAttackBonus', "value": 0 },
+      { "key": 'meleeStrengthBonus', "value": 0 },
+      { "key": 'rangedStrengthBonus', "value": 0 },
+      { "key": 'magicDamageBonus', "value": 0 },
+      { "key": 'meleeDefenceBonus', "value": 0 },
+      { "key": 'rangedDefenceBonus', "value": 0 },
+      { "key": 'magicDefenceBonus', "value": 0 },
+      { "key": 'damageReduction', "value": 0 },
+      { "key": 'summoningMaxhit', "value": 0 }
+    ],
     validSlots: ["Platebody"],
     occupiesSlots: [],
     equipRequirements: [],
@@ -2636,7 +3112,21 @@ export const ItemList: monadItemList = {
     sellsFor: 1,
     "category": "Combat",
     // melvor
-
+    equipmentStats:[
+      { "key": 'stabAttackBonus', "value": 0 },
+      { "key": 'slashAttackBonus', "value": 0 },
+      { "key": 'blockAttackBonus', "value": 0 },
+      { "key": 'rangedAttackBonus', "value": 0 },
+      { "key": 'magicAttackBonus', "value": 0 },
+      { "key": 'meleeStrengthBonus', "value": 0 },
+      { "key": 'rangedStrengthBonus', "value": 0 },
+      { "key": 'magicDamageBonus', "value": 0 },
+      { "key": 'meleeDefenceBonus', "value": 0 },
+      { "key": 'rangedDefenceBonus', "value": 0 },
+      { "key": 'magicDefenceBonus', "value": 0 },
+      { "key": 'damageReduction', "value": 0 },
+      { "key": 'summoningMaxhit', "value": 0 }
+    ],
     validSlots: ["Platebody"],
     occupiesSlots: [],
     equipRequirements: [],
@@ -2670,7 +3160,18 @@ export const ItemList: monadItemList = {
       {
         "key": "damageReduction",
         "value": 3
-      }
+      },
+      { "key": 'stabAttackBonus', "value": 0 },
+      { "key": 'slashAttackBonus', "value": 0 },
+      { "key": 'blockAttackBonus', "value": 0 },
+      { "key": 'rangedAttackBonus', "value": 0 },
+      { "key": 'meleeStrengthBonus', "value": 0 },
+      { "key": 'rangedStrengthBonus', "value": 0 },
+      { "key": 'magicDamageBonus', "value": 0 },
+      { "key": 'meleeDefenceBonus', "value": 0 },
+      { "key": 'rangedDefenceBonus', "value": 0 },
+      { "key": 'magicDefenceBonus', "value": 0 },
+      { "key": 'summoningMaxhit', "value": 0 }
     ],
     validSlots: ["Weapon"],
     occupiesSlots: [],
@@ -2688,7 +3189,25 @@ export const ItemList: monadItemList = {
     image: "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.medievalcollectibles.com%2Fwp-content%2Fuploads%2F2019%2F04%2FMC-TR-005.png",
     attackType: "melee",
     // melvor
-
+    equipmentStats:[
+      {
+        "key": "attackSpeed",
+        "value": 2600
+      },
+      { "key": 'stabAttackBonus', "value": 0 },
+      { "key": 'slashAttackBonus', "value": 0 },
+      { "key": 'blockAttackBonus', "value": 0 },
+      { "key": 'rangedAttackBonus', "value": 0 },
+      { "key": 'magicAttackBonus', "value": 0 },
+      { "key": 'meleeStrengthBonus', "value": 0 },
+      { "key": 'rangedStrengthBonus', "value": 0 },
+      { "key": 'magicDamageBonus', "value": 0 },
+      { "key": 'meleeDefenceBonus', "value": 0 },
+      { "key": 'rangedDefenceBonus', "value": 0 },
+      { "key": 'magicDefenceBonus', "value": 0 },
+      { "key": 'damageReduction', "value": 0 },
+      { "key": 'summoningMaxhit', "value": 0 }
+    ],
     validSlots: ["Weapon"],
     occupiesSlots: [],
     equipRequirements: [],
@@ -2708,7 +3227,21 @@ export const ItemList: monadItemList = {
     sellsFor: 1,
     "category": "Combat",
     // melvor
-
+    equipmentStats:[
+      { "key": 'stabAttackBonus', "value": 0 },
+      { "key": 'slashAttackBonus', "value": 0 },
+      { "key": 'blockAttackBonus', "value": 0 },
+      { "key": 'rangedAttackBonus', "value": 0 },
+      { "key": 'magicAttackBonus', "value": 0 },
+      { "key": 'meleeStrengthBonus', "value": 0 },
+      { "key": 'rangedStrengthBonus', "value": 0 },
+      { "key": 'magicDamageBonus', "value": 0 },
+      { "key": 'meleeDefenceBonus', "value": 0 },
+      { "key": 'rangedDefenceBonus', "value": 0 },
+      { "key": 'magicDefenceBonus', "value": 0 },
+      { "key": 'damageReduction', "value": 0 },
+      { "key": 'summoningMaxhit', "value": 0 }
+    ],
     validSlots: ["Platebody"],
     occupiesSlots: [],
     equipRequirements: [],
@@ -2726,7 +3259,21 @@ export const ItemList: monadItemList = {
     "category": "Combat",
     type: "Equipment",
     // melvor
-
+    equipmentStats:[
+      { "key": 'stabAttackBonus', "value": 0 },
+      { "key": 'slashAttackBonus', "value": 0 },
+      { "key": 'blockAttackBonus', "value": 0 },
+      { "key": 'rangedAttackBonus', "value": 0 },
+      { "key": 'magicAttackBonus', "value": 0 },
+      { "key": 'meleeStrengthBonus', "value": 0 },
+      { "key": 'rangedStrengthBonus', "value": 0 },
+      { "key": 'magicDamageBonus', "value": 0 },
+      { "key": 'meleeDefenceBonus', "value": 0 },
+      { "key": 'rangedDefenceBonus', "value": 0 },
+      { "key": 'magicDefenceBonus', "value": 0 },
+      { "key": 'damageReduction', "value": 0 },
+      { "key": 'summoningMaxhit', "value": 0 }
+    ],
     validSlots: ["Platebody"],
     occupiesSlots: [],
     equipRequirements: [],
@@ -2744,7 +3291,21 @@ export const ItemList: monadItemList = {
     "category": "Combat",
     type: "Equipment",
     // melvor
-
+    equipmentStats:[
+      { "key": 'stabAttackBonus', "value": 0 },
+      { "key": 'slashAttackBonus', "value": 0 },
+      { "key": 'blockAttackBonus', "value": 0 },
+      { "key": 'rangedAttackBonus', "value": 0 },
+      { "key": 'magicAttackBonus', "value": 0 },
+      { "key": 'meleeStrengthBonus', "value": 0 },
+      { "key": 'rangedStrengthBonus', "value": 0 },
+      { "key": 'magicDamageBonus', "value": 0 },
+      { "key": 'meleeDefenceBonus', "value": 0 },
+      { "key": 'rangedDefenceBonus', "value": 0 },
+      { "key": 'magicDefenceBonus', "value": 0 },
+      { "key": 'damageReduction', "value": 0 },
+      { "key": 'summoningMaxhit', "value": 0 }
+    ],
     validSlots: ["Cape"],
     occupiesSlots: [],
     equipRequirements: [],

@@ -16,6 +16,12 @@ import '../img/items/Miolite_Gloves.png';
 import '../img/people/owl.jpg';
 import '../img/items/lootbox.png';
 
+// game.items.registeredObjects.forEach(item => {
+//   if(item._namespace.name === "monad") {
+//       game.bank.addItem(item, 1, true, true, false);
+//   }
+// })
+
 function randomNumber(min: number, max: number) {
   if (min > max) {
     return 1
@@ -988,7 +994,47 @@ export async function setup(ctx: Modding.ModContext) {
                       "ignoreCompletion": false,
                       "obtainFromItemLog": false,
                       "golbinRaidExclusive": false,
-                      "sellsFor": monadItems[id].sellsFor
+                      "sellsFor": getMonadSalePrice(monadItems[id])
+                    }
+                    function getRndInteger(min, max) {
+                      return Math.floor(Math.random() * (max - min) ) + min;
+                    }
+                    function getMonadSalePrice (monadItem) {
+                      if(monadItem.rating === "junk") {
+                        return getRndInteger(1,29)
+                      }
+                      else if(monadItem.rating === "common") {
+                        return getRndInteger(30,39)
+                      }
+                      else if(monadItem.rating === "normal") {
+                        return getRndInteger(40,199)
+                      }
+                      else if(monadItem.rating === "intermediate") {
+                        return getRndInteger(200,399)
+                      }
+                      else if(monadItem.rating === "advanced") {
+                        return getRndInteger(400,599)
+                      }
+                      else if(monadItem.rating === "rare") {
+                        return getRndInteger(600,2999)
+                      }
+                      else if(monadItem.rating === "epic") {
+                        return getRndInteger(3000,3999)
+                      }
+                      else if(monadItem.rating === "legendary") {
+                        return getRndInteger(4000,99999)
+                      }
+                      else if(monadItem.rating === "unique") {
+                        return getRndInteger(100000,1000000-1)
+                      }
+                      else if(monadItem.rating === "growth") {
+                        return getRndInteger(1000000,9999999)
+                      }
+                      else if(monadItem.rating === "quest") {
+                        return 1
+                      } else  {
+                        return 1
+                      }
                     }
                     const newequipmentStats: ItemStats[] = monadItems[id].equipmentStats ? monadItems[id].equipmentStats : [
                       { "key": 'stabAttackBonus', "value": 0 },
@@ -1055,18 +1101,83 @@ export async function setup(ctx: Modding.ModContext) {
                             if (statKeys[m] === 'lightningResistancePerc') {
                               newModifiers['decreasedDamageTakenFromFireSpells'] = Math.floor(tempStats[statKeys[m]])
                             }
+                            if (statKeys[m] === 'fireResistancePerc') {
+                              newModifiers['decreasedDamageTakenFromFireSpells'] = Math.floor(tempStats[statKeys[m]])
+                            }
+                            if (statKeys[m] === 'iceResistancePerc') {
+                              newModifiers['decreasedDamageTakenFromWaterSpells'] = Math.floor(tempStats[statKeys[m]])
+                            }
+                            if (statKeys[m] === 'waterResistancePerc') {
+                              newModifiers['decreasedDamageTakenFromWaterSpells'] = Math.floor(tempStats[statKeys[m]])
+                            }
+                            if (statKeys[m] === 'windResistancePerc') {
+                              newModifiers['decreasedDamageTakenFromAirSpells'] = Math.floor(tempStats[statKeys[m]])
+                            }
+                            if (statKeys[m] === 'allResistancePerc') {
+                              newModifiers['increasedDamageReduction'] = Math.floor(tempStats[statKeys[m]])
+                            }
                           } 
-                          //  'Enchanting' | 'SpellSpeed' | 'swimSpeed' | 'stealthInShadowsPerc' | 'controlPlants' | 'command'
-                          // underwaterBreathing
-                          // allSkillCooldownPerc
-                          // iceCostPerc
-                          // allCostPerc
-                          // lightningCostPerc
-                          if (statKeys[m] === 'windIncreasedDamage') {
+                          if (statKeys[m] === 'underwaterBreathing') {
+                            newModifiers['increasedBonusFishingSpecialChance'] = Math.floor(tempStats[statKeys[m]]/100000)
+                          }
+                          
+                          if (statKeys[m] === 'Enchanting') {
+                            newModifiers['increasedRunecraftingEssencePreservation'] = Math.floor(tempStats[statKeys[m]])
+                          }
+                          if (statKeys[m] === 'stealthInShadowsPerc') {
+                            newModifiers['increasedThievingStealth'] = Math.floor(tempStats[statKeys[m]]) * 10
+                          }
+                          if (statKeys[m] === 'command') {
+                            newModifiers['increasedSummoningMaxHit'] = Math.floor(tempStats[statKeys[m]]) * 100
+                          }
+                          if (statKeys[m] === 'controlPlants') {
+                            newModifiers['increasedSummoningMaxHit'] = Math.floor(tempStats[statKeys[m]]) * 10
+                          }
+                          if (statKeys[m] === 'controlUndead') {
+                            newModifiers['increasedSummoningMaxHit'] = Math.floor(tempStats[statKeys[m]]) * 10
+                          }
+                          if (statKeys[m] === 'SpellSpeed') {
+                            newModifiers['decreasedAttackIntervalPercent'] = Math.floor(tempStats[statKeys[m]])
+                          }   
+                          if (statKeys[m] === 'allCostPerc') {
+                            newModifiers['increasedRunePreservation'] = Math.floor(tempStats[statKeys[m]])
+                          }  
+                          if (statKeys[m] === 'waterCostPerc') {
+                            newModifiers['increasedRunePreservation'] = Math.floor(tempStats[statKeys[m]])
+                          }  
+                          if (statKeys[m] === 'iceCostPerc') {
+                            newModifiers['increasedRunePreservation'] = Math.floor(tempStats[statKeys[m]])
+                          }  
+                          if (statKeys[m] === 'fireCostPerc') {
+                            newModifiers['increasedRunePreservation'] = Math.floor(tempStats[statKeys[m]])
+                          }  
+                          if (statKeys[m] === 'windCostPerc') {
+                            newModifiers['increasedRunePreservation'] = Math.floor(tempStats[statKeys[m]])
+                          }  
+                          if (statKeys[m] === 'lightningCostPerc') {
+                            newModifiers['increasedRunePreservation'] = Math.floor(tempStats[statKeys[m]])
+                          }       
+                          if (statKeys[m] === 'allSkillCooldownPerc') {
+                            newModifiers['decreasedAttackIntervalPercent'] = Math.floor(tempStats[statKeys[m]])
+                            newModifiers['decreasedGlobalSkillIntervalPercent'] = Math.floor(tempStats[statKeys[m]])
+                          }   
+                          if (statKeys[m] === 'allIncreasedDamage') {
+                            newModifiers['increasedDamageToAllMonsters'] = Math.floor(tempStats[statKeys[m]])
+                          }             
+                          if (statKeys[m] === 'iceIncreasedDamage') {
+                            newModifiers['increasedMaxWaterSpellDmg'] = Math.floor(tempStats[statKeys[m]])
+                          }
+                          if (statKeys[m] === 'waterIncreasedDamage') {
                             newModifiers['increasedMaxWaterSpellDmg'] = Math.floor(tempStats[statKeys[m]])
                           }
                           if (statKeys[m] === 'windIncreasedDamage') {
                             newModifiers['increasedMaxAirSpellDmg'] = Math.floor(tempStats[statKeys[m]])
+                          }
+                          if (statKeys[m] === 'fireIncreasedDamage') {
+                            newModifiers['increasedMaxFireSpellDmg'] = Math.floor(tempStats[statKeys[m]])
+                          }
+                          if (statKeys[m] === 'lightningIncreasedDamage') {
+                            newModifiers['increasedMaxFireSpellDmg'] = Math.floor(tempStats[statKeys[m]])
                           }
                           if (statKeys[m] === 'blockPerc') {
                             newModifiers['increasedChanceToDodge'] = Math.floor(tempStats[statKeys[m]])
@@ -1074,17 +1185,11 @@ export async function setup(ctx: Modding.ModContext) {
                           if (statKeys[m] === 'manaRegenPerc') {
                             newModifiers['increasedHitpointRegeneration'] = Math.floor(tempStats[statKeys[m]])
                           }
-                          if (statKeys[m] === 'lightningIncreasedDamage') {
-                            newModifiers['increasedMaxFireSpellDmg'] = Math.floor(tempStats[statKeys[m]])
-                          }
                           if (statKeys[m] === 'diseaseResistance') {
                             newModifiers['poisonImmunity'] = Math.floor(tempStats[statKeys[m]])
                           }
                           if (statKeys[m] === 'diseaseResistancePerc') {
                             newModifiers['poisonImmunity'] = Math.floor(tempStats[statKeys[m]])
-                          }
-                          if (statKeys[m] === 'controlUndead') {
-                            newModifiers['increasedSummoningMaxHit'] = Math.floor(tempStats[statKeys[m]]) * 10
                           }
                           if (statKeys[m] === 'strengthPerc') {
                             newModifiers['increasedMeleeStrengthBonus'] = Math.floor(tempStats[statKeys[m]])
@@ -1093,7 +1198,9 @@ export async function setup(ctx: Modding.ModContext) {
                           if (statKeys[m] === 'magicPerc') {
                             newModifiers['increasedMagicDamageBonus'] = Math.floor(tempStats[statKeys[m]])
                           }
-                          // 'CriticalHitDamage'
+                          if (statKeys[m] === 'CriticalHitDamage') {
+                            newModifiers['increasedDamageToAllMonsters'] = Math.floor(tempStats[statKeys[m]]/4)
+                          }
                           if (statKeys[m] === 'CriticalHitChance') {
                             newModifiers['increasedMagicCritChance'] = Math.floor(tempStats[statKeys[m]])
                             newModifiers['increasedMeleeCritChance'] = Math.floor(tempStats[statKeys[m]])
@@ -1148,14 +1255,16 @@ export async function setup(ctx: Modding.ModContext) {
                             }
                           }
                           if (statKeys[m] === 'magic') {
+                            console.log(monadItems[id].name, newequipmentStats)
                             for (let q = 0; q < newequipmentStats.length; q++) {
                               if (newequipmentStats[q].key === 'magicAttackBonus') {
                                 newequipmentStats[q].value = Math.floor(tempStats[statKeys[m]] * 3)
                               }
                               if (newequipmentStats[q].key === 'magicDamageBonus') {
                                 newequipmentStats[q].value = Math.floor(tempStats[statKeys[m]])
-                              }
+                              }                              
                             }
+                            console.log(monadItems[id].name, newequipmentStats)
                           }
                           if (statKeys[m] === 'dexterity') {
                             for (let q = 0; q < newequipmentStats.length; q++) {
@@ -1394,9 +1503,9 @@ export async function setup(ctx: Modding.ModContext) {
                         // ]
                         return;
                       }
-                      if (item.namespace === _namespace) {
-                        allItems.push(`${item.namespace}:${item.localID}`)
-                      } else {
+                      // if (item.namespace === _namespace) {
+                      //   allItems.push(`${item.namespace}:${item.localID}`)
+                      // } else {
                         // https://wiki.melvoridle.com/index.php?title=Table_of_Items
                         allItems.push(`${item.namespace}:${item.localID}`)
 
@@ -1425,7 +1534,7 @@ export async function setup(ctx: Modding.ModContext) {
                         else if (item.sellsFor < 1000000) uniqueItems.push(item.namespace + ':' + item.localID)
 
                         else { growthItems.push(item.namespace + ':' + item.localID) }
-                      }
+                      // }
                     }
                   } catch (error) {
                     errorLog.push("game.items.registeredObjects.forEach ", error)
@@ -1477,21 +1586,21 @@ export async function setup(ctx: Modding.ModContext) {
                           ]
                         }
                       })
-                      if (_namespaceItemList.length > 0) {
-                        itemPackage.monsters.modify({
-                          "id": monsterId,
-                          "lootTable": {
-                            "add": [
-                              {
-                                "itemID": `${_namespaceItemList.pop()}`,
-                                "maxQuantity": 1,
-                                "minQuantity": 1,
-                                "weight": 1
-                              }
-                            ]
-                          }
-                        });
-                      }
+                      // if (_namespaceItemList.length > 0) {
+                      //   itemPackage.monsters.modify({
+                      //     "id": monsterId,
+                      //     "lootTable": {
+                      //       "add": [
+                      //         {
+                      //           "itemID": `${_namespaceItemList.pop()}`,
+                      //           "maxQuantity": 1,
+                      //           "minQuantity": 1,
+                      //           "weight": 1
+                      //         }
+                      //       ]
+                      //     }
+                      //   });
+                      // }
                       if (combatLevelCalc(monster.levels) > 1 && junkItems.length > 0) {
                         itemPackage.monsters.modify({
                           "id": monsterId,
