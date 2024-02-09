@@ -948,6 +948,240 @@ export async function setup(ctx: Modding.ModContext) {
             }
             if (true && monadItems) {
               try {
+                function monadStats(tempStats, newModifiers = {}) {
+                  if (tempStats) {
+                    const statKeys: Array<string> = Object.keys(tempStats)
+                    if (statKeys.length > 0) {
+                      for (let m = 0; m < statKeys.length; m++) {
+                        if (kcm) {
+                          if (statKeys[m] === 'elfDamageReductionPerc') {
+                            newModifiers['decreasedDamageTakenFromElfs'] = Math.floor(tempStats[statKeys[m]])
+                          }
+                          if (statKeys[m] === 'goblinDamageReductionPerc') {
+                            newModifiers['decreasedDamageTakenFromGoblins'] = Math.floor(tempStats[statKeys[m]])
+                          }
+                          if (statKeys[m] === 'robotDamageReductionPerc') {
+                            newModifiers['decreasedDamageTakenFromRobots'] = Math.floor(tempStats[statKeys[m]])
+                          }
+                          if (statKeys[m] === 'orcDamageReductionPerc') {
+                            newModifiers['decreasedDamageTakenFromOrcs'] = Math.floor(tempStats[statKeys[m]])
+                          }
+                          if (statKeys[m] === 'dragonDamageReductionPerc') {
+                            newModifiers['decreasedDamageTakenFromDragons'] = Math.floor(tempStats[statKeys[m]])
+                          }
+                          if (statKeys[m] === 'humanDamageReductionPerc') {
+                            newModifiers['decreasedDamageTakenFromHumans'] = Math.floor(tempStats[statKeys[m]])
+                          }
+                          if (statKeys[m] === 'elementalDamageReductionPerc') {
+                            newModifiers['decreasedDamageTakenFromElementals'] = Math.floor(tempStats[statKeys[m]])
+                          }
+                          if (statKeys[m] === 'mythicalcreatureDamageReductionPerc') {
+                            newModifiers['decreasedDamageTakenFromMythicalCreatures'] = Math.floor(tempStats[statKeys[m]])
+                          }
+                          if (statKeys[m] === 'seacreatureDamageReductionPerc') {
+                            newModifiers['decreasedDamageTakenFromSeaCreatures'] = Math.floor(tempStats[statKeys[m]])
+                          }
+                          if (statKeys[m] === 'beastDamageReductionPerc') {
+                            newModifiers['decreasedDamageTakenFromBeasts'] = Math.floor(tempStats[statKeys[m]])
+                          }
+                          if (statKeys[m] === 'demonDamageReductionPerc') {
+                            newModifiers['decreasedDamageTakenFromDemons'] = Math.floor(tempStats[statKeys[m]])
+                          }
+                          if (statKeys[m] === 'undeadDamageReductionPerc') {
+                            newModifiers['decreasedDamageTakenFromUndead'] = Math.floor(tempStats[statKeys[m]])
+                          }
+                          if (statKeys[m] === 'lightningResistancePerc') {
+                            newModifiers['decreasedDamageTakenFromFireSpells'] = Math.floor(tempStats[statKeys[m]])
+                          }
+                          if (statKeys[m] === 'fireResistancePerc') {
+                            newModifiers['decreasedDamageTakenFromFireSpells'] = Math.floor(tempStats[statKeys[m]])
+                          }
+                          if (statKeys[m] === 'iceResistancePerc') {
+                            newModifiers['decreasedDamageTakenFromWaterSpells'] = Math.floor(tempStats[statKeys[m]])
+                          }
+                          if (statKeys[m] === 'waterResistancePerc') {
+                            newModifiers['decreasedDamageTakenFromWaterSpells'] = Math.floor(tempStats[statKeys[m]])
+                          }
+                          if (statKeys[m] === 'windResistancePerc') {
+                            newModifiers['decreasedDamageTakenFromAirSpells'] = Math.floor(tempStats[statKeys[m]])
+                          }
+                          if (statKeys[m] === 'allResistancePerc') {
+                            newModifiers['increasedDamageReduction'] = Math.floor(tempStats[statKeys[m]])
+                          }
+                        } 
+                        if (statKeys[m] === 'underwaterBreathing') {
+                          newModifiers['increasedBonusFishingSpecialChance'] = Math.floor(tempStats[statKeys[m]]/100000)
+                        }                          
+                        if (statKeys[m] === 'Enchanting') {
+                          newModifiers['increasedRunecraftingEssencePreservation'] = Math.floor(tempStats[statKeys[m]])
+                        }
+                        if (statKeys[m] === 'stealthInShadowsPerc') {
+                          newModifiers['increasedThievingStealth'] = Math.floor(tempStats[statKeys[m]]) * 10
+                        }
+                        if (statKeys[m] === 'command') {
+                          newModifiers['increasedSummoningMaxHit'] = Math.floor(tempStats[statKeys[m]]) * 100
+                        }
+                        if (statKeys[m] === 'controlPlants') {
+                          newModifiers['increasedSummoningMaxHit'] = Math.floor(tempStats[statKeys[m]]) * 10
+                        }
+                        if (statKeys[m] === 'controlUndead') {
+                          newModifiers['increasedSummoningMaxHit'] = Math.floor(tempStats[statKeys[m]]) * 10
+                        }
+                        if (statKeys[m] === 'SpellSpeed') {
+                          newModifiers['decreasedAttackIntervalPercent'] = Math.floor(tempStats[statKeys[m]])
+                        }   
+                        if (statKeys[m] === 'allCostPerc') {
+                          newModifiers['increasedRunePreservation'] = Math.floor(tempStats[statKeys[m]])
+                        }  
+                        if (statKeys[m] === 'waterCostPerc') {
+                          newModifiers['increasedRunePreservation'] = Math.floor(tempStats[statKeys[m]])
+                        }  
+                        if (statKeys[m] === 'iceCostPerc') {
+                          newModifiers['increasedRunePreservation'] = Math.floor(tempStats[statKeys[m]])
+                        }  
+                        if (statKeys[m] === 'fireCostPerc') {
+                          newModifiers['increasedRunePreservation'] = Math.floor(tempStats[statKeys[m]])
+                        }  
+                        if (statKeys[m] === 'windCostPerc') {
+                          newModifiers['increasedRunePreservation'] = Math.floor(tempStats[statKeys[m]])
+                        }  
+                        if (statKeys[m] === 'lightningCostPerc') {
+                          newModifiers['increasedRunePreservation'] = Math.floor(tempStats[statKeys[m]])
+                        }       
+                        if (statKeys[m] === 'allSkillCooldownPerc') {
+                          newModifiers['decreasedAttackIntervalPercent'] = Math.floor(tempStats[statKeys[m]])
+                          newModifiers['decreasedGlobalSkillIntervalPercent'] = Math.floor(tempStats[statKeys[m]])
+                        }   
+                        if (statKeys[m] === 'allIncreasedDamage') {
+                          newModifiers['increasedDamageToAllMonsters'] = Math.floor(tempStats[statKeys[m]])
+                        }             
+                        if (statKeys[m] === 'iceIncreasedDamage') {
+                          newModifiers['increasedMaxWaterSpellDmg'] = Math.floor(tempStats[statKeys[m]])
+                        }
+                        if (statKeys[m] === 'waterIncreasedDamage') {
+                          newModifiers['increasedMaxWaterSpellDmg'] = Math.floor(tempStats[statKeys[m]])
+                        }
+                        if (statKeys[m] === 'windIncreasedDamage') {
+                          newModifiers['increasedMaxAirSpellDmg'] = Math.floor(tempStats[statKeys[m]])
+                        }
+                        if (statKeys[m] === 'fireIncreasedDamage') {
+                          newModifiers['increasedMaxFireSpellDmg'] = Math.floor(tempStats[statKeys[m]])
+                        }
+                        if (statKeys[m] === 'lightningIncreasedDamage') {
+                          newModifiers['increasedMaxFireSpellDmg'] = Math.floor(tempStats[statKeys[m]])
+                        }
+                        if (statKeys[m] === 'blockPerc') {
+                          newModifiers['increasedChanceToDodge'] = Math.floor(tempStats[statKeys[m]])
+                        }
+                        if (statKeys[m] === 'manaRegenPerc') {
+                          newModifiers['increasedHitpointRegeneration'] = Math.floor(tempStats[statKeys[m]])
+                        }
+                        if (statKeys[m] === 'diseaseResistance') {
+                          newModifiers['poisonImmunity'] = Math.floor(tempStats[statKeys[m]])
+                        }
+                        if (statKeys[m] === 'diseaseResistancePerc') {
+                          newModifiers['poisonImmunity'] = Math.floor(tempStats[statKeys[m]])
+                        }
+                        if (statKeys[m] === 'strengthPerc') {
+                          newModifiers['increasedMeleeStrengthBonus'] = Math.floor(tempStats[statKeys[m]])
+                          newModifiers['increasedRangedStrengthBonus'] = Math.floor(tempStats[statKeys[m]])
+                        }
+                        if (statKeys[m] === 'magicPerc') {
+                          newModifiers['increasedMagicDamageBonus'] = Math.floor(tempStats[statKeys[m]])
+                        }
+                        if (statKeys[m] === 'CriticalHitDamage') {
+                          newModifiers['increasedDamageToAllMonsters'] = Math.floor(tempStats[statKeys[m]]/4)
+                        }
+                        if (statKeys[m] === 'CriticalHitChance') {
+                          newModifiers['increasedMagicCritChance'] = Math.floor(tempStats[statKeys[m]])
+                          newModifiers['increasedMeleeCritChance'] = Math.floor(tempStats[statKeys[m]])
+                          newModifiers['increasedRangedCritChance'] = Math.floor(tempStats[statKeys[m]])
+                        }
+                        if (statKeys[m] === 'HP' || statKeys[m] === 'vitality') {
+                          newModifiers['increasedFlatMaxHitpoints'] = (newModifiers['increasedFlatMaxHitpoints'] || 0) + Math.floor(tempStats[statKeys[m]] / 10)
+                        }
+                        if (statKeys[m] === 'HPPerc' || statKeys[m] === 'vitalityPerc') {
+                          newModifiers['increasedMaxHitpoints'] = (newModifiers['increasedMaxHitpoints'] || 0) + Math.floor(tempStats[statKeys[m]])
+                        }
+                        if (statKeys[m] === 'meleeDefenceBonus') {
+                          for (let q = 0; q < newequipmentStats.length; q++) {
+                            if (newequipmentStats[q].key === 'meleeDefenceBonus') {
+                              newequipmentStats[q].value = newequipmentStats[q].value + Math.floor(tempStats[statKeys[m]])
+                            }
+                          }
+                        }
+                        if (statKeys[m] === 'rangedDefenceBonus') {
+                          for (let q = 0; q < newequipmentStats.length; q++) {
+                            if (newequipmentStats[q].key === 'rangedDefenceBonus') {
+                              newequipmentStats[q].value = newequipmentStats[q].value + Math.floor(tempStats[statKeys[m]])
+                            }
+                          }
+                        }
+                        if (statKeys[m] === 'strength') {
+                          for (let q = 0; q < newequipmentStats.length; q++) {
+                            if (newequipmentStats[q].key === 'meleeStrengthBonus' || newequipmentStats[q].key === 'rangedStrengthBonus') {
+                              newequipmentStats[q].value = newequipmentStats[q].value + Math.floor(tempStats[statKeys[m]] * 10)
+                            }
+                          }
+                        }
+                        if (statKeys[m] === 'endurance') {
+                          for (let q = 0; q < newequipmentStats.length; q++) {
+                            if (newequipmentStats[q].key === 'meleeDefenceBonus' || newequipmentStats[q].key === 'rangedDefenceBonus') {
+                              newequipmentStats[q].value = newequipmentStats[q].value + Math.floor(tempStats[statKeys[m]] * 2)
+                            }
+                          }
+                        }
+                        if (statKeys[m] === 'physicalDamageReduction') {
+                          for (let q = 0; q < newequipmentStats.length; q++) {
+                            if (newequipmentStats[q].key === 'meleeDefenceBonus' || newequipmentStats[q].key === 'rangedDefenceBonus') {
+                              newequipmentStats[q].value = newequipmentStats[q].value + Math.floor(tempStats[statKeys[m]] * 2)
+                            }
+                          }
+                        }
+                        if (statKeys[m] === 'willpower' || statKeys[m] === 'magicDamageReduction') {
+                          for (let q = 0; q < newequipmentStats.length; q++) {
+                            if (newequipmentStats[q].key === 'magicDefenceBonus') {
+                              newequipmentStats[q].value = Math.floor(tempStats[statKeys[m]])
+                            }
+                          }
+                        }
+                        if (statKeys[m] === 'magic') {
+                          console.log(monadItems[id].name, newequipmentStats)
+                          for (let q = 0; q < newequipmentStats.length; q++) {
+                            if (newequipmentStats[q].key === 'magicAttackBonus') {
+                              newequipmentStats[q].value = Math.floor(tempStats[statKeys[m]] * 3)
+                            }
+                            if (newequipmentStats[q].key === 'magicDamageBonus') {
+                              newequipmentStats[q].value = Math.floor(tempStats[statKeys[m]])
+                            }                              
+                          }
+                        }
+                        if (statKeys[m] === 'dexterity') {
+                          for (let q = 0; q < newequipmentStats.length; q++) {
+                            if (newequipmentStats[q].key === 'rangedAttackBonus' || newequipmentStats[q].key === 'rangedDefenceBonus') {
+                              newequipmentStats[q].value = Math.floor(tempStats[statKeys[m]])
+                            }
+                          }
+                        }
+                        if (statKeys[m] === 'sense') {
+                          for (let q = 0; q < newequipmentStats.length; q++) {
+                            if (newequipmentStats[q].key === 'damageReduction') {
+                              newequipmentStats[q].value = Math.floor(tempStats[statKeys[m]])
+                            }
+                          }
+                        }
+                        if (statKeys[m] === 'charisma') {
+                          for (let q = 0; q < newequipmentStats.length; q++) {
+                            if (newequipmentStats[q].key === 'summoningMaxhit') {
+                              newequipmentStats[q].value = Math.floor(tempStats[statKeys[m]])
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                  return newModifiers
+                }
                 const monadItemsKeys: Array<string> = Object.keys(monadItems)
                 for (let index = 0; index < monadItemsKeys.length; index++) {
                   const id = monadItemsKeys[index]
@@ -968,12 +1202,10 @@ export async function setup(ctx: Modding.ModContext) {
                     }
                     const newSynergy: ItemSynergyData = {
                       "itemIDs": newIDs,
-                      "playerModifiers": {
-
-                      }
+                      "playerModifiers": monadStats(monadItems[id].stats)
                     }
                     if (newSynergy.itemIDs.length > 0) {
-                      const Requirements = ['conditionalModifiers', "enemyModifiers", "equipmentStats", "playerModifiers"]
+                      const Requirements = ['conditionalModifiers', "enemyModifiers", "equipmentStats"]
                       for (let j = 0; j < Requirements.length; j++) {
                         if (monadItems[id][Requirements[j]]) {
                           newSynergy[Requirements[j]] = monadItems[id][Requirements[j]]
@@ -1119,8 +1351,7 @@ export async function setup(ctx: Modding.ModContext) {
                           } 
                           if (statKeys[m] === 'underwaterBreathing') {
                             newModifiers['increasedBonusFishingSpecialChance'] = Math.floor(tempStats[statKeys[m]]/100000)
-                          }
-                          
+                          }                          
                           if (statKeys[m] === 'Enchanting') {
                             newModifiers['increasedRunecraftingEssencePreservation'] = Math.floor(tempStats[statKeys[m]])
                           }
@@ -1264,7 +1495,6 @@ export async function setup(ctx: Modding.ModContext) {
                                 newequipmentStats[q].value = Math.floor(tempStats[statKeys[m]])
                               }                              
                             }
-                            console.log(monadItems[id].name, newequipmentStats)
                           }
                           if (statKeys[m] === 'dexterity') {
                             for (let q = 0; q < newequipmentStats.length; q++) {
