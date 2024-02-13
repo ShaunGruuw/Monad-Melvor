@@ -102,6 +102,104 @@ export async function setup(ctx: Modding.ModContext) {
     if (AoDEntitlement) {
       await ctx.gameData.addPackage('aod.json');
     }
+
+
+    const showList = (itemID: string, backFunction: any, ...backArgs: any) => {
+      const item = game.items.getObjectByID(itemID);
+
+      let html = `<h5 class="font-w400 mb-1">${item.name}</h5>`;
+      html += `<img src="${item.media}" style="max-width: 256px; max-height: 256px;"></img>`;
+      html += '<p></p>';
+      // style="width: 48px; height: 48px;"
+      // @ts-ignore
+      game.allSynergies.forEach(synergy => {
+        if (synergy.items.includes(item)) {
+          html += `<div>${getLangString('equipped_with')}</div>`;
+          // @ts-ignore
+          synergy.items.forEach(i => {
+            html += `<div>${i.name}</div>`
+          })
+          html += '<p></p>';
+          html += `<div>${getLangString('gain_modifiers')}</div>`;
+          for (var modifier in synergy.playerModifiers) {
+            // check if the property/key is defined in the object itself, not in parent
+            if (synergy.playerModifiers.hasOwnProperty(modifier)) {
+              // @ts-ignore
+              const isNegative = modifierData[modifier].isNegative ? 'red' : 'green'
+              if (modifier.includes('tes_')) {
+                const displayString = getLangString(modifier).replace('${value}',
+                  synergy.playerModifiers[modifier]).replace('${skillName}',
+                    synergy.playerModifiers[modifier]).replace('${skillName}',
+                      synergy.playerModifiers[modifier])
+                html += `<div style="color: ${isNegative}">${displayString}</div>`
+              } else if (modifier === 'allowUnholyPrayerUse') {
+                html += `<div>${getLangString('allowUnholyPrayerUse')}</div>`
+              } else if (typeof synergy.playerModifiers[modifier] === 'object') {
+                const displayString = getLangString("MODIFIER_DATA_" + modifier).replace('${value}',
+                  synergy.playerModifiers[modifier][0].value).replace('${skillName}',
+                    synergy.playerModifiers[modifier][0].skill._localID).replace('${skillName}',
+                      synergy.playerModifiers[modifier][0].skill._localID)
+                html += `<div style="color: ${isNegative}">${displayString}</div>`
+              } else {
+                const displayString = getLangString("MODIFIER_DATA_" + modifier).replace('${value}',
+                  synergy.playerModifiers[modifier]).replace('${skillName}',
+                    synergy.playerModifiers[modifier]).replace('${skillName}',
+                      synergy.playerModifiers[modifier])
+                html += `<div style="color: ${isNegative}">${displayString}</div>`
+              }
+            }
+          }
+          html += '<p></p>';
+        }
+      })
+      // @ts-ignore
+      if (game.calcItemLevel && typeof game.calcItemLevel(item) === 'number') {
+        // @ts-ignore
+        html += `<div>${getLangString('power_rating')} ${Math.floor(game.calcItemLevel(item))}</div>`
+        // @ts-ignore
+        console.log(`${item._namespace.name + ":" + item.localID}: ${game.calcItemLevel(item)}`)
+      }
+
+
+      if (backFunction) {
+        SwalLocale.fire({
+          html: html,
+          showCancelButton: true,
+          confirmButtonText: getLangString('ASTROLOGY_BTN_2'),
+          cancelButtonText: getLangString('FARMING_MISC_24'),
+        }).then((result) => {
+          if (result.value) {
+            backFunction(...backArgs);
+          }
+        });
+      } else {
+        SwalLocale.fire({
+          html: html
+        });
+      }
+    }
+
+    ctx.patch(BankSideBarMenu, 'initialize').after(function (returnValue, game) {
+      if(document.getElementsByClassName('btn btn-sm btn-outline-secondary p-0 ml-2 tes').length === 0
+      ) {
+        const img = createElement("img", {
+          classList: ["skill-icon-xxs"],
+          attributes: [["src", "https://cdn2-main.melvor.net/assets/media/bank/old_hat.png"]],
+        });
+  
+        const button = createElement('button', {
+          className: 'btn btn-sm btn-outline-secondary p-0 ml-2 monad'
+        });
+        // @ts-ignore
+        button.onclick = () => showList(game.bank.selectedBankItem.item.id);
+        button.appendChild(img);
+        // @ts-ignore
+        bankSideBarMenu.selectedMenu.itemWikiLink.parentNode.append(button);
+      }
+    });
+
+
+
     ctx.onModsLoaded(async () => {
       try {
         const kcm = mod.manager.getLoadedModList().includes('Custom Modifiers in Melvor')
@@ -948,7 +1046,21 @@ export async function setup(ctx: Modding.ModContext) {
             }
             if (true && monadItems) {
               try {
-                function monadStats(tempStats, newModifiers = {}) {
+                function monadStats(tempStats, newModifiers = {}, newequipmentStats = [
+                  { "key": 'stabAttackBonus', "value": 0 },
+                  { "key": 'slashAttackBonus', "value": 0 },
+                  { "key": 'blockAttackBonus', "value": 0 },
+                  { "key": 'rangedAttackBonus', "value": 0 },
+                  { "key": 'magicAttackBonus', "value": 0 },
+                  { "key": 'meleeStrengthBonus', "value": 0 },
+                  { "key": 'rangedStrengthBonus', "value": 0 },
+                  { "key": 'magicDamageBonus', "value": 0 },
+                  { "key": 'meleeDefenceBonus', "value": 0 },
+                  { "key": 'rangedDefenceBonus', "value": 0 },
+                  { "key": 'magicDefenceBonus', "value": 0 },
+                  { "key": 'damageReduction', "value": 0 },
+                  { "key": 'summoningMaxhit', "value": 0 }
+                ]) {
                   if (tempStats) {
                     const statKeys: Array<string> = Object.keys(tempStats)
                     if (statKeys.length > 0) {
@@ -1009,6 +1121,9 @@ export async function setup(ctx: Modding.ModContext) {
                             newModifiers['increasedDamageReduction'] = Math.floor(tempStats[statKeys[m]])
                           }
                         } 
+                        if (statKeys[m] === 'increasedPrayerPointsPerMonsterKill') {
+                          newModifiers['increasedPrayerPointsPerMonsterKill'] = Math.floor(tempStats[statKeys[m]])
+                        }    
                         if (statKeys[m] === 'underwaterBreathing') {
                           newModifiers['increasedBonusFishingSpecialChance'] = Math.floor(tempStats[statKeys[m]]/100000)
                         }                          
@@ -1146,7 +1261,6 @@ export async function setup(ctx: Modding.ModContext) {
                           }
                         }
                         if (statKeys[m] === 'magic') {
-                          console.log(monadItems[id].name, newequipmentStats)
                           for (let q = 0; q < newequipmentStats.length; q++) {
                             if (newequipmentStats[q].key === 'magicAttackBonus') {
                               newequipmentStats[q].value = Math.floor(tempStats[statKeys[m]] * 3)
@@ -1180,7 +1294,7 @@ export async function setup(ctx: Modding.ModContext) {
                       }
                     }
                   }
-                  return newModifiers
+                  return {"newModifiers":newModifiers, "newequipmentStats":newequipmentStats}
                 }
                 const monadItemsKeys: Array<string> = Object.keys(monadItems)
                 for (let index = 0; index < monadItemsKeys.length; index++) {
@@ -1202,7 +1316,7 @@ export async function setup(ctx: Modding.ModContext) {
                     }
                     const newSynergy: ItemSynergyData = {
                       "itemIDs": newIDs,
-                      "playerModifiers": monadStats(monadItems[id].stats)
+                      "playerModifiers": monadStats(monadItems[id].stats).newModifiers
                     }
                     if (newSynergy.itemIDs.length > 0) {
                       const Requirements = ['conditionalModifiers', "enemyModifiers", "equipmentStats"]
@@ -1349,6 +1463,9 @@ export async function setup(ctx: Modding.ModContext) {
                               newModifiers['increasedDamageReduction'] = Math.floor(tempStats[statKeys[m]])
                             }
                           } 
+                          if (statKeys[m] === 'increasedPrayerPointsPerMonsterKill') {
+                            newModifiers['increasedPrayerPointsPerMonsterKill'] = Math.floor(tempStats[statKeys[m]])
+                          }    
                           if (statKeys[m] === 'underwaterBreathing') {
                             newModifiers['increasedBonusFishingSpecialChance'] = Math.floor(tempStats[statKeys[m]]/100000)
                           }                          
@@ -1486,7 +1603,6 @@ export async function setup(ctx: Modding.ModContext) {
                             }
                           }
                           if (statKeys[m] === 'magic') {
-                            console.log(monadItems[id].name, newequipmentStats)
                             for (let q = 0; q < newequipmentStats.length; q++) {
                               if (newequipmentStats[q].key === 'magicAttackBonus') {
                                 newequipmentStats[q].value = Math.floor(tempStats[statKeys[m]] * 3)

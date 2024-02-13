@@ -147,8 +147,12 @@ type monadSpcificEvent = { kind: monadSpcificKeys };
 type monadStatEvent = { kind: monadStatKey };
 type monadStatEquipmentEvent = { kind: monadStatEquipmentKey };
 
+declare type melvorMissing = 'increasedPrayerPointsPerMonsterKill';
+type melvorStatEvent = { kind: melvorMissing };
+// CombatModifiers
+// PlayerModifiers
 
-declare type monadStatPair = EventConfig<monadStatEvent | monadStatEquipmentEvent | monadElementsEvent | monadSpeciesEvent | monadSpcificEvent>
+declare type monadStatPair  = EventConfig<monadStatEvent | monadStatEquipmentEvent | monadElementsEvent | monadSpeciesEvent | monadSpcificEvent| melvorStatEvent> | PlayerModifiers
 interface monadBaseEquipmentItemData extends monadItem {
   // stats: monadStats;
   stats: monadStatPair;
@@ -998,7 +1002,7 @@ export const ItemList: monadItemList = {
     description:
       "Skill: One of the Twelve; Increases all stats by 12% for 7 seconds.",
     rating: "epic",
-    stats: {},
+    stats: { increasedPrayerPointsPerMonsterKill: 1 },
     note: "",
     sellsFor: 1,
     "category": "Combat",
