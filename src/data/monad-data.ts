@@ -2756,7 +2756,7 @@ export const ItemList: monadItemList = {
   "Hui Lu's Battle Armour": {
     name: "Hui Lu's Battle Armour",
     description: "",
-    image: "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fget.wallhere.com%2Fphoto%2FHua-Lu-drawing-digital-art-samurai-men-creature-armor-tie-1557857.jpg",
+    image: "https://i.pinimg.com/originals/c7/06/73/c70673ebd140c9d4a5a7ea4eebeffdd7.jpg",
     rating: "rare",
     stats: {},
     long: "", // Price since it was shown In a shop.
@@ -2804,7 +2804,7 @@ export const ItemList: monadItemList = {
     0: {
       name: "Hui Lu's Battle Armour",
       description: "???",
-      image: "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fget.wallhere.com%2Fphoto%2FHua-Lu-drawing-digital-art-samurai-men-creature-armor-tie-1557857.jpg",
+      image: "https://i.pinimg.com/originals/c7/06/73/c70673ebd140c9d4a5a7ea4eebeffdd7.jpg",
       rating: "normal",
       stats: {},
       long: "", // Price since it was shown In a shop.
@@ -2817,7 +2817,7 @@ export const ItemList: monadItemList = {
   "Hui Lu's Enchanting Gloves": {
     name: "Hui Lu's Enchanting Gloves",
     description: "",
-    image: "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fget.wallhere.com%2Fphoto%2FHua-Lu-drawing-digital-art-samurai-men-creature-armor-tie-1557857.jpg",
+    image: "https://i.pinimg.com/originals/c7/06/73/c70673ebd140c9d4a5a7ea4eebeffdd7.jpg",
     rating: "rare",
     stats: {},
     long: "", // Price since it was shown In a shop.
@@ -2859,7 +2859,7 @@ export const ItemList: monadItemList = {
     0: {
       name: "Hui Lu's Enchanting Gloves",
       description: "???",
-      image: "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fget.wallhere.com%2Fphoto%2FHua-Lu-drawing-digital-art-samurai-men-creature-armor-tie-1557857.jpg",
+      image: "https://i.pinimg.com/originals/c7/06/73/c70673ebd140c9d4a5a7ea4eebeffdd7.jpg",
       rating: "normal",
       stats: {},
       long: "", // Price since it was shown In a shop.
@@ -2872,7 +2872,7 @@ export const ItemList: monadItemList = {
   "Hui Lu's Burning Boots": {
     name: "Hui Lu's Burning Boots",
     description: "",
-    image: "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fget.wallhere.com%2Fphoto%2FHua-Lu-drawing-digital-art-samurai-men-creature-armor-tie-1557857.jpg",
+    image: "https://i.pinimg.com/originals/c7/06/73/c70673ebd140c9d4a5a7ea4eebeffdd7.jpg",
     rating: "rare",
     stats: {},
     long: "", // Price since it was shown In a shop.
@@ -2916,7 +2916,7 @@ export const ItemList: monadItemList = {
     0: {
       name: "Hui Lu's Burning Boots",
       description: "???",
-      image: "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fget.wallhere.com%2Fphoto%2FHua-Lu-drawing-digital-art-samurai-men-creature-armor-tie-1557857.jpg",
+      image: "https://i.pinimg.com/originals/c7/06/73/c70673ebd140c9d4a5a7ea4eebeffdd7.jpg",
       rating: "normal",
       stats: {},
       long: "", // Price since it was shown In a shop.
