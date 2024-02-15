@@ -356,7 +356,7 @@ export const ItemList: monadItemList = {
     occupiesSlots: [],
     equipRequirements: [],
     modifiers: {
-      "increasedMeleeMaxHitFlat": 1
+      "increasedMeleeMaxHitFlat": 5
     },
     enemyModifiers: {},
     "equipmentStats": [
@@ -1078,7 +1078,9 @@ export const ItemList: monadItemList = {
     validSlots: ["Platebody"],
     occupiesSlots: [],
     equipRequirements: [],
-    modifiers: {},
+    modifiers: {
+      "increasedTownshipLeatherProduction": 5
+    },
     enemyModifiers: {}
   },
   "Crown of the Dammed": {
@@ -1124,12 +1126,15 @@ export const ItemList: monadItemList = {
       { "key": 'meleeStrengthBonus', "value": 0 },
       { "key": 'rangedStrengthBonus', "value": 0 },
       { "key": 'magicDamageBonus', "value": 0 },
-      { "key": 'summoningMaxhit', "value": 0 }
+      { "key": 'summoningMaxhit', "value": 10 }
     ],
     validSlots: ["Helmet"],
     occupiesSlots: [],
     equipRequirements: [],
-    modifiers: {},
+    modifiers: {
+      "increasedSummoningMaxHit": 50,
+      increasedSummoningChargePreservation: 10
+    },
     enemyModifiers: {}, sellsFor: 1,
     "category": "Combat",
   },
