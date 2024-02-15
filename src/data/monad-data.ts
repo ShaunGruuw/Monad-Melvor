@@ -1871,7 +1871,9 @@ export const ItemList: monadItemList = {
     validSlots: ["Boots"],
     occupiesSlots: [],
     equipRequirements: [],
-    modifiers: {},
+    modifiers: {
+      aprilFoolsIncreasedMovementSpeed: 10
+    },
     enemyModifiers: {},
   },
   "Rogue's Ring": {
@@ -2138,6 +2140,7 @@ export const ItemList: monadItemList = {
     equipRequirements: [],
     modifiers: {
       increasedThievingStealth: 40,
+      "increasedChanceToDoubleLootCombat": 10
     },
     enemyModifiers: {},
   },
@@ -2206,7 +2209,9 @@ export const ItemList: monadItemList = {
     validSlots: ["Boots"],
     occupiesSlots: [],
     equipRequirements: [],
-    modifiers: {},
+    modifiers: {
+      "increasedChanceToDoubleLootCombat": 1
+    },
     enemyModifiers: {},
   },
   "Black Band": {
@@ -2384,7 +2389,9 @@ export const ItemList: monadItemList = {
     validSlots: ["Ring"],
     occupiesSlots: [],
     equipRequirements: [],
-    modifiers: {},
+    modifiers: {
+      "increasedAltMagicSkillXP": 6
+    },
     enemyModifiers: {}
   },
   "Frost Gloves": {
@@ -3364,7 +3371,7 @@ export const ItemList: monadItemList = {
     },
     enemyModifiers: {}
   },
-  //   The following are types of Japanese swords:
+  // The following are types of Japanese swords:
   // Tsurugi/Ken (剣, "sword"): A straight two edged sword that was mainly produced prior to the 10th century. Before the 10th century, they completely disappeared as weapons and came to be made only as offerings to Shinto shrines and Buddhist temples.
   // Chokutō (直刀, "straight sword"): A straight single edged sword that was mainly produced prior to the 10th century. Since the 10th century, they disappeared as weapons and came to be made only as offerings to Shinto shrines and Buddhist temples.
   // Tachi (太刀, "long sword"): A sword that is generally longer and more curved than the later katana, with curvature often centered from the middle or towards the tang, and often including the tang. Tachi were worn suspended, with the edge downward. The tachi was in vogue before the 15th century.
