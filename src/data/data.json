@@ -93,7 +93,8 @@
         ],
         "occupiesSlots": [],
         "tier": "none",
-        "equipRequirements": [],
+        "equipRequirements": [
+        ],
         "equipmentStats": [],
         "itemType": "Equipment",
         "modifiers": {

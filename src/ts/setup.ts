@@ -198,8 +198,6 @@ export async function setup(ctx: Modding.ModContext) {
       }
     });
 
-
-
     ctx.onModsLoaded(async () => {
       try {
         const kcm = mod.manager.getLoadedModList().includes('Custom Modifiers in Melvor')
@@ -1855,7 +1853,11 @@ export async function setup(ctx: Modding.ModContext) {
                         // https://wiki.melvoridle.com/index.php?title=Table_of_Items
                         allItems.push(`${item.namespace}:${item.localID}`)
 
-                        if (item.sellsFor < 1 && item.type != "Misc") questItems.push(item.namespace + ':' + item.localID)
+                        if(item.category === "Archaeology") {
+                          growthItems.push(item.namespace + ":" + item.localID)
+                        }
+
+                        else if (item.sellsFor < 1 && item.type != "Misc") questItems.push(item.namespace + ':' + item.localID)
 
                         else if (item.sellsFor < 30) {
                           junkItems.push(item.namespace + ':' + item.localID)

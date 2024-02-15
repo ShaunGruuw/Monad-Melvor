@@ -23,6 +23,10 @@
             "equipmentStats": [],
             "itemType": "Equipment",
             "modifiers": {
+              "increasedChanceForElementalRune": 100,
+              "increasedChanceAdditionalBarSmithing": 100,
+              "increasedChanceDarkBlade": 100,
+              "doubleOresMining": 10,
               "increasedSummoningMaxHit": 1000,
               "decreasedSummoningAttackIntervalPercent": 50,
               "increasedHPRegenFlat": 1000,

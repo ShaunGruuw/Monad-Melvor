@@ -248,7 +248,7 @@ export const ItemList: monadItemList = {
     category: "Potion",
     // Melvor
     "modifiers": {
-      // "increasedHealEvery200Int": 1
+      "increasedEndOfTurnHealing5": 1
     },
     "charges": 5,
     "tier": 0,
@@ -1279,7 +1279,9 @@ export const ItemList: monadItemList = {
     validSlots: ["Helmet"],
     occupiesSlots: [],
     equipRequirements: [],
-    modifiers: {},
+    modifiers: {
+      "increasedMinAirSpellDmg": 5
+    },
     enemyModifiers: {}, sellsFor: 1,
     "category": "Combat",
   },
@@ -2237,7 +2239,11 @@ export const ItemList: monadItemList = {
     validSlots: ["Ring"],
     occupiesSlots: [],
     equipRequirements: [],
-    modifiers: {},
+    modifiers: {
+      "decreasedPlayerDamageReduction": 5,
+      "increasedDamageReductionAgainstBosses": 5,
+      "increasedChanceToAvoidStun": 5
+    },
     enemyModifiers: {},
     9: {
       name: "Black Band +9",
@@ -2447,7 +2453,9 @@ export const ItemList: monadItemList = {
     validSlots: ["Gloves"],
     occupiesSlots: [],
     equipRequirements: [],
-    modifiers: {},
+    modifiers: {
+      "increasedMaxWaterSpellDmg": 3
+    },
     enemyModifiers: {}
   },
   "Flame Gloves": {
@@ -2516,7 +2524,9 @@ export const ItemList: monadItemList = {
     validSlots: ["Gloves"],
     occupiesSlots: [],
     equipRequirements: [],
-    modifiers: {},
+    modifiers: {
+      "increasedMaxFireSpellDmg": 3
+    },
     enemyModifiers: {}
   },
   "Ceremonial White Stag Mask": {
@@ -2565,7 +2575,7 @@ export const ItemList: monadItemList = {
       { "key": 'meleeStrengthBonus', "value": 0 },
       { "key": 'rangedStrengthBonus', "value": 0 },
       { "key": 'magicDamageBonus', "value": 0 },
-      { "key": 'summoningMaxhit', "value": 0 }
+      { "key": 'summoningMaxhit', "value": 10 }
     ],
     validSlots: ["Helmet"],
     occupiesSlots: [],
@@ -2632,7 +2642,7 @@ export const ItemList: monadItemList = {
       { "key": 'meleeStrengthBonus', "value": 0 },
       { "key": 'rangedStrengthBonus', "value": 0 },
       { "key": 'magicDamageBonus', "value": 0 },
-      { "key": 'summoningMaxhit', "value": 0 }
+      { "key": 'summoningMaxhit', "value": 100 }
     ],
     validSlots: ["Helmet"],
     occupiesSlots: [],
@@ -2799,7 +2809,9 @@ export const ItemList: monadItemList = {
     validSlots: ["Platebody"],
     occupiesSlots: [],
     equipRequirements: [],
-    modifiers: {},
+    modifiers: {
+      "increasedReflectDamage": 10
+    },
     enemyModifiers: {},
     0: {
       name: "Hui Lu's Battle Armour",
@@ -2854,7 +2866,9 @@ export const ItemList: monadItemList = {
     validSlots: ["Gloves"],
     occupiesSlots: [],
     equipRequirements: [],
-    modifiers: {},
+    modifiers: {
+      "increasedMaxFireSpellDmg": 5
+    },
     enemyModifiers: {},
     0: {
       name: "Hui Lu's Enchanting Gloves",
@@ -2911,7 +2925,9 @@ export const ItemList: monadItemList = {
     validSlots: ["Boots"],
     occupiesSlots: [],
     equipRequirements: [],
-    modifiers: {},
+    modifiers: {
+      "decreasedDamageTakenPerAttack": 5
+    },
     enemyModifiers: {},
     0: {
       name: "Hui Lu's Burning Boots",
@@ -2970,7 +2986,8 @@ export const ItemList: monadItemList = {
     validSlots: ["Gloves"],
     occupiesSlots: [],
     equipRequirements: [],
-    modifiers: {},
+    modifiers: {
+    },
     enemyModifiers: {}
   },
   "Glide Moroha": {
@@ -2990,28 +3007,28 @@ export const ItemList: monadItemList = {
     "equipmentStats": [
       {
         "key": "meleeDefenceBonus",
-        "value": 56
+        "value": 0
       },
       {
         "key": "rangedDefenceBonus",
-        "value": 58
+        "value": 0
       },
       {
         "key": "magicDefenceBonus",
-        "value": -1
+        "value": 0
       },
       {
         "key": "magicAttackBonus",
-        "value": -8
+        "value": 0
       },
       {
         "key": "rangedAttackBonus",
-        "value": -2
+        "value": 0
       },
-      { "key": 'stabAttackBonus', "value": 0 },
-      { "key": 'slashAttackBonus', "value": 0 },
-      { "key": 'blockAttackBonus', "value": 0 },
-      { "key": 'meleeStrengthBonus', "value": 0 },
+      { "key": 'stabAttackBonus', "value": 8 },
+      { "key": 'slashAttackBonus', "value": 72 },
+      { "key": 'blockAttackBonus', "value": 8 },
+      { "key": 'meleeStrengthBonus', "value": 75 },
       { "key": 'rangedStrengthBonus', "value": 0 },
       { "key": 'magicDamageBonus', "value": 0 },
       { "key": 'damageReduction', "value": 0 },
@@ -3019,7 +3036,13 @@ export const ItemList: monadItemList = {
     ],
     validSlots: ["Shield"],
     occupiesSlots: [],
-    equipRequirements: [],
+    equipRequirements: [
+      {
+        "skillID":"melvorD:Attack",
+        "level": 60,
+        "type": "SkillLevel"
+      }
+    ],
     modifiers: {},
     enemyModifiers: {}
   },
@@ -3042,12 +3065,12 @@ export const ItemList: monadItemList = {
         "key": "attackSpeed",
         "value": 2600
       },
-      { "key": 'stabAttackBonus', "value": 0 },
-      { "key": 'slashAttackBonus', "value": 0 },
-      { "key": 'blockAttackBonus', "value": 0 },
+      { "key": 'stabAttackBonus', "value": 8 },
+      { "key": 'slashAttackBonus', "value": 72 },
+      { "key": 'blockAttackBonus', "value": 8 },
       { "key": 'rangedAttackBonus', "value": 0 },
       { "key": 'magicAttackBonus', "value": 0 },
-      { "key": 'meleeStrengthBonus', "value": 0 },
+      { "key": 'meleeStrengthBonus', "value": 75 },
       { "key": 'rangedStrengthBonus', "value": 0 },
       { "key": 'magicDamageBonus', "value": 0 },
       { "key": 'meleeDefenceBonus', "value": 0 },
@@ -3058,21 +3081,27 @@ export const ItemList: monadItemList = {
     ],
     validSlots: ["Weapon"],
     occupiesSlots: [],
-    equipRequirements: [],
+    equipRequirements: [
+      {
+        "skillID":"melvorD:Attack",
+        "level": 60,
+        "type": "SkillLevel"
+      }
+    ],
     modifiers: {},
     enemyModifiers: {}
   },
-  "Glide & Gale (2/2)": {
-    name: "Set Effect:",
-    description: "Skill: Biting Wind (Lowest Item Enchant Level).",
-    rating: "rare",
-    stats: {},
-    note: "",
-    sellsFor: 1,
-    "category": "Combat",
-    type: "Set",
-    itemIDs: ["Gale Moroha", "Glide Moroha"],
-  },
+  // "Glide & Gale (2/2)": {
+  //   name: "Set Effect:",
+  //   description: "Skill: Biting Wind (Lowest Item Enchant Level).",
+  //   rating: "rare",
+  //   stats: {},
+  //   note: "",
+  //   sellsFor: 1,
+  //   "category": "Combat",
+  //   type: "Set",
+  //   itemIDs: ["Gale Moroha", "Glide Moroha"],
+  // },
   "Niyosho Gakuran": {
     name: "Niyosho Gakuran",
     description: "The male school uniform of Niyosho.",
@@ -3102,7 +3131,9 @@ export const ItemList: monadItemList = {
     validSlots: ["Platebody"],
     occupiesSlots: [],
     equipRequirements: [],
-    modifiers: {},
+    modifiers: {
+      "increasedTownshipHappiness": 5
+    },
     enemyModifiers: {}
   },
   "Niyosho Hakama": {
@@ -3134,7 +3165,9 @@ export const ItemList: monadItemList = {
     validSlots: ["Platebody"],
     occupiesSlots: [],
     equipRequirements: [],
-    modifiers: {},
+    modifiers: {
+      "increasedTownshipHappiness": 20
+    },
     enemyModifiers: {}
   },
   "Otto's Leaky Wand": {
@@ -3171,16 +3204,19 @@ export const ItemList: monadItemList = {
       { "key": 'rangedAttackBonus', "value": 0 },
       { "key": 'meleeStrengthBonus', "value": 0 },
       { "key": 'rangedStrengthBonus', "value": 0 },
-      { "key": 'magicDamageBonus', "value": 0 },
+      { "key": 'magicDamageBonus', "value": 10 },
       { "key": 'meleeDefenceBonus', "value": 0 },
       { "key": 'rangedDefenceBonus', "value": 0 },
       { "key": 'magicDefenceBonus', "value": 0 },
-      { "key": 'summoningMaxhit', "value": 0 }
+      { "key": 'summoningMaxhit', "value": 10 }
     ],
     validSlots: ["Weapon"],
     occupiesSlots: [],
     equipRequirements: [],
-    modifiers: {},
+    modifiers: {
+      "increasedPoisonSpellAccuracy": 10,
+      "decreasedGlobalAccuracy": 10
+    },
     enemyModifiers: {}
   },
   "Jokoto Wakizashi": {
@@ -3196,14 +3232,14 @@ export const ItemList: monadItemList = {
     equipmentStats:[
       {
         "key": "attackSpeed",
-        "value": 2600
+        "value": 2300
       },
-      { "key": 'stabAttackBonus', "value": 0 },
-      { "key": 'slashAttackBonus', "value": 0 },
-      { "key": 'blockAttackBonus', "value": 0 },
+      { "key": 'stabAttackBonus', "value": 4 },
+      { "key": 'slashAttackBonus', "value": 19 },
+      { "key": 'blockAttackBonus', "value": 4 },
       { "key": 'rangedAttackBonus', "value": 0 },
       { "key": 'magicAttackBonus', "value": 0 },
-      { "key": 'meleeStrengthBonus', "value": 0 },
+      { "key": 'meleeStrengthBonus', "value": 14 },
       { "key": 'rangedStrengthBonus', "value": 0 },
       { "key": 'magicDamageBonus', "value": 0 },
       { "key": 'meleeDefenceBonus', "value": 0 },
@@ -3214,7 +3250,13 @@ export const ItemList: monadItemList = {
     ],
     validSlots: ["Weapon"],
     occupiesSlots: [],
-    equipRequirements: [],
+    equipRequirements: [
+      {
+        "skillID":"melvorD:Attack",
+        "level": 10,
+        "type": "SkillLevel"
+      }
+    ],
     modifiers: {},
     enemyModifiers: {},
     sellsFor: 1,
@@ -3249,7 +3291,9 @@ export const ItemList: monadItemList = {
     validSlots: ["Platebody"],
     occupiesSlots: [],
     equipRequirements: [],
-    modifiers: {},
+    modifiers: {
+      "increasedTownshipHappiness": 10
+    },
     enemyModifiers: {}
   },
   "Niyosho Kimono": {
@@ -3281,7 +3325,9 @@ export const ItemList: monadItemList = {
     validSlots: ["Platebody"],
     occupiesSlots: [],
     equipRequirements: [],
-    modifiers: {},
+    modifiers: {
+      "increasedTownshipHappiness": 5
+    },
     enemyModifiers: {}
   },
   "Autumn Cloak": {
