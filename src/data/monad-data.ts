@@ -239,7 +239,7 @@ export const ItemList: monadItemList = {
   "Training Health Potion": {
     type: "Potion",
     name: "Training Health Potion",
-    description: "Recovers 1HP every 5 seconds for the next 120 seconds.", // 24 HP
+    description: "Recovers 1HP every 5 seconds for the next 120 seconds", // 24 HP
     image: "img/BloodPotion.png",
     long: "¤1", // Price since it was shown In a shop.
     note: "",
@@ -420,7 +420,7 @@ export const ItemList: monadItemList = {
   },
   "Trainee Bone Spear": {
     name: "Trainee Bone Spear",
-    description: "Tiny increase in spear proficiency when equipped.",
+    description: "Tiny increase in spear proficiency when equipped",
     image: "https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fimg4.wikia.nocookie.net%2F__cb20100812144340%2Frunescape%2Fimages%2F4%2F43%2FBone_spear_detail.png",
     long: "", // Price since it was shown In a shop.
     rating: "junk",
@@ -499,7 +499,7 @@ export const ItemList: monadItemList = {
   "Paladin Engeler's Body Armour (silver rank)": {
     name: "Paladin Engeler's Body Armour (silver rank)",
     description:
-      "Reduces physical damage taken by 10%, except spears. Endurance +1, Endurance +10%.",
+      "Reduces physical damage taken by 10%, except spears. Endurance +1, Endurance +10%",
     rating: "epic",
     stats: { endurance: 1, endurancePerc: 10, physicalDamageReduction: 10 },
     note: "",
@@ -544,7 +544,7 @@ export const ItemList: monadItemList = {
   },
   "Paladin Engeler's Sallet (silver rank)": {
     name: "Paladin Engeler's Sallet (silver rank)",
-    description: "Endurance +1.8.",
+    description: "Endurance +1.8",
     rating: "epic",
     stats: { endurance: 1.8 },
     note: "",
@@ -589,7 +589,7 @@ export const ItemList: monadItemList = {
   },
   "Paladin Engeler's Gauntlets (silver rank)": {
     name: "Paladin Engeler's Gauntlets (silver rank)",
-    description: "Endurance +1.",
+    description: "Endurance +1",
     rating: "epic",
     stats: { endurance: 1 },
     note: "",
@@ -624,7 +624,7 @@ export const ItemList: monadItemList = {
   },
   "Paladin Engeler's Sabaton (silver rank)": {
     name: "Paladin Engeler's Sabaton (silver rank)",
-    description: "Endurance +1.2.",
+    description: "Endurance +1.2",
     rating: "epic",
     stats: { endurance: 1.2 },
     note: "",
@@ -668,7 +668,7 @@ export const ItemList: monadItemList = {
   },
   "Paladin Engeler's Mace (silver rank)": {
     name: "Paladin Engeler's Mace (silver rank)",
-    description: "Strength +3.",
+    description: "Strength +3",
     rating: "epic",
     stats: { strength: 3, strengthPerc: 1 },
     note: "",
@@ -718,7 +718,7 @@ export const ItemList: monadItemList = {
   "Paladin Engeler's Shield (silver rank)": {
     name: "Paladin Engeler's Shield (silver rank)",
     description:
-      "Threat increased 20%, Reduce received damage from Demons by 7%, Reduce received damage from Undead by 7%, chance to block 20%.",
+      "Threat increased 20%, Reduce received damage from Demons by 7%, Reduce received damage from Undead by 7%, chance to block 20%",
     rating: "epic",
     stats: { "demonDamageReductionPerc": 7, undeadDamageReductionPerc: 7, blockPerc: 20, meleeDefenceBonus: 100, rangedDefenceBonus: 100 },
     note: "",
@@ -762,7 +762,7 @@ export const ItemList: monadItemList = {
   },
   "Paladin Engeler's Cape (silver rank)": {
     name: "Paladin Engeler's Cape (silver rank)",
-    description: "Increase HP by 315, Increase MP by 225.",
+    description: "Increase HP by 315, Increase MP by 225",
     rating: "epic",
     stats: { HP: 315, MP: 225 },
     note: "",
@@ -814,7 +814,7 @@ export const ItemList: monadItemList = {
     modifiers: {},
     enemyModifiers: {},
     1: {
-      description: "Increase HP by 32, Increase MP by 23.",
+      description: "Increase HP by 32, Increase MP by 23",
       stats: { HP: 32, MP: 23 },
       type: "Equipment",
     }
@@ -986,7 +986,7 @@ export const ItemList: monadItemList = {
   },
   "Paladin Engeler's Set (4/7)": {
     name: "Paladin Engeler's Set",
-    description: "Crit Rate: +1, Critical Damage: +3%.",
+    description: "Crit Rate: +1, Critical Damage: +3%",
     rating: "epic",
     stats: { CriticalHitChance: 1, CriticalHitDamage: 3 },
     note: "",
@@ -1000,7 +1000,7 @@ export const ItemList: monadItemList = {
   "Paladin Engeler's Set (7/7)": {
     name: "Paladin Engeler's Set",
     description:
-      "Skill: One of the Twelve; Increases all stats by 12% for 7 seconds.",
+      "Skill: One of the Twelve; Increases all stats by 12% for 7 seconds",
     rating: "epic",
     stats: { increasedPrayerPointsPerMonsterKill: 1 },
     note: "",
@@ -1013,7 +1013,7 @@ export const ItemList: monadItemList = {
   },
   "Toads Skin Jacket": {
     name: "Toads Skin Jacket",
-    description: "Has a small chance to poison on contact, dexterity +1.",
+    description: "Has a small chance to poison on contact, dexterity +1",
     image:
       "https://ffxiv.gamerescape.com/w/images/7/70/Model-Toadskin_Jacket-Male-Hyur.png",
     rating: "normal",
@@ -1085,7 +1085,7 @@ export const ItemList: monadItemList = {
   },
   "Crown of the Dammed": {
     name: "Crown of the Dammed",
-    description: "Magic + 25, -5 Charisma, control undead +1.",
+    description: "Magic + 25, -5 Charisma, control undead +1",
     image: "https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fimg4.wikia.nocookie.net%2F__cb20120612154312%2Felderscrolls%2Fimages%2F4%2F42%2FBonecrowngo.png",
     rating: "rare",
     stats: { magic: 25, charisma: -5, controlUndead: 1 },
@@ -1140,7 +1140,7 @@ export const ItemList: monadItemList = {
   },
   "Ring of initial undead control": {
     name: "Ring of initial undead control",
-    description: "mag + 10, Control undead +1.",
+    description: "mag + 10, Control undead +1",
     image: "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fstatic.wikia.nocookie.net%2Fthe-bloodied-goats%2Fimages%2F2%2F2b%2FNecromanticRing_01.png",
     rating: "normal",
     stats: { magic: 10, controlUndead: 1 },
@@ -1172,7 +1172,7 @@ export const ItemList: monadItemList = {
   },
   "Ring of Little Strength": {
     name: "Ring of Little Strength",
-    description: "Strength +1.",
+    description: "Strength +1",
     image: "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fdemonssouls.wiki.fextralife.com%2Ffile%2FDemons-Souls%2Fring_of_great_strength_ring_demon%27s_souls_wiki_guide234px.png",
     rating: "junk",
     stats: { strength: 1 },
@@ -1204,7 +1204,7 @@ export const ItemList: monadItemList = {
   },
   "Pendent of Medium Magic": {
     name: "Pendent of Medium Magic",
-    description: "magic +2, strength -1.",
+    description: "magic +2, strength -1",
     image: "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fi.pinimg.com%2Foriginals%2F6d%2F67%2F34%2F6d6734a47795c57393d8722de88a02d3.png",
     rating: "normal",
     stats: { strength: -1, magic: 2 },
@@ -1236,7 +1236,7 @@ export const ItemList: monadItemList = {
   },
   "Witches Hat": {
     name: "Witches Hat",
-    description: "magic +30.",
+    description: "magic +30",
     image: "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fcdn4.iconfinder.com%2Fdata%2Ficons%2Fhalloween-4%2F60%2Fhalloween_hat_witch-1024.png",
     rating: "normal",
     stats: { magic: 30 },
@@ -1292,7 +1292,7 @@ export const ItemList: monadItemList = {
   },
   "Queen's Pawn": {
     name: "Queen's Pawn",
-    description: "Skill: Animate stone.",
+    description: "Skill: Animate stone",
     image: "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fclipground.com%2Fimages%2Fqueen-chess-piece-png-5.png",
     rating: "rare",
     stats: {},
@@ -1326,7 +1326,7 @@ export const ItemList: monadItemList = {
   },
   "Skull of victim": {
     name: "Skull of victim",
-    description: "Control undead +2.",
+    description: "Control undead +2",
     stats: { controlUndead: 2 },
     image: "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwallpapercave.com%2Fwp%2FoHigspi.jpg",
     rating: "normal",
@@ -1359,7 +1359,7 @@ export const ItemList: monadItemList = {
   },
   "Enchanting Quill": {
     name: "Enchanting Quill",
-    description: "Enchanting chance of success + 5%.",
+    description: "Enchanting chance of success + 5%",
     image: "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fi.pinimg.com%2Foriginals%2F4d%2Fea%2Fa3%2F4deaa39ea2c9b61448246b35d9208b62.jpg",
     stats: { Enchanting: 5 },
     rating: "normal",
@@ -1392,7 +1392,7 @@ export const ItemList: monadItemList = {
   },
   "Princesses Coin": {
     name: "Princesses Coin",
-    description: "(???).",
+    description: "(???)",
     image: "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.thirdwayindustries.com%2Fwp-content%2Fuploads%2F2021%2F03%2Ftales_coin_princess.png",
     rating: "junk",
     sellsFor: 1,
@@ -1403,7 +1403,7 @@ export const ItemList: monadItemList = {
   },
   "necklace made of teeth": {
     name: "necklace made of teeth",
-    description: "(???).",
+    description: "(???)",
     image: "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fvignette.wikia.nocookie.net%2Fclubpenguin%2Fimages%2F7%2F70%2FToothy_Necklace.png",
     rating: "junk",
     stats: {},
@@ -1436,7 +1436,7 @@ export const ItemList: monadItemList = {
   },
   "Black scarf": {
     name: "Black scarf",
-    description: "Hides users identity.",
+    description: "Hides users identity",
     image: "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fpurepng.com%2Fpublic%2Fuploads%2Flarge%2Fpurepng.com-heather-black-scarfscarfscarvesfabricwarmthfashionclipartheatherblack-1421526411611eyqmx.png",
     rating: "junk",
     stats: {},
@@ -1469,7 +1469,7 @@ export const ItemList: monadItemList = {
   },
   "Whale Skin": {
     name: "Whale Skin",
-    description: "Coating boats to go faster.",
+    description: "Coating boats to go faster",
     image: "https://i.redd.it/eyoqcw8tm0u21.png",
     rating: "normal",
     long: "", // Price since it was shown In a shop.
@@ -1480,7 +1480,7 @@ export const ItemList: monadItemList = {
   },
   "Linen Halfgloves": {
     name: "Linen Halfgloves",
-    description: "Dexterity +1.",
+    description: "Dexterity +1",
     image:
       "https://ffxiv.gamerescape.com/w/images/9/9a/Model-Linen_Halfgloves-Male-Hyur.png",
     rating: "junk",
@@ -1529,7 +1529,7 @@ export const ItemList: monadItemList = {
   },
   "Battlemage's Gloves": {
     name: "Battlemage's Gloves",
-    description: "Magic +1, Willpower: +1, Spell Speed: +1%.",
+    description: "Magic +1, Willpower: +1, Spell Speed: +1%",
     image:
       "https://ffxiv.gamerescape.com/w/images/9/9a/Model-Linen_Halfgloves-Male-Hyur.png",
     rating: "normal",
@@ -1584,7 +1584,7 @@ export const ItemList: monadItemList = {
   },
   "Battlemage's Hat": {
     name: "Battlemage's Hat",
-    description: "Magic +1, Willpower: +1, Spell Speed: +1%.",
+    description: "Magic +1, Willpower: +1, Spell Speed: +1%",
     image:
       "https://ffxiv.gamerescape.com/w/images/3/34/Model-Battlemage%27s_Hat-Male-Hyur.png",
     rating: "normal",
@@ -1639,7 +1639,7 @@ export const ItemList: monadItemList = {
   },
   "Battlemage's Robe": {
     name: "Battlemage's Robe",
-    description: "Magic +1, Willpower: +1, Spell Speed: +1%.",
+    description: "Magic +1, Willpower: +1, Spell Speed: +1%",
     image:
       "https://ffxiv.gamerescape.com/w/images/6/63/Model-Battlemage%27s_Robe-Male-Hyur.png",
     rating: "normal",
@@ -1685,7 +1685,7 @@ export const ItemList: monadItemList = {
   },
   "Battlemage's Crakows": {
     name: "Battlemage's Crakows",
-    description: "Magic +1, Willpower: +1, Spell Speed: +1%.",
+    description: "Magic +1, Willpower: +1, Spell Speed: +1%",
     image:
       "https://ffxiv.gamerescape.com/w/images/0/0c/Model-Battlemage%27s_Crakows-Male-Hyur.png",
     rating: "normal",
@@ -1740,7 +1740,7 @@ export const ItemList: monadItemList = {
   },
   "Battlemage's Breeches": {
     name: "Battlemage's Breeches",
-    description: "Magic +1, Willpower: +1, Spell Speed: +1%.",
+    description: "Magic +1, Willpower: +1, Spell Speed: +1%",
     image:
       "https://ffxiv.gamerescape.com/w/images/2/2e/Model-Battlemage%27s_Breeches-Male-Hyur.png",
     rating: "normal",
@@ -1787,7 +1787,7 @@ export const ItemList: monadItemList = {
   },
   "Battlemage's Set (5/5)": {
     name: "Battlemage's Set (5/5)",
-    description: "Magic +1, Willpower: +1, Spell Speed: +1%.",
+    description: "Magic +1, Willpower: +1, Spell Speed: +1%",
     rating: "normal",
     stats: { magic: 1, willpower: 1, SpellSpeed: 1 },
     note: "",
@@ -1832,7 +1832,7 @@ export const ItemList: monadItemList = {
   },
   "Rayndr Jackboots": {
     name: "Rayndr Jackboots",
-    description: "Critical hit rate: +1, Endurance: +1.",
+    description: "Critical hit rate: +1, Endurance: +1",
     image:
       "https://ffxiv.gamerescape.com/w/images/2/23/Model-Qarn_Jackboots-Male-Hyur.png",
     rating: "normal",
@@ -1883,7 +1883,7 @@ export const ItemList: monadItemList = {
   },
   "Rogue's Ring": {
     name: "Rogue's Ring",
-    description: "Critical hit rate: +1, Dexterity: +1.",
+    description: "Critical hit rate: +1, Dexterity: +1",
     image:
       "https://ffxiv.gamerescape.com/w/images/thumb/0/05/Model-Rogue%27s_Ring.png/450px-Model-Rogue%27s_Ring.png",
     rating: "normal",
@@ -1916,7 +1916,7 @@ export const ItemList: monadItemList = {
     enemyModifiers: {},
     3: {
       name: "Rogue's Ring +3",
-      description: "Critical hit rate: +3, Dexterity: +3.",
+      description: "Critical hit rate: +3, Dexterity: +3",
       image:
         "https://ffxiv.gamerescape.com/w/images/thumb/0/05/Model-Rogue%27s_Ring.png/450px-Model-Rogue%27s_Ring.png",
       rating: "normal",
@@ -1927,7 +1927,7 @@ export const ItemList: monadItemList = {
     },
     9: {
       name: "Rogue's Ring +9",
-      description: "Critical hit rate: +9, Dexterity: +9.",
+      description: "Critical hit rate: +9, Dexterity: +9",
       image:
         "https://ffxiv.gamerescape.com/w/images/thumb/0/05/Model-Rogue%27s_Ring.png/450px-Model-Rogue%27s_Ring.png",
       rating: "normal",
@@ -1946,7 +1946,7 @@ export const ItemList: monadItemList = {
   },
   "Dark Elf's Scimitar": {
     name: "Dark Elf's Scimitar",
-    description: "Cutting deals 3% more damage, strength: +1.",
+    description: "Cutting deals 3% more damage, strength: +1",
     image:
       "https://i.pinimg.com/564x/e4/b7/5d/e4b75d01d093430bb055a82dc5967c38.jpg",
     rating: "normal",
@@ -1988,7 +1988,7 @@ export const ItemList: monadItemList = {
   },
   "Meroyri Xiphos": {
     name: "Meroyri Xiphos",
-    description: "strength: +1.",
+    description: "strength: +1",
     image:
       "https://i.pinimg.com/564x/36/0d/28/360d2889c232ccfc54439397d95198d2.jpg",
     rating: "junk",
@@ -2030,7 +2030,7 @@ export const ItemList: monadItemList = {
   },
   "Rayndr Face Mask": {
     name: "Rayndr Face Mask",
-    description: "Disease resistance +3%.",
+    description: "Disease resistance +3%",
     image: "https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fauronlu.istad.org%2Fffx-script%2Fwp-content%2Fuploads%2F2015%2F09%2F96nedus.jpg",
     rating: "junk",
     stats: { diseaseResistancePerc: 3 },
@@ -2079,7 +2079,7 @@ export const ItemList: monadItemList = {
   "Shadow Pirate's Coat": {
     name: "Shadow Pirate's Coat",
     description:
-      "Hiding in shadows is 40% more effective. +150 water resistance. 2% water resistance.",
+      "Hiding in shadows is 40% more effective. +150 water resistance. 2% water resistance",
     image: "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fi.pinimg.com%2F474x%2F7d%2F0b%2Fd6%2F7d0bd6d33ea4f540d26ce3d59b642258.jpg",
     rating: "rare",
     stats: { stealthInShadowsPerc: 40, waterResistancePerc: 2, waterResistance: 150 },
@@ -2151,7 +2151,7 @@ export const ItemList: monadItemList = {
   },
   "Leather Pirate Boots": {
     name: "Leather Pirate Boots",
-    description: "+1 Endurance.",
+    description: "+1 Endurance",
     image: "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Frudokstavern.com%2Fwp-content%2Fuploads%2F2021%2F08%2FBoots-of-the-Shadow-Walker_1-768x768.jpg",
     rating: "junk",
     stats: { endurance: 1 },
@@ -2221,7 +2221,7 @@ export const ItemList: monadItemList = {
   },
   "Black Band": {
     name: "Black Band",
-    description: "Dexterity: +1.",
+    description: "Dexterity: +1",
     image: "img/Black_Band.png",
     rating: "normal",
     stats: { dexterity: 1 },
@@ -2257,7 +2257,7 @@ export const ItemList: monadItemList = {
     enemyModifiers: {},
     9: {
       name: "Black Band +9",
-      description: "Dexterity: +9.",
+      description: "Dexterity: +9",
       image: "img/Black_Band.png",
       rating: "normal",
       stats: { dexterity: 9 },
@@ -2271,14 +2271,14 @@ export const ItemList: monadItemList = {
   "Tidus Earing": {
     name: "Tidus Earing",
     description:
-      "Dexterity +9, Swimming speed +5, Can breath underwater for 5 minutes.",
+      "Dexterity +9, Swimming speed +5, Can breath underwater for 5 minutes",
     image:
       "https://image.vector-park.jp/images/item/original2/019/2017/08/24/019-201708240761_1.jpg?t=1572379770",
     rating: "epic",
     stats: { dexterity: 9, swimSpeed: 5, underwaterBreathing: 300000 },
     9: {
       name: "Tidus Earing",
-      description: "Dexterity +9, Swimming speed +5, Can breath underwater for 5 minutes.",
+      description: "Dexterity +9, Swimming speed +5, Can breath underwater for 5 minutes",
       image: "https://image.vector-park.jp/images/item/original2/019/2017/08/24/019-201708240761_1.jpg?t=1572379770",
       rating: "normal",
       stats: { dexterity: 9 },
@@ -2317,7 +2317,7 @@ export const ItemList: monadItemList = {
   },
   "Featureless Deathwood Mask": {
     name: "Featureless Deathwood Mask",
-    description: "Hides the users stats, name and other details.",
+    description: "Hides the users stats, name and other details",
     image: "https://static.wikia.nocookie.net/elderscrolls/images/f/f5/Nahkriin_Mask.png",
     rating: "rare",
     stats: {},
@@ -2610,11 +2610,11 @@ export const ItemList: monadItemList = {
   "Heavenly White Stag Mask": {
     name: "Heavenly White Stag Mask",
     description:
-      "Magic: +2, Disease resistance + 20%, Mana regeneration + 20%, blessing of 建御雷 [Takemikazuchi].",
+      "Magic: +2, Disease resistance + 20%, Mana regeneration + 20%, blessing of 建御雷 [Takemikazuchi]",
     image: "img/owl.jpg",
     rating: "unique",
     stats: { magic: 2, diseaseResistancePerc: 20, manaRegenPerc: 20, lightningResistancePerc: 20, lightningCostPerc: 15 },
-    long: "Blessing of 建御雷 [Takemikazuchi]: Resist lightning +20%, Lightning cost - 15%, Lightning power +20%.", // Price since it was shown In a shop.
+    long: "Blessing of 建御雷 [Takemikazuchi]: Resist lightning +20%, Lightning cost - 15%, Lightning power +20%", // Price since it was shown In a shop.
     note: "",
     sellsFor: 1,
     "category": "Combat",
@@ -2664,11 +2664,11 @@ export const ItemList: monadItemList = {
     0: {
       name: "Heavenly White Stag Mask",
       description:
-        "Magic: +1, Disease resistance + 20%, Mana regeneration + 10%, blessing of 建御雷 [Takemikazuchi].",
+        "Magic: +1, Disease resistance + 20%, Mana regeneration + 10%, blessing of 建御雷 [Takemikazuchi]",
       image: "img/owl.jpg",
       rating: "unique",
       stats: { magic: 1, },
-      long: "Blessing of 建御雷 [Takemikazuchi]: Resist lightning +10%, Lightning cost - 10%, Lightning power +10%.", // Price since it was shown In a shop.
+      long: "Blessing of 建御雷 [Takemikazuchi]: Resist lightning +10%, Lightning cost - 10%, Lightning power +10%", // Price since it was shown In a shop.
       note: "",
       sellsFor: 1,
       "category": "Combat",
@@ -2698,11 +2698,11 @@ export const ItemList: monadItemList = {
     1: {
       name: "Heavenly White Stag Mask",
       description:
-        "Magic: +2, Disease resistance + 20%, Mana regeneration + 20%, blessing of 建御雷 [Takemikazuchi].",
+        "Magic: +2, Disease resistance + 20%, Mana regeneration + 20%, blessing of 建御雷 [Takemikazuchi]",
       image: "img/owl.jpg",
       rating: "unique",
       stats: { magic: 2 },
-      long: "Blessing of 建御雷 [Takemikazuchi]: Resist lightning +20%, Lightning cost - 15%, Lightning power +20%.", // Price since it was shown In a shop.
+      long: "Blessing of 建御雷 [Takemikazuchi]: Resist lightning +20%, Lightning cost - 15%, Lightning power +20%", // Price since it was shown In a shop.
       note: "",
       sellsFor: 1,
       "category": "Combat",
@@ -2732,7 +2732,7 @@ export const ItemList: monadItemList = {
   },
   "Academy Robe (Black/Yellow)": {
     name: "Academy Robe (Black/Yellow)",
-    description: "Magic: +2, Lightning +2%, HP +10.",
+    description: "Magic: +2, Lightning +2%, HP +10",
     image: "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fcdn.sphere.co.uk%2Fpubtool-images%2Fnau89xt86itn68e7cswvg24yvcit&f=1&nofb=1&ipt=0731a0d425e37930a55835401236d4e146cc9c29305cbda2efa5f7882eb88741&ipo=images",
     rating: "junk",
     stats: { magic: 2, HP: 10, lightningIncreasedDamage: 2 },
@@ -2956,7 +2956,7 @@ export const ItemList: monadItemList = {
   },
   "Otari Kote": {
     name: "Otari Kote",
-    description: "Endurance +1, Skill: Powdered Snow Defense (Passive).",
+    description: "Endurance +1, Skill: Powdered Snow Defense (Passive)",
     image: "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fi.pinimg.com%2Foriginals%2F24%2F9f%2F00%2F249f00a8b019357ac998c60d3df129f9.jpg",
     rating: "normal",
     stats: {
@@ -3005,12 +3005,12 @@ export const ItemList: monadItemList = {
   "Glide Moroha": {
     name: "Glide Moroha",
     description:
-      "Deals +5 ice damage. Ice skills cost 5% less mana, other skills cost 2% less mana.",
+      "Deals +5 ice damage. Ice skills cost 5% less mana, other skills cost 2% less mana",
     image: "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.darkknightarmoury.com%2Fwp-content%2Fuploads%2F2021%2F02%2FSH2413.jpg",
     rating: "rare",
     stats: { iceIncreasedDamage: 5, iceCostPerc: 5, allCostPerc: 2 },
     long: "", // Price since it was shown In a shop.
-    note: "Moroha is the type of blade. Ice.",
+    note: "Moroha is the type of blade. Ice",
     type: "Weapon",
     sellsFor: 1,
     "category": "Combat",
@@ -3061,12 +3061,12 @@ export const ItemList: monadItemList = {
   "Gale Moroha": {
     name: "Gale Moroha",
     description:
-      "Deals +1 wind damage. Attack speed starts at 10% of user maximum speed. Skill cool downs are reduced 3%.",
+      "Deals +1 wind damage. Attack speed starts at 10% of user maximum speed. Skill cool downs are reduced 3%",
     image: "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.darkknightarmoury.com%2Fwp-content%2Fuploads%2F2021%2F02%2FSH2413.jpg",
     rating: "rare",
     stats: { windIncreasedDamage: 1, attackSpeed: 2400, allSkillCooldownPerc: 3 },
     long: "", // Price since it was shown In a shop.
-    note: "Moroha is the type of blade. Wind.",
+    note: "Moroha is the type of blade. Wind",
     type: "Weapon",
     sellsFor: 1,
     attackType: "melee",
@@ -3105,7 +3105,7 @@ export const ItemList: monadItemList = {
   },
   // "Glide & Gale (2/2)": {
   //   name: "Set Effect:",
-  //   description: "Skill: Biting Wind (Lowest Item Enchant Level).",
+  //   description: "Skill: Biting Wind (Lowest Item Enchant Level)",
   //   rating: "rare",
   //   stats: {},
   //   note: "",
@@ -3116,7 +3116,7 @@ export const ItemList: monadItemList = {
   // },
   "Niyosho Gakuran": {
     name: "Niyosho Gakuran",
-    description: "The male school uniform of Niyosho.",
+    description: "The male school uniform of Niyosho",
     rating: "junk",
     stats: {},
     note: "gakuran (学ラン)",
@@ -3150,10 +3150,10 @@ export const ItemList: monadItemList = {
   },
   "Niyosho Hakama": {
     name: "Niyosho Hakama",
-    description: "The school uniform of Niyosho.",
+    description: "The school uniform of Niyosho",
     rating: "junk",
     stats: {},
-    note: "Originally students just wore standard everyday clothes to school; kimono for female students, with hakama for male students. During the Meiji period, students began to wear uniforms modelled after Western dress.",
+    note: "Originally students just wore standard everyday clothes to school; kimono for female students, with hakama for male students. During the Meiji period, students began to wear uniforms modelled after Western dress",
     image: "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fi.pinimg.com%2Foriginals%2Ffd%2Fe6%2F75%2Ffde675e4fe3d7eeef19e5b4e2fab8366.png",
     type: "Equipment",
     sellsFor: 1,
@@ -3184,7 +3184,7 @@ export const ItemList: monadItemList = {
   },
   "Otto's Leaky Wand": {
     name: "Otto's Leaky Wand",
-    description: "Can only be used by Otto. Command +1, Command over plant's +4.",
+    description: "Can only be used by Otto. Command +1, Command over plant's +4",
     rating: "normal",
     stats: {
       controlPlants: 4,
@@ -3233,7 +3233,7 @@ export const ItemList: monadItemList = {
   },
   "Jokoto Wakizashi": {
     name: "Jokoto Wakizashi",
-    description: "A 55cm length short sword. This sword was made long ago, it is very worn.",
+    description: "A 55cm length short sword. This sword was made long ago, it is very worn",
     rating: "junk",
     stats: {},
     note: "Jokotō (ancient swords, until around A.D. 900), https://en.wikipedia.org/wiki/Wakizashi",
@@ -3276,11 +3276,11 @@ export const ItemList: monadItemList = {
   },
   "Seifuku": {
     name: "Seifuku",
-    description: "High school sailor outfit worn by female students of Niyosho.",
+    description: "High school sailor outfit worn by female students of Niyosho",
     rating: "junk",
     stats: {},
     image: "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fnanj-challenge.up.seesaa.net%2Fimage%2Fseifuku_sailor.png",
-    note: "seifuku (制服). The sailor fuku (セーラー服, sērā fuku) (lit. 'sailor outfit') is a common style of uniform worn by female middle school students, traditionally by high school students.",
+    note: "seifuku (制服). The sailor fuku (セーラー服, sērā fuku) (lit. 'sailor outfit') is a common style of uniform worn by female middle school students, traditionally by high school students",
     type: "Equipment",
     sellsFor: 1,
     "category": "Combat",
@@ -3310,7 +3310,7 @@ export const ItemList: monadItemList = {
   },
   "Niyosho Kimono": {
     name: "Niyosho Kimono",
-    description: "A kimono made in Niyosho.",
+    description: "A kimono made in Niyosho",
     rating: "junk",
     stats: {},
     note: "",
@@ -3344,7 +3344,7 @@ export const ItemList: monadItemList = {
   },
   "Autumn Cloak": {
     name: "Autumn Cloak",
-    description: "Once a day you can cause the leaves on this cloak to swirl around you, obscuring you from sight for one minute.",
+    description: "Once a day you can cause the leaves on this cloak to swirl around you, obscuring you from sight for one minute",
     rating: "rare",
     image: "https://ottotsuma.github.io/images/items/bc253ed84af1a472a0b23f1f07600190.jpg",
     stats: {},

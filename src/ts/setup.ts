@@ -15,6 +15,7 @@ import '../img/items/Black_Band.png';
 import '../img/items/Miolite_Gloves.png';
 import '../img/people/owl.jpg';
 import '../img/items/lootbox.png';
+import '../img/items/helberd.png'
 
 // game.items.registeredObjects.forEach(item => {
 //   if(item._namespace.name === "monad") {
@@ -102,7 +103,6 @@ export async function setup(ctx: Modding.ModContext) {
     if (AoDEntitlement) {
       await ctx.gameData.addPackage('aod.json');
     }
-
 
     const showList = (itemID: string, backFunction: any, ...backArgs: any) => {
       const item = game.items.getObjectByID(itemID);
@@ -201,7 +201,7 @@ export async function setup(ctx: Modding.ModContext) {
     ctx.onModsLoaded(async () => {
       try {
         const kcm = mod.manager.getLoadedModList().includes('Custom Modifiers in Melvor')
-        // const tes = mod.manager.getLoadedModList().includes("The Elder Scrolls")
+        const tes = mod.manager.getLoadedModList().includes("The Elder Scrolls")
         const mythLoaded = mod.manager.getLoadedModList().includes("[Myth] Music")
         // const dboxLoaded = mod.manager.getLoadedModList().includes('dbox')
         // const Abyssal = mod.manager.getLoadedModList().includes('Abyssal Rift')
@@ -268,6 +268,8 @@ export async function setup(ctx: Modding.ModContext) {
         const growthItems: Array<string> = []
         const questItems: Array<string> = []
         const bannedList = {
+          "dndCoin": true,
+          "dndCoinofFinding": true,
           "Sweetroll": true,
           "Crown_of_Rhaelyx": true,
           "Cooking_Gloves": true,
@@ -1720,6 +1722,7 @@ export async function setup(ctx: Modding.ModContext) {
                     if (Object.keys(newModifiers).length < 1) {
                       newItem.customDescription = monadItems[id].description
                     }
+
                     if (newItem.itemType) { itemPackage.items.add(newItem), allItems.push(_namespace + ':' + itemID) }
                     else { errorLog.push("Unknown item", newItem) }
                   }
@@ -2245,11 +2248,41 @@ export async function setup(ctx: Modding.ModContext) {
         errorLog.push("Error, Monad onModsLoaded", error)
       }
     });
+    ctx.onCharacterLoaded(ctx => {
+      try {
+               // deal with synergies
+               const found_items = []
+               game.itemSynergies.forEach(synergies => {
+                 if (synergies && synergies.length > 0) {
+                   synergies.forEach(synergy => {
+                     synergy.items.forEach(item => {
+                       // @ts-ignore
+                       if (item?._namespace?.name === "monad") {
+                             // @ts-ignore
+                             if (!found_items.includes(item)) found_items.push(item)
+                       }
+                     })
+                   })
+                 }
+               })
+               found_items.forEach(item => {
+                 const monad_item = game.items.getObjectByID(item._namespace.name + ":" + item._localID)
+                 if (monad_item._customDescription) {
+                   monad_item._customDescription = monad_item._customDescription +". Click the small 🏴‍☠<strong class=\"text-warning\">pirate hat icon</strong> to find out which Synergies this item is effected by."
+                 } else {
+                   monad_item._customDescription = monad_item.description + ". Click the small 🏴‍☠<strong class=\"text-warning\">pirate hat icon</strong> to find out which Synergies this item is effected by."
+                 }
+               })
+      } catch (error) {
+        console.log(error)
+      }
+     })
   } catch (error) {
     errorLog.push("Error, Monad setup", error)
   }
   game.monadErrorLog = errorLog
 }
+
 
 // game.items.registeredObjects.forEach(item => {
 //     if(item._namespace.name === "monad") {

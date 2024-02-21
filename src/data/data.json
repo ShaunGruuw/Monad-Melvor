@@ -79,32 +79,58 @@
     ],
     "items": [
       {
-        "id": "Test_Gem",
-        "name": "Test_Gem",
+        "id": "helberd",
+        "name": "Obsidian Helberd",
         "category": "Combat",
-        "type": "Gem",
-        "media": "https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fpngimg.com%2Fuploads%2Fcucumber%2Fcucumber_PNG84294.png",
-        "ignoreCompletion": true,
+        "type": "Weapon",
+        "media": "img/helberd.png",
+        "ignoreCompletion": false,
         "obtainFromItemLog": false,
         "golbinRaidExclusive": false,
-        "sellsFor": 1,
-        "validSlots": [
-          "Gem"
-        ],
-        "occupiesSlots": [],
+        "sellsFor": 15000000,
         "tier": "none",
-        "equipRequirements": [
+        "validSlots": [
+          "Weapon"
         ],
-        "equipmentStats": [],
-        "itemType": "Equipment",
+        "occupiesSlots": [
+          "Shield"
+        ],
         "modifiers": {
-          "increasedHiddenSkillLevel": [
-            {
-              "skillID":"melvorD:Defence",
-              "value": 0.1
-            }
-          ]
-        }
+          "increasedDamageToAllMonsters": 100,
+          "decreasedPlayerDamageReduction": 100,
+          "decreasedEnemyDamageReduction": 100
+        },
+        "equipRequirements": [
+          {
+            "dungeonID":"melvorF:Impending_Darkness",
+            "count": 1,
+            "type": "DungeonCompletion"
+          }
+        ],
+        "equipmentStats": [
+          {
+            "key": "attackSpeed",
+            "value": 5000
+          },
+          {
+            "key": "stabAttackBonus",
+            "value": 200
+          },
+          {
+            "key": "slashAttackBonus",
+            "value": 200
+          },
+          {
+            "key": "blockAttackBonus",
+            "value": 200
+          },
+          {
+            "key": "meleeStrengthBonus",
+            "value": 600
+          }
+        ],
+        "itemType": "Weapon",
+        "attackType": "melee"
       },
       {
         "id": "lootbox",
