@@ -1961,7 +1961,7 @@ export async function setup(ctx: Modding.ModContext) {
                                 "itemID": `${junkItems.shift()}`,
                                 "maxQuantity": randomNumber(1, calculateRewardsMax(combatLevelCalc(monster.levels), 100)),
                                 "minQuantity": 1,
-                                "weight": 100
+                                "weight": 1
                               }
                             ]
                           }
@@ -1976,7 +1976,7 @@ export async function setup(ctx: Modding.ModContext) {
                                 "itemID": `${commonItems.shift()}`,
                                 "maxQuantity": randomNumber(1, calculateRewardsMax(combatLevelCalc(monster.levels), 70)),
                                 "minQuantity": 1,
-                                "weight": 60
+                                "weight": 1
                               }
                             ]
                           }
@@ -1991,7 +1991,7 @@ export async function setup(ctx: Modding.ModContext) {
                                 "itemID": `${normalItems.shift()}`,
                                 "maxQuantity": randomNumber(1, calculateRewardsMax(combatLevelCalc(monster.levels), 50)),
                                 "minQuantity": 1,
-                                "weight": 40
+                                "weight": 1
                               }
                             ]
                           }
@@ -2006,7 +2006,7 @@ export async function setup(ctx: Modding.ModContext) {
                                 "itemID": `${intermediateItems.shift()}`,
                                 "maxQuantity": randomNumber(1, calculateRewardsMax(combatLevelCalc(monster.levels), 20)),
                                 "minQuantity": 1,
-                                "weight": 30
+                                "weight": 1
                               }
                             ]
                           }
@@ -2021,7 +2021,7 @@ export async function setup(ctx: Modding.ModContext) {
                                 "itemID": `${advancedItems.shift()}`,
                                 "maxQuantity": randomNumber(1, calculateRewardsMax(combatLevelCalc(monster.levels), 10)),
                                 "minQuantity": 1,
-                                "weight": 20
+                                "weight": 1
                               }
                             ]
                           }
@@ -2036,7 +2036,7 @@ export async function setup(ctx: Modding.ModContext) {
                                 "itemID": `${rareItems.shift()}`,
                                 "maxQuantity": randomNumber(1, calculateRewardsMax(combatLevelCalc(monster.levels), 6)),
                                 "minQuantity": 1,
-                                "weight": 10
+                                "weight": 1
                               }
                             ]
                           }
@@ -2051,7 +2051,7 @@ export async function setup(ctx: Modding.ModContext) {
                                 "itemID": `${epicItems.shift()}`,
                                 "maxQuantity": randomNumber(1, calculateRewardsMax(combatLevelCalc(monster.levels), 2)),
                                 "minQuantity": 1,
-                                "weight": 5
+                                "weight": 1
                               }
                             ]
                           }
