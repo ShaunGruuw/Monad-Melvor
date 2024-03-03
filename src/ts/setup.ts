@@ -184,7 +184,7 @@ export async function setup(ctx: Modding.ModContext) {
       ) {
         const img = createElement("img", {
           classList: ["skill-icon-xxs"],
-          attributes: [["src", "https://cdn2-main.melvor.net/assets/media/bank/old_hat.png"]],
+          attributes: [["src", "https://cdn2-main.melvor.net/assets/media/skills/summoning/synergy.svg"]],
         });
   
         const button = createElement('button', {
@@ -2268,9 +2268,9 @@ export async function setup(ctx: Modding.ModContext) {
                found_items.forEach(item => {
                  const monad_item = game.items.getObjectByID(item._namespace.name + ":" + item._localID)
                  if (monad_item._customDescription) {
-                   monad_item._customDescription = monad_item._customDescription +". Click the small 🏴‍☠<strong class=\"text-warning\">pirate hat icon</strong> to find out which Synergies this item is effected by."
+                   monad_item._customDescription = monad_item._customDescription +". Click the small <strong class=\"text-warning\">synergy icon</strong> to find out which synergies this item is effected by."
                  } else {
-                   monad_item._customDescription = monad_item.description + ". Click the small 🏴‍☠<strong class=\"text-warning\">pirate hat icon</strong> to find out which Synergies this item is effected by."
+                   monad_item._customDescription = monad_item.description + ". Click the small <strong class=\"text-warning\">synergy icon</strong> to find out which synergies this item is effected by."
                  }
                })
       } catch (error) {
