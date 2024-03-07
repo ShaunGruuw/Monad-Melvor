@@ -1683,8 +1683,8 @@
         "id": "EnchantingQuill",
         "name": "Enchanting Quill",
         "category": "Combat",
-        "type": "Equipment",
-        "itemType": "Equipment",
+        "type": "Weapon",
+        "itemType": "Weapon",
         "media": "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fi.pinimg.com%2Foriginals%2F4d%2Fea%2Fa3%2F4deaa39ea2c9b61448246b35d9208b62.jpg",
         "ignoreCompletion": false,
         "obtainFromItemLog": false,
@@ -1692,6 +1692,10 @@
         "sellsFor": 1,
         "customDescription": "Enchanting chance of success + 5%.",
         "equipmentStats": [
+          {
+            "key": "attackSpeed",
+            "value": 3000
+          },
           {
             "key": "stabAttackBonus",
             "value": 50
@@ -1752,7 +1756,8 @@
         ],
         "occupiesSlots": [],
         "equipRequirements": [],
-        "enemyModifiers": {}
+        "enemyModifiers": {},
+        "attackType": "melee"
       },
       {
         "id": "PrincessesCoin",
