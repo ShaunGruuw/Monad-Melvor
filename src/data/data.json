@@ -163,6 +163,55 @@
         "golbinRaidExclusive": false,
         "sellsFor": 1,
         "healsFor": 3
+      },
+      {
+        "id": "BusterSword",
+        "name": "バスターソード",
+        "category": "Combat",
+        "type": "Weapon",
+        "media": "https://img2.wikia.nocookie.net/__cb20100828144019/finalfantasy/vi/images/9/9a/Buster_sword_2_FF7.png",
+        "ignoreCompletion": false,
+        "obtainFromItemLog": false,
+        "golbinRaidExclusive": false,
+        "sellsFor": 1,
+        "tier": "none",
+        "validSlots": [
+          "Weapon"
+        ],
+        "occupiesSlots": [
+          "Shield"
+        ],
+        "modifiers": {
+          "increasedDamageToAllMonsters": 100,
+          "decreasedPlayerDamageReduction": 100,
+          "decreasedEnemyDamageReduction": 100
+        },
+        "equipRequirements": [
+        ],
+        "equipmentStats": [
+          {
+            "key": "attackSpeed",
+            "value": 3000
+          },
+          {
+            "key": "stabAttackBonus",
+            "value": 22
+          },
+          {
+            "key": "slashAttackBonus",
+            "value": 22
+          },
+          {
+            "key": "blockAttackBonus",
+            "value": 22
+          },
+          {
+            "key": "meleeStrengthBonus",
+            "value": 22
+          }
+        ],
+        "itemType": "Weapon",
+        "attackType": "melee"
       }
     ],
     "pets": [
