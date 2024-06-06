@@ -178,25 +178,28 @@ export async function setup(ctx: Modding.ModContext) {
         });
       }
     }
-
-    ctx.patch(BankSideBarMenu, 'initialize').after(function (returnValue, game) {
-      if(document.getElementsByClassName('btn btn-sm btn-outline-secondary p-0 ml-2 tes').length === 0
-      ) {
-        const img = createElement("img", {
-          classList: ["skill-icon-xxs"],
-          attributes: [["src", "https://cdn2-main.melvor.net/assets/media/skills/summoning/synergy.svg"]],
-        });
-  
-        const button = createElement('button', {
-          className: 'btn btn-sm btn-outline-secondary p-0 ml-2 monad'
-        });
-        // @ts-ignore
-        button.onclick = () => showList(game.bank.selectedBankItem.item.id);
-        button.appendChild(img);
-        // @ts-ignore
-        bankSideBarMenu.selectedMenu.itemWikiLink.parentNode.append(button);
-      }
-    });
+    try {
+      ctx.patch(BankSideBarMenuElement, 'initialize').after(function (returnValue, game) {
+        if(document.getElementsByClassName('btn btn-sm btn-outline-secondary p-0 ml-2 tes').length === 0
+        ) {
+          const img = createElement("img", {
+            classList: ["skill-icon-xxs"],
+            attributes: [["src", "https://cdn2-main.melvor.net/assets/media/skills/summoning/synergy.svg"]],
+          });
+    
+          const button = createElement('button', {
+            className: 'btn btn-sm btn-outline-secondary p-0 ml-2 monad'
+          });
+          // @ts-ignore
+          button.onclick = () => showList(game.bank.selectedBankItem.item.id);
+          button.appendChild(img);
+          // @ts-ignore
+          BankSideBarMenuElement.selectedMenu.itemWikiLink.parentNode.append(button);
+        }
+      });
+    } catch (error) {
+      errorLog.push("Error, BankSideBarMenuElement", error)
+    }
 
     ctx.onModsLoaded(async () => {
       try {
