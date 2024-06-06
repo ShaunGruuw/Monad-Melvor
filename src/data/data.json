@@ -49,17 +49,21 @@
             "weight": 1
           }
         ],
-        "gpDrops": {
-          "min": 1,
-          "max": 3
-        },
+        "currencyDrops": [
+          {
+            "currencyID": "melvorD:GP",
+            "min": 1,
+            "max": 3
+          }
+        ],
         "equipmentStats": [
           {
             "key": "attackSpeed",
             "value": 3000
           },
           {
-            "key": "damageReduction",
+            "key": "resistance",
+            "damageType": "melvorD:Normal",
             "value": 1
           }
         ],
@@ -96,13 +100,23 @@
           "Shield"
         ],
         "modifiers": {
-          "increasedDamageToAllMonsters": 100,
-          "decreasedPlayerDamageReduction": 100,
-          "decreasedEnemyDamageReduction": 100
+          "damageDealtToAllMonsters": 100
+        },
+        "enemyModifiers": {
+          "flatResistance": [
+            {
+              "damageTypeID": "melvorD:Normal",
+              "value": -100
+            },
+            {
+              "damageTypeID": "melvorD:Normal",
+              "value": -100
+            }
+          ]
         },
         "equipRequirements": [
           {
-            "dungeonID":"melvorF:Impending_Darkness",
+            "dungeonID": "melvorF:Impending_Darkness",
             "count": 1,
             "type": "DungeonCompletion"
           }
@@ -143,12 +157,14 @@
         "golbinRaidExclusive": false,
         "sellsFor": 250,
         "itemType": "Openable",
-        "dropTable": [{
-          "itemID":"melvorD:Rubber_Ducky",
-          "maxQuantity": 1,
-          "minQuantity": 1,
-          "weight": 1
-        }],
+        "dropTable": [
+          {
+            "itemID": "melvorD:Rubber_Ducky",
+            "maxQuantity": 1,
+            "minQuantity": 1,
+            "weight": 1
+          }
+        ],
         "customDescription": "A box that must of fallen of the back of a ship on the way to Melvor."
       },
       {
@@ -182,12 +198,21 @@
           "Shield"
         ],
         "modifiers": {
-          "increasedDamageToAllMonsters": 100,
-          "decreasedPlayerDamageReduction": 100,
-          "decreasedEnemyDamageReduction": 100
+          "damageDealtToAllMonsters": 100
         },
-        "equipRequirements": [
-        ],
+        "enemyModifiers": {
+          "flatResistance": [
+            {
+              "damageTypeID": "melvorD:Normal",
+              "value": -100
+            },
+            {
+              "damageTypeID": "melvorD:Normal",
+              "value": -100
+            }
+          ]
+        },
+        "equipRequirements": [],
         "equipmentStats": [
           {
             "key": "attackSpeed",
@@ -222,7 +247,7 @@
         "scaleChanceWithMasteryPool": false,
         "ignoreCompletion": false,
         "modifiers": {
-          "increasedHolyDustFromBlessedOffering": 20
+          "flatAdditionalHolyDustFromBlessedOffering": 20
         },
         "activeInRaid": false,
         "hint": "test_pet"
@@ -239,8 +264,7 @@
         "difficulty": [
           6
         ],
-        "entryRequirements": [
-        ],
+        "entryRequirements": [],
         "rewardItemIDs": [
           "monad:lootbox"
         ],
@@ -251,14 +275,6 @@
         },
         "fixedPetClears": false,
         "pauseOnBosses": false
-      }
-    ],
-    "dungeonDisplayOrder": [
-      {
-        "insertAt": "End",
-        "ids": [
-          "monad:Monad_Dungeon"
-        ]
       }
     ]
   },
@@ -271,6 +287,21 @@
             {
               "monsterID": "monad:Kappa",
               "insertAt": 1
+            }
+          ]
+        }
+      }
+    ],
+    "combatAreaCategories": [
+      {
+        "id": "melvorD:Dungeons",
+        "areas": {
+          "add": [
+            {
+              "insertAt": "End",
+              "ids": [
+                "monad:Monad_Dungeon"
+              ]
             }
           ]
         }
