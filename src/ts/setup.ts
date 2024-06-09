@@ -179,7 +179,7 @@ export async function setup(ctx: Modding.ModContext) {
       }
     }
     try {
-      ctx.patch(BankSideBarMenuElement, 'initialize').after(function (returnValue, game) {
+      ctx.patch(bankSideBarMenu, 'initialize').after(function (returnValue, game) {
         if(document.getElementsByClassName('btn btn-sm btn-outline-secondary p-0 ml-2 tes').length === 0
         ) {
           const img = createElement("img", {
@@ -194,11 +194,11 @@ export async function setup(ctx: Modding.ModContext) {
           button.onclick = () => showList(game.bank.selectedBankItem.item.id);
           button.appendChild(img);
           // @ts-ignore
-          BankSideBarMenuElement.selectedMenu.itemWikiLink.parentNode.append(button);
+          bankSideBarMenu.selectedMenu.itemWikiLink.parentNode.append(button);
         }
       });
     } catch (error) {
-      errorLog.push("Error, BankSideBarMenuElement", error)
+      errorLog.push("Error, bankSideBarMenu", error)
     }
 
     ctx.onModsLoaded(async () => {
