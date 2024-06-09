@@ -85,8 +85,11 @@ interface monadItem {
   itemIDs?: (string | SynergyGroup)[];
   equipmentStats?: EquipStatPair[];
   stats?: monadStatPair;
-  modifiers?: PlayerModifierData;
+  modifiers?: melvorModifiers;
 }
+type PlayerModifierKeys = keyof PlayerModifierTable;
+type melvorModifiers = Partial<Record<PlayerModifierKeys, number>>;
+
 interface monadEquipmentItemData extends monadBaseEquipmentItemData {
   type: 'Equipment';
 }
@@ -152,16 +155,17 @@ type melvorStatEvent = { kind: melvorMissing };
 // CombatModifiers
 // PlayerModifiers
 
-declare type monadStatPair  = EventConfig<monadStatEvent | monadStatEquipmentEvent | monadElementsEvent | monadSpeciesEvent | monadSpcificEvent| melvorStatEvent> | PlayerModifiers
+declare type monadStatPair = EventConfig<monadStatEvent | monadStatEquipmentEvent | monadElementsEvent | monadSpeciesEvent | monadSpcificEvent| melvorStatEvent> | PlayerModifierTable
+
 interface monadBaseEquipmentItemData extends monadItem {
   // stats: monadStats;
   stats: monadStatPair;
-  validSlots: SlotTypes[];
-  occupiesSlots: SlotTypes[];
+  validSlots: string[];
+  occupiesSlots: string[];
   equipRequirements: AnyRequirementData[];
   equipmentStats: EquipStatPair[];
-  modifiers?: PlayerModifierData;
-  enemyModifiers?: CombatModifierData;
+  modifiers?: melvorModifiers;
+  enemyModifiers?: ModifierValuesRecordData;
   conditionalModifiers?: ConditionalModifierData[];
   specialAttacks?: string[];
   overrideSpecialChances?: number[];
@@ -195,7 +199,7 @@ interface monadBoneItemData extends monadItem {
 
 interface monadPotionItemData extends monadItem {
   type: 'Potion';
-  modifiers: PlayerModifierData;
+  modifiers?: melvorModifiers;
   charges: number;
   action: string;
   consumesOn: GameEventMatcherData[];
@@ -222,8 +226,8 @@ interface monadMiscItemData extends monadItem {
 interface monadSetItemData extends Partial<monadBaseEquipmentItemData> {
   type: 'Set';
   itemIDs: (string | SynergyGroup)[];
-  playerModifiers?: PlayerModifierData;
-  enemyModifiers?: CombatModifierData;
+  playerModifiers?: PlayerModifierTable;
+  enemyModifiers?: ModifierValuesRecordData;
   conditionalModifiers?: ConditionalModifierData[];
   equipmentStats?: EquipStatPair[];
 }
@@ -248,7 +252,7 @@ export const ItemList: monadItemList = {
     category: "Potion",
     // Melvor
     "modifiers": {
-      "increasedEndOfTurnHealing5": 1
+      "autoEatEfficiency": 1
     },
     "charges": 5,
     "tier": 0,
@@ -276,7 +280,7 @@ export const ItemList: monadItemList = {
     occupiesSlots: [],
     equipRequirements: [],
     modifiers: {
-      "increasedSummoningMaxHit": 100
+      "summoningMaxHit": 100
     },
     enemyModifiers: {},
     equipmentStats: [
@@ -356,7 +360,7 @@ export const ItemList: monadItemList = {
     occupiesSlots: [],
     equipRequirements: [],
     modifiers: {
-      "increasedMeleeMaxHitFlat": 5
+      "meleeMaxHit": 5
     },
     enemyModifiers: {},
     "equipmentStats": [
@@ -1079,7 +1083,7 @@ export const ItemList: monadItemList = {
     occupiesSlots: [],
     equipRequirements: [],
     modifiers: {
-      "increasedTownshipLeatherProduction": 5
+      "townshipResourceProduction": 1
     },
     enemyModifiers: {}
   },
@@ -1132,8 +1136,8 @@ export const ItemList: monadItemList = {
     occupiesSlots: [],
     equipRequirements: [],
     modifiers: {
-      "increasedSummoningMaxHit": 50,
-      increasedSummoningChargePreservation: 10
+      "summoningMaxHit": 50,
+      summoningChargePreservationChance: 10
     },
     enemyModifiers: {}, sellsFor: 1,
     "category": "Combat",
@@ -1285,7 +1289,7 @@ export const ItemList: monadItemList = {
     occupiesSlots: [],
     equipRequirements: [],
     modifiers: {
-      "increasedMinAirSpellDmg": 5
+      "flatMagicAttackBonus": 5
     },
     enemyModifiers: {}, sellsFor: 1,
     "category": "Combat",
@@ -1877,7 +1881,7 @@ export const ItemList: monadItemList = {
     occupiesSlots: [],
     equipRequirements: [],
     modifiers: {
-      aprilFoolsIncreasedMovementSpeed: 10
+      
     },
     enemyModifiers: {},
   },
@@ -2144,8 +2148,8 @@ export const ItemList: monadItemList = {
     occupiesSlots: [],
     equipRequirements: [],
     modifiers: {
-      increasedThievingStealth: 40,
-      "increasedChanceToDoubleLootCombat": 10
+      thievingStealth: 40,
+      "combatLootDoublingChance": 10
     },
     enemyModifiers: {},
   },
@@ -2215,7 +2219,7 @@ export const ItemList: monadItemList = {
     occupiesSlots: [],
     equipRequirements: [],
     modifiers: {
-      "increasedChanceToDoubleLootCombat": 1
+      "combatLootDoublingChance": 1
     },
     enemyModifiers: {},
   },
@@ -2244,15 +2248,19 @@ export const ItemList: monadItemList = {
       { "key": 'rangedDefenceBonus', "value": 0 },
       { "key": 'magicDefenceBonus', "value": 0 },
       { "key": 'damageReduction', "value": 0 },
-      { "key": 'summoningMaxhit', "value": 0 }
+      { "key": 'summoningMaxhit', "value": 0 },
+      {
+        "key": "resistance",
+        "damageType": "melvorD:Normal",
+        "value": -5
+      }
     ],
     validSlots: ["Ring"],
     occupiesSlots: [],
     equipRequirements: [],
     modifiers: {
-      "decreasedPlayerDamageReduction": 5,
-      "increasedDamageReductionAgainstBosses": 5,
-      "increasedChanceToAvoidStun": 5
+      "damageDealtToBosses": 5,
+      "stunAvoidChance": 5
     },
     enemyModifiers: {},
     9: {
@@ -2395,7 +2403,7 @@ export const ItemList: monadItemList = {
     occupiesSlots: [],
     equipRequirements: [],
     modifiers: {
-      "increasedAltMagicSkillXP": 6
+      "altMagicSkillXP": 6
     },
     enemyModifiers: {}
   },
@@ -2466,7 +2474,7 @@ export const ItemList: monadItemList = {
     occupiesSlots: [],
     equipRequirements: [],
     modifiers: {
-      "increasedMaxWaterSpellDmg": 3
+      "magicDamageBonus": 3
     },
     enemyModifiers: {}
   },
@@ -2537,7 +2545,7 @@ export const ItemList: monadItemList = {
     occupiesSlots: [],
     equipRequirements: [],
     modifiers: {
-      "increasedMaxFireSpellDmg": 3
+      "magicDamageBonus": 3
     },
     enemyModifiers: {}
   },
@@ -2822,7 +2830,7 @@ export const ItemList: monadItemList = {
     occupiesSlots: [],
     equipRequirements: [],
     modifiers: {
-      "increasedReflectDamage": 10
+      "reflectDamage": 10
     },
     enemyModifiers: {},
     0: {
@@ -2879,7 +2887,7 @@ export const ItemList: monadItemList = {
     occupiesSlots: [],
     equipRequirements: [],
     modifiers: {
-      "increasedMaxFireSpellDmg": 5
+      "magicDamageBonus": 5
     },
     enemyModifiers: {},
     0: {
@@ -2938,7 +2946,7 @@ export const ItemList: monadItemList = {
     occupiesSlots: [],
     equipRequirements: [],
     modifiers: {
-      "decreasedDamageTakenPerAttack": 5
+      "damageTakenPerAttack": 5
     },
     enemyModifiers: {},
     0: {
@@ -3144,7 +3152,7 @@ export const ItemList: monadItemList = {
     occupiesSlots: [],
     equipRequirements: [],
     modifiers: {
-      "increasedTownshipHappiness": 5
+      "flatTownshipHappiness": 5
     },
     enemyModifiers: {}
   },
@@ -3178,7 +3186,7 @@ export const ItemList: monadItemList = {
     occupiesSlots: [],
     equipRequirements: [],
     modifiers: {
-      "increasedTownshipHappiness": 20
+      "flatTownshipHappiness": 20
     },
     enemyModifiers: {}
   },
@@ -3226,8 +3234,8 @@ export const ItemList: monadItemList = {
     occupiesSlots: [],
     equipRequirements: [],
     modifiers: {
-      "increasedPoisonSpellAccuracy": 10,
-      "decreasedGlobalAccuracy": 10
+      "magicAccuracyRating": 10,
+      "accuracyRating": -10
     },
     enemyModifiers: {}
   },
@@ -3304,7 +3312,7 @@ export const ItemList: monadItemList = {
     occupiesSlots: [],
     equipRequirements: [],
     modifiers: {
-      "increasedTownshipHappiness": 10
+      "flatTownshipHappiness": 10
     },
     enemyModifiers: {}
   },
@@ -3338,7 +3346,7 @@ export const ItemList: monadItemList = {
     occupiesSlots: [],
     equipRequirements: [],
     modifiers: {
-      "increasedTownshipHappiness": 5
+      "flatTownshipHappiness": 5
     },
     enemyModifiers: {}
   },
@@ -3372,7 +3380,7 @@ export const ItemList: monadItemList = {
     occupiesSlots: [],
     equipRequirements: [],
     modifiers: {
-      increasedThievingStealth: 250
+      thievingStealth: 250
     },
     enemyModifiers: {}
   },
