@@ -56,34 +56,34 @@ function getMagicSpell(magicLevel: number, isDragon = false) {
   // spell.requirements []
   // spell.requiredItem {}
   // spell.level
-    const spells = {
-      1: "melvorD:WindStrike",
-      3: "melvorD:WaterStrike",
-      6: "melvorD:EarthStrike",
-      10: "melvorD:FireStrike",
-      14: "melvorD:WindBolt",
-      16: "melvorD:WaterBolt",
-      19: "melvorD:EarthBolt",
-      23: "melvorD:FireBolt",
-      28: "melvorD:WindBlast",
-      30: "melvorD:WaterBlast",
-      33: "melvorD:EarthBlast",
-      37: "melvorD:FireBlast",
-      43: "melvorD:WindWave",
-      45: "melvorD:WaterWave",
-      48: "melvorD:EarthWave",
-      52: "melvorD:FireWave",
-      57: "melvorD:WindSurge",
-      61: "melvorD:WaterSurge",
-      64: "melvorD:EarthSurge",
-      68: "melvorD:FireSurge"
-    }
-    if(isDragon || magicLevel > 67) {
-      return "melvorD:FireSurge"
-    }
-    const counts = Object.keys(spells)
-    const output = counts.reduce((prev, curr) => Math.abs(curr - magicLevel) < Math.abs(prev - magicLevel) ? curr : prev) 
-    return spells[output]
+  const spells = {
+    1: "melvorD:WindStrike",
+    3: "melvorD:WaterStrike",
+    6: "melvorD:EarthStrike",
+    10: "melvorD:FireStrike",
+    14: "melvorD:WindBolt",
+    16: "melvorD:WaterBolt",
+    19: "melvorD:EarthBolt",
+    23: "melvorD:FireBolt",
+    28: "melvorD:WindBlast",
+    30: "melvorD:WaterBlast",
+    33: "melvorD:EarthBlast",
+    37: "melvorD:FireBlast",
+    43: "melvorD:WindWave",
+    45: "melvorD:WaterWave",
+    48: "melvorD:EarthWave",
+    52: "melvorD:FireWave",
+    57: "melvorD:WindSurge",
+    61: "melvorD:WaterSurge",
+    64: "melvorD:EarthSurge",
+    68: "melvorD:FireSurge"
+  }
+  if (isDragon || magicLevel > 67) {
+    return "melvorD:FireSurge"
+  }
+  const counts = Object.keys(spells)
+  const output = counts.reduce((prev, curr) => Math.abs(curr - magicLevel) < Math.abs(prev - magicLevel) ? curr : prev)
+  return spells[output]
 }
 
 // function modifyMaxHit(monster) {
@@ -114,38 +114,30 @@ export async function setup(ctx: Modding.ModContext) {
       // @ts-ignore
       game.allSynergies.forEach(synergy => {
         if (synergy.items.includes(item)) {
-          html += `<div>${getLangString('equipped_with')}</div>`;
+          html += `<div>When equipped with the following items:</div>`;
           // @ts-ignore
           synergy.items.forEach(i => {
             html += `<div>${i.name}</div>`
           })
           html += '<p></p>';
-          html += `<div>${getLangString('gain_modifiers')}</div>`;
-          for (var modifier in synergy.playerModifiers) {
+          html += `<div>Gain the following modifiers:</div>`;
+          for (var modifierIndex in synergy.playerModifiers) {
             // check if the property/key is defined in the object itself, not in parent
-            if (synergy.playerModifiers.hasOwnProperty(modifier)) {
-              // @ts-ignore
-              const isNegative = modifierData[modifier].isNegative ? 'red' : 'green'
-              if (modifier.includes('tes_')) {
-                const displayString = getLangString(modifier).replace('${value}',
-                  synergy.playerModifiers[modifier]).replace('${skillName}',
-                    synergy.playerModifiers[modifier]).replace('${skillName}',
-                      synergy.playerModifiers[modifier])
-                html += `<div style="color: ${isNegative}">${displayString}</div>`
-              } else if (modifier === 'allowUnholyPrayerUse') {
+            if (synergy.playerModifiers.hasOwnProperty(modifierIndex)) {
+              // @ts-ignore              
+              if (modifierIndex === 'allowUnholyPrayerUse') {
                 html += `<div>${getLangString('allowUnholyPrayerUse')}</div>`
-              } else if (typeof synergy.playerModifiers[modifier] === 'object') {
-                const displayString = getLangString("MODIFIER_DATA_" + modifier).replace('${value}',
-                  synergy.playerModifiers[modifier][0].value).replace('${skillName}',
-                    synergy.playerModifiers[modifier][0].skill._localID).replace('${skillName}',
-                      synergy.playerModifiers[modifier][0].skill._localID)
-                html += `<div style="color: ${isNegative}">${displayString}</div>`
               } else {
-                const displayString = getLangString("MODIFIER_DATA_" + modifier).replace('${value}',
-                  synergy.playerModifiers[modifier]).replace('${skillName}',
-                    synergy.playerModifiers[modifier]).replace('${skillName}',
-                      synergy.playerModifiers[modifier])
-                html += `<div style="color: ${isNegative}">${displayString}</div>`
+                for (let index = 0; index < synergy.playerModifiers.length; index++) {
+                  const mod = synergy.playerModifiers[index];
+                  const isNegative = modifierIndex.inverted ? 'red' : 'green'
+                  const negString = mod.isNegative ? 'negAliases' : 'posAliases'
+                  const displayString = getLangString("MODIFIER_DATA_" + mod.modifier.allowedScopes[0][negString][0].key).replace('${skillName}', mod.modifier.allowedScopes[0][negString][0].key).replace('${value}',
+                    mod.value)
+                    // .replace('${skillName}', mod.modifier.allowedScopes[0]?.value[negString][0].key)
+                  html += `<div style="color: ${isNegative}">${displayString}</div>`
+                  html += '<p></p>';
+                }
               }
             }
           }
@@ -179,14 +171,14 @@ export async function setup(ctx: Modding.ModContext) {
       }
     }
     try {
-      ctx.patch(bankSideBarMenu, 'initialize').after(function (returnValue, game) {
-        if(document.getElementsByClassName('btn btn-sm btn-outline-secondary p-0 ml-2 tes').length === 0
+      ctx.patch(BankSidebarMenuElement, 'initialize').after(function (returnValue, game) {
+        if (document.getElementsByClassName('btn btn-sm btn-outline-secondary p-0 ml-2 tes').length === 0
         ) {
           const img = createElement("img", {
             classList: ["skill-icon-xxs"],
             attributes: [["src", "https://cdn2-main.melvor.net/assets/media/skills/summoning/synergy.svg"]],
           });
-    
+
           const button = createElement('button', {
             className: 'btn btn-sm btn-outline-secondary p-0 ml-2 monad'
           });
@@ -1123,13 +1115,13 @@ export async function setup(ctx: Modding.ModContext) {
                           if (statKeys[m] === 'allResistancePerc') {
                             newModifiers['increasedDamageReduction'] = Math.floor(tempStats[statKeys[m]])
                           }
-                        } 
+                        }
                         if (statKeys[m] === 'increasedPrayerPointsPerMonsterKill') {
                           newModifiers['increasedPrayerPointsPerMonsterKill'] = Math.floor(tempStats[statKeys[m]])
-                        }    
+                        }
                         if (statKeys[m] === 'underwaterBreathing') {
-                          newModifiers['increasedBonusFishingSpecialChance'] = Math.floor(tempStats[statKeys[m]]/100000)
-                        }                          
+                          newModifiers['increasedBonusFishingSpecialChance'] = Math.floor(tempStats[statKeys[m]] / 100000)
+                        }
                         if (statKeys[m] === 'Enchanting') {
                           newModifiers['increasedRunecraftingEssencePreservation'] = Math.floor(tempStats[statKeys[m]])
                         }
@@ -1147,32 +1139,32 @@ export async function setup(ctx: Modding.ModContext) {
                         }
                         if (statKeys[m] === 'SpellSpeed') {
                           newModifiers['decreasedAttackIntervalPercent'] = Math.floor(tempStats[statKeys[m]])
-                        }   
+                        }
                         if (statKeys[m] === 'allCostPerc') {
                           newModifiers['increasedRunePreservation'] = Math.floor(tempStats[statKeys[m]])
-                        }  
+                        }
                         if (statKeys[m] === 'waterCostPerc') {
                           newModifiers['increasedRunePreservation'] = Math.floor(tempStats[statKeys[m]])
-                        }  
+                        }
                         if (statKeys[m] === 'iceCostPerc') {
                           newModifiers['increasedRunePreservation'] = Math.floor(tempStats[statKeys[m]])
-                        }  
+                        }
                         if (statKeys[m] === 'fireCostPerc') {
                           newModifiers['increasedRunePreservation'] = Math.floor(tempStats[statKeys[m]])
-                        }  
+                        }
                         if (statKeys[m] === 'windCostPerc') {
                           newModifiers['increasedRunePreservation'] = Math.floor(tempStats[statKeys[m]])
-                        }  
+                        }
                         if (statKeys[m] === 'lightningCostPerc') {
                           newModifiers['increasedRunePreservation'] = Math.floor(tempStats[statKeys[m]])
-                        }       
+                        }
                         if (statKeys[m] === 'allSkillCooldownPerc') {
                           newModifiers['decreasedAttackIntervalPercent'] = Math.floor(tempStats[statKeys[m]])
                           newModifiers['decreasedGlobalSkillIntervalPercent'] = Math.floor(tempStats[statKeys[m]])
-                        }   
+                        }
                         if (statKeys[m] === 'allIncreasedDamage') {
                           newModifiers['increasedDamageToAllMonsters'] = Math.floor(tempStats[statKeys[m]])
-                        }             
+                        }
                         if (statKeys[m] === 'iceIncreasedDamage') {
                           newModifiers['increasedMaxWaterSpellDmg'] = Math.floor(tempStats[statKeys[m]])
                         }
@@ -1208,7 +1200,7 @@ export async function setup(ctx: Modding.ModContext) {
                           newModifiers['increasedMagicDamageBonus'] = Math.floor(tempStats[statKeys[m]])
                         }
                         if (statKeys[m] === 'CriticalHitDamage') {
-                          newModifiers['increasedDamageToAllMonsters'] = Math.floor(tempStats[statKeys[m]]/4)
+                          newModifiers['increasedDamageToAllMonsters'] = Math.floor(tempStats[statKeys[m]] / 4)
                         }
                         if (statKeys[m] === 'CriticalHitChance') {
                           newModifiers['increasedMagicCritChance'] = Math.floor(tempStats[statKeys[m]])
@@ -1270,7 +1262,7 @@ export async function setup(ctx: Modding.ModContext) {
                             }
                             if (newequipmentStats[q].key === 'magicDamageBonus') {
                               newequipmentStats[q].value = Math.floor(tempStats[statKeys[m]])
-                            }                              
+                            }
                           }
                         }
                         if (statKeys[m] === 'dexterity') {
@@ -1297,7 +1289,7 @@ export async function setup(ctx: Modding.ModContext) {
                       }
                     }
                   }
-                  return {"newModifiers":newModifiers, "newequipmentStats":newequipmentStats}
+                  return { "newModifiers": newModifiers, "newequipmentStats": newequipmentStats }
                 }
                 const monadItemsKeys: Array<string> = Object.keys(monadItems)
                 for (let index = 0; index < monadItemsKeys.length; index++) {
@@ -1346,42 +1338,42 @@ export async function setup(ctx: Modding.ModContext) {
                       "sellsFor": getMonadSalePrice(monadItems[id])
                     }
                     function getRndInteger(min, max) {
-                      return Math.floor(Math.random() * (max - min) ) + min;
+                      return Math.floor(Math.random() * (max - min)) + min;
                     }
-                    function getMonadSalePrice (monadItem) {
-                      if(monadItem.rating === "junk") {
-                        return getRndInteger(1,29)
+                    function getMonadSalePrice(monadItem) {
+                      if (monadItem.rating === "junk") {
+                        return getRndInteger(1, 29)
                       }
-                      else if(monadItem.rating === "common") {
-                        return getRndInteger(30,39)
+                      else if (monadItem.rating === "common") {
+                        return getRndInteger(30, 39)
                       }
-                      else if(monadItem.rating === "normal") {
-                        return getRndInteger(40,199)
+                      else if (monadItem.rating === "normal") {
+                        return getRndInteger(40, 199)
                       }
-                      else if(monadItem.rating === "intermediate") {
-                        return getRndInteger(200,399)
+                      else if (monadItem.rating === "intermediate") {
+                        return getRndInteger(200, 399)
                       }
-                      else if(monadItem.rating === "advanced") {
-                        return getRndInteger(400,599)
+                      else if (monadItem.rating === "advanced") {
+                        return getRndInteger(400, 599)
                       }
-                      else if(monadItem.rating === "rare") {
-                        return getRndInteger(600,2999)
+                      else if (monadItem.rating === "rare") {
+                        return getRndInteger(600, 2999)
                       }
-                      else if(monadItem.rating === "epic") {
-                        return getRndInteger(3000,3999)
+                      else if (monadItem.rating === "epic") {
+                        return getRndInteger(3000, 3999)
                       }
-                      else if(monadItem.rating === "legendary") {
-                        return getRndInteger(4000,99999)
+                      else if (monadItem.rating === "legendary") {
+                        return getRndInteger(4000, 99999)
                       }
-                      else if(monadItem.rating === "unique") {
-                        return getRndInteger(100000,1000000-1)
+                      else if (monadItem.rating === "unique") {
+                        return getRndInteger(100000, 1000000 - 1)
                       }
-                      else if(monadItem.rating === "growth") {
-                        return getRndInteger(1000000,9999999)
+                      else if (monadItem.rating === "growth") {
+                        return getRndInteger(1000000, 9999999)
                       }
-                      else if(monadItem.rating === "quest") {
+                      else if (monadItem.rating === "quest") {
                         return 1
-                      } else  {
+                      } else {
                         return 1
                       }
                     }
@@ -1465,13 +1457,13 @@ export async function setup(ctx: Modding.ModContext) {
                             if (statKeys[m] === 'allResistancePerc') {
                               newModifiers['increasedDamageReduction'] = Math.floor(tempStats[statKeys[m]])
                             }
-                          } 
+                          }
                           if (statKeys[m] === 'increasedPrayerPointsPerMonsterKill') {
                             newModifiers['increasedPrayerPointsPerMonsterKill'] = Math.floor(tempStats[statKeys[m]])
-                          }    
+                          }
                           if (statKeys[m] === 'underwaterBreathing') {
-                            newModifiers['increasedBonusFishingSpecialChance'] = Math.floor(tempStats[statKeys[m]]/100000)
-                          }                          
+                            newModifiers['increasedBonusFishingSpecialChance'] = Math.floor(tempStats[statKeys[m]] / 100000)
+                          }
                           if (statKeys[m] === 'Enchanting') {
                             newModifiers['increasedRunecraftingEssencePreservation'] = Math.floor(tempStats[statKeys[m]])
                           }
@@ -1489,32 +1481,32 @@ export async function setup(ctx: Modding.ModContext) {
                           }
                           if (statKeys[m] === 'SpellSpeed') {
                             newModifiers['decreasedAttackIntervalPercent'] = Math.floor(tempStats[statKeys[m]])
-                          }   
+                          }
                           if (statKeys[m] === 'allCostPerc') {
                             newModifiers['increasedRunePreservation'] = Math.floor(tempStats[statKeys[m]])
-                          }  
+                          }
                           if (statKeys[m] === 'waterCostPerc') {
                             newModifiers['increasedRunePreservation'] = Math.floor(tempStats[statKeys[m]])
-                          }  
+                          }
                           if (statKeys[m] === 'iceCostPerc') {
                             newModifiers['increasedRunePreservation'] = Math.floor(tempStats[statKeys[m]])
-                          }  
+                          }
                           if (statKeys[m] === 'fireCostPerc') {
                             newModifiers['increasedRunePreservation'] = Math.floor(tempStats[statKeys[m]])
-                          }  
+                          }
                           if (statKeys[m] === 'windCostPerc') {
                             newModifiers['increasedRunePreservation'] = Math.floor(tempStats[statKeys[m]])
-                          }  
+                          }
                           if (statKeys[m] === 'lightningCostPerc') {
                             newModifiers['increasedRunePreservation'] = Math.floor(tempStats[statKeys[m]])
-                          }       
+                          }
                           if (statKeys[m] === 'allSkillCooldownPerc') {
                             newModifiers['decreasedAttackIntervalPercent'] = Math.floor(tempStats[statKeys[m]])
                             newModifiers['decreasedGlobalSkillIntervalPercent'] = Math.floor(tempStats[statKeys[m]])
-                          }   
+                          }
                           if (statKeys[m] === 'allIncreasedDamage') {
                             newModifiers['increasedDamageToAllMonsters'] = Math.floor(tempStats[statKeys[m]])
-                          }             
+                          }
                           if (statKeys[m] === 'iceIncreasedDamage') {
                             newModifiers['increasedMaxWaterSpellDmg'] = Math.floor(tempStats[statKeys[m]])
                           }
@@ -1550,7 +1542,7 @@ export async function setup(ctx: Modding.ModContext) {
                             newModifiers['increasedMagicDamageBonus'] = Math.floor(tempStats[statKeys[m]])
                           }
                           if (statKeys[m] === 'CriticalHitDamage') {
-                            newModifiers['increasedDamageToAllMonsters'] = Math.floor(tempStats[statKeys[m]]/4)
+                            newModifiers['increasedDamageToAllMonsters'] = Math.floor(tempStats[statKeys[m]] / 4)
                           }
                           if (statKeys[m] === 'CriticalHitChance') {
                             newModifiers['increasedMagicCritChance'] = Math.floor(tempStats[statKeys[m]])
@@ -1612,7 +1604,7 @@ export async function setup(ctx: Modding.ModContext) {
                               }
                               if (newequipmentStats[q].key === 'magicDamageBonus') {
                                 newequipmentStats[q].value = Math.floor(tempStats[statKeys[m]])
-                              }                              
+                              }
                             }
                           }
                           if (statKeys[m] === 'dexterity') {
@@ -1856,38 +1848,38 @@ export async function setup(ctx: Modding.ModContext) {
                       // if (item.namespace === _namespace) {
                       //   allItems.push(`${item.namespace}:${item.localID}`)
                       // } else {
-                        // https://wiki.melvoridle.com/index.php?title=Table_of_Items
-                        allItems.push(`${item.namespace}:${item.localID}`)
+                      // https://wiki.melvoridle.com/index.php?title=Table_of_Items
+                      allItems.push(`${item.namespace}:${item.localID}`)
 
-                        if(item.category === "Archaeology") {
-                          growthItems.push(item.namespace + ":" + item.localID)
-                        }
+                      if (item.category === "Archaeology") {
+                        growthItems.push(item.namespace + ":" + item.localID)
+                      }
 
-                        else if (item.sellsFor < 1 && item.type != "Misc") questItems.push(item.namespace + ':' + item.localID)
+                      else if (item.sellsFor < 1 && item.type != "Misc") questItems.push(item.namespace + ':' + item.localID)
 
-                        else if (item.sellsFor < 30) {
-                          junkItems.push(item.namespace + ':' + item.localID)
-                        }
+                      else if (item.sellsFor < 30) {
+                        junkItems.push(item.namespace + ':' + item.localID)
+                      }
 
-                        else if (item.sellsFor < 40) commonItems.push(item.namespace + ':' + item.localID)
+                      else if (item.sellsFor < 40) commonItems.push(item.namespace + ':' + item.localID)
 
-                        else if (item.sellsFor < 200) normalItems.push(item.namespace + ':' + item.localID)
+                      else if (item.sellsFor < 200) normalItems.push(item.namespace + ':' + item.localID)
 
-                        else if (item.sellsFor < 400) intermediateItems.push(item.namespace + ':' + item.localID)
+                      else if (item.sellsFor < 400) intermediateItems.push(item.namespace + ':' + item.localID)
 
-                        else if (item.sellsFor < 600) advancedItems.push(item.namespace + ':' + item.localID)
+                      else if (item.sellsFor < 600) advancedItems.push(item.namespace + ':' + item.localID)
 
-                        else if (item.sellsFor < 3000) rareItems.push(item.namespace + ':' + item.localID)
+                      else if (item.sellsFor < 3000) rareItems.push(item.namespace + ':' + item.localID)
 
-                        else if (item.sellsFor < 4000) epicItems.push(item.namespace + ':' + item.localID)
+                      else if (item.sellsFor < 4000) epicItems.push(item.namespace + ':' + item.localID)
 
-                        else if (item.sellsFor < 100000) {
-                          legendaryItems.push(item.namespace + ':' + item.localID)
-                        }
+                      else if (item.sellsFor < 100000) {
+                        legendaryItems.push(item.namespace + ':' + item.localID)
+                      }
 
-                        else if (item.sellsFor < 1000000) uniqueItems.push(item.namespace + ':' + item.localID)
+                      else if (item.sellsFor < 1000000) uniqueItems.push(item.namespace + ':' + item.localID)
 
-                        else { growthItems.push(item.namespace + ':' + item.localID) }
+                      else { growthItems.push(item.namespace + ':' + item.localID) }
                       // }
                     }
                   } catch (error) {
@@ -2253,33 +2245,37 @@ export async function setup(ctx: Modding.ModContext) {
     });
     ctx.onCharacterLoaded(ctx => {
       try {
-               // deal with synergies
-               const found_items = []
-               game.itemSynergies.forEach(synergies => {
-                 if (synergies && synergies.length > 0) {
-                   synergies.forEach(synergy => {
-                     synergy.items.forEach(item => {
-                       // @ts-ignore
-                       if (item?._namespace?.name === "monad") {
-                             // @ts-ignore
-                             if (!found_items.includes(item)) found_items.push(item)
-                       }
-                     })
-                   })
-                 }
-               })
-               found_items.forEach(item => {
-                 const monad_item = game.items.getObjectByID(item._namespace.name + ":" + item._localID)
-                 if (monad_item._customDescription) {
-                   monad_item._customDescription = monad_item._customDescription +". Click the small <strong class=\"text-warning\">synergy icon</strong> to find out which synergies this item is effected by."
-                 } else {
-                   monad_item._customDescription = monad_item.description + ". Click the small <strong class=\"text-warning\">synergy icon</strong> to find out which synergies this item is effected by."
-                 }
-               })
+        // deal with synergies
+        const synergiesForExport = []
+        const found_items = []
+        game.itemSynergies.forEach(synergies => {
+          if (synergies && synergies.length > 0) {
+            synergies.forEach(synergy => {
+              synergy.items.forEach(item => {
+                // @ts-ignore
+                if (item?._namespace?.name === "monad") {
+                  // @ts-ignore
+                  if (!found_items.includes(item)) found_items.push(item)
+                  // @ts-ignore
+                  if (!synergiesForExport.includes(synergy)) synergiesForExport.push(synergy)
+                }
+              })
+            })
+          }
+        })
+        found_items.forEach(item => {
+          const monad_item = game.items.getObjectByID(item._namespace.name + ":" + item._localID)
+          if (monad_item._customDescription) {
+            monad_item._customDescription = monad_item._customDescription + ". Click the small <strong class=\"text-warning\">synergy icon</strong> to find out which synergies this item is effected by."
+          } else {
+            monad_item._customDescription = monad_item.description + ". Click the small <strong class=\"text-warning\">synergy icon</strong> to find out which synergies this item is effected by."
+          }
+        })
+        game.allSynergies = synergiesForExport
       } catch (error) {
         console.log(error)
       }
-     })
+    })
   } catch (error) {
     errorLog.push("Error, Monad setup", error)
   }
