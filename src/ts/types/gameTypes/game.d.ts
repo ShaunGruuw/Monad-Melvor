@@ -4,6 +4,9 @@ declare type GameEvents = {
     skillAction: SkillActionEvent;
 };
 declare class Game extends GameEventEmitter<GameEvents> implements Serializable, EncodableObject {
+    monadErrorLog:any;
+    calcItemLevel: any;
+    allSynergies: [ItemSynergy];
     loopInterval: number;
     loopStarted: boolean;
     disableClearOffline: boolean;

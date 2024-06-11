@@ -114,8 +114,6 @@ export async function setup(ctx: Modding.ModContext) {
       let html = `<h5 class="font-w400 mb-1">${item.name}</h5>`;
       html += `<img src="${item.media}" style="max-width: 256px; max-height: 256px;"></img>`;
       html += '<p></p>';
-      // style="width: 48px; height: 48px;"
-      // @ts-ignore
       game.allSynergies.forEach(synergy => {
         if (synergy.items.includes(item)) {
           html += `<div>When equipped with the following items:</div>`;
@@ -127,8 +125,7 @@ export async function setup(ctx: Modding.ModContext) {
           html += `<div>Gain the following modifiers:</div>`;
           for (var modifierIndex in synergy.playerModifiers) {
             // check if the property/key is defined in the object itself, not in parent
-            if (synergy.playerModifiers.hasOwnProperty(modifierIndex)) {
-              // @ts-ignore              
+            if (synergy.playerModifiers.hasOwnProperty(modifierIndex)) {            
               if (modifierIndex === 'allowUnholyPrayerUse') {
                 html += `<div>${getLangString('allowUnholyPrayerUse')}</div>`
               } else {
@@ -137,7 +134,7 @@ export async function setup(ctx: Modding.ModContext) {
                   const isNegative = mod.isNegative ? 'red' : 'green'
                   const negString = mod.isNegative ? 'negAliases' : 'posAliases'
                   const displayString = getLangString("MODIFIER_DATA_" + mod.modifier.allowedScopes[0][negString][0].key).replace('${skillName}', mod.modifier.allowedScopes[0][negString][0].key).replace('${value}',
-                    mod.value)
+                    mod.value + '')
                     // .replace('${skillName}', mod.modifier.allowedScopes[0]?.value[negString][0].key)
                   html += `<div style="color: ${isNegative}">${displayString}</div>`
                   html += '<p></p>';
