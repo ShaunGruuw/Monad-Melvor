@@ -130,7 +130,7 @@ export async function setup(ctx: Modding.ModContext) {
               } else {
                 for (let index = 0; index < synergy.playerModifiers.length; index++) {
                   const mod = synergy.playerModifiers[index];
-                  const isNegative = modifierIndex.inverted ? 'red' : 'green'
+                  const isNegative = mod.isNegative ? 'red' : 'green'
                   const negString = mod.isNegative ? 'negAliases' : 'posAliases'
                   const displayString = getLangString("MODIFIER_DATA_" + mod.modifier.allowedScopes[0][negString][0].key).replace('${skillName}', mod.modifier.allowedScopes[0][negString][0].key).replace('${value}',
                     mod.value)
