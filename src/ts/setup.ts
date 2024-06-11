@@ -95,6 +95,10 @@ export async function setup(ctx: Modding.ModContext) {
   const errorLog: any[] = []
   const idLog: any[] = []
   try {
+    const combatSim = mod.manager.getLoadedModList().includes("[Myth] Combat Simulator")
+    if(combatSim) {
+      mod.api.mythCombatSimulator?.registerNamespace('tes');
+    }
     const TothEntitlement = cloudManager.hasTotHEntitlement
     const AoDEntitlement = cloudManager.hasAoDEntitlement
     // Register our GameData
