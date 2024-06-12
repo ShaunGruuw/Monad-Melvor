@@ -99,8 +99,8 @@ export async function setup(ctx: Modding.ModContext) {
     if(combatSim) {
       mod.api.mythCombatSimulator?.registerNamespace('tes');
     }
-    const TothEntitlement = cloudManager.hasTotHEntitlement
-    const AoDEntitlement = cloudManager.hasAoDEntitlement
+    const TothEntitlement = cloudManager.hasTotHEntitlementAndIsEnabled
+    const AoDEntitlement = cloudManager.hasAoDEntitlementAndIsEnabled
     // Register our GameData
     await ctx.gameData.addPackage('data.json');
     // await ctx.gameData.addPackage('monad-data.json');
