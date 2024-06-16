@@ -116,26 +116,23 @@ export async function setup(ctx: Modding.ModContext) {
       html += '<p></p>';
       game.allSynergies.forEach(synergy => {
         if (synergy.items.includes(item)) {
-          html += `<div>When equipped with the following items:</div>`;
-          // @ts-ignore
+          html += `<div>${getLangString('equipped_with')}</div>`;
           synergy.items.forEach(i => {
+            // @ts-ignore
             html += `<div>${i.name}</div>`
           })
           html += '<p></p>';
-          html += `<div>Gain the following modifiers:</div>`;
+          html += `<div>${getLangString('gain_modifiers')}</div>`;
           for (var modifierIndex in synergy.playerModifiers) {
             // check if the property/key is defined in the object itself, not in parent
-            if (synergy.playerModifiers.hasOwnProperty(modifierIndex)) {            
+            if (synergy.playerModifiers.hasOwnProperty(modifierIndex)) {
               if (modifierIndex === 'allowUnholyPrayerUse') {
                 html += `<div>${getLangString('allowUnholyPrayerUse')}</div>`
               } else {
                 for (let index = 0; index < synergy.playerModifiers.length; index++) {
                   const mod = synergy.playerModifiers[index];
                   const isNegative = mod.isNegative ? 'red' : 'green'
-                  const negString = mod.isNegative ? 'negAliases' : 'posAliases'
-                  const displayString = getLangString("MODIFIER_DATA_" + mod.modifier.allowedScopes[0][negString][0].key).replace('${skillName}', mod.modifier.allowedScopes[0][negString][0].key).replace('${value}',
-                    mod.value + '')
-                    // .replace('${skillName}', mod.modifier.allowedScopes[0]?.value[negString][0].key)
+                  const displayString = mod.getDescription().description
                   html += `<div style="color: ${isNegative}">${displayString}</div>`
                   html += '<p></p>';
                 }
@@ -172,24 +169,24 @@ export async function setup(ctx: Modding.ModContext) {
       }
     }
     try {
-      ctx.patch(BankSidebarMenuElement, 'initialize').after(function (returnValue, game) {
-        if (document.getElementsByClassName('btn btn-sm btn-outline-secondary p-0 ml-2 tes').length === 0
-        ) {
-          const img = createElement("img", {
-            classList: ["skill-icon-xxs"],
-            attributes: [["src", "https://cdn2-main.melvor.net/assets/media/skills/summoning/synergy.svg"]],
-          });
+      // ctx.patch(BankSidebarMenuElement, 'initialize').after(function (returnValue, game) {
+      //   if (document.getElementsByClassName('btn btn-sm btn-outline-secondary p-0 ml-2 tes').length === 0
+      //   ) {
+      //     const img = createElement("img", {
+      //       classList: ["skill-icon-xxs"],
+      //       attributes: [["src", "https://cdn2-main.melvor.net/assets/media/skills/summoning/synergy.svg"]],
+      //     });
 
-          const button = createElement('button', {
-            className: 'btn btn-sm btn-outline-secondary p-0 ml-2 monad'
-          });
-          // @ts-ignore
-          button.onclick = () => showList(game.bank.selectedBankItem.item.id);
-          button.appendChild(img);
-          // @ts-ignore
-          bankSideBarMenu.selectedMenu.itemWikiLink.parentNode.append(button);
-        }
-      });
+      //     const button = createElement('button', {
+      //       className: 'btn btn-sm btn-outline-secondary p-0 ml-2 monad'
+      //     });
+      //     // @ts-ignore
+      //     button.onclick = () => showList(game.bank.selectedBankItem.item.id);
+      //     button.appendChild(img);
+      //     // @ts-ignore
+      //     bankSideBarMenu.selectedMenu.itemWikiLink.parentNode.append(button);
+      //   }
+      // });
     } catch (error) {
       errorLog.push("Error, bankSideBarMenu", error)
     }
@@ -2254,12 +2251,12 @@ export async function setup(ctx: Modding.ModContext) {
             synergies.forEach(synergy => {
               synergy.items.forEach(item => {
                 // @ts-ignore
-                if (item?._namespace?.name === "monad") {
+                // if (item?._namespace?.name === "monad") {
                   // @ts-ignore
                   if (!found_items.includes(item)) found_items.push(item)
                   // @ts-ignore
                   if (!synergiesForExport.includes(synergy)) synergiesForExport.push(synergy)
-                }
+                // }
               })
             })
           }
