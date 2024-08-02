@@ -97,7 +97,7 @@ export async function setup(ctx: Modding.ModContext) {
   try {
     const combatSim = mod.manager.getLoadedModList().includes("[Myth] Combat Simulator")
     if(combatSim) {
-      mod.api.mythCombatSimulator?.registerNamespace('tes');
+      mod.api.mythCombatSimulator?.registerNamespace('monad');
     }
     const TothEntitlement = cloudManager.hasTotHEntitlementAndIsEnabled
     const AoDEntitlement = cloudManager.hasAoDEntitlementAndIsEnabled
